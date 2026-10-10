@@ -1,0 +1,74 @@
+\section{SecretHandle design}
+\label{sec:method}
+
+\input{figures/tikz_method_pipeline}
+
+\subsection{Mint at the authoritative source}
+
+The source adapter invokes a binder interface available only to approved system components. Its request contains the value in a protected buffer, type $q$, provenance $\sigma$, task token, candidate destination evidence, and lifecycle hints. The service validates caller identity and provenance before accepting the value. A third-party app cannot mint an ``OS OTP'' simply by passing a string that looks like a code.
+
+The service derives $d$ using the intersection of independently available constraints. For an SMS Retriever request, it begins with the requesting package association. For Credential Manager, it uses the calling package and verified origin contract. For a task token, it intersects the allowed application set. For the selected target class, it may restrict to an OTP, username, address, or payment field. Intersection is monotonic: each trustworthy source can remove destinations but cannot broaden authority granted by another.
+
+After generating random $n$, the service constructs $H$, computes $a$, stores \cref{eq:record}, wipes the incoming buffer where feasible, and returns $h$. The agent-facing observation replaces the protected content with a stable visual and tree representation. The handle string contains a version, a non-secret type tag, a random identifier, and a truncated display checksum for transcription detection; authorization always uses the full authenticator passed out-of-band or encoded in the action token.
+
+\subsection{Representing handles to agents}
+
+A handle must be usable by agents without resembling a plausible raw secret. The accessibility tree exposes a role such as \texttt{secret\_handle}, a stable handle ID, type, permitted coarse destination, and expiry bucket. The screenshot shows an icon and short label, for example ``OTP ready for Example Bank -- 38s''. It never renders the code length or digits. The SDK adds \texttt{ENTER(handleId, targetNodeToken)} to the action schema.
+
+Malicious apps can draw identical pixels or set similar accessibility labels. They cannot cause resolution because the agent-visible string alone lacks a valid authenticated record. To reduce agent confusion, the system overlays handles in a reserved, non-app surface and marks tree nodes with a framework-owned extra that ordinary apps cannot set. This is usability hardening; cryptographic acceptance remains the security boundary.
+
+\subsection{Resolve below the observation boundary}
+
+When the agent invokes \texttt{ENTER}, the SDK sends a binder request containing the authenticated handle and a short-lived target-node token issued by the accessibility framework. The resolver does not accept package, origin, or field type as free-form strings from the agent. It dereferences the node token inside the current window, re-evaluates its package and field metadata, and checks freshness to avoid time-of-check/time-of-use substitution.
+
+For native views, package UID and window ownership provide the primary identity. Field classification combines framework input type, autofill hints, view semantics, and optionally app-declared metadata; inconsistent evidence fails closed for narrow policies. For WebViews, package identity alone cannot distinguish origins. The design requires an origin attestation from the WebView/browser integration tied to the frame and node. Android WebView APIs expose application integration points \cite{androidWebView}, but a production-quality authenticated node-to-origin binding is a specific implementation challenge, not assumed to exist universally.
+
+The resolver begins a transaction, verifies $a$, loads the record, evaluates eligibility, and changes $z$ from live to reserved using compare-and-swap or a store lock. It then obtains confirmation if required. A confirmed reservation produces a one-shot internal injection capability consumed by a modified input path. On successful commit, $u$ is decremented and state becomes live or consumed. On a transient injection error, policy determines whether the reservation is safely rolled back; rollback is allowed only if the value could not have reached the target.
+
+\subsection{Observation redaction}
+
+The redactor registers an obligation $\rho=(v,n,q,t_{start},t_{end},\mathsf{mask})$ before injection. Accessibility serialization replaces the target text/value and relevant events with a typed mask for the agent service. The screenshot path masks the node bounds in frames delivered to the agent. The app and user may still see the actual value; the protection is principal-specific.
+
+Bounds can move between injection and capture. Therefore each obligation follows a stable view/window token and recomputes bounds at capture time. If the view cannot be re-identified, the policy masks the containing window for one frame or until the transition completes. Password fields already have platform-specific display behavior, but SecretHandle cannot rely on it because OTP and address fields are often ordinary text inputs. Android 15's screen-share sensitivity controls demonstrate a platform precedent for principal-dependent rendering \cite{android15privacy,androidSecureFlag}.
+
+Redaction ends when the field clears, the window closes, the task ends, or trusted app state proves that the raw value is no longer present. A timer alone is insufficient because a slowly updating agent might observe the value after expiry. Conversely, indefinite redaction can hide unrelated user content if a view is recycled. The implementation must bind obligations to a content generation or explicit clearing event.
+
+\subsection{Lifecycle, revocation, and recovery}
+
+Expiry is checked against a monotonic clock. Wall-clock changes cannot revive a handle. Single-use state is stored durably enough to survive a service restart when the secret itself survives; otherwise restart revokes the handle. Task termination revokes all handles indexed by $\tau$. Locking the device, changing user profile, replacing the target package, or invalidating the source request can trigger revocation.
+
+Crash recovery uses a conservative journal. A record found in reserved state after an uncertain crash is consumed for single-use secrets unless the injection path provides a durable proof that delivery did not occur. This can reduce availability but preserves replay safety. Multi-use identifier handles may decrement on reservation to avoid overuse. The policy and audit log record the reason without logging $s$.
+
+\subsection{Payment confirmation}
+
+Payment-class handles require an amount/payee summary from a trusted task or wallet channel and a fresh confirmation for each use. Protected Confirmation can provide a hardware-protected UI on supported devices \cite{androidProtectedConfirmation}; when unavailable, the system uses a clearly weaker system dialog and labels the assurance level. Confirmation binds a digest of destination, task, amount context, and handle identifier. It does not show or sign the secret itself. A confirmation produced for one reservation cannot authorize another.
+
+\subsection{Auditing without secret leakage}
+
+The audit record contains event type, pseudonymous handle ID, type, source class, destination class, decision, coarse latency, and policy version. It excludes raw values, application text, screenshots, full origins containing user identifiers, and authenticators. Per-install keyed pseudonyms allow joins within an experiment without becoming globally linkable. Debug builds additionally expose invariant failures to a protected test harness; production builds rate-limit error detail.
+
+\subsection{Compatibility and deployment modes}
+
+The strongest deployment modifies AOSP across sources, accessibility, screenshot composition, and input dispatch. An OEM extension can add wallet and hardware-key integration. A research prototype may begin with SMS, a purpose-built credential provider, and open test apps. A user-space accessibility-service prototype can demonstrate workflows but cannot establish the same guarantee: it receives observations after framework serialization and may have to type through an agent-visible action path. Results from that mode must be labeled as feasibility measurements, not validation of the OS-bound theorem assumptions.
+
+\begin{table}[htbp]
+\centering
+\caption{Failure handling is explicit and value-oblivious.}
+\label{tab:failures}
+\footnotesize
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.1cm}@{}}
+\toprule
+Condition & Resolver behavior & Agent-visible response \\
+\midrule
+Unknown/forged handle & Constant-path reject; rate-limit source & invalid handle \\
+Expired/\allowbreak revoked/\allowbreak consumed & Reject without revealing which state by default & unavailable handle \\
+Task mismatch & Reject and audit policy mismatch & destination denied \\
+Package/\allowbreak origin/\allowbreak field mismatch & Reject; never downgrade silently & destination denied \\
+Confirmation denied/\allowbreak unavailable & Release or consume reservation per type & confirmation not granted \\
+Target vanished before injection & Abort; consume OTP if delivery uncertain & target changed \\
+Redactor cannot track target & Mask containing window or abort before entry & secure display unavailable \\
+Service crash in reserved state & Conservatively consume single-use handle & handle unavailable \\
+\bottomrule
+\end{tabularx}
+\end{table}

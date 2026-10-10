@@ -1,0 +1,101 @@
+\section{Algorithms and implementation blueprint}
+\label{sec:algorithm}
+
+\begin{algorithm}[htbp]
+\caption{SecretHandle Mint at an authoritative source}
+\label{alg:mint}
+\begin{algorithmic}[1]
+\Require protected value buffer $s$, type $q$, provenance $\sigma$, task token $T$, destination evidence $E$, policy hints $P$
+\Ensure visible handle $h$ or $\bot$
+\State authenticate binder caller and validate that it may assert source $\sigma$
+\State $(\tau,D_T)\gets\mathsf{VerifyTaskToken}(T)$; reject on failure
+\State $D_S\gets\mathsf{SourceDestinations}(\sigma,E)$
+\State $d\gets D_T\cap D_S\cap\mathsf{TypePolicy}(q,P)$; reject if empty
+\State $(t_i,t_e,u,c)\gets\mathsf{Lifecycle}(q,P)$
+\State $n\sample\bits^\lambda$; $H\gets(n,q,\sigma,d,\tau,t_i,t_e,u,c)$
+\State $a\gets F_K(\mathsf{enc}(H))$
+\State atomically insert $\Omega[n]\gets(s,H,a,\mathsf{live},\bot)$
+\State register source-side suppression of $s$ for the agent principal
+\State wipe caller buffer where supported; \Return $h=(n,q,a)$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[htbp]
+\caption{SecretHandle ENTER/Resolve}
+\label{alg:resolve}
+\begin{algorithmic}[1]
+\Require handle $h=(n,q,a)$, task token $T'$, target node token $V$, time $t$
+\Ensure internal injection or value-oblivious rejection
+\State $(\tau',\_)\gets\mathsf{VerifyTaskToken}(T')$; reject on failure
+\State begin transaction; load $\Omega[n]=(s,H,a_H,z,r)$
+\State verify $a=a_H=F_K(\mathsf{enc}(H))$ in constant-time
+\State $x\gets\mathsf{ResolveFreshTargetContext}(V)$
+\If{$z\ne\mathsf{live}$ or $t\notin[t_i,t_e)$ or $u=0$ or $\tau'\ne\tau$ or $\Match(d,x)=0$}
+  \State rollback; \Return $\Reject$
+\EndIf
+\State $r\sample\bits^\lambda$; atomically set $(z,r)\gets(\mathsf{reserved},r)$; commit
+\State $\gamma\gets\mathsf{ObtainConfirmation}(c,n,d,\tau,r)$
+\If{$\mathsf{ConfirmOK}(c,\gamma)=0$}
+  \State finalize reservation according to type policy; \Return $\Reject$
+\EndIf
+\State $x'\gets\mathsf{ResolveFreshTargetContext}(V)$
+\If{$x'\ne x$ or $\Match(d,x')=0$} \State conservatively finalize; \Return $\Reject$ \EndIf
+\State register redaction obligation for $(V,n,q)$ before delivery
+\State $ok\gets\mathsf{InjectInternal}(V,s,r)$
+\State begin transaction; decrement $u$; set $z\gets\mathsf{consumed}$ if $u=0$ or delivery uncertain; commit
+\State wipe transient buffers; \Return $ok$ with value-oblivious status
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[htbp]
+\caption{Observation Redactor}
+\label{alg:redact}
+\begin{algorithmic}[1]
+\Require raw observation $O$, agent principal $A$, active registry $R$
+\Ensure agent-visible observation $O'$ without protected value material
+\State $O'\gets O$
+\ForAll{active obligations $\rho=(V,n,q,\ldots)$ visible to $A$}
+  \State recompute current node/window identity and bounds for $V$
+  \If{stable identity is available}
+    \State replace accessibility value, text events, and screenshot region with type mask
+  \Else
+    \State mask containing window or suppress frame according to fail-closed policy
+  \EndIf
+  \State remove action echoes, debug text, and content descriptions containing protected material
+\EndFor
+\State \Return $O'$ through a principal-specific buffer
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Framework integration points}
+
+The intended prototype adds a system service in \texttt{system\_server} with a small binder surface: mint for allowlisted adapters, list public handles for the current task, resolve for the agent SDK, revoke, and protected audit export. The store uses encrypted files only when persistence is required; short-lived OTPs stay in locked memory where practical. Keystore keys are non-exportable and version-bound. Android's hardware-backed Keystore offers TEE or StrongBox protection depending on the device \cite{androidKeystore,androidKeyAttestation}; the prototype must report the actual security level.
+
+Source changes are isolated behind adapter interfaces. The OTP adapter connects to an open test SMS receiver and the notification classification path. Credential and wallet experiments use research providers to avoid modifying commercial apps or handling real accounts. The clipboard adapter intercepts sensitive clips, substitutes a public handle projection for the agent principal, and preserves ordinary user paste behavior.
+
+The accessibility manager issues node tokens that bind window ID, connection ID, node ID, generation, package UID, and a short expiry. Tokens are not raw node identifiers because the latter can be reused. A privileged resolver call re-fetches node metadata from the live window. Text injection bypasses the agent process and ordinary IME suggestion/history surfaces; otherwise a keyboard could re-expose the secret. The evaluation includes instrumented keyboard and clipboard monitors to test this condition.
+
+Screenshot redaction should occur before the buffer is mapped into the agent process. Drawing an overlay after capture is insufficient. Accessibility redaction should be service-specific, because hiding values from the user or target app would break the workflow. Existing Android behavior for screen-share sensitive content provides a conceptual precedent for output-dependent masking \cite{android15privacy}.
+
+\subsection{Policy language}
+
+A compact policy is represented as a conjunction of typed predicates:
+\begin{equation}
+d(x)=P_{pkg}(p)\land P_{origin}(o)\land P_{field}(f)\land P_{node}(v),
+\label{eq:policy}
+\end{equation}
+where absent components are either explicit wildcards authorized by the source/task policy or required-and-unavailable failures. Policy serialization uses canonical field ordering. Wildcards are visible in audit output and disallowed by default for OTP and payment classes.
+
+The field predicate should avoid brittle widget resource names as the sole authority. Strong evidence includes trusted framework input type and provider request context; weaker evidence includes app-provided autofill hints or labels. Policies can require multiple signals or confirmation. A future form-level binding may include a digest of surrounding trusted structure, but dynamic UI changes make such digests difficult to stabilize.
+
+\subsection{Concurrency and TOCTOU defense}
+
+Three races matter. First, two agent calls may attempt the same handle; atomic reservation handles this case. Second, the target may change after checking; a fresh target context immediately before injection and a reservation-bound one-shot injection capability narrow the gap. Third, capture may race with entry; registering redaction before delivery ensures the screenshot/accessibility path observes an obligation whenever the field can contain $s$.
+
+The design favors fail-closed behavior. If the target generation changes, the resolver does not follow focus automatically. If delivery outcome is unknown, a one-use handle is consumed. These choices trade task success for safety and must be quantified rather than hidden.
+
+\subsection{Complexity}
+
+For a store indexed by random identifier, mint and lookup are expected $O(1)$. Policy evaluation is $O(k)$ for $k$ predicate components, with small fixed $k$ in \cref{eq:policy}. Authentication cost is linear in encoded metadata length, not secret length. Redaction cost is $O(r+n)$ per observation for $r$ active obligations and $n$ serialized nodes unless the framework maintains an indexed obligation map; screenshot masking is proportional to the number and area of dirty regions. Persistent journaling adds one durability barrier per reservation/commit for secrets requiring crash-safe replay protection.
+
+Memory cost per live handle is $|s|+O(|H|+\lambda)$ plus index and audit overhead. Because OTP and credential records are short-lived, bounded per-task quotas and expiration sweeps limit exhaustion. An untrusted agent cannot mint protected-source records and is rate-limited on resolution attempts.

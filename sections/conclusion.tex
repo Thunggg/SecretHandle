@@ -1,0 +1,8 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+SecretHandle moves secret use for mobile AI agents out of the planner's observation and into an Android reference monitor. The OS mints a typed opaque handle where a secret first arrives, intersects source and task constraints, authenticates the record, and reveals only a non-semantic capability. \texttt{ENTER(handle)} succeeds only for a live task and trusted target that satisfy destination policy; atomic lifecycle state limits replay; and principal-specific redaction prevents the next screenshot or accessibility tree from simply revealing the entered value.
+
+The formal analysis identifies what the design can and cannot promise. Given an intact reference monitor, authentic target identity, complete modeled-channel redaction, value-oblivious public behavior, and a secure authenticator, the construction provides conditional non-disclosure, destination confinement, unforgeability, and single-use safety. It does not prevent misuse within an allowed destination, compromise of the OS, or leakage through an omitted channel.
+
+The next scientific step is implementation, not stronger prose. The AOSP prototype must demonstrate source integration, WebView and custom-view behavior, atomic recovery, observation closure, and acceptable overhead on real login, 2FA, and checkout flows. Until those measurements exist, the empirical contribution remains a reproducible protocol and the proposed trends remain placeholders.

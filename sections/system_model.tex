@@ -1,0 +1,51 @@
+\section{System and threat model}
+\label{sec:system}
+
+\subsection{Entities and trust boundary}
+
+\input{figures/tikz_architecture}
+
+The trusted computing base (TCB) contains the Android kernel, the relevant portion of \texttt{system\_server}, the SecretHandle service, source adapters, the resolver and input-dispatch integration, accessibility and screenshot redactors, and the keystore operation used to authenticate records. A payment confirmation path may place the confirmation UI and key authorization inside a TEE; Android Protected Confirmation is optional at the device level and therefore must be detected rather than assumed \cite{androidProtectedConfirmation}.
+
+The agent process, local or remote model, model provider, agent memory, ordinary applications, rendered web content, notifications not authenticated by a protected source, and app-supplied labels are untrusted. A target application may be honest, malicious, or confused. SecretHandle's destination property says whether a handle may be resolved at a target identity; it does not prove that an allowed app will subsequently use the value honestly.
+
+The user authorizes a task and may approve sensitive mint or resolve events. The task broker gives the service a task identifier $\tau$ and an initial destination policy. The mechanism assumes $\tau$ cannot be chosen or modified by the agent alone. This can be implemented by an OS-signed task token or by state held in the service. The concept document mentions composition with a separate task-capability mechanism; because that artifact is not present, the manuscript specifies the minimum task-token contract independently rather than relying on an unavailable result.
+
+\subsection{Authoritative sources}
+
+An authoritative source is a TCB component or mediated provider that receives the secret before an agent-readable representation and can supply trustworthy provenance. The initial adapters are:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{SMS/notification OTP adapter.} It observes a verification message in the protected delivery or classification path, derives an app binding when the message or request supports one, and withholds the code from the agent-facing notification. App-hash association is evidence for an app, not evidence for an arbitrary field.
+  \item \textbf{Credential Manager adapter.} It mints only after the user selects a credential for a requesting app or origin. The adapter retains the credential material inside the provider/system path and exports a one-use handle.
+  \item \textbf{Clipboard adapter.} It mints only for clips explicitly marked or user-designated as sensitive. Because \texttt{EXTRA\_IS\_SENSITIVE} does not itself change clipboard access control \cite{androidClipboard}, SecretHandle must suppress or replace agent-visible clip content in addition to reading the hint.
+  \item \textbf{Wallet adapter.} It accepts a token or payment credential from a wallet/provider contract and requires confirmation. Server-side payment tokenization is complementary; the local handle controls which UI destination receives the wallet output.
+\end{itemize}
+
+An OCR or named-entity detector is not an authoritative source. It may create a best-effort legacy handle with a visibly weaker assurance label, but such a path is excluded from the detector-independent theorems.
+
+\subsection{Adversary capabilities}
+
+The adversary controls the agent's planning output and may arrange arbitrary untrusted text or pixels in an app, webpage, notification, or message. It can request actions on any node visible to the agent, replay previously observed handles, guess new handle strings, race multiple \texttt{ENTER} calls, switch foreground apps, navigate a WebView, and render a string with the same visual syntax as a handle. It may read all agent inputs, outputs, prompts, tool traces, and application-visible values after legitimate injection if the destination app itself is compromised.
+
+The adversary cannot read TCB memory, forge Android package identity, extract the non-exportable handle-authentication key, modify the resolver's atomic state transition, compromise the trusted display used for Protected Confirmation, or bypass every screenshot/accessibility redaction hook. These are explicit assumptions. A result that depends on them is a conditional system theorem, not an unconditional statement about all Android devices.
+
+\subsection{Security goals}
+
+\input{figures/tikz_threat_privacy_robustness}
+
+The mechanism targets five goals.
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Agent-view non-disclosure:} the modeled agent view reveals only declared leakage $\ell$, not the raw value.
+  \item \textbf{Destination confinement:} resolution succeeds only when the trusted target context satisfies the handle's destination predicate and task.
+  \item \textbf{Unforgeability:} a string not produced by the mint service is accepted only with negligible probability, subject to authenticator security and identifier entropy.
+  \item \textbf{Lifecycle safety:} expired, revoked, consumed, or confirmation-denied handles do not resolve; a single-use handle cannot succeed twice, including under concurrency.
+  \item \textbf{Observation closure:} after legitimate entry, the value is masked in subsequent modeled accessibility and pixel observations until the field is cleared or the redaction obligation ends safely.
+\end{enumerate}
+
+The utility goal is narrower: authorized login, 2FA, identifier entry, and checkout flows should remain completable with tolerable latency and user burden.
+
+\subsection{Non-goals}
+
+SecretHandle does not detect every prompt injection, determine whether a user-intended task is socially beneficial, stop an authorized bank app from sending an OTP to its server, protect against a compromised kernel, or conceal unavoidable physical effects of task completion. It does not claim that an OTP is phishing-resistant; WebAuthn and passkeys address that authentication problem differently \cite{webauthn3}. It also does not make screenshot-only automation safe when the agent cannot name a stable target node; such agents require a trusted target-selection adapter or user confirmation.

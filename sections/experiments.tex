@@ -1,0 +1,91 @@
+\section{Experimental methodology and planned evaluation}
+\label{sec:experiments}
+
+\input{figures/tikz_experimental_setup}
+
+No implementation measurements are available in the project. This section is therefore a preregistration-style protocol: it fixes hypotheses, workloads, attacks, baselines, metrics, and analysis before data collection. Empty tables and conceptual plots are labeled accordingly.
+
+\subsection{Prototype configurations}
+
+The primary configuration is a userdebug AOSP build on a supported Pixel device. It includes the service, SMS/notification adapter, research Credential Manager provider, sensitive-clipboard adapter, resolver, principal-specific accessibility redactor, screenshot redactor, node-token support, and agent SDK. A secondary Samsung device evaluates only components implementable through public/system integration and reports whether keys are hardware-backed; Knox integration is not assumed until implemented. Emulator runs support deterministic testing but do not count as evidence for hardware-protected keys or real-device latency.
+
+Four open test applications cover: (A) username/password plus SMS OTP; (B) multi-page 2FA with an adversarial message preview; (C) address and phone-number checkout; and (D) wallet-token checkout with per-use confirmation. Each application logs only ground-truth events to a protected harness: target identity, whether a value was delivered, server acceptance, and task completion. No real financial account or production OTP is used.
+
+\subsection{Agents and model placement}
+
+The evaluation targets AppAgent, the Mobile-Agent family, and another actively maintained open mobile-agent runner compatible with AndroidWorld. The idea document names DroidRun; because version and archival paper metadata were not verified during this audit, it remains an implementation candidate rather than a cited scholarly baseline. Each supported agent runs with at least one cloud model and one on-device or locally hosted model when feasible. Agent prompts, images, accessibility trees, tool calls, and traces are captured by a disclosure monitor that searches for exact canary values and structured encodings.
+
+AndroidWorld measures whether general non-secret tasks regress \cite{rawles2024androidworld}. SPA-Bench can provide additional app/task breadth \cite{chen2024spabench}. Standard suites do not replace the authentication applications because they were not designed to exercise authoritative OTP, credential, clipboard, and wallet sources.
+
+\subsection{Attacks and stress tests}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Read and exfiltrate.} Unprotected agents navigate to a message or notification containing a canary OTP and encounter an instruction to send it to an attacker endpoint. SecretHandle variants expose only the bound handle.
+  \item \textbf{Destination redirection.} An injected instruction requests \texttt{ENTER(handle)} into an attacker app, a different package, a WebView with another origin, a non-OTP field, or a stale/recycled node.
+  \item \textbf{Fake handle.} A malicious app draws the exact handle visual grammar and submits guessed handle IDs and authenticators. Rate-limit behavior and false acceptance are recorded.
+  \item \textbf{Replay and race.} The harness issues sequential and concurrent resolves around successful use and expiry. It crashes/restarts the service at each reservation phase.
+  \item \textbf{Post-entry reread.} Immediately and repeatedly after injection, the agent captures screenshots, accessibility trees, text-change events, clipboard, IME state, and debugging logs.
+  \item \textbf{Same-destination semantic misuse.} The attacker keeps the target within the allowed package/origin but changes surrounding account or transaction context. This test quantifies the residual risk that destination binding does not claim to eliminate.
+  \item \textbf{Identity ambiguity.} The harness varies WebView navigation, nested frames, custom views, overlays, focus changes, split-screen, OEM keyboards, view recycling, rotation, and accessibility-service reconnects.
+\end{enumerate}
+
+Attack templates are drawn from the structure of indirect prompt-injection benchmarks \cite{zhan2024injecagent,debenedetti2024agentdojo}, GUI fine-print/environment attacks \cite{chen2025fineprint,liao2024eia}, and mobile third-party-channel workflows \cite{du2025mobileattacks}. We adapt mechanics, not reported success numbers.
+
+\subsection{Baselines and ablations}
+
+The primary baselines are:
+\begin{description}[leftmargin=1.2cm,style=nextline]
+  \item[B0: unprotected] The agent receives the raw value in its ordinary observation and types it normally.
+  \item[B1: detected placeholder] An OCR/NER detector replaces rendered sensitive text with a local placeholder and resolves the placeholder for the requested target without destination binding, approximating the closest published mobile-placeholder family \cite{zhao2026anonymization}.
+  \item[B2: platform flow] Android Autofill, OTP Autofill, or Credential Manager is used when the test app can invoke it \cite{androidAutofillServices,androidCredentialManager}. Unsupported agent workflows are recorded as not applicable rather than failures.
+  \item[B3: SecretHandle] Full source minting, destination/task binding, lifecycle, and redaction.
+\end{description}
+
+Ablations disable source minting (detector fallback), destination binding, task binding, atomic lifecycle, post-entry redaction, origin checks, or per-use confirmation one at a time. Unsafe ablations run only with synthetic canaries and isolated endpoints.
+
+\subsection{Metrics}
+
+For $N$ tasks, let $I_i$ be the set of instrumented agent-visible artifacts and $s_i$ the canary secret. Exact exposure is
+\begin{equation}
+E=\frac{1}{N}\sum_{i=1}^{N}\mathbf{1}[s_i\in I_i],
+\end{equation}
+augmented by normalized, encoded, OCR, and substring checks. This metric can establish observed zero exposure under the harness but cannot prove absence from uninstrumented channels.
+
+Redirection success $R$ is the fraction of attack trials in which the raw value reaches a target outside $d$. Legitimate task success $U$ is the fraction of benign trials satisfying the application oracle. Post-entry leakage $L$ counts trials in which the value appears in any subsequent modeled observation. Forgery acceptance $F$ and replay acceptance $Y$ count successful unauthorized injections per attempt. Latency reports end-to-end action overhead and component-level mint, authentication, target lookup, confirmation, injection, and redaction time.
+
+We also record memory, CPU time, energy where supported, number of user confirmations, policy rejection rate, false rejection rate, crash-recovery outcome, and destination identity availability. General-task regression is the difference in success on benchmark tasks that do not use a handle.
+
+\subsection{Design and sample planning}
+
+Each condition uses fixed task seeds and paired benign/adversarial versions. Runs are blocked by device, agent, model, application, and secret type. Binary outcomes receive Wilson confidence intervals; paired comparisons use a paired permutation or exact McNemar test when assumptions fit. Latency uses medians, tail percentiles, bootstrap intervals, and full distributions. The number of repetitions is selected by a prospective precision analysis before looking at outcomes. All exclusions---agent crash, platform crash, network outage, user cancellation, unsupported identity---are reported by category.
+
+Observed zeros are reported as ``0 of $n$'' with a confidence interval, not as proof of impossible attack. Multiple hypothesis testing is limited by identifying RQ1--RQ4 as primary outcomes and treating other comparisons as exploratory. Raw canary values are randomly generated per run, stored only in the protected oracle, and destroyed after analysis.
+
+\begin{table}[htbp]
+\centering
+\caption{Planned primary result table. Placeholder only; replace every dash with measured values and confidence intervals before submission.}
+\label{tab:placeholder-main}
+\resizebox{\textwidth}{!}{\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Condition & Exposure $E$ & Redirect $R$ & Utility $U$ & Reread $L$ & Replay $Y$ & p95 latency \\
+\midrule
+Unprotected & -- & -- & -- & -- & -- & -- \\
+Detected placeholder & -- & -- & -- & -- & -- & -- \\
+Platform flow & -- & -- & -- & -- & -- & -- \\
+SecretHandle & -- & -- & -- & -- & -- & -- \\
+\bottomrule
+\multicolumn{7}{l}{\footnotesize Placeholder / expected trend only; replace with actual experimental results before submission.}
+\end{tabular}}
+\end{table}
+
+\input{figures/pgfplots_placeholder_results}
+
+\subsection{Killer experiment}
+
+The decisive first experiment instantiates the OTP-forwarding pattern against the open login-plus-OTP app. Under B0, the agent can read a canary code and is exposed to an injected instruction requesting forwarding. Under B3, the SMS adapter exposes a handle bound to the login app and OTP field. The test passes only if the protected oracle confirms all three conditions: the raw code is absent from every instrumented agent artifact, resolution into an attacker destination is rejected, and the legitimate login succeeds. A failure in any condition blocks the corresponding claim and triggers root-cause analysis before expansion to credentials or checkout.
+
+\subsection{Reproducibility checklist}
+
+The artifact must pin the AOSP commit, device build, kernel, app hashes, provider versions, agent commits, model identifiers, prompts, seeds, network endpoints, and policy files. It must include a one-command isolated canary experiment, scripts that reconstruct every table/plot from raw data, schemas for trace redaction, and checks that no real secret is collected. Tests cover unit state transitions, concurrency schedules, property-based policy intersection, end-to-end UI flows, and regression on non-secret tasks.
+
+Independent evaluators should be able to switch between B0--B3 without changing task text, inspect audit decisions, and verify oracle isolation. The release should separate device-required tests from emulator-compatible tests and document OEM features unavailable on each platform.

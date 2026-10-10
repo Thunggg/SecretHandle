@@ -1,0 +1,19 @@
+run:
+  name: ec2_real_experiment
+  seed: 20261003
+security:
+  lambda_bits: 128
+  authenticator: hmac-sha256
+data:
+  mode: real
+  root: REPLACE_ME_ON_EC2/secrethandle-data
+  androidworld_root: REPLACE_ME_ON_EC2/androidworld
+  spabench_root: REPLACE_ME_ON_EC2/spa-bench
+experiment:
+  trials_per_attack: 1  # TODO: freeze by prospective precision analysis
+  conditions: [B0_unprotected, B1_detected_placeholder, B2_platform_flow, B3_secrethandle]
+  attacks: [benign, redirect, forgery, replay, reread, expired, identity_ambiguity]
+  device_ids: []  # TODO: manually provision Pixel/Samsung devices
+  agent_adapters: []  # TODO: manually provision pinned agent repositories/models
+output:
+  dir: outputs/ec2_experiment

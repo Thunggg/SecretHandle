@@ -1,0 +1,457 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{zhang2023appagent}
+C.~Zhang, Z.~Yang, J.~Liu, Y.~Li, Y.~Han, X.~Chen, Z.~Huang, B.~Fu, G.~Yu,
+  \href{https://arxiv.org/abs/2312.13771}{{AppAgent}: Multimodal agents as
+  smartphone users}, arXiv preprint arXiv:2312.13771 (2023).
+\newblock \href {https://doi.org/10.48550/arXiv.2312.13771}
+  {\path{doi:10.48550/arXiv.2312.13771}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2312.13771}
+
+\bibitem{wang2024mobileagent}
+J.~Wang, H.~Xu, J.~Ye, M.~Yan, W.~Shen, J.~Zhang, F.~Huang, J.~Sang,
+  \href{https://arxiv.org/abs/2401.16158}{Mobile-agent: Autonomous multi-modal
+  mobile device agent with visual perception}, arXiv preprint arXiv:2401.16158
+  (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2401.16158}
+  {\path{doi:10.48550/arXiv.2401.16158}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2401.16158}
+
+\bibitem{wen2023autodroid}
+H.~Wen, Y.~Li, G.~Liu, S.~Zhao, T.~Yu, T.~J.-J. Li, S.~Jiang, Y.~Liu, Y.~Zhang,
+  Y.~Liu, \href{https://arxiv.org/abs/2308.15272}{{AutoDroid}: {LLM}-powered
+  task automation in android}, arXiv preprint arXiv:2308.15272 (2023).
+\newblock \href {https://doi.org/10.48550/arXiv.2308.15272}
+  {\path{doi:10.48550/arXiv.2308.15272}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2308.15272}
+
+\bibitem{rawles2024androidworld}
+C.~Rawles, S.~Clinckemaillie, Y.~Chang, J.~Waltz, G.~Lau, M.~Fair, A.~Li,
+  W.~Bishop, W.~Li, F.~Campbell-Ajala, D.~Toyama, R.~Berry, D.~Tyamagundlu,
+  T.~Lillicrap, O.~Riva,
+  \href{https://arxiv.org/abs/2405.14573}{{AndroidWorld}: A dynamic
+  benchmarking environment for autonomous agents}, arXiv preprint
+  arXiv:2405.14573 (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2405.14573}
+  {\path{doi:10.48550/arXiv.2405.14573}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2405.14573}
+
+\bibitem{toyama2021androidenv}
+D.~Toyama, P.~Hamel, A.~Gergely, G.~Comanici, A.~Glaese, Z.~Ahmed, T.~Jackson,
+  S.~Mourad, D.~Precup, \href{https://arxiv.org/abs/2105.13231}{{AndroidEnv}: A
+  reinforcement learning platform for android}, arXiv preprint arXiv:2105.13231
+  (2021).
+\newblock \href {https://doi.org/10.48550/arXiv.2105.13231}
+  {\path{doi:10.48550/arXiv.2105.13231}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2105.13231}
+
+\bibitem{rawles2023aitw}
+C.~Rawles, A.~Li, D.~Rodriguez, O.~Riva, T.~Lillicrap,
+  \href{https://arxiv.org/abs/2307.10088}{Android in the wild: A large-scale
+  dataset for android device control}, arXiv preprint arXiv:2307.10088 (2023).
+\newblock \href {https://doi.org/10.48550/arXiv.2307.10088}
+  {\path{doi:10.48550/arXiv.2307.10088}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2307.10088}
+
+\bibitem{chen2024spabench}
+J.~Chen, D.~Yuen, B.~Xie, Y.~Yang, G.~Chen, Z.~Wu, L.~Yixing, X.~Zhou, W.~Liu,
+  S.~Wang, K.~Zhou, R.~Shao, L.~Nie, Y.~Wang, J.~Hao, J.~Wang, K.~Shao,
+  \href{https://arxiv.org/abs/2410.15164}{{SPA-Bench}: A comprehensive
+  benchmark for smartphone agent evaluation}, arXiv preprint arXiv:2410.15164
+  (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2410.15164}
+  {\path{doi:10.48550/arXiv.2410.15164}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2410.15164}
+
+\bibitem{greshake2023indirect}
+K.~Greshake, S.~Abdelnabi, S.~Mishra, C.~Endres, T.~Holz, M.~Fritz,
+  \href{https://arxiv.org/abs/2302.12173}{Not what you've signed up for:
+  Compromising real-world {LLM}-integrated applications with indirect prompt
+  injection}, arXiv preprint arXiv:2302.12173 (2023).
+\newblock \href {https://doi.org/10.48550/arXiv.2302.12173}
+  {\path{doi:10.48550/arXiv.2302.12173}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2302.12173}
+
+\bibitem{zhan2024injecagent}
+Q.~Zhan, Z.~Liang, Z.~Ying, D.~Kang,
+  \href{https://arxiv.org/abs/2403.02691}{{InjecAgent}: Benchmarking indirect
+  prompt injections in tool-integrated large language model agents}, arXiv
+  preprint arXiv:2403.02691 (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2403.02691}
+  {\path{doi:10.48550/arXiv.2403.02691}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2403.02691}
+
+\bibitem{debenedetti2024agentdojo}
+E.~Debenedetti, J.~Zhang, M.~Balunovi{\'c}, L.~Beurer-Kellner, M.~Fischer,
+  F.~Tram\`er, \href{https://arxiv.org/abs/2406.13352}{{AgentDojo}: A dynamic
+  environment to evaluate prompt injection attacks and defenses for {LLM}
+  agents}, arXiv preprint arXiv:2406.13352 (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2406.13352}
+  {\path{doi:10.48550/arXiv.2406.13352}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2406.13352}
+
+\bibitem{chen2025fineprint}
+C.~Chen, Z.~Zhang, B.~Guo, S.~Ma, I.~Khalilov, S.~A. Gebreegziabher, Y.~Ye,
+  Z.~Xiao, Y.~Yao, T.~Li, T.~J.-J. Li,
+  \href{https://arxiv.org/abs/2504.11281}{The obvious invisible threat:
+  {LLM}-powered {GUI} agents' vulnerability to fine-print injections}, arXiv
+  preprint arXiv:2504.11281 (2025).
+\newblock \href {https://doi.org/10.48550/arXiv.2504.11281}
+  {\path{doi:10.48550/arXiv.2504.11281}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2504.11281}
+
+\bibitem{liao2024eia}
+Z.~Liao, L.~Mo, C.~Xu, M.~Kang, J.~Zhang, C.~Xiao, Y.~Tian, B.~Li, H.~Sun,
+  \href{https://arxiv.org/abs/2409.11295}{{EIA}: Environmental injection attack
+  on generalist web agents for privacy leakage}, arXiv preprint
+  arXiv:2409.11295 (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2409.11295}
+  {\path{doi:10.48550/arXiv.2409.11295}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2409.11295}
+
+\bibitem{chen2025aeia}
+Y.~Chen, X.~Hu, K.~Yin, J.~Li, S.~Zhang,
+  \href{https://arxiv.org/abs/2502.13053}{Evaluating the robustness of
+  multimodal agents against active environmental injection attacks}, arXiv
+  preprint arXiv:2502.13053 (2025).
+\newblock \href {https://doi.org/10.48550/arXiv.2502.13053}
+  {\path{doi:10.48550/arXiv.2502.13053}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2502.13053}
+
+\bibitem{du2025mobileattacks}
+C.~Du, Q.~Huang, T.~Tang, Z.~Wang, A.~Nadkarni, Y.~Xiao,
+  \href{https://arxiv.org/abs/2510.27140}{Measuring the security of mobile
+  {LLM} agents under adversarial prompts from untrusted third-party channels},
+  arXiv preprint arXiv:2510.27140 (2025).
+\newblock \href {https://doi.org/10.48550/arXiv.2510.27140}
+  {\path{doi:10.48550/arXiv.2510.27140}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2510.27140}
+
+\bibitem{zhao2026anonymization}
+L.~Zhao, Z.~Zou, S.~Li, Z.~Liu,
+  \href{https://arxiv.org/abs/2602.10139}{Anonymization-enhanced privacy
+  protection for mobile {GUI} agents: Available but invisible}, arXiv preprint
+  arXiv:2602.10139 (2026).
+\newblock \href {https://doi.org/10.48550/arXiv.2602.10139}
+  {\path{doi:10.48550/arXiv.2602.10139}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2602.10139}
+
+\bibitem{androidSmsRetriever}
+{Android Developers},
+  \href{https://developer.android.com/identity/sms-retriever}{Request {SMS}
+  verification in an android app}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://developer.android.com/identity/sms-retriever}
+
+\bibitem{androidAutofill}
+{Android Developers},
+  \href{https://developer.android.com/identity/autofill}{Autofill framework},
+  accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://developer.android.com/identity/autofill}
+
+\bibitem{androidCredentialManager}
+{Android Developers},
+  \href{https://developer.android.com/identity/credential-manager}{About
+  credential manager}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://developer.android.com/identity/credential-manager}
+
+\bibitem{androidAutofillServices}
+{Android Developers},
+  \href{https://developer.android.com/identity/autofill/autofill-services}{Build
+  autofill services}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://developer.android.com/identity/autofill/autofill-services}
+
+\bibitem{android15privacy}
+{Android Developers},
+  \href{https://developer.android.com/about/versions/15/behavior-changes-all}{Android
+  15 behavior changes: Security and privacy}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://developer.android.com/about/versions/15/behavior-changes-all}
+
+\bibitem{androidKeystore}
+{Android Open Source Project},
+  \href{https://source.android.com/docs/security/features/keystore}{Hardware-backed
+  keystore}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://source.android.com/docs/security/features/keystore}
+
+\bibitem{androidKeyAttestation}
+{Android Open Source Project},
+  \href{https://source.android.com/docs/security/features/keystore/attestation}{Key
+  and {ID} attestation}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://source.android.com/docs/security/features/keystore/attestation}
+
+\bibitem{androidProtectedConfirmation}
+{Android Open Source Project},
+  \href{https://source.android.com/docs/security/features/protected-confirmation}{Android
+  protected confirmation}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://source.android.com/docs/security/features/protected-confirmation}
+
+\bibitem{rfc8707}
+B.~Campbell, J.~Bradley, H.~Tschofenig,
+  \href{https://www.rfc-editor.org/info/rfc8707}{Resource indicators for
+  {OAuth} 2.0}, Tech. Rep. RFC 8707, RFC Editor (2020).
+\newblock \href {https://doi.org/10.17487/RFC8707}
+  {\path{doi:10.17487/RFC8707}}.
+\newline\urlprefix\url{https://www.rfc-editor.org/info/rfc8707}
+
+\bibitem{rfc9449}
+D.~Fett, B.~Campbell, J.~Bradley, T.~Lodderstedt, M.~Jones, D.~Waite,
+  \href{https://www.rfc-editor.org/info/rfc9449}{{OAuth} 2.0 demonstrating
+  proof of possession ({DPoP})}, Tech. Rep. RFC 9449, RFC Editor (2023).
+\newblock \href {https://doi.org/10.17487/RFC9449}
+  {\path{doi:10.17487/RFC9449}}.
+\newline\urlprefix\url{https://www.rfc-editor.org/info/rfc9449}
+
+\bibitem{webauthn3}
+{W3C Web Authentication Working Group},
+  \href{https://www.w3.org/TR/webauthn-3/}{Web authentication: An {API} for
+  accessing public key credentials -- level 3}, W3C Recommendation (2026).
+\newline\urlprefix\url{https://www.w3.org/TR/webauthn-3/}
+
+\bibitem{wang2024mobileagentv2}
+J.~Wang, H.~Xu, H.~Jia, X.~Zhang, M.~Yan, W.~Shen, J.~Zhang, F.~Huang, J.~Sang,
+  \href{https://arxiv.org/abs/2406.01014}{Mobile-agent-v2: Mobile device
+  operation assistant with effective navigation via multi-agent collaboration},
+  arXiv preprint arXiv:2406.01014 (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2406.01014}
+  {\path{doi:10.48550/arXiv.2406.01014}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2406.01014}
+
+\bibitem{ye2025mobileagentv3}
+J.~Ye, X.~Zhang, H.~Xu, H.~Liu, J.~Wang, Z.~Zhu, Z.~Zheng, F.~Gao, J.~Cao,
+  Z.~Lu, J.~Liao, Q.~Zheng, F.~Huang, J.~Zhou, M.~Yan,
+  \href{https://arxiv.org/abs/2508.15144}{Mobile-agent-v3: Fundamental agents
+  for {GUI} automation}, arXiv preprint arXiv:2508.15144 (2025).
+\newblock \href {https://doi.org/10.48550/arXiv.2508.15144}
+  {\path{doi:10.48550/arXiv.2508.15144}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2508.15144}
+
+\bibitem{niu2024screenagent}
+R.~Niu, J.~Li, S.~Wang, Y.~Fu, X.~Hu, X.~Leng, H.~Kong, Y.~Chang, Q.~Wang,
+  \href{https://arxiv.org/abs/2402.07945}{{ScreenAgent}: A vision language
+  model-driven computer control agent}, arXiv preprint arXiv:2402.07945 (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2402.07945}
+  {\path{doi:10.48550/arXiv.2402.07945}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2402.07945}
+
+\bibitem{xie2024osworld}
+T.~Xie, D.~Zhang, J.~Chen, X.~Li, S.~Zhao, R.~Cao, T.~J. Hua, Z.~Cheng,
+  D.~Shin, F.~Lei, Y.~Liu, Y.~Xu, S.~Zhou, S.~Savarese, C.~Xiong, V.~Zhong,
+  T.~Yu, \href{https://arxiv.org/abs/2404.07972}{{OSWorld}: Benchmarking
+  multimodal agents for open-ended tasks in real computer environments}, arXiv
+  preprint arXiv:2404.07972 (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2404.07972}
+  {\path{doi:10.48550/arXiv.2404.07972}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2404.07972}
+
+\bibitem{chong2024casper}
+C.~J. Chong, C.~Hou, Z.~Yao, S.~M.~S. Talebi,
+  \href{https://arxiv.org/abs/2408.07004}{{Casper}: Prompt sanitization for
+  protecting user privacy in web-based large language models}, arXiv preprint
+  arXiv:2408.07004 (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2408.07004}
+  {\path{doi:10.48550/arXiv.2408.07004}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2408.07004}
+
+\bibitem{siyan2025papillon}
+L.~Siyan, V.~C. Raghuram, O.~Khattab, J.~Hirschberg, Z.~Yu,
+  \href{https://aclanthology.org/2025.naacl-long.173/}{{PAPILLON}: Privacy
+  preservation from internet-based and local language model ensembles}, in:
+  Proceedings of NAACL-HLT 2025, 2025, pp. 3371--3390.
+\newblock \href {https://doi.org/10.18653/v1/2025.naacl-long.173}
+  {\path{doi:10.18653/v1/2025.naacl-long.173}}.
+\newline\urlprefix\url{https://aclanthology.org/2025.naacl-long.173/}
+
+\bibitem{zeng2025privacyrestore}
+Z.~Zeng, J.~Wang, J.~Yang, Z.~Lu, H.~Li, H.~Zhuang, C.~Chen,
+  \href{https://aclanthology.org/2025.acl-long.532/}{{PrivacyRestore}:
+  Privacy-preserving inference in large language models via privacy removal and
+  restoration}, in: Proceedings of ACL 2025, 2025, pp. 10821--10855.
+\newblock \href {https://doi.org/10.18653/v1/2025.acl-long.532}
+  {\path{doi:10.18653/v1/2025.acl-long.532}}.
+\newline\urlprefix\url{https://aclanthology.org/2025.acl-long.532/}
+
+\bibitem{carpentier2024preempting}
+R.~Carpentier, B.~Z.~H. Zhao, H.~J. Asghar, D.~Kaafar,
+  \href{https://arxiv.org/abs/2411.11521}{Preempting text sanitization utility
+  in resource-constrained privacy-preserving {LLM} interactions}, arXiv
+  preprint arXiv:2411.11521 (2024).
+\newblock \href {https://doi.org/10.48550/arXiv.2411.11521}
+  {\path{doi:10.48550/arXiv.2411.11521}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2411.11521}
+
+\bibitem{debenedetti2025camel}
+E.~Debenedetti, I.~Shumailov, T.~Fan, J.~Hayes, N.~Carlini, D.~Fabian, C.~Kern,
+  C.~Shi, A.~Terzis, F.~Tram\`er,
+  \href{https://arxiv.org/abs/2503.18813}{Defeating prompt injections by
+  design}, arXiv preprint arXiv:2503.18813 (2025).
+\newblock \href {https://doi.org/10.48550/arXiv.2503.18813}
+  {\path{doi:10.48550/arXiv.2503.18813}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2503.18813}
+
+\bibitem{costa2025fides}
+M.~Costa, B.~K{\"o}pf, A.~Kolluri, A.~Paverd, M.~Russinovich, A.~Salem,
+  S.~Tople, L.~Wutschitz, S.~Zanella-B{\'e}guelin,
+  \href{https://arxiv.org/abs/2505.23643}{Securing {AI} agents with
+  information-flow control}, arXiv preprint arXiv:2505.23643 (2025).
+\newblock \href {https://doi.org/10.48550/arXiv.2505.23643}
+  {\path{doi:10.48550/arXiv.2505.23643}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2505.23643}
+
+\bibitem{shi2025progent}
+T.~Shi, J.~He, Z.~Wang, H.~Li, L.~Wu, W.~Guo, D.~Song,
+  \href{https://arxiv.org/abs/2504.11703}{{Progent}: Securing {AI} agents with
+  privilege control}, arXiv preprint arXiv:2504.11703 (2025).
+\newblock \href {https://doi.org/10.48550/arXiv.2504.11703}
+  {\path{doi:10.48550/arXiv.2504.11703}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2504.11703}
+
+\bibitem{wu2025isolategpt}
+Y.~Wu, F.~Roesner, T.~Kohno, N.~Zhang, U.~Iqbal,
+  \href{https://www.ndss-symposium.org/ndss-paper/isolategpt-an-execution-isolation-architecture-for-llm-based-agentic-systems/}{{IsolateGPT}:
+  An execution isolation architecture for {LLM}-based agentic systems}, in:
+  Network and Distributed System Security Symposium, 2025.
+\newline\urlprefix\url{https://www.ndss-symposium.org/ndss-paper/isolategpt-an-execution-isolation-architecture-for-llm-based-agentic-systems/}
+
+\bibitem{bagdasarian2024airgap}
+E.~Bagdasarian, R.~Yi, S.~Ghalebikesabi, P.~Kairouz, M.~Gruteser, S.~Oh,
+  B.~Balle, D.~Ramage,
+  \href{https://doi.org/10.1145/3658644.3690350}{{AirGapAgent}: Protecting
+  privacy-conscious conversational agents}, in: Proceedings of the 2024 ACM
+  SIGSAC Conference on Computer and Communications Security, 2024, pp.
+  3868--3882.
+\newblock \href {https://doi.org/10.1145/3658644.3690350}
+  {\path{doi:10.1145/3658644.3690350}}.
+\newline\urlprefix\url{https://doi.org/10.1145/3658644.3690350}
+
+\bibitem{dennis1966semantics}
+J.~B. Dennis, E.~C.~V. Horn, Programming semantics for multiprogrammed
+  computations, in: Communications of the ACM, Vol.~9, 1966, pp. 143--155.
+\newblock \href {https://doi.org/10.1145/365230.365252}
+  {\path{doi:10.1145/365230.365252}}.
+
+\bibitem{saltzer1975protection}
+J.~H. Saltzer, M.~D. Schroeder, The protection of information in computer
+  systems, Proceedings of the IEEE 63~(9) (1975) 1278--1308.
+\newblock \href {https://doi.org/10.1109/PROC.1975.9939}
+  {\path{doi:10.1109/PROC.1975.9939}}.
+
+\bibitem{watson2010capsicum}
+R.~N.~M. Watson, J.~Anderson, B.~Laurie, K.~Kennaway,
+  \href{https://www.usenix.org/conference/usenixsecurity10/capsicum-practical-capabilities-unix}{{Capsicum}:
+  Practical capabilities for {UNIX}}, in: 19th USENIX Security Symposium, 2010.
+\newline\urlprefix\url{https://www.usenix.org/conference/usenixsecurity10/capsicum-practical-capabilities-unix}
+
+\bibitem{felt2011permission}
+A.~P. Felt, E.~Chin, S.~Hanna, D.~Song, D.~Wagner, Android permissions
+  demystified, in: Proceedings of the 18th ACM Conference on Computer and
+  Communications Security, 2011, pp. 627--638.
+\newblock \href {https://doi.org/10.1145/2046707.2046779}
+  {\path{doi:10.1145/2046707.2046779}}.
+
+\bibitem{bugiel2013flexible}
+S.~Bugiel, S.~Heuser, A.-R. Sadeghi,
+  \href{https://www.usenix.org/conference/usenixsecurity13/technical-sessions/paper/bugiel}{Flexible
+  and fine-grained mandatory access control on android for diverse security and
+  privacy policies}, in: 22nd USENIX Security Symposium, 2013, pp. 131--146.
+\newline\urlprefix\url{https://www.usenix.org/conference/usenixsecurity13/technical-sessions/paper/bugiel}
+
+\bibitem{rossi2021seapp}
+M.~Rossi, D.~Facchinetti, E.~Bacis, M.~Rosa, S.~Paraboschi,
+  \href{https://www.usenix.org/conference/usenixsecurity21/presentation/rossi}{{SEApp}:
+  Bringing mandatory access control to android apps}, in: 30th USENIX Security
+  Symposium, 2021, pp. 3613--3630.
+\newline\urlprefix\url{https://www.usenix.org/conference/usenixsecurity21/presentation/rossi}
+
+\bibitem{enck2010taintdroid}
+W.~Enck, P.~Gilbert, B.-G. Chun, L.~P. Cox, J.~Jung, P.~McDaniel, A.~N. Sheth,
+  \href{https://www.usenix.org/conference/osdi10/taintdroid-information-flow-tracking-system-realtime-privacy-monitoring}{{TaintDroid}:
+  An information-flow tracking system for realtime privacy monitoring on
+  smartphones}, in: 9th USENIX Symposium on Operating Systems Design and
+  Implementation, 2010.
+\newline\urlprefix\url{https://www.usenix.org/conference/osdi10/taintdroid-information-flow-tracking-system-realtime-privacy-monitoring}
+
+\bibitem{yan2012droidscope}
+L.~K. Yan, H.~Yin,
+  \href{https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/yan}{{DroidScope}:
+  Seamlessly reconstructing the {OS} and dalvik semantic views for dynamic
+  android malware analysis}, in: 21st USENIX Security Symposium, 2012, pp.
+  569--584.
+\newline\urlprefix\url{https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/yan}
+
+\bibitem{rfc4226}
+D.~M'Raihi, M.~Bellare, F.~Hoornaert, D.~Naccache, O.~Ranen,
+  \href{https://www.rfc-editor.org/info/rfc4226}{{HOTP}: An {HMAC}-based
+  one-time password algorithm}, Tech. Rep. RFC 4226, RFC Editor (2005).
+\newblock \href {https://doi.org/10.17487/RFC4226}
+  {\path{doi:10.17487/RFC4226}}.
+\newline\urlprefix\url{https://www.rfc-editor.org/info/rfc4226}
+
+\bibitem{rfc6238}
+D.~M'Raihi, S.~Machani, M.~Pei, J.~Rydell,
+  \href{https://www.rfc-editor.org/info/rfc6238}{{TOTP}: Time-based one-time
+  password algorithm}, Tech. Rep. RFC 6238, RFC Editor (2011).
+\newblock \href {https://doi.org/10.17487/RFC6238}
+  {\path{doi:10.17487/RFC6238}}.
+\newline\urlprefix\url{https://www.rfc-editor.org/info/rfc6238}
+
+\bibitem{nist80063b}
+{National Institute of Standards and Technology},
+  \href{https://pages.nist.gov/800-63-3/sp800-63b.html}{Digital identity
+  guidelines: Authentication and lifecycle management}, Tech. Rep. SP 800-63B,
+  NIST (2017).
+\newblock \href {https://doi.org/10.6028/NIST.SP.800-63b}
+  {\path{doi:10.6028/NIST.SP.800-63b}}.
+\newline\urlprefix\url{https://pages.nist.gov/800-63-3/sp800-63b.html}
+
+\bibitem{rfc9700}
+T.~Lodderstedt, J.~Bradley, A.~Labunets, D.~Fett,
+  \href{https://www.rfc-editor.org/info/rfc9700}{Best current practice for
+  {OAuth} 2.0 security}, Tech. Rep. RFC 9700, RFC Editor (2025).
+\newblock \href {https://doi.org/10.17487/RFC9700}
+  {\path{doi:10.17487/RFC9700}}.
+\newline\urlprefix\url{https://www.rfc-editor.org/info/rfc9700}
+
+\bibitem{androidAccessibility}
+{Android Developers},
+  \href{https://developer.android.com/guide/topics/ui/accessibility/service}{Create
+  your own accessibility service}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://developer.android.com/guide/topics/ui/accessibility/service}
+
+\bibitem{androidSmsConsent}
+{Android Developers},
+  \href{https://developers.google.com/identity/sms-retriever/user-consent/overview}{One-tap
+  {SMS} verification with the {SMS} user consent {API}}, accessed 2026-10-03
+  (2026).
+\newline\urlprefix\url{https://developers.google.com/identity/sms-retriever/user-consent/overview}
+
+\bibitem{androidClipboard}
+{Android Developers},
+  \href{https://developer.android.com/reference/android/content/ClipDescription#EXTRA_IS_SENSITIVE}{{ClipDescription.EXTRA\_IS\_SENSITIVE}
+  api reference}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://developer.android.com/reference/android/content/ClipDescription#EXTRA_IS_SENSITIVE}
+
+\bibitem{rfc2104}
+H.~Krawczyk, M.~Bellare, R.~Canetti,
+  \href{https://www.rfc-editor.org/info/rfc2104}{{HMAC}: Keyed-hashing for
+  message authentication}, Tech. Rep. RFC 2104, RFC Editor (1997).
+\newblock \href {https://doi.org/10.17487/RFC2104}
+  {\path{doi:10.17487/RFC2104}}.
+\newline\urlprefix\url{https://www.rfc-editor.org/info/rfc2104}
+
+\bibitem{androidWebView}
+{Android Developers},
+  \href{https://developer.android.com/develop/ui/views/layout/webapps/webview}{Manage
+  webview objects}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://developer.android.com/develop/ui/views/layout/webapps/webview}
+
+\bibitem{androidSecureFlag}
+{Android Developers},
+  \href{https://developer.android.com/security/fraud-prevention/activities}{Secure
+  sensitive activities}, accessed 2026-10-03 (2026).
+\newline\urlprefix\url{https://developer.android.com/security/fraud-prevention/activities}
+
+\end{thebibliography}

@@ -1,0 +1,26 @@
+paper_section,page_or_algorithm_or_equation,paper_object,implementation_file,class_or_function_name,test_file,implementation_status,notes
+5.1,p.14 Eq.1,Secret store record,src/secrethandle/schemas.py; src/secrethandle/store.py,SecretRecord; SecretStore,tests/test_store.py,implemented,Locked in-memory reference store; durable Android store external
+5.1,p.14 Eq.2; Algorithm 1 p.26,Mint,src/secrethandle/core.py,SecretHandleService.mint,tests/test_core.py,implemented,Canonical HMAC and typed policy intersection
+5.1,p.14 Eq.3; Algorithm 2 p.27,Resolve ENTER,src/secrethandle/core.py,SecretHandleService.resolve,tests/test_core.py; tests/test_concurrency.py,implemented,Private injector and target resolver are adapters
+5.1,p.14 Eq.4; Algorithm 3 p.28,Observation redaction,src/secrethandle/redaction.py,ObservationRedactor.redact,tests/test_redaction.py,implemented_with_synthetic_demo,Real framework pixel/tree hooks are external
+5.1,p.15 Definition 1; Eq.7,Destination match,src/secrethandle/policy.py,DestinationPolicy.matches,tests/test_policy.py,implemented,Missing mandatory identity fails closed
+5.1,p.15 Definition 2,Eligibility,src/secrethandle/core.py,SecretHandleService._precheck,tests/test_core.py,implemented,Confirmation is a separate post-reservation phase
+5.2,p.15 Eq.5,Non-disclosure advantage,src/secrethandle/metrics.py,deterministic_view_difference,tests/test_metrics.py,implemented_with_synthetic_demo,Diagnostic only; not a cryptographic proof
+7,p.23 Eq.6,Forgery bound,src/secrethandle/crypto.py,forgery_bound,tests/test_crypto.py,implemented,Numerical theorem-bound utility
+7,p.24 Proposition 1,Single-use linearizability,src/secrethandle/store.py,SecretStore.reserve,tests/test_concurrency.py,implemented,Threaded reference-model test
+7,p.24 Proposition 2,Expiry monotonicity,src/secrethandle/store.py,SecretStore.expire,tests/test_store.py,implemented,Monotonic-time API
+7.1,p.25 Proposition 3,Safe attenuation,src/secrethandle/policy.py,is_safe_attenuation,tests/test_policy.py,implemented,Finite typed policy language
+9.4,pp.31-32,B0 unprotected,src/secrethandle/baselines.py,UnprotectedBaseline,tests/test_baselines.py,implemented_with_synthetic_demo,Never use with real secrets
+9.4,p.31,B1 detected placeholder,src/secrethandle/baselines.py,DetectedPlaceholderBaseline,tests/test_baselines.py,implemented_with_synthetic_demo,Reference detector only; not external paper code
+9.4,p.32,B2 platform flow,src/secrethandle/adapters.py,PlatformFlowAdapter,tests/test_adapters.py,adapter_stub_waiting_for_external_dependency,Requires Android APIs and app cooperation
+9.4,p.32,B3 SecretHandle,src/secrethandle/baselines.py,SecretHandleBaseline,tests/test_experiments.py,implemented_with_synthetic_demo,Wraps reference service
+9.5,p.32 Eq.8,Exposure E,src/secrethandle/metrics.py,exposure_rate,tests/test_metrics.py,implemented,Detector breakdown retained
+9.5,p.32,Metrics R U L F Y,src/secrethandle/metrics.py,aggregate_trial_metrics,tests/test_metrics.py,implemented,Applicability-aware denominators
+9.5-9.6,pp.32-33,Latency and confidence intervals,src/secrethandle/statistics.py,wilson_interval; bootstrap_interval; exact_mcnemar,tests/test_statistics.py,implemented,Seeded bootstrap/permutation
+9.3,pp.30-31,Attack suite,src/secrethandle/synthetic.py,generate_trials,tests/test_synthetic.py,implemented_with_synthetic_demo,Synthetic canaries and isolated in-memory targets
+9.1-9.2,pp.30-31,Devices apps agents benchmarks,src/secrethandle/adapters.py,AospAdapter; AgentRunnerAdapter; BenchmarkAdapter,tests/test_adapters.py,adapter_stub_waiting_for_external_dependency,Manual EC2/device provisioning required
+9.4,p.32,Ablations,src/secrethandle/experiments.py,run_ablation,tests/test_experiments.py,implemented_with_synthetic_demo,Unsafe modes synthetic-only
+9.7,p.34,Killer experiment,src/secrethandle/experiments.py,run_killer_experiment,tests/test_experiments.py,implemented_with_synthetic_demo,Three-condition protected oracle
+Appendix E,pp.44-45,Artifact monitors and encodings,src/secrethandle/oracles.py,DisclosureOracle; DeliveryOracle,tests/test_oracles.py,implemented_with_synthetic_demo,OCR/image inspection requires external adapter
+Appendix C-D-F,pp.44-46,Evaluation matrices and parameters,configs/experiment_template.yaml; docs/data_format.md,configuration schema,tests/test_config.py,implemented_with_synthetic_demo,Unset real parameters remain explicit TODOs
+11,pp.37-38,Android/WebView/StrongBox limitations,src/secrethandle/adapters.py,external adapter protocols,tests/test_adapters.py,adapter_stub_waiting_for_external_dependency,No Android enforcement claim

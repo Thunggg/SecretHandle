@@ -1,0 +1,25 @@
+run:
+  name: synthetic_demo
+  seed: 20261003
+security:
+  lambda_bits: 128
+  authenticator: hmac-sha256
+data:
+  mode: synthetic
+  root: null
+experiment:
+  trials_per_attack: 4
+  conditions:
+    - B0_unprotected
+    - B1_detected_placeholder
+    - B2_platform_flow
+    - B3_secrethandle
+  attacks:
+    - benign
+    - redirect
+    - forgery
+    - replay
+    - reread
+    - expired
+output:
+  dir: outputs/synthetic_demo

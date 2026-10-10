@@ -1,0 +1,24 @@
+\begin{figure}[htbp]
+\centering
+\resizebox{0.80\textwidth}{!}{%
+\begin{tikzpicture}[node distance=15mm and 19mm]
+\node[sh/source] (data) {Synthetic sources\\OTP / credential /\\identifier / payment};
+\node[sh/infrastructure,right=of data] (vars) {Factors\\device, agent, model,\\binding, lifecycle, redaction};
+\node[sh/attack,right=of vars] (attacks) {Attacks\\read, redirect, fake,\\replay, reread};
+\node[sh/component,below=22mm of attacks] (conds) {Conditions\\B0 unprotected\\B1 placeholder\\B2 platform\\B3 SecretHandle};
+\node[sh/defense,left=of conds] (oracle) {Protected oracles\\delivery + app state\\agent-artifact scan};
+\node[sh/theory,left=of oracle] (metrics) {Metrics\\$E,R,U,L,F,Y$\\latency + overhead};
+\draw[sh/flow] (data) -- (vars);
+\draw[sh/attackflow] (vars) -- (attacks);
+\draw[sh/flow] (attacks) -- (conds);
+\draw[sh/secureflow] (conds) -- (oracle);
+\draw[sh/secureflow] (oracle) -- (metrics);
+\node[sh/infrastructure,below=17mm of oracle,minimum width=96mm] (repro) {Pinned AOSP/apps/agents/models + paired seeds + confidence intervals + raw-data scripts};
+\draw[sh/control] (vars.south) -- (repro.north);
+\draw[sh/control] (metrics.south) -- ([xshift=-32mm]repro.north);
+\draw[sh/control] (conds.south) -- ([xshift=32mm]repro.north);
+\end{tikzpicture}%
+}
+\caption{Planned experimental setup. Protected canary and delivery oracles distinguish actual secret flow from model behavior. Every empirical output remains pending until the AOSP prototype and runs exist.}
+\label{fig:experiments}
+\end{figure}

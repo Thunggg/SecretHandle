@@ -1,0 +1,26 @@
+\section{Limitations and threats to validity}
+\label{sec:limitations}
+
+\textbf{No implementation or results yet.} The largest limitation is empirical: the current project contains a concept PDF and manuscript, not an AOSP patch set or measurements. Architecture feasibility arguments and formal properties cannot substitute for implementation. All tables and plots are placeholders or protocol diagrams.
+
+\textbf{Trusted OS assumption.} The analysis trusts substantial Android framework code. Kernel or system-server compromise can read values, forge target identity, bypass redaction, or inject directly. Hardware-backed keys protect key extraction but do not make a compromised framework enforce the correct policy. Protected Confirmation strengthens a narrow user-approval path, not the entire resolver.
+
+\textbf{Incomplete observation coverage.} The model names screenshots, accessibility trees/events, action echoes, logs, clipboard, and IME state, but real devices may expose additional channels: vendor services, notifications, crash dumps, GPU buffers, screen readers, backups, analytics, or application reflections. The prototype must enumerate and instrument actual flows. A single uncovered path invalidates the non-disclosure assumption for that configuration.
+
+\textbf{WebView identity.} Package identity is insufficient for origin-level confinement. Reliable binding between a target node, frame, and authenticated origin may require browser/WebView changes. Custom tabs, redirects, nested frames, embedded SDKs, and origin transitions complicate the model. The safe fallback is rejection or explicit user confirmation, which can reduce utility.
+
+\textbf{Field semantics.} Android input types and autofill hints are partly app-controlled and may be absent or misleading. Binding only to a package can permit same-app redirection; binding to a fragile node can break dynamic interfaces. The prototype must report the assurance source for each predicate and test malicious app metadata.
+
+\textbf{Authorized-destination misuse.} An injected instruction can still cause a legitimate but unwanted action inside the allowed destination. Examples include selecting an attacker's account before entering a bound OTP, confirming an unintended checkout, or submitting a form whose semantics changed. Task tokens, form-level binding, transaction summaries, and protected confirmation may reduce this risk but are not solved by a package/origin predicate alone.
+
+\textbf{Source coverage and authenticity.} Not every secret enters through SMS Retriever, notification classification, Credential Manager, clipboard, or wallet. A fake SMS or notification may trigger a source adapter if authenticity is not established. App-hash conventions, request correlation, and server-side verification help, but the adapter must define exactly what provenance it authenticates. Detector-derived fallback handles do not inherit protected-source guarantees.
+
+\textbf{Denial of service.} An agent can repeatedly request invalid resolves, navigate targets away, or force conservative consumption after uncertain failures. Rate limits, quotas, and user-visible recovery reduce abuse but cannot guarantee availability against a model controlling the UI. Fail-closed policy may cause more benign task failures.
+
+\textbf{Low-entropy and inference leakage.} OTPs have low entropy. The design avoids deterministic value hashes and does not expose verifier responses beyond task effects, but application outcomes can reveal whether the hidden code was accepted. The theorem declassifies such necessary outcomes; it does not claim semantic secrecy after the world reacts.
+
+\textbf{Cryptographic abstraction.} The unforgeability proof assumes canonical encoding, secure key generation, correct MAC use, and key secrecy. Implementation errors, truncation, backup/restore behavior, multi-user key separation, rollback, or OEM keystore defects can violate these assumptions. A security review and test vectors are required.
+
+\textbf{External validity.} Open test apps and a small set of devices may not represent commercial login, banking, WebView, or wallet implementations. Agent behavior changes rapidly across model versions. Results must pin versions and avoid claiming universal effectiveness from observed zero failures.
+
+\textbf{Literature horizon.} Agent security and mobile GUI privacy are fast-moving fields. The verified search through 2026-10-03 identified a very close 2026 mobile-placeholder work. A submission must update the search, obtain and compare full text where currently only abstract-level verification was possible, and revise novelty claims.

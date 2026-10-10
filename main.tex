@@ -1,0 +1,110 @@
+\documentclass[preprint,12pt]{elsarticle}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs,multirow,array,tabularx,longtable}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+\usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds,shapes.geometric,shapes.symbols,decorations.pathreplacing,patterns,matrix,shadows.blur}
+\pgfplotsset{compat=1.18}
+\input{figures/tikz_styles}
+
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newcommand{\SH}{\textsc{SecretHandle}}
+\newcommand{\Enter}{\ensuremath{\mathsf{Enter}}}
+\newcommand{\Mint}{\ensuremath{\mathsf{Mint}}}
+\newcommand{\Resolve}{\ensuremath{\mathsf{Resolve}}}
+\newcommand{\Redact}{\ensuremath{\mathsf{Redact}}}
+\newcommand{\Reject}{\ensuremath{\mathsf{Reject}}}
+\newcommand{\Adv}{\ensuremath{\mathsf{Adv}}}
+\newcommand{\Match}{\ensuremath{\mathsf{Match}}}
+\newcommand{\View}{\ensuremath{\mathsf{View}}}
+\newcommand{\Real}{\ensuremath{\mathsf{Real}}}
+\newcommand{\Ideal}{\ensuremath{\mathsf{Ideal}}}
+\newcommand{\bits}{\{0,1\}}
+\newcommand{\sample}{\xleftarrow{\$}}
+\crefname{assumption}{assumption}{assumptions}
+\Crefname{assumption}{Assumption}{Assumptions}
+\crefname{proposition}{proposition}{propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.06}
+\renewcommand{\floatpagefraction}{0.82}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{6}
+
+\journal{Elsevier journal manuscript}
+
+\begin{document}
+\begin{frontmatter}
+
+\title{SecretHandle: OS-Minted, Destination- and Task-Bound Opaque Secrets for Android Mobile AI Agents}
+
+\author[inst1]{Anonymous Author(s)}
+\affiliation[inst1]{organization={Institution withheld for review}, city={City}, country={Country}}
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\begin{keyword}
+mobile AI agents \sep Android security \sep opaque capabilities \sep destination binding \sep one-time passwords \sep prompt injection \sep observation redaction \sep trusted input
+\end{keyword}
+
+\end{frontmatter}
+
+\begin{highlights}
+\item Secret handles are minted inside Android at authoritative sources, before an agent can observe a raw secret.
+\item Each opaque handle is bound to a task and destination and carries a type-specific lifetime and use policy.
+\item The OS resolves \texttt{ENTER(handle)} locally and redacts the resulting field from later agent observations.
+\item A transition-system analysis states conditional non-disclosure, confinement, unforgeability, and replay properties.
+\item A reproducible AOSP evaluation protocol is provided; no placeholder curve is reported as an empirical result.
+\end{highlights}
+
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/preliminaries}
+\input{sections/system_model}
+\input{sections/problem_formulation}
+\input{sections/methodology}
+\input{sections/theory}
+\input{sections/algorithm}
+\input{sections/experiments}
+\input{sections/discussion}
+\input{sections/limitations}
+\input{sections/conclusion}
+
+\appendix
+\input{appendix/proofs}
+\input{appendix/additional_experiments}
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this manuscript.
+
+\section*{Data and code availability}
+The current manuscript specifies a prototype and evaluation plan. No measurements are claimed. A future artifact release must include the AOSP patch set, test applications, attack scripts, configuration manifests, and raw measurements before the empirical sections are converted from protocol to results.
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references_verified}
+
+\end{document}

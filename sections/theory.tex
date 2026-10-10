@@ -1,0 +1,136 @@
+\section{Formal analysis}
+\label{sec:theory}
+
+\input{figures/tikz_theory_diagram}
+
+The results in this section describe the model in \cref{sec:problem}. They are not measurements of an implementation. Each theorem states the assumption that connects the abstract transition to a future AOSP prototype.
+
+\begin{assumption}[Reference-monitor integrity]
+\label{ass:tcb}
+The adversary cannot modify the SecretHandle service, store, resolver, redaction registry, trusted target-context extraction, injection path, or their control flow; all resolve attempts pass through the resolver.
+\end{assumption}
+
+\begin{assumption}[Source and task authenticity]
+\label{ass:source}
+Only an approved source adapter can mint a protected-source handle, and task token $\tau$ and provenance $\sigma$ cannot be forged or widened by the agent.
+\end{assumption}
+
+\begin{assumption}[Authenticator security and freshness]
+\label{ass:crypto}
+$F$ is existentially unforgeable under chosen-message attack, $K$ remains secret, identifiers are sampled uniformly from $\bits^\lambda$, and encoding $\mathsf{enc}$ is canonical and injective over valid metadata.
+\end{assumption}
+
+\begin{assumption}[Authentic target identity]
+\label{ass:identity}
+For every accepted node token, the resolver-derived $x=(p,o,f,v)$ equals the actual injection target at commit time. An origin or field component required by $d$ is never treated as matched when it is unavailable or unauthenticated.
+\end{assumption}
+
+\begin{assumption}[Complete modeled-channel redaction]
+\label{ass:redaction}
+Before $s$ becomes observable in a target field, an obligation is active, and every screenshot, accessibility tree, event, action echo, and framework log included in $\View_A$ applies the same value-independent mask until $s$ is absent.
+\end{assumption}
+
+\begin{assumption}[Value-oblivious public behavior]
+\label{ass:oblivious}
+For equal-length $s_0,s_1$ with equal leakage $\ell$, minting, policy decisions, error messages, public timing buckets, handle distributions, and application effects included before the declassified task outcome are identically distributed or computationally indistinguishable.
+\end{assumption}
+
+\begin{lemma}[Mint-view independence]
+\label{lem:mint}
+Under \cref{ass:source,ass:crypto,ass:oblivious}, the agent-visible distribution produced by \Mint\ for $s_0$ and $s_1$ with equal $\ell$ is computationally indistinguishable.
+\end{lemma}
+
+\begin{proof}
+The visible identifier is uniform and independent of $s$. The type and public label are equal by the leakage premise. The authenticator covers metadata that is identical under equal $\ell$ and does not encode $s$ in the construction. Store contents differ but are outside $\View_A$ by \cref{ass:tcb}. Any remaining distinguisher contradicts value-oblivious public behavior or identifier/authenticator independence. Full case expansion appears in Appendix~\ref{app:proofs}.
+\end{proof}
+
+\begin{lemma}[Resolve authorization invariant]
+\label{lem:resolve}
+Under \cref{ass:tcb,ass:identity}, every transition from live to reserved occurs only for a record whose authenticator, task, time, use budget, confirmation precondition, and destination predicate pass the eligibility check.
+\end{lemma}
+
+\begin{proof}
+The resolver is the complete mediator by \cref{ass:tcb}. Its transition guard is exactly eligibility. Target components are authentic by \cref{ass:identity}. Therefore a live-to-reserved transition implies every conjunct of the guard. The conclusion does not say that the authorized destination is benevolent.
+\end{proof}
+
+\begin{theorem}[Destination confinement]
+\label{thm:confinement}
+Under \cref{ass:tcb,ass:identity}, if a SecretHandle value is committed to target $x$ in task $\tau'$, then $\Match(d,x)=1$ and $\tau'=\tau$ for the corresponding minted record.
+\end{theorem}
+
+\begin{proof}
+A committed injection requires a prior successful reservation of the same record and target token. By \cref{lem:resolve}, reservation implies target and task acceptance. The injection capability is one-shot and binds the reservation to the revalidated node token; \cref{ass:identity} excludes target substitution before commit. Hence the committed target satisfies the predicate and task equality. If WebView origin is unavailable, the theorem applies only when policy rejects or omits an origin requirement explicitly; it does not infer an origin from package identity.
+\end{proof}
+
+\begin{theorem}[Handle unforgeability]
+\label{thm:unforgeability}
+Let an adversary make at most $Q$ online acceptance attempts and observe handles of its choice through authorized mint events. Under \cref{ass:tcb,ass:crypto}, the probability that it causes acceptance of a handle/metadata combination not emitted by \Mint\ is bounded by
+\begin{equation}
+\Adv^{\mathsf{forge}}_{\SH,\mathcal{A}}(\lambda)
+\leq \Adv^{\mathsf{euf}}_{F,\mathcal{B}}(\lambda)+\frac{Q}{2^\lambda},
+\label{eq:forge}
+\end{equation}
+up to identifier collisions already counted in the random term.
+\end{theorem}
+
+\begin{proof}
+Construct $\mathcal{B}$ that simulates the store and answers authenticators through its MAC oracle. If the adversary submits new valid metadata and tag, $\mathcal{B}$ outputs an EUF-CMA forgery. If it instead guesses an existing live random identifier without a new tag, its chance over $Q$ attempts is at most $Q/2^\lambda$ before rate limiting. A fake visual handle does not alter this argument because acceptance uses the authenticated record, not rendered syntax.
+\end{proof}
+
+\begin{proposition}[Single-use linearizability]
+\label{prop:singleuse}
+Assume the live-to-reserved transition is an atomic compare-and-swap and no rollback occurs after possible delivery. For a record minted with $u=1$, at most one concurrent resolve call reaches committed injection.
+\end{proposition}
+
+\begin{proof}
+All contenders observe one state variable. Exactly one can linearize the transition from live to reserved. Other calls see reserved or consumed and reject. The winner either commits and consumes the record or fails before possible delivery and performs a policy-approved rollback. The no-rollback-after-possible-delivery condition prevents two sequential commits across an uncertain failure.
+\end{proof}
+
+\begin{proposition}[Expiry monotonicity]
+\label{prop:expiry}
+If expiry is evaluated against a monotonic clock and expired records never transition to live, then a handle rejected because $t\ge t_e$ cannot later become eligible through wall-clock adjustment.
+\end{proposition}
+
+\begin{proof}
+Monotonic time does not decrease. The expiry handler changes live or reserved records to expired, and no transition returns expired to live. Therefore eligibility's strict $t<t_e$ conjunct remains false.
+\end{proof}
+
+\begin{theorem}[Agent-view non-disclosure]
+\label{thm:nondisclosure}
+Under \cref{ass:tcb,ass:source,ass:crypto,ass:redaction,ass:oblivious}, and before any explicitly declassified value-dependent application outcome, $\Adv^{\mathsf{nd}}_{\SH,\mathcal{A}}(\lambda)$ in \cref{eq:nd} is negligible for equal-leakage secrets.
+\end{theorem}
+
+\begin{proof}
+Consider a hybrid trace. First replace the mint view for $s_0$ with that for $s_1$; the difference is negligible by \cref{lem:mint}. Resolver decisions depend on authenticated metadata, task, target, lifecycle, and confirmation, which are equal or value-oblivious by premise. At injection, the raw value moves only through TCB memory and the target's private input path. \Cref{ass:redaction} replaces every modeled post-entry occurrence by the same mask. Public errors and timing do not depend on the value by \cref{ass:oblivious}. Thus the two agent-view distributions are indistinguishable until an allowed value-dependent outcome is released. Appendix~\ref{app:proofs} enumerates abort and retry cases.
+\end{proof}
+
+\begin{corollary}[Redirection resistance for a disjoint attacker destination]
+\label{cor:redirection}
+Under \cref{thm:confinement}, if attacker target $x_A$ is outside $d$, an injected instruction that requests \texttt{ENTER(handle)} at $x_A$ cannot cause the resolver to commit the secret there.
+\end{corollary}
+
+\begin{proof}
+If commit occurred, \cref{thm:confinement} would imply $\Match(d,x_A)=1$, contradicting the premise.
+\end{proof}
+
+\begin{remark}[Legitimate-but-unwanted actions]
+The corollary does not cover $x_A\in d$. An injection may still induce an unwanted action within the same authorized package/origin, such as logging into an attacker's account or submitting a form the user did not intend. Task semantics, transaction confirmation, and richer field/form binding are separate defenses.
+\end{remark}
+
+\begin{remark}[No claim of optimality]
+The bounds above characterize one construction. They are not claimed tight, optimal, or matching lower bounds. In particular, total leakage may be dominated by application behavior or an omitted observation channel rather than the authenticator term.
+\end{remark}
+
+\subsection{Composition conditions}
+
+A deployment combines multiple sources, an agent framework, keyboard/input components, OEM services, and applications. Non-disclosure composes only if every component that receives $s$ is either in the TCB or outside the agent view and if all agent-visible joins apply redaction. Destination confinement composes only if every resolution path uses the same target identity. A fallback that copies $s$ to the clipboard or asks the agent to type it invalidates the guarantee for that operation.
+
+\begin{proposition}[Safe attenuation]
+If policy $P'$ has a destination set contained in $P$, an expiry no later than $P$, a use budget no larger than $P$, and a confirmation rule at least as strict as $P$, then replacing $P$ with $P'$ cannot introduce a new successful resolve trace.
+\end{proposition}
+
+\begin{proof}
+Every eligibility conjunct accepted under $P'$ is also accepted under $P$, while the converse need not hold. Therefore the accepted trace set can only shrink.
+\end{proof}
+
+This proposition supports source/task policy intersection and post-mint tightening. It does not justify dynamic widening.

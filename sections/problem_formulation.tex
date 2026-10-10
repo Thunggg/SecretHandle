@@ -1,0 +1,73 @@
+\section{Problem formulation and security definitions}
+\label{sec:problem}
+
+\subsection{State and transitions}
+
+The trusted store maps each identifier $n$ to a record
+\begin{equation}
+\Omega[n]=(s,H,a,z,r),
+\label{eq:record}
+\end{equation}
+where $s$ is the value, $H=(n,q,\sigma,d,\tau,t_i,t_e,u,c)$ is metadata, $a=F_K(\mathsf{enc}(H))$, $z\in\{\mathsf{live},\mathsf{reserved},\mathsf{consumed},\mathsf{expired},\mathsf{revoked}\}$ is lifecycle state, and $r$ is an optional reservation nonce. The visible handle is $h=(n,q,a)$ plus an explicitly non-sensitive label. Storing the complete $H$ server-side prevents the agent from editing a destination even if the display representation is malleable.
+
+The abstract machine supports:
+\begin{align}
+  (h,\Omega') &\leftarrow \Mint(s,q,\sigma,d,\tau,c,t_i,t_e,u;\Omega), \label{eq:mint}\\
+  (y,\Omega') &\leftarrow \Resolve(h,x,\tau',t,\gamma;\Omega), \label{eq:resolve}\\
+  O' &\leftarrow \Redact(O,R), \label{eq:redact}
+\end{align}
+where $x$ is the TCB-derived target context, $\gamma$ is confirmation evidence, $y$ is either an internal injection capability or $\Reject$, $O$ is a raw observation, and $R$ is the active redaction registry. Expiry and revocation are state transitions that never return $s$.
+
+\begin{definition}[Target match]
+For trusted context $x=(p,o,f,v)$, $\Match(d,x)=1$ exactly when every mandatory component of destination predicate $d$ accepts the corresponding component in $x$. An unavailable mandatory identity produces $0$, not a wildcard.
+\end{definition}
+
+\begin{definition}[Eligible handle]
+A record is eligible at time $t$ for task $\tau'$ and target $x$ if its authenticator verifies, its state is live, $t_i\le t<t_e$, $u>0$, $\tau'=\tau$, $\Match(d,x)=1$, and confirmation evidence satisfies $c$.
+\end{definition}
+
+\subsection{Observation boundary}
+
+The agent view $\View_A(\pi)$ contains agent-visible screenshots, accessibility trees, handle metadata, action results, timing rounded to the public granularity, and application messages. It excludes TCB memory, sealed storage, protected-confirmation pixels, and the private input buffer between resolver and target. This boundary is intentionally concrete: claiming that ``the agent never sees the value'' without enumerating observations would be unfalsifiable.
+
+Let $\ell(s,H,\pi)$ be allowed leakage. By default it contains $q$, a coarse destination label, issue age bucket, remaining-lifetime bucket, success/failure status, and effects already observable from the task, such as arrival at a logged-in screen. It must not include $s$, a deterministic hash of a low-entropy OTP, value length unless unavoidable, or error codes that distinguish candidate values.
+
+\begin{definition}[Agent-view non-disclosure]
+For equal-length secrets $s_0,s_1$ with the same allowed leakage and any probabilistic polynomial-time adversary $\mathcal{A}$ controlling the agent, the distinguishing advantage is
+\begin{equation}
+\begin{aligned}
+\Adv^{\mathsf{nd}}_{\SH,\mathcal{A}}(\lambda)=
+\big|&\Pr[\mathcal{A}(\View_A(\Real(s_0)))=1]\\
+&-\Pr[\mathcal{A}(\View_A(\Real(s_1)))=1]\big|.
+\end{aligned}
+\label{eq:nd}
+\end{equation}
+Non-disclosure holds when this advantage is negligible given equal $\ell$.
+\end{definition}
+
+This is a non-interference-style definition with declassified effects. It is stronger than ``the prompt omits the value'' but weaker than preventing inference from all world state. For example, a successful login reveals that the hidden code was accepted; that outcome is intentionally declassified.
+
+\begin{definition}[Destination confinement]
+For any trace, if \Resolve\ returns an injection capability containing or referencing $s$ for target $x$ under task $\tau'$, then $\Match(d,x)=1$ and $\tau'=\tau$ for the live record bound to $h$.
+\end{definition}
+
+\begin{definition}[Single-use replay safety]
+For a handle minted with $u=1$, at most one resolve operation reaches the committed-injection state, even when an adversary schedules an arbitrary number of concurrent calls.
+\end{definition}
+
+\subsection{Correctness and availability}
+
+Security is vacuous if the resolver always rejects. Functional correctness requires that an eligible handle aimed at a supported, stable target is injected exactly once unless a platform error occurs, and that the failure is surfaced without revealing $s$. Availability is not absolute: the OS, user, or app may cancel; the target may disappear; a confirmation UI may be unavailable. The evaluation therefore separates policy rejection, platform failure, agent failure, and user denial.
+
+\subsection{Research questions}
+
+The evaluation is organized around six questions:
+
+\begin{description}[leftmargin=1.5cm,style=nextline]
+\item[RQ1] Does OS-source minting keep raw values out of all instrumented agent observations and traces?
+\item[RQ2] Does destination/task binding prevent injection-driven redirection without blocking legitimate completion?
+\item[RQ3] Do lifecycle and atomic reservation prevent replay, expiry bypass, and concurrency races?
+\item[RQ4] Does observation redaction prevent post-entry rereading in pixels and accessibility trees?
+\item[RQ5] What latency, memory, energy, and user-interaction overheads arise by source and handle type?
+\item[RQ6] Which identity ambiguities, unsupported apps, WebViews, keyboards, or OEM modifications cause failure or force a weaker policy?
+\end{description}

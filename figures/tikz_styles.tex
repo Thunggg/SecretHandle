@@ -1,0 +1,24 @@
+\definecolor{shblue}{HTML}{2F6B9A}
+\definecolor{shbluefill}{HTML}{DCECF7}
+\definecolor{shorange}{HTML}{C65D20}
+\definecolor{shorangefill}{HTML}{FBE3D3}
+\definecolor{shgreen}{HTML}{2E7D5B}
+\definecolor{shgreenfill}{HTML}{DDF1E7}
+\definecolor{shpurple}{HTML}{6C4AA1}
+\definecolor{shpurplefill}{HTML}{E9E0F5}
+\definecolor{shgray}{HTML}{5F6770}
+\definecolor{shgrayfill}{HTML}{EEF0F2}
+\tikzset{
+  sh/component/.style={draw=shblue,fill=shbluefill,rounded corners=2pt,thick,minimum width=25mm,minimum height=11mm,align=center,font=\small},
+  sh/source/.style={draw=shgray,fill=shgrayfill,rounded corners=2pt,thick,minimum width=22mm,minimum height=10mm,align=center,font=\small,pattern=north east lines,pattern color=gray!25},
+  sh/defense/.style={draw=shgreen,fill=shgreenfill,rounded corners=2pt,thick,minimum width=27mm,minimum height=11mm,align=center,font=\small},
+  sh/attack/.style={draw=shorange,fill=shorangefill,diamond,aspect=2.2,thick,align=center,font=\small},
+  sh/theory/.style={draw=shpurple,fill=shpurplefill,rounded corners=2pt,thick,minimum width=28mm,minimum height=10mm,align=center,font=\small},
+  sh/infrastructure/.style={draw=shgray,fill=shgrayfill,rounded corners=2pt,thick,minimum width=25mm,minimum height=10mm,align=center,font=\small},
+  sh/flow/.style={-{Latex[length=2.2mm]},thick,draw=shblue,shorten >=2pt,shorten <=2pt},
+  sh/secureflow/.style={-{Latex[length=2.2mm]},thick,draw=shgreen,shorten >=2pt,shorten <=2pt},
+  sh/attackflow/.style={-{Latex[length=2.2mm]},thick,dashed,draw=shorange,shorten >=2pt,shorten <=2pt},
+  sh/control/.style={-{Latex[length=2mm]},semithick,densely dotted,draw=shgray,shorten >=2pt,shorten <=2pt},
+  sh/label/.style={midway,fill=white,inner sep=1.5pt,font=\scriptsize,align=center},
+  sh/group/.style={draw=shgray,dashed,rounded corners=4pt,inner sep=5pt}
+}

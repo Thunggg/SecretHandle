@@ -1,0 +1,70 @@
+{
+  "canonical_title": "SecretHandle: OS-Minted, Destination-Bound Opaque Secrets for Mobile AI Agents",
+  "required_core_terms": [
+    "SecretHandle",
+    "Android",
+    "mobile AI agent",
+    "OS-minted",
+    "authoritative source",
+    "opaque handle",
+    "destination binding",
+    "task binding",
+    "typed lifecycle",
+    "observation redaction",
+    "ENTER(handle)"
+  ],
+  "required_equations": [
+    "typed handle record H=(id,type,source,destination,task,issued,expiry,use_budget,confirmation,authenticator)",
+    "destination acceptance predicate Match(target,destination)",
+    "mint/resolve/redact transition relation",
+    "agent-view non-disclosure property",
+    "destination-confinement property",
+    "unforgeability advantage bound",
+    "single-use and expiry invariants",
+    "exposure, redirection, task-success, leakage, and latency metrics"
+  ],
+  "required_algorithm_names": [
+    "SecretHandle Mint",
+    "SecretHandle ENTER/Resolve",
+    "Observation Redactor"
+  ],
+  "required_theorem_directions": [
+    "conditional agent-view non-disclosure",
+    "destination confinement under authentic target identity",
+    "handle unforgeability reduced to the authenticator",
+    "single-use and TTL replay safety",
+    "post-entry observation safety under redaction completeness",
+    "composition theorem with explicitly stated leakage assumptions"
+  ],
+  "required_experiment_variables": [
+    "secret source and type",
+    "agent family and model placement",
+    "destination package/origin/field",
+    "attack class",
+    "binding enabled",
+    "lifecycle enabled",
+    "redaction enabled",
+    "secret exposure count",
+    "redirection success",
+    "task success",
+    "post-entry leakage",
+    "forgery/replay acceptance",
+    "resolver latency"
+  ],
+  "required_baselines": [
+    "unprotected agent",
+    "detector-based placeholder substitution",
+    "AutoDroid-style prompt substitution",
+    "Android Autofill or Credential Manager where invocable"
+  ],
+  "forbidden_topic_drifts": [
+    "federated learning",
+    "over-the-air aggregation",
+    "differential privacy as the central problem",
+    "blockchain or ledger systems",
+    "mechanism design or incentive engineering",
+    "server-side payment tokens as the central mechanism",
+    "generic prompt-injection prevention",
+    "claims of measured superiority without measurements"
+  ]
+}

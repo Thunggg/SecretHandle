@@ -1,0 +1,75 @@
+\section{Detailed proofs and invariant audit}
+\label{app:proofs}
+
+\subsection{Operational semantics}
+
+Let global state be $\Gamma=(\Omega,R,C,W,A)$, where $R$ is the redaction registry, $C$ the monotonic clock, $W$ the trusted window/node map, and $A$ the audit stream. A transition is labeled by a principal and event. Only TCB-labeled transitions read the secret component of $\Omega$. Agent-labeled transitions may read the public projection $\mathsf{pub}(H)$ and request resolver operations.
+
+The relevant rules are summarized below. Side conditions are conjunctive.
+\begin{align*}
+\frac{n\notin\mathrm{dom}(\Omega)\quad \mathsf{SourceOK}(\sigma)\quad d\ne\emptyset}
+{\Gamma\xrightarrow{\Mint(s,H)}\Gamma[\Omega[n]\mapsto(s,H,a,\mathsf{live},\bot)]},\\[4pt]
+\frac{\mathsf{Eligible}(\Omega[n],x,\tau',t)\quad r\sample\bits^\lambda}
+{\Gamma\xrightarrow{\mathsf{Reserve}(n,x,r)}\Gamma[\Omega[n].z\mapsto\mathsf{reserved},\Omega[n].r\mapsto r]},\\[4pt]
+\frac{\Omega[n].z=\mathsf{reserved}\quad \mathsf{SameTarget}(W,x)\quad \mathsf{ConfirmOK}(c,\gamma)}
+{\Gamma\xrightarrow{\mathsf{RegisterRedaction}(n,x)}\Gamma[R\leftarrow R\cup\{\rho_{n,x}\}]},\\[4pt]
+\frac{\rho_{n,x}\in R\quad \Omega[n].z=\mathsf{reserved}}
+{\Gamma\xrightarrow{\mathsf{CommitInject}(n,x)}\Gamma[\Omega[n].u\leftarrow u-1,\Omega[n].z\leftarrow z']},
+\end{align*}
+where $z'=\mathsf{consumed}$ for $u-1=0$ and live otherwise. Every failure rule produces a public status independent of $s$.
+
+\subsection{Proof of mint-view independence}
+
+Fix secrets $s_0,s_1$ satisfying the equal-leakage premise. The public metadata is equal by definition of $\ell$ or sampled from the same value-independent distribution. Fresh $n$ is uniform in both worlds. The record authenticator covers $H$, not $s$; therefore its distribution is identical when $H$ is identical. If the implementation instead authenticates a ciphertext of $s$, the proof must be replaced by an IND-CPA/AEAD hybrid and include nonce discipline. The present construction keeps $s$ in the server-side record, so no encryption assumption is required for the visible handle.
+
+Source suppression emits the same typed event and mask in both worlds under value-oblivious behavior. Store and audit differences containing $s$ are outside the agent view. A distinguisher therefore either observes an undeclared value-dependent public behavior, contradicting \cref{ass:oblivious}, or distinguishes identical distributions. This completes \cref{lem:mint}.
+
+\subsection{Proof of destination confinement with races}
+
+Consider the last target validation before commit. By \cref{ass:identity}, it names the actual target context. Eligibility required $\Match(d,x)=1$ and task equality at reservation. The one-shot injection capability includes reservation nonce $r$ and target generation. The input path accepts it only for the same live target generation; otherwise it fails. Thus an attacker cannot swap focus to a second node between validation and delivery. If an implementation separates validation and injection without this binding, the theorem's premise is false and the proof does not apply.
+
+The proof covers malicious rendered labels because labels are not authoritative target identity. It covers a malicious app only at the identity boundary: if that app is outside $d$, it is rejected; if inside $d$, confinement permits it. It covers WebView origins only when \cref{ass:identity} is established for the frame. Package-only checks cannot instantiate an origin-specific theorem.
+
+\subsection{Unforgeability reduction details}
+
+The adversary receives handles from authorized mint queries and submits candidates to resolve. The reduction records every oracle-authenticated metadata string. A candidate that verifies for a metadata string never authenticated by the oracle is a direct EUF-CMA forgery. A candidate that reuses a valid tag but changes a canonically encoded field also creates a new authenticated message; injective encoding rules out ambiguity. A candidate with a guessed live identifier and corresponding previously observed authenticator succeeds only if it has effectively copied an existing handle or guessed the identifier/tag. Copying is governed by destination/lifecycle properties, not forgery; guessing a live identifier contributes the random term. Online rate limits reduce practical trials but are not needed for asymptotic negligibility when $Q$ is polynomial.
+
+Handle IDs must be at least $\lambda$ random bits. Sequential IDs or display-checksum-only validation would invalidate the theorem. Truncating the cryptographic authenticator changes the bound to include the tag length and must be reflected in $\lambda$.
+
+\subsection{Single-use invariant under failures}
+
+Define invariant $I(n)$ for $u=1$: the sum of committed injections and the indicator that state is live is at most one. Initially, no injection has committed and state is live, so the sum is one. Reservation changes live to reserved without committing, reducing the sum to zero. A successful commit increments committed count and changes state to consumed, producing one. A rollback changes reserved to live only when the injection path proves delivery impossible, restoring one with zero commits. An uncertain failure consumes rather than rolls back, leaving zero and preserving safety. No other transition returns consumed to live. Induction over transitions proves the invariant.
+
+A database transaction alone is insufficient if the input subsystem can deliver before durable state records the reservation. The implementation must either persist reservation first or make the injection token valid only after a durable reservation. Crash tests in the evaluation target every boundary.
+
+\subsection{Non-disclosure abort cases}
+
+The main proof considers five branches. (1) Pre-reservation rejection depends only on public metadata and state, not $s$. (2) Confirmation denial occurs before injection and exposes no value. (3) Target change consumes or releases a reservation with a common error. (4) Successful injection places $s$ in the target, but redaction masks every modeled observation until $s$ is absent. (5) Uncertain delivery consumes the handle and emits the same coarse status. Under \cref{ass:oblivious}, timing and errors do not distinguish $s_0$ from $s_1$.
+
+Application behavior after receiving $s$ may differ. For an OTP verifier, acceptance reveals that the hidden value matched server state. The definition treats the user-authorized task outcome as declassified. If the application echoes the raw value in a new unregistered view, \cref{ass:redaction} requires taint/obligation propagation or the theorem stops. This is why the experimental oracle searches the full subsequent observation, not only the original field.
+
+\subsection{Dimensional and type checks}
+
+Time quantities $t_i,t_e,t$ use the same monotonic-clock unit. Use budget $u$ is dimensionless. $F_K$ accepts a byte encoding and returns a $\lambda$-bit tag. Probabilities and advantages are dimensionless. Destination predicates consume typed contexts; package IDs are not compared directly with origins or field classes. A node token $v$ is an opaque reference with a generation, not a memory address supplied by the agent.
+
+\subsection{Claims deliberately not proved}
+
+We do not prove that source classification has perfect recall, that every Android build preserves the TCB, that WebView origins are always authenticated, that all side channels are closed, that task intent is correctly inferred, or that user confirmation is usable. We do not establish a lower bound, optimality, or a universally minimal TCB. These are empirical or future formal questions.
+
+\section{Protocol traces}
+
+\subsection{Legitimate OTP trace}
+
+The user starts task $\tau$ to log into package $p_B$. The app initiates a verification request. The SMS adapter receives code $s$, validates the request association, and asks the service to mint an OTP handle with $d=(p_B,\_,\mathsf{otpField})$, $u=1$, and short expiry. The agent receives $h$ and a typed arrival event. It navigates to the OTP field and calls \texttt{ENTER}. The resolver validates $p_B$, field type, task, TTL, and state; reserves the handle; installs redaction; injects; and consumes. The app verifies $s$ with its server. The agent observes only a masked field and the logged-in screen.
+
+\subsection{Cross-app redirection trace}
+
+An attacker instruction asks the agent to open package $p_A$ and enter $h$. The node token resolves to $x_A$ with package $p_A\ne p_B$. Since $\Match(d,x_A)=0$, the resolver rejects before reading $s$ into an injection buffer. The handle remains live unless policy treats repeated denials as suspicious and revokes it. The agent may return to $p_B$ and complete the legitimate flow.
+
+\subsection{Fake-handle trace}
+
+A malicious app renders ``OTP ready'' and a guessed identifier. The agent copies the apparent handle into \texttt{ENTER}. The service finds no authenticated live record or observes an invalid tag and returns a uniform unavailable response. The rendered pixel pattern has no authority. The rate limiter attributes repeated guesses to the agent task and optionally asks the user to terminate it.
+
+\subsection{Same-app residual attack}
+
+An injection inside $p_B$ redirects the agent to another OTP-like field in the same app. If $d$ binds only package and broad field class, the target may pass. Node/form binding or a task-state predicate would be needed to reject it. This trace demonstrates why the paper scopes its strongest claim to the actual predicate and reports predicate granularity per experiment.

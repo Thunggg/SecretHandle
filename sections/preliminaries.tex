@@ -1,0 +1,72 @@
+\section{Platform background and notation}
+\label{sec:preliminaries}
+
+\subsection{Android observation and actuation}
+
+An accessibility-based agent typically obtains a screenshot and a structured tree containing nodes, bounds, roles, text, content descriptions, and action affordances. Android accessibility services are explicitly privileged components that can observe events and act on behalf of users \cite{androidAccessibility}. A screenshot-only agent may omit the tree, while a hybrid agent aligns visual regions with nodes. In either case, ordinary text entry exposes a string to at least the action-producing process and frequently to logs or prompts.
+
+Android Autofill has a different interaction pattern. The framework connects a client view, the system, and an Autofill service; the client exposes structure and accepts a selected dataset \cite{androidAutofill,androidAutofillServices}. Credential Manager aggregates passkeys, passwords, and federated sign-in credentials through app requests and user-facing selectors \cite{androidCredentialManager}. These mechanisms are useful precedents because the OS mediates sensitive data, but an autonomous accessibility agent generally cannot assume that the target app has initiated the appropriate request or that every relevant secret type has a platform provider.
+
+Android already distinguishes some sensitive sources. The SMS Retriever flow delivers an app-associated verification message to a registered app and expects server-side verification \cite{androidSmsRetriever}. User Consent allows a one-time, user-mediated SMS read \cite{androidSmsConsent}. The clipboard sensitivity extra is a rendering hint rather than an access-control guarantee \cite{androidClipboard}. Android 15 adds OTP redaction for many untrusted notification listeners and screen-sharing protections \cite{android15privacy}. \SH\ treats these as source-specific signals and enforcement hooks, not as proof that the unified design already exists.
+
+\subsection{Cryptographic and capability terminology}
+
+Let $\lambda$ denote the security parameter and $F_K:\bits^*\rightarrow\bits^\lambda$ a message authentication function keyed by $K$. The implementation may use an approved HMAC construction \cite{rfc2104} with a non-exportable key in Android Keystore \cite{androidKeystore}; the model needs only existential unforgeability under chosen-message attack for the authenticated handle representation. A capability conveys authority. A printed string that merely looks like a handle is not a capability unless the resolver authenticates it and finds a live server-side record.
+
+We distinguish four identities: package identity $p$, web origin $o$, field class $f$, and task identity $\tau$. A destination policy $d$ is a predicate over a target context rather than necessarily a single tuple. For a native app, $d$ may restrict $p$ and $f$. For a WebView, it may also restrict $o$, but only if the platform can authenticate the displayed document origin. If reliable origin extraction is unavailable, policy must fail closed or require confirmation; it must not silently downgrade to a package-only guarantee.
+
+\begin{table}[htbp]
+\centering
+\caption{Principal notation. Every symbol used in the core transition system is defined here.}
+\label{tab:notation}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$s\in\mathcal{S}$ & Raw secret value, never intentionally included in the agent view. \\
+$q\in\mathcal{Q}$ & Secret type: OTP, credential, identifier, clipboard value, or payment token. \\
+$\sigma\in\mathcal{P}$ & Authoritative source and provenance statement. \\
+$\tau\in\mathcal{T}$ & Unforgeable or OS-authenticated task identifier. \\
+$d\in\mathcal{D}$ & Destination predicate over package, origin, field class, and optional app-defined context. \\
+$n\in\bits^\lambda$ & Fresh random handle identifier. \\
+$t_i,t_e$ & Issue and expiry times, with $t_i<t_e$. \\
+$u\in\mathbb{N}$ & Remaining successful-use budget. \\
+$c\in\mathcal{C}$ & Confirmation policy, e.g., none, biometric, or Protected Confirmation. \\
+$H=(n,q,\sigma,d,\tau,t_i,t_e,u,c)$ & Authenticated handle metadata. \\
+$a=F_K(\mathsf{enc}(H))$ & Handle authenticator. \\
+$h=(n,q,a)$ & Compact agent-visible handle; non-sensitive display metadata may accompany it. \\
+$x=(p,o,f,v)$ & Resolver-authenticated target context for node token $v$. \\
+$\Omega$ & Trusted SecretHandle store mapping $n$ to secret and state. \\
+$\View_A(\pi)$ & Agent-visible projection of execution trace $\pi$. \\
+$\ell$ & Explicit leakage allowed by the interface: type, coarse destination label, age/expiry, and status. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Lifecycle classes}
+
+Lifecycle is part of the authority, not advisory metadata. OTP handles default to one successful use and a short TTL matched to the issuer's validity window. Identifier handles may permit multiple uses only inside the same task and destination set. Credential handles are scoped to a relying app or origin and normally require a platform credential-selection event. Payment-class handles additionally require per-use confirmation. A policy profile may always be tightened after minting; widening a destination or use budget requires a newly authenticated handle and, for sensitive classes, fresh user approval.
+
+\begin{table}[htbp]
+\centering
+\caption{Default policy profiles. These are design defaults to validate experimentally, not platform measurements.}
+\label{tab:profiles}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.55cm}>{\raggedright\arraybackslash}p{2.45cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{1.75cm}>{\raggedright\arraybackslash}p{2.35cm}@{}}
+\toprule
+Type & Source & Binding & Use budget & Confirmation \\
+\midrule
+OTP & SMS/\allowbreak notification & package + OTP field + task & 1; short TTL & none/\allowbreak user-consent \\
+Credential & Credential Manager & package/origin + task & 1 per request & platform selector \\
+Identifier & clipboard/\allowbreak profile & package + field class + task & bounded task use & policy dependent \\
+Payment & wallet/\allowbreak token provider & package/origin + checkout task & 1 & per-use protected UI \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Design principles}
+
+The design follows four rules. First, \emph{mint before observation}: a protected source never emits the raw value onto an agent-readable path. Second, \emph{authorize the sink}: the target is checked from trusted framework state, not from the model's textual assertion. Third, \emph{consume atomically}: concurrent calls cannot both pass a single-use check. Fourth, \emph{close the observation loop}: resolving a value is not sufficient if the next tree or screenshot reveals it.
+
+These principles refine least privilege and complete mediation \cite{saltzer1975protection}. They also expose a limitation: a source not integrated with the OS cannot receive detector-independent protection. Such content may still use a detector-based placeholder, but its guarantee must be stated separately.

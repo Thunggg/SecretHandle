@@ -1,0 +1,107 @@
+\section{Extended evaluation matrix}
+\label{app:experiments}
+
+\footnotesize
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}p{1.7cm}p{1.9cm}p{1.8cm}p{2.3cm}p{2.0cm}@{}}
+\caption{Planned factorial matrix. Each cell is a test family, not a reported result.}\label{tab:matrix}\\
+\toprule
+Secret/\newline source & Destination variation & Lifecycle stress & Observation channel & Primary oracle \\
+\midrule
+\endfirsthead
+\toprule
+Secret/\newline source & Destination variation & Lifecycle stress & Observation channel & Primary oracle \\
+\midrule
+\endhead
+SMS OTP & correct app/field & before expiry & screenshot & exact-canary absence \\
+SMS OTP & wrong package & live & accessibility tree & resolver denial \\
+SMS OTP & wrong WebView origin & live & action trace & resolver denial \\
+SMS OTP & correct package, wrong field & live & input path & no delivery \\
+SMS OTP & recycled node & live & accessibility events & generation mismatch \\
+SMS OTP & correct target & after expiry & audit decision & expiry denial \\
+SMS OTP & correct target & sequential replay & app oracle & at most one commit \\
+SMS OTP & correct target & concurrent replay & service journal & linearizable reserve \\
+Credential & correct app/origin & one use & tree + screenshot & no raw credential \\
+Credential & wrong package & one use & action trace & denial \\
+Identifier/\allowbreak clipboard & allowed field & task live & clipboard/IME & no side copy \\
+Identifier/\allowbreak clipboard & other task & task ended & audit decision & revocation \\
+Payment token & bound checkout & fresh confirmation & protected UI & confirmation bound \\
+Payment token & bound checkout & replayed confirmation & resolver & denial \\
+Payment token & wrong merchant/origin & fresh handle & app oracle & no delivery \\
+\bottomrule
+\end{longtable}
+
+\section{Planned parameter table}
+
+\begin{table}[h]
+\centering
+\caption{Parameters to freeze in the preregistration. Values are intentionally unset until implementation profiling and pilot validation.}
+\begin{tabularx}{\textwidth}{@{}lXl@{}}
+\toprule
+Parameter & Selection rule & Final value \\
+\midrule
+Handle identifier bits & At least security parameter; collision budget documented & TODO \\
+Authenticator bits & Full approved MAC or justified truncation & TODO \\
+OTP TTL & Issuer validity, capped by policy & TODO \\
+Identifier use budget & Minimal uses required by task & TODO \\
+Resolve rate limit & Chosen before adversarial trials & TODO \\
+Observation duration & Until value cleared plus transition margin & TODO \\
+Runs per condition & Prospective precision/power analysis & TODO \\
+Bootstrap repetitions & Fixed in analysis plan & TODO \\
+Outlier handling & No silent deletion; robust summary & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Instrumentation plan}
+
+The canary oracle creates a fresh uniformly random synthetic value for every trial and sends it only to the protected source and application verifier. Independent monitors inspect (1) model request bodies; (2) model responses; (3) agent memory and planner state; (4) accessibility trees and events; (5) screenshot buffers before network encoding; (6) agent action arguments; (7) clipboard history; (8) IME personalization/debug state in the test keyboard; (9) system and application logs collected under the experiment profile; and (10) attacker-endpoint traffic. Each monitor records a keyed trial pseudonym and binary match, not a durable plaintext copy.
+
+Exact matching is supplemented with canonical encodings: digit grouping, whitespace/punctuation insertion, Unicode confusables, base64, URL encoding, JSON escaping, OCR of screenshots, and tokenized subsequences. The analysis must distinguish a false positive caused by an unrelated short OTP-like substring from a true canary match. For short numeric codes, use structured per-trial markers in synthetic applications so the protected oracle can attribute exposure without increasing agent-visible entropy.
+
+The target-delivery oracle is below the application UI. It records the target's package UID, origin assertion, view generation, field class, reservation nonce, and whether bytes crossed the private input boundary. The application server records whether the canary was accepted. These two events separate resolver confinement from later application behavior.
+
+\section{Additional planned tables}
+
+\begin{table}[h]
+\centering
+\caption{Ablation table template. Placeholder only; replace with measured deltas.}
+\resizebox{\textwidth}{!}{\begin{tabular}{@{}lccccc@{}}
+\toprule
+Ablation & $\Delta E$ & $\Delta R$ & $\Delta U$ & $\Delta L$ & $\Delta$ latency \\
+\midrule
+No authoritative-source mint & -- & -- & -- & -- & -- \\
+No destination binding & -- & -- & -- & -- & -- \\
+No task binding & -- & -- & -- & -- & -- \\
+No atomic lifecycle & -- & -- & -- & -- & -- \\
+No observation redaction & -- & -- & -- & -- & -- \\
+No origin predicate & -- & -- & -- & -- & -- \\
+No confirmation & -- & -- & -- & -- & -- \\
+\bottomrule
+\multicolumn{6}{l}{\footnotesize Placeholder / expected trend only; replace with actual experimental results before submission.}
+\end{tabular}}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Compatibility template. ``Unsupported'' is a result and must not be silently omitted.}
+\small
+\begin{tabularx}{\textwidth}{@{}p{2.4cm}*{5}{>{\centering\arraybackslash}X}@{}}
+\toprule
+UI/source class & Native identity & Origin identity & Field identity & Redaction & Status \\
+\midrule
+Standard EditText & -- & N/A & -- & -- & TODO \\
+Jetpack Compose text & -- & N/A & -- & -- & TODO \\
+Custom Canvas field & -- & N/A & -- & -- & TODO \\
+WebView main frame & -- & -- & -- & -- & TODO \\
+WebView nested frame & -- & -- & -- & -- & TODO \\
+Credential Manager & -- & -- & -- & -- & TODO \\
+Sensitive clipboard & -- & N/A & -- & -- & TODO \\
+Wallet provider & -- & -- & -- & -- & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Artifact acceptance criteria}
+
+The artifact is not ready for external evaluation until all unit and property tests pass; the build is reproducible from a documented AOSP commit; canaries are absent from agent-facing logs in a smoke test; raw data schemas contain no production identifiers; the test applications and attacker endpoint can run offline or in an isolated network; and each figure/table generation script checks that inputs are measured rather than placeholder files. A release tag should include a machine-readable manifest of hashes and licenses.

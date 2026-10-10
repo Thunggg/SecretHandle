@@ -1,0 +1,40 @@
+\begin{figure}[htbp]
+\centering
+\resizebox{0.90\textwidth}{!}{%
+\begin{tikzpicture}[node distance=10mm and 14mm]
+\node[sh/infrastructure] (a1) {A1: reference\\monitor integrity};
+\node[sh/infrastructure,right=of a1] (a2) {A2: source/task\\authenticity};
+\node[sh/infrastructure,right=of a2] (a3) {A3: secure MAC\\+ random IDs};
+\node[sh/infrastructure,right=of a3] (a4) {A4: authentic\\target identity};
+\node[sh/infrastructure,right=of a4] (a5) {A5--A6: complete redaction\\+ value-oblivious behavior};
+
+\node[sh/theory,below=16mm of a2] (l1) {Lemma 1\\mint-view independence};
+\node[sh/theory,below=16mm of a4] (l2) {Lemma 2\\authorization invariant};
+
+\node[sh/theory,below=16mm of l1] (t1) {Theorem 1\\handle unforgeability};
+\node[sh/theory,right=14mm of t1] (t2) {Theorem 2\\destination confinement};
+\node[sh/theory,right=14mm of t2] (t3) {Theorem 3\\agent-view non-disclosure};
+\node[sh/theory,right=14mm of t3] (p1) {Propositions\\single-use + expiry};
+
+\node[sh/defense,below=16mm of t2] (c1) {Design insight\\reject wrong destination};
+\node[sh/defense,right=18mm of c1] (c2) {Evaluation oracles\\exposure, redirect, replay, reread};
+
+\draw[sh/control] (a2.south) |- (l1.north);
+\draw[sh/control] (a3.south) |- (l1.north east);
+\draw[sh/control] (a1.south) |- (l2.north west);
+\draw[sh/control] (a4.south) -- (l2.north);
+\draw[sh/control] (a5.south) |- (l2.north east);
+\draw[sh/control] (l1.south) -- (t1.north);
+\draw[sh/control] (l1.south east) |- (t3.north west);
+\draw[sh/control] (l2.south) |- (t2.north);
+\draw[sh/control] (l2.south east) |- (p1.north);
+\draw[sh/control] (a5.south west) |- (t3.north);
+\draw[sh/secureflow] (t2.south) -- (c1.north);
+\draw[sh/secureflow] (t1.south) |- (c2.west);
+\draw[sh/secureflow] (t3.south) -- (c2.north);
+\draw[sh/secureflow] (p1.south) |- (c2.east);
+\end{tikzpicture}%
+}\par\vspace{2mm}
+\caption{Dependency graph for the formal results. The diagram separates assumptions, lemmas, conditional theorems, and the empirical oracles needed to test whether an implementation satisfies the assumptions.}
+\label{fig:theory}
+\end{figure}

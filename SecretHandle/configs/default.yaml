@@ -1,0 +1,15 @@
+run:
+  name: reference_default
+  seed: 0
+security:
+  lambda_bits: 128
+  authenticator: hmac-sha256
+data:
+  mode: synthetic
+  root: null
+experiment:
+  trials_per_attack: 1
+  conditions: [B3_secrethandle]
+  attacks: [benign, redirect, forgery, replay, reread, expired]
+output:
+  dir: outputs/default

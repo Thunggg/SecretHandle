@@ -1,0 +1,42 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why source minting changes the failure mode}
+
+A detector-based system asks whether every sensitive value already present in a heterogeneous visual/text representation was found. Source minting asks whether each protected source was integrated and whether its adapter withheld the value. The latter moves coverage from an open-ended recognition problem to an enumerated systems boundary. It is not universal: secrets originating in arbitrary app-rendered content still need recognition or app cooperation. The benefit is that OTP, credential, clipboard, and wallet paths can have source-specific contracts and tests.
+
+\subsection{Destination binding as local audience restriction}
+
+OAuth audience restriction is effective only when the resource server validates the intended audience \cite{rfc8707}. Similarly, SecretHandle binding is effective only when the resolver authenticates the actual UI target. A package name supplied by the model would merely restate intent; a package UID and window owner obtained inside the framework provide enforcement evidence. Origin binding is harder because a WebView hosts multiple documents under one package. The design therefore makes origin assurance explicit and treats unavailable identity as a measurable deployment limitation.
+
+Sender-constrained tokens such as DPoP reduce the usefulness of a stolen bearer token \cite{rfc9449}. SecretHandle's random authenticated ID reduces handle forgery, but it is not sender-bound to an agent because the agent is untrusted and may be replaced. Instead, authority is constrained by OS-held task and target state. Copying a handle to another app or model should not expand its usable destinations.
+
+\subsection{Relationship to Autofill and Credential Manager}
+
+Autofill and Credential Manager already embody a better principle than exposing credentials to a model: system/provider mediation and user selection \cite{androidAutofill,androidCredentialManager}. SecretHandle should reuse them rather than duplicate credential storage. Its contribution is the agent-facing continuity across sources and apps: the agent can reason that ``a credential/OTP/address is available'' and request an entry operation, while the OS preserves destination and observation constraints. An implementation that can express the workflow entirely through existing platform APIs should prefer those APIs.
+
+\subsection{Error semantics and side channels}
+
+Detailed errors improve debuggability but can leak state. The agent does not need to distinguish a wrong authenticator from an expired handle or absent record; all can map to ``unavailable''. Destination denial may be distinct because it supports replanning without value information. Rate limits and public timing buckets reduce online guessing and state probes.
+
+Mask geometry, label length, source timing, and task outcome can still leak metadata. OTP arrival time is often already visible as an event; value length should not be. Padding and fixed visual grammar reduce direct leakage. A complete side-channel treatment, including power, cache, accessibility event timing, and app-dependent task outcomes, is beyond this paper's model.
+
+\subsection{Revocation and user control}
+
+Users need a system surface listing active handles by type, source, coarse destination, task, expiry, and use state---never raw value by default. They can revoke individual handles or the task. A protected audit explains why an entry was accepted or denied. Payment and identity handles should expose stronger confirmation and recovery controls than ephemeral OTPs.
+
+Revocation is straightforward before resolution because the service owns the record. It cannot claw back a value already delivered to an authorized app. This is another reason to use narrow destination and task bindings and to require confirmation for consequential operations.
+
+\subsection{Migration path}
+
+Deployment can proceed in stages. Stage 1 implements OTP handles for open test apps and proves the complete observation boundary. Stage 2 integrates Credential Manager and sensitive clipboard, broadens UI compatibility, and introduces task tokens. Stage 3 adds wallet providers and protected confirmation. Stage 4 evaluates OEM integrations and publishes source-adapter contracts for platform components. Each stage should preserve an assurance label: protected-source, provider-mediated, detector-derived, or legacy/unprotected.
+
+\subsection{Ethical and operational considerations}
+
+Experiments use synthetic secrets, isolated attacker endpoints, and accounts created for research. The threat suite must not send real OTPs, addresses, or payment data to model providers. Any discovered bypass in an agent, application, or OEM component should follow coordinated disclosure. Debug traces should be treated as sensitive because they may expose app structure and user-like workflows even when canaries are synthetic.
+
+An accessibility agent is itself powerful. SecretHandle reduces one class of data exposure but may increase user confidence beyond what is warranted. User interfaces and documentation should say that destination binding does not certify the destination's behavior and does not prevent every injected action.
+
+\subsection{Generalization beyond Android}
+
+The abstraction requires three platform primitives: an authoritative source hook, an authenticated destination identity, and a principal-specific observation path. Other mobile or desktop systems could instantiate the design, and passkey/autofill systems already demonstrate source-to-destination mediation. This manuscript remains Android-centered because its source pipelines, accessibility stack, package identity, WebView integration, and AOSP implementation are the concrete research objects.

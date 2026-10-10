@@ -1,0 +1,22 @@
+\begin{figure}[htbp]
+\centering
+\resizebox{0.92\textwidth}{!}{%
+\begin{tikzpicture}[node distance=15mm and 24mm]
+\node[sh/component] (agent) {Compromised agent\\holds only $h$};
+\node[sh/defense,right=of agent,minimum width=46mm] (gate) {Resolver gate\\auth + task + $\Match(d,x)$ + lifecycle};
+\node[sh/source,below=of agent] (secret) {OS source\\raw $s$};
+\node[sh/component,above right=13mm and 24mm of gate] (honest) {Bound login app\\$x_L\in d$};
+\node[sh/attack,below right=13mm and 24mm of gate] (adv) {Attacker app/field\\$x_A\notin d$};
+\node[sh/defense,right=24mm of honest] (mask) {Redacted agent view\\after entry};
+
+\draw[sh/flow] (agent.east) -- node[sh/label,above] {target choice} (gate.west);
+\draw[sh/secureflow] (secret.east) -| node[sh/label,pos=.72,below] {private value} (gate.south west);
+\draw[sh/secureflow] (gate.north east) -- node[sh/label,above left] {accept} (honest.south west);
+\draw[sh/attackflow] (gate.south east) -- node[sh/label,below left] {reject} (adv.north west);
+\draw[sh/secureflow] (honest.east) -- (mask.west);
+\draw[sh/attackflow] (adv.west) to[bend right=18] node[sh/label,below] {injected redirect} (agent.south);
+\end{tikzpicture}%
+}
+\caption{Threat and control boundary. A compromised agent can choose targets and replay handles, but a handle bound to $d$ is accepted only at a matching target. The figure does not claim protection when the attacker operates inside $d$.}
+\label{fig:threat}
+\end{figure}

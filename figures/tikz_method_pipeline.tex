@@ -1,0 +1,25 @@
+\begin{figure}[htbp]
+\centering
+\resizebox{0.78\textwidth}{!}{%
+\begin{tikzpicture}[node distance=14mm and 17mm]
+\node[sh/source] (s1) {\textbf{1}\\source receives $s$};
+\node[sh/defense,right=of s1] (s2) {\textbf{2}\\mint $H,a$\\store $s$ privately};
+\node[sh/component,right=of s2] (s3) {\textbf{3}\\agent observes $h$\\and plans};
+\node[sh/defense,below=24mm of s3] (s4) {\textbf{4}\\resolve target $x$\\check policy};
+\node[sh/defense,left=of s4] (s5) {\textbf{5}\\reserve + confirm\\inject privately};
+\node[sh/defense,left=of s5] (s6) {\textbf{6}\\redact tree/pixels\\consume handle};
+\draw[sh/secureflow] (s1) -- node[sh/label,above] {protected buffer} (s2);
+\draw[sh/flow] (s2) -- node[sh/label,above] {$h$, no $s$} (s3);
+\draw[sh/flow] (s3) -- node[sh/label,right] {$h,V$} (s4);
+\draw[sh/secureflow] (s4) -- node[sh/label,above] {eligible} (s5);
+\draw[sh/secureflow] (s5) -- node[sh/label,above] {obligation first} (s6);
+\node[sh/attack,above=14mm of s3] (bad) {malicious\\instruction};
+\node[sh/infrastructure,below=15mm of s4] (reject) {wrong task / package /\\origin / field / state\\$\Rightarrow\Reject$};
+\draw[sh/attackflow] (bad.south) -- (s3.north);
+\draw[sh/attackflow] (s3.east) to[bend left=28] node[sh/label,right] {redirect attempt} (reject.east);
+\draw[sh/control] (s4.south) -- (reject.north);
+\end{tikzpicture}%
+}
+\caption{Method pipeline. Security does not depend on the agent recognizing an attack: the resolver checks trusted task and target state, and redaction is installed before private delivery.}
+\label{fig:pipeline}
+\end{figure}

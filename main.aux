@@ -1,0 +1,356 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
+\Newlabel{inst1}{a}
+\citation{zhang2023appagent,wang2024mobileagent,wen2023autodroid,rawles2024androidworld,toyama2021androidenv,rawles2023aitw,chen2024spabench}
+\citation{greshake2023indirect,zhan2024injecagent,debenedetti2024agentdojo}
+\citation{chen2025fineprint,liao2024eia,chen2025aeia}
+\citation{du2025mobileattacks}
+\citation{zhao2026anonymization}
+\citation{wen2023autodroid}
+\citation{androidSmsRetriever}
+\citation{androidAutofill,androidCredentialManager,androidAutofillServices}
+\citation{android15privacy}
+\citation{androidKeystore,androidKeyAttestation,androidProtectedConfirmation}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
+\newlabel{sec:introduction}{{1}{2}{Introduction}{section.1}{}}
+\newlabel{sec:introduction@cref}{{[section][1][]1}{[1][2][]2}}
+\citation{rfc8707}
+\citation{rfc9449}
+\citation{webauthn3}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Contributions}{3}{subsection.1.1}\protected@file@percent }
+\citation{zhang2023appagent}
+\citation{wang2024mobileagent,wang2024mobileagentv2,ye2025mobileagentv3}
+\citation{wen2023autodroid}
+\citation{niu2024screenagent,xie2024osworld}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Scope and paper organization}{4}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related work and novelty boundary}{4}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{4}{Related work and novelty boundary}{section.2}{}}
+\newlabel{sec:related@cref}{{[section][2][]2}{[1][4][]4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Mobile GUI agents and benchmarks}{4}{subsection.2.1}\protected@file@percent }
+\citation{rawles2023aitw,toyama2021androidenv,rawles2024androidworld,chen2024spabench}
+\citation{zhao2026anonymization}
+\citation{wen2023autodroid}
+\citation{chong2024casper}
+\citation{siyan2025papillon}
+\citation{zeng2025privacyrestore}
+\citation{carpentier2024preempting}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Placeholders and inference-time privacy}{5}{subsection.2.2}\protected@file@percent }
+\citation{greshake2023indirect}
+\citation{zhan2024injecagent,debenedetti2024agentdojo}
+\citation{chen2025fineprint,liao2024eia,chen2025aeia}
+\citation{du2025mobileattacks}
+\citation{debenedetti2025camel}
+\citation{costa2025fides}
+\citation{shi2025progent}
+\citation{wu2025isolategpt,bagdasarian2024airgap}
+\citation{dennis1966semantics}
+\citation{saltzer1975protection}
+\citation{watson2010capsicum}
+\citation{felt2011permission}
+\citation{bugiel2013flexible,rossi2021seapp}
+\citation{enck2010taintdroid,yan2012droidscope}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Prompt injection, agent isolation, and information flow}{6}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Capabilities, mobile information flow, and Android mediation}{6}{subsection.2.4}\protected@file@percent }
+\citation{rfc4226,rfc6238}
+\citation{nist80063b}
+\citation{androidSmsRetriever,androidAutofillServices}
+\citation{androidCredentialManager,androidAutofill}
+\citation{rfc8707,rfc9449,rfc9700}
+\citation{webauthn3}
+\citation{androidAccessibility}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Authentication and bound tokens}{7}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Novelty statement}{7}{subsection.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Platform background and notation}{7}{section.3}\protected@file@percent }
+\newlabel{sec:preliminaries}{{3}{7}{Platform background and notation}{section.3}{}}
+\newlabel{sec:preliminaries@cref}{{[section][3][]3}{[1][7][]7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Android observation and actuation}{7}{subsection.3.1}\protected@file@percent }
+\citation{androidAutofill,androidAutofillServices}
+\citation{androidCredentialManager}
+\citation{androidSmsRetriever}
+\citation{androidSmsConsent}
+\citation{androidClipboard}
+\citation{android15privacy}
+\citation{rfc2104}
+\citation{androidKeystore}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Cryptographic and capability terminology}{8}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Principal notation. Every symbol used in the core transition system is defined here.\relax }}{9}{table.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:notation}{{1}{9}{Principal notation. Every symbol used in the core transition system is defined here.\relax }{table.caption.1}{}}
+\newlabel{tab:notation@cref}{{[table][1][]1}{[1][8][]9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Lifecycle classes}{9}{subsection.3.3}\protected@file@percent }
+\citation{saltzer1975protection}
+\citation{androidProtectedConfirmation}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Default policy profiles. These are design defaults to validate experimentally, not platform measurements.\relax }}{10}{table.caption.2}\protected@file@percent }
+\newlabel{tab:profiles}{{2}{10}{Default policy profiles. These are design defaults to validate experimentally, not platform measurements.\relax }{table.caption.2}{}}
+\newlabel{tab:profiles@cref}{{[table][2][]2}{[1][10][]10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Design principles}{10}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}System and threat model}{10}{section.4}\protected@file@percent }
+\newlabel{sec:system}{{4}{10}{System and threat model}{section.4}{}}
+\newlabel{sec:system@cref}{{[section][4][]4}{[1][10][]10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Entities and trust boundary}{10}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Colors and line styles distinguish ordinary, protected, and adversarial flows.\relax }}{11}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{11}{SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Colors and line styles distinguish ordinary, protected, and adversarial flows.\relax }{figure.caption.3}{}}
+\newlabel{fig:architecture@cref}{{[figure][1][]1}{[1][10][]11}}
+\citation{androidClipboard}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Authoritative sources}{12}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Adversary capabilities}{12}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Security goals}{13}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Threat and control boundary. A compromised agent can choose targets and replay handles, but a handle bound to $d$ is accepted only at a matching target. The figure does not claim protection when the attacker operates inside $d$.\relax }}{13}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:threat}{{2}{13}{Threat and control boundary. A compromised agent can choose targets and replay handles, but a handle bound to $d$ is accepted only at a matching target. The figure does not claim protection when the attacker operates inside $d$.\relax }{figure.caption.4}{}}
+\newlabel{fig:threat@cref}{{[figure][2][]2}{[1][13][]13}}
+\citation{webauthn3}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Non-goals}{14}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Problem formulation and security definitions}{14}{section.5}\protected@file@percent }
+\newlabel{sec:problem}{{5}{14}{Problem formulation and security definitions}{section.5}{}}
+\newlabel{sec:problem@cref}{{[section][5][]5}{[1][14][]14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}State and transitions}{14}{subsection.5.1}\protected@file@percent }
+\newlabel{eq:record}{{1}{14}{State and transitions}{equation.5.1}{}}
+\newlabel{eq:record@cref}{{[equation][1][]1}{[1][14][]14}}
+\newlabel{eq:mint}{{2}{14}{State and transitions}{equation.5.2}{}}
+\newlabel{eq:mint@cref}{{[equation][2][]2}{[1][14][]14}}
+\newlabel{eq:resolve}{{3}{14}{State and transitions}{equation.5.3}{}}
+\newlabel{eq:resolve@cref}{{[equation][3][]3}{[1][14][]14}}
+\newlabel{eq:redact}{{4}{14}{State and transitions}{equation.5.4}{}}
+\newlabel{eq:redact@cref}{{[equation][4][]4}{[1][14][]14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Observation boundary}{15}{subsection.5.2}\protected@file@percent }
+\newlabel{eq:nd}{{5}{15}{Agent-view non-disclosure}{equation.5.5}{}}
+\newlabel{eq:nd@cref}{{[equation][5][]5}{[1][15][]15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Correctness and availability}{16}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Research questions}{16}{subsection.5.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Method pipeline. Security does not depend on the agent recognizing an attack: the resolver checks trusted task and target state, and redaction is installed before private delivery.\relax }}{17}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:pipeline}{{3}{17}{Method pipeline. Security does not depend on the agent recognizing an attack: the resolver checks trusted task and target state, and redaction is installed before private delivery.\relax }{figure.caption.5}{}}
+\newlabel{fig:pipeline@cref}{{[figure][3][]3}{[1][16][]17}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}SecretHandle design}{17}{section.6}\protected@file@percent }
+\newlabel{sec:method}{{6}{17}{SecretHandle design}{section.6}{}}
+\newlabel{sec:method@cref}{{[section][6][]6}{[1][16][]17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Mint at the authoritative source}{17}{subsection.6.1}\protected@file@percent }
+\citation{androidWebView}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Representing handles to agents}{18}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Resolve below the observation boundary}{18}{subsection.6.3}\protected@file@percent }
+\citation{android15privacy,androidSecureFlag}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Observation redaction}{19}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Lifecycle, revocation, and recovery}{19}{subsection.6.5}\protected@file@percent }
+\citation{androidProtectedConfirmation}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Payment confirmation}{20}{subsection.6.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Auditing without secret leakage}{20}{subsection.6.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.8}Compatibility and deployment modes}{20}{subsection.6.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Formal analysis}{20}{section.7}\protected@file@percent }
+\newlabel{sec:theory}{{7}{20}{Formal analysis}{section.7}{}}
+\newlabel{sec:theory@cref}{{[section][7][]7}{[1][20][]20}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Failure handling is explicit and value-oblivious.\relax }}{21}{table.caption.6}\protected@file@percent }
+\newlabel{tab:failures}{{3}{21}{Failure handling is explicit and value-oblivious.\relax }{table.caption.6}{}}
+\newlabel{tab:failures@cref}{{[table][3][]3}{[1][20][]21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Dependency graph for the formal results. The diagram separates assumptions, lemmas, conditional theorems, and the empirical oracles needed to test whether an implementation satisfies the assumptions.\relax }}{21}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:theory}{{4}{21}{Dependency graph for the formal results. The diagram separates assumptions, lemmas, conditional theorems, and the empirical oracles needed to test whether an implementation satisfies the assumptions.\relax }{figure.caption.7}{}}
+\newlabel{fig:theory@cref}{{[figure][4][]4}{[1][20][]21}}
+\newlabel{ass:tcb}{{1}{22}{Reference-monitor integrity}{assumption.1}{}}
+\newlabel{ass:tcb@cref}{{[assumption][1][]1}{[1][20][]22}}
+\newlabel{ass:source}{{2}{22}{Source and task authenticity}{assumption.2}{}}
+\newlabel{ass:source@cref}{{[assumption][2][]2}{[1][22][]22}}
+\newlabel{ass:crypto}{{3}{22}{Authenticator security and freshness}{assumption.3}{}}
+\newlabel{ass:crypto@cref}{{[assumption][3][]3}{[1][22][]22}}
+\newlabel{ass:identity}{{4}{22}{Authentic target identity}{assumption.4}{}}
+\newlabel{ass:identity@cref}{{[assumption][4][]4}{[1][22][]22}}
+\newlabel{ass:redaction}{{5}{22}{Complete modeled-channel redaction}{assumption.5}{}}
+\newlabel{ass:redaction@cref}{{[assumption][5][]5}{[1][22][]22}}
+\newlabel{ass:oblivious}{{6}{22}{Value-oblivious public behavior}{assumption.6}{}}
+\newlabel{ass:oblivious@cref}{{[assumption][6][]6}{[1][22][]22}}
+\newlabel{lem:mint}{{1}{22}{Mint-view independence}{lemma.1}{}}
+\newlabel{lem:mint@cref}{{[lemma][1][]1}{[1][22][]22}}
+\newlabel{lem:resolve}{{2}{23}{Resolve authorization invariant}{lemma.2}{}}
+\newlabel{lem:resolve@cref}{{[lemma][2][]2}{[1][22][]23}}
+\newlabel{thm:confinement}{{1}{23}{Destination confinement}{theorem.1}{}}
+\newlabel{thm:confinement@cref}{{[theorem][1][]1}{[1][23][]23}}
+\newlabel{thm:unforgeability}{{2}{23}{Handle unforgeability}{theorem.2}{}}
+\newlabel{thm:unforgeability@cref}{{[theorem][2][]2}{[1][23][]23}}
+\newlabel{eq:forge}{{6}{23}{Handle unforgeability}{equation.7.6}{}}
+\newlabel{eq:forge@cref}{{[equation][6][]6}{[1][23][]23}}
+\newlabel{prop:singleuse}{{1}{24}{Single-use linearizability}{proposition.1}{}}
+\newlabel{prop:singleuse@cref}{{[proposition][1][]1}{[1][23][]24}}
+\newlabel{prop:expiry}{{2}{24}{Expiry monotonicity}{proposition.2}{}}
+\newlabel{prop:expiry@cref}{{[proposition][2][]2}{[1][24][]24}}
+\newlabel{thm:nondisclosure}{{3}{24}{Agent-view non-disclosure}{theorem.3}{}}
+\newlabel{thm:nondisclosure@cref}{{[theorem][3][]3}{[1][24][]24}}
+\newlabel{cor:redirection}{{1}{24}{Redirection resistance for a disjoint attacker destination}{corollary.1}{}}
+\newlabel{cor:redirection@cref}{{[corollary][1][]1}{[1][24][]24}}
+\citation{androidKeystore,androidKeyAttestation}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Composition conditions}{25}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Algorithms and implementation blueprint}{25}{section.8}\protected@file@percent }
+\newlabel{sec:algorithm}{{8}{25}{Algorithms and implementation blueprint}{section.8}{}}
+\newlabel{sec:algorithm@cref}{{[section][8][]8}{[1][25][]25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Framework integration points}{25}{subsection.8.1}\protected@file@percent }
+\citation{android15privacy}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces SecretHandle Mint at an authoritative source\relax }}{26}{algorithm.1}\protected@file@percent }
+\newlabel{alg:mint}{{1}{26}{SecretHandle Mint at an authoritative source\relax }{algorithm.1}{}}
+\newlabel{alg:mint@cref}{{[algorithm][1][]1}{[1][25][]26}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces SecretHandle ENTER/Resolve\relax }}{27}{algorithm.2}\protected@file@percent }
+\newlabel{alg:resolve}{{2}{27}{SecretHandle ENTER/Resolve\relax }{algorithm.2}{}}
+\newlabel{alg:resolve@cref}{{[algorithm][2][]2}{[1][25][]27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Policy language}{27}{subsection.8.2}\protected@file@percent }
+\newlabel{eq:policy}{{7}{27}{Policy language}{equation.8.7}{}}
+\newlabel{eq:policy@cref}{{[equation][7][]7}{[1][27][]27}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Observation Redactor\relax }}{28}{algorithm.3}\protected@file@percent }
+\newlabel{alg:redact}{{3}{28}{Observation Redactor\relax }{algorithm.3}{}}
+\newlabel{alg:redact@cref}{{[algorithm][3][]3}{[1][25][]28}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Concurrency and TOCTOU defense}{28}{subsection.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Complexity}{29}{subsection.8.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Experimental methodology and planned evaluation}{29}{section.9}\protected@file@percent }
+\newlabel{sec:experiments}{{9}{29}{Experimental methodology and planned evaluation}{section.9}{}}
+\newlabel{sec:experiments@cref}{{[section][9][]9}{[1][29][]29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Planned experimental setup. Protected canary and delivery oracles distinguish actual secret flow from model behavior. Every empirical output remains pending until the AOSP prototype and runs exist.\relax }}{29}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:experiments}{{5}{29}{Planned experimental setup. Protected canary and delivery oracles distinguish actual secret flow from model behavior. Every empirical output remains pending until the AOSP prototype and runs exist.\relax }{figure.caption.8}{}}
+\newlabel{fig:experiments@cref}{{[figure][5][]5}{[1][29][]29}}
+\citation{rawles2024androidworld}
+\citation{chen2024spabench}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Prototype configurations}{30}{subsection.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Agents and model placement}{30}{subsection.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Attacks and stress tests}{30}{subsection.9.3}\protected@file@percent }
+\citation{zhan2024injecagent,debenedetti2024agentdojo}
+\citation{chen2025fineprint,liao2024eia}
+\citation{du2025mobileattacks}
+\citation{zhao2026anonymization}
+\citation{androidAutofillServices,androidCredentialManager}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Baselines and ablations}{31}{subsection.9.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.5}Metrics}{32}{subsection.9.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.6}Design and sample planning}{32}{subsection.9.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Planned primary result table. Placeholder only; replace every dash with measured values and confidence intervals before submission.\relax }}{33}{table.caption.9}\protected@file@percent }
+\newlabel{tab:placeholder-main}{{4}{33}{Planned primary result table. Placeholder only; replace every dash with measured values and confidence intervals before submission.\relax }{table.caption.9}{}}
+\newlabel{tab:placeholder-main@cref}{{[table][4][]4}{[1][33][]33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Conceptual expected trends, not experimental results. The coordinates are illustrative placeholders chosen only to show the planned plots; they must be replaced by measured data or removed before submission. Left: finer binding is expected to reduce redirection. Right: additional checks may impose utility cost.\relax }}{33}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:placeholder-trends}{{6}{33}{Conceptual expected trends, not experimental results. The coordinates are illustrative placeholders chosen only to show the planned plots; they must be replaced by measured data or removed before submission. Left: finer binding is expected to reduce redirection. Right: additional checks may impose utility cost.\relax }{figure.caption.10}{}}
+\newlabel{fig:placeholder-trends@cref}{{[figure][6][]6}{[1][33][]33}}
+\citation{rfc8707}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.7}Killer experiment}{34}{subsection.9.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.8}Reproducibility checklist}{34}{subsection.9.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Discussion}{34}{section.10}\protected@file@percent }
+\newlabel{sec:discussion}{{10}{34}{Discussion}{section.10}{}}
+\newlabel{sec:discussion@cref}{{[section][10][]10}{[1][34][]34}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Why source minting changes the failure mode}{34}{subsection.10.1}\protected@file@percent }
+\citation{rfc9449}
+\citation{androidAutofill,androidCredentialManager}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Destination binding as local audience restriction}{35}{subsection.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Relationship to Autofill and Credential Manager}{35}{subsection.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Error semantics and side channels}{35}{subsection.10.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Revocation and user control}{36}{subsection.10.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.6}Migration path}{36}{subsection.10.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.7}Ethical and operational considerations}{36}{subsection.10.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.8}Generalization beyond Android}{36}{subsection.10.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Limitations and threats to validity}{37}{section.11}\protected@file@percent }
+\newlabel{sec:limitations}{{11}{37}{Limitations and threats to validity}{section.11}{}}
+\newlabel{sec:limitations@cref}{{[section][11][]11}{[1][37][]37}}
+\@writefile{toc}{\contentsline {section}{\numberline {12}Conclusion}{39}{section.12}\protected@file@percent }
+\newlabel{sec:conclusion}{{12}{39}{Conclusion}{section.12}{}}
+\newlabel{sec:conclusion@cref}{{[section][12][]12}{[1][38][]39}}
+\@writefile{toc}{\let\numberline\tmptocnumberline}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}A}Detailed proofs and invariant audit}{39}{appendix.A}\protected@file@percent }
+\newlabel{app:proofs}{{Appendix \nobreakspace  {}A}{39}{Detailed proofs and invariant audit}{appendix.A}{}}
+\newlabel{app:proofs@cref}{{[appendix][1][2147483647]Appendix \nobreakspace  {}A}{[1][39][]39}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.1}Operational semantics}{39}{subsection.A.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.2}Proof of mint-view independence}{40}{subsection.A.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.3}Proof of destination confinement with races}{40}{subsection.A.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.4}Unforgeability reduction details}{41}{subsection.A.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.5}Single-use invariant under failures}{41}{subsection.A.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.6}Non-disclosure abort cases}{42}{subsection.A.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.7}Dimensional and type checks}{42}{subsection.A.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.8}Claims deliberately not proved}{42}{subsection.A.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}B}Protocol traces}{43}{appendix.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}B.1}Legitimate OTP trace}{43}{subsection.B.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}B.2}Cross-app redirection trace}{43}{subsection.B.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}B.3}Fake-handle trace}{43}{subsection.B.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}B.4}Same-app residual attack}{43}{subsection.B.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}C}Extended evaluation matrix}{43}{appendix.C}\protected@file@percent }
+\newlabel{app:experiments}{{Appendix \nobreakspace  {}C}{43}{Extended evaluation matrix}{appendix.C}{}}
+\newlabel{app:experiments@cref}{{[appendix][3][2147483647]Appendix \nobreakspace  {}C}{[1][43][]43}}
+\gdef \LT@i {\LT@entry 
+    {1}{54.36958pt}\LT@entry 
+    {1}{66.06006pt}\LT@entry 
+    {1}{63.21504pt}\LT@entry 
+    {1}{77.44142pt}\LT@entry 
+    {1}{62.9055pt}}
+\@writefile{lot}{\contentsline {table}{\numberline {C.5}{\ignorespaces Planned factorial matrix. Each cell is a test family, not a reported result.\relax }}{44}{table.5}\protected@file@percent }
+\newlabel{tab:matrix}{{C.5}{44}{Planned factorial matrix. Each cell is a test family, not a reported result.\relax }{table.5}{}}
+\newlabel{tab:matrix@cref}{{[table][5][2147483647]C.5}{[1][43][]44}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}D}Planned parameter table}{44}{appendix.D}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}E}Instrumentation plan}{44}{appendix.E}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {D.6}{\ignorespaces Parameters to freeze in the preregistration. Values are intentionally unset until implementation profiling and pilot validation.\relax }}{45}{table.caption.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}F}Additional planned tables}{45}{appendix.F}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}G}Artifact acceptance criteria}{45}{appendix.G}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {F.7}{\ignorespaces Ablation table template. Placeholder only; replace with measured deltas.\relax }}{46}{table.caption.12}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {F.8}{\ignorespaces Compatibility template. ``Unsupported'' is a result and must not be silently omitted.\relax }}{46}{table.caption.13}\protected@file@percent }
+\bibstyle{elsarticle-num}
+\bibdata{references_verified}
+\bibcite{zhang2023appagent}{{1}{}{{}}{{}}}
+\bibcite{wang2024mobileagent}{{2}{}{{}}{{}}}
+\bibcite{wen2023autodroid}{{3}{}{{}}{{}}}
+\bibcite{rawles2024androidworld}{{4}{}{{}}{{}}}
+\bibcite{toyama2021androidenv}{{5}{}{{}}{{}}}
+\bibcite{rawles2023aitw}{{6}{}{{}}{{}}}
+\bibcite{chen2024spabench}{{7}{}{{}}{{}}}
+\bibcite{greshake2023indirect}{{8}{}{{}}{{}}}
+\bibcite{zhan2024injecagent}{{9}{}{{}}{{}}}
+\bibcite{debenedetti2024agentdojo}{{10}{}{{}}{{}}}
+\bibcite{chen2025fineprint}{{11}{}{{}}{{}}}
+\bibcite{liao2024eia}{{12}{}{{}}{{}}}
+\bibcite{chen2025aeia}{{13}{}{{}}{{}}}
+\bibcite{du2025mobileattacks}{{14}{}{{}}{{}}}
+\bibcite{zhao2026anonymization}{{15}{}{{}}{{}}}
+\bibcite{androidSmsRetriever}{{16}{}{{}}{{}}}
+\bibcite{androidAutofill}{{17}{}{{}}{{}}}
+\bibcite{androidCredentialManager}{{18}{}{{}}{{}}}
+\bibcite{androidAutofillServices}{{19}{}{{}}{{}}}
+\bibcite{android15privacy}{{20}{}{{}}{{}}}
+\bibcite{androidKeystore}{{21}{}{{}}{{}}}
+\bibcite{androidKeyAttestation}{{22}{}{{}}{{}}}
+\bibcite{androidProtectedConfirmation}{{23}{}{{}}{{}}}
+\bibcite{rfc8707}{{24}{}{{}}{{}}}
+\bibcite{rfc9449}{{25}{}{{}}{{}}}
+\bibcite{webauthn3}{{26}{}{{}}{{}}}
+\bibcite{wang2024mobileagentv2}{{27}{}{{}}{{}}}
+\bibcite{ye2025mobileagentv3}{{28}{}{{}}{{}}}
+\bibcite{niu2024screenagent}{{29}{}{{}}{{}}}
+\bibcite{xie2024osworld}{{30}{}{{}}{{}}}
+\bibcite{chong2024casper}{{31}{}{{}}{{}}}
+\bibcite{siyan2025papillon}{{32}{}{{}}{{}}}
+\bibcite{zeng2025privacyrestore}{{33}{}{{}}{{}}}
+\bibcite{carpentier2024preempting}{{34}{}{{}}{{}}}
+\bibcite{debenedetti2025camel}{{35}{}{{}}{{}}}
+\bibcite{costa2025fides}{{36}{}{{}}{{}}}
+\bibcite{shi2025progent}{{37}{}{{}}{{}}}
+\bibcite{wu2025isolategpt}{{38}{}{{}}{{}}}
+\bibcite{bagdasarian2024airgap}{{39}{}{{}}{{}}}
+\bibcite{dennis1966semantics}{{40}{}{{}}{{}}}
+\bibcite{saltzer1975protection}{{41}{}{{}}{{}}}
+\bibcite{watson2010capsicum}{{42}{}{{}}{{}}}
+\bibcite{felt2011permission}{{43}{}{{}}{{}}}
+\bibcite{bugiel2013flexible}{{44}{}{{}}{{}}}
+\bibcite{rossi2021seapp}{{45}{}{{}}{{}}}
+\bibcite{enck2010taintdroid}{{46}{}{{}}{{}}}
+\bibcite{yan2012droidscope}{{47}{}{{}}{{}}}
+\bibcite{rfc4226}{{48}{}{{}}{{}}}
+\bibcite{rfc6238}{{49}{}{{}}{{}}}
+\bibcite{nist80063b}{{50}{}{{}}{{}}}
+\bibcite{rfc9700}{{51}{}{{}}{{}}}
+\bibcite{androidAccessibility}{{52}{}{{}}{{}}}
+\bibcite{androidSmsConsent}{{53}{}{{}}{{}}}
+\bibcite{androidClipboard}{{54}{}{{}}{{}}}
+\bibcite{rfc2104}{{55}{}{{}}{{}}}
+\bibcite{androidWebView}{{56}{}{{}}{{}}}
+\bibcite{androidSecureFlag}{{57}{}{{}}{{}}}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers
+\gdef \@abspage@last{53}
