@@ -1,0 +1,351 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---- Phông chữ: biên dịch bằng XeLaTeX ----
+% Dùng phông Windows (có sẵn). Nếu muốn phông TeX Gyre, bỏ dấu % ở 3 dòng cuối.
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+% \setmainfont{TeX Gyre Termes}
+% \setsansfont{TeX Gyre Heros}
+% \setmonofont{Latin Modern Mono}
+
+\usepackage[a4paper,margin=2.2cm,top=2.4cm,bottom=2.4cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{shblue}{RGB}{20,70,140}
+\definecolor{shgray}{RGB}{90,90,90}
+\definecolor{shlight}{RGB}{238,243,250}
+\definecolor{shgreen}{RGB}{20,110,70}
+\definecolor{shred}{RGB}{150,30,30}
+
+\titleformat{\section}{\color{shblue}\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}{\color{shblue}\large\bfseries}{}{0pt}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{shgray}SecretHandle --- Master Checklist (A$\to$Z)}
+\fancyhead[R]{\small\color{shgray}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{15pt}
+\setlength{\emergencystretch}{2em}
+
+% ---- Trạng thái ----
+\newcommand{\done}{\textcolor{shgreen}{$\blacksquare$}}
+\newcommand{\doing}{\textcolor{shblue}{$\boxdot$}}
+\newcommand{\todo}{\textcolor{shgray}{$\square$}}
+\newcommand{\block}{\textcolor{shred}{$\blacktriangleright$}}
+
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\SH}{\textsc{SecretHandle}}
+
+\newlist{chk}{itemize}{1}
+\setlist[chk]{label=\todo,leftmargin=1.8em,topsep=2pt,itemsep=1.5pt,parsep=0pt}
+\setlist[itemize]{topsep=2pt,itemsep=1.5pt,parsep=0pt,leftmargin=1.4em}
+
+\begin{document}
+
+\begin{center}
+{\color{shblue}\LARGE\bfseries Master Checklist --- \SH{} (A$\to$Z)}\\[4pt]
+{\large Một nguồn duy nhất để biết đã làm đến đâu và bước tiếp theo}\\[4pt]
+{\small\color{shgray} Cập nhật: 2026-10-17 \quad$\vert$\quad Nguyên tắc: không placeholder nào được trình bày như kết quả.}
+\end{center}
+
+\vspace{0.3em}
+\noindent\textbf{Ký hiệu trạng thái:}\quad
+\done{}~Đã xong\quad
+\doing{}~Đang làm / một phần\quad
+\todo{}~Chưa bắt đầu\quad
+\block{}~Đang tắc (blocker)
+
+\vspace{0.6em}
+\section*{Mốc quan trọng}
+\begin{tabularx}{\textwidth}{@{}p{1.4cm}p{2.6cm}X@{}}
+\toprule
+\textbf{Cổng} & \textbf{Hạn} & \textbf{Điều kiện qua (tóm tắt)} \\
+\midrule
+G0 & 25/10/2026 (W2) & AOSP build/boot được; B0 tái hiện được; chốt D0--D5 \\
+G1 & 15/11/2026 (W5) & Walking skeleton + killer thu nhỏ $n=30$ đủ (a)(b)(c) \\
+G2 & 06/12/2026 (W8) & T1 đủ chức năng; pilot đọc lại $n=100$ không rò rỉ; ablation chạy \\
+G3 & 20/12/2026 (W10) & Đóng băng tham số + mã hệ thống \\
+G4 & 17/01/2027 (W14) & Đóng băng số liệu + bản thảo; artifact một lệnh \\
+Nộp & 26/01/2027 & USENIX Security '27 Cycle 2 (mục tiêu nộp $\le$ 22/01) \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.6em}
+\section*{Tiến độ tổng quan}
+\begin{tabularx}{\textwidth}{@{}X p{3.2cm}@{}}
+\toprule
+\textbf{Nhóm} & \textbf{Trạng thái} \\
+\midrule
+Tài liệu ý tưởng + bản thảo + mô hình tham chiếu & \done{} \textasciitilde85\% \\
+Audit cấp bản thảo (citation/figure/math/reviewer/notation) & \done \\
+Quyết định D0--D5 & \done{} (đã chốt 2026-10-17) \\
+Triển khai AOSP (Track A) & \todo{} 0\% \\
+Ứng dụng/tác nhân/harness (Track B) & \todo{} 0\% \\
+Baseline/ablation thực & \doing{} chỉ có bản tổng hợp \\
+Thí nghiệm thực \& số đo & \todo{} 0\% \\
+Phân tích thống kê / viết lại theo venue & \todo{} 0\% \\
+Artifact \& nộp & \todo{} 0\% \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.6em}
+\section*{PHẦN A --- Nền tảng đã có (chỉ bảo trì)}
+\begin{chk}
+\item[\done] Ý tưởng gốc: \code{idea.tex} / \code{idea.pdf} (5 trang) + \code{idea\_fidelity\_report.md}, \code{topic\_signature.json}.
+\item[\done] Bản thảo 53 trang: \code{main.tex} + 13 \code{sections/} + 2 \code{appendix/} + 6 hình TikZ/PGFPlots; \code{main.pdf}.
+\item[\done] Mô hình tham chiếu Python \code{SecretHandle/src/secrethandle/} (core, crypto, policy, store, redaction, metrics, statistics, adapters, baselines, oracles, experiments, plotting, synthetic, cli).
+\item[\done] Bộ test offline: \textbf{39 passed} (\code{python -m pytest -q}).
+\item[\done] Harness + config tổng hợp + script demo/plot/experiment.
+\item[\done] Audit cấp bản thảo: \code{citation\_claim\_map.csv}, \code{citation\_consistency\_report.md}, \code{math\_audit.md}, \code{claim\_strength\_audit.md}, \code{figure\_quality\_audit.md}, \code{notation\_consistency\_check.md}, \code{reviewer\_audit.md}, \code{theorem\_dependency\_graph.md}, \code{topic\_alignment\_check.md}.
+\item[\done] Audit cấp mã: \code{SecretHandle/audits/} (paper\_implementation\_spec, paper\_to\_code\_traceability, math\_to\_code\_audit, implementation\_gaps, result\_integrity\_audit).
+\item[\done] Tài liệu hướng dẫn: \code{instructions/SecretHandle\_HuongDan.tex} (v2).
+\item[\done] Nhật ký quyết định: \code{SecretHandle/docs/design\_decisions.md} (D0--D5 đã chốt).
+\end{chk}
+
+\section*{PHẦN B --- Giai đoạn 0: Chuẩn bị \& quyết định (W1--W2, cổng G0)}
+\subsection*{B1. Quyết định thiết kế (đã chốt 2026-10-17)}
+\begin{chk}
+\item[\done] \textbf{D0} Venue/lịch: USENIX Security '27 Cycle 2 (MVP T1), Plan B dự phòng.
+\item[\done] \textbf{D1} Authenticator: giữ MAC (HMAC-SHA-256, canonical, tách khóa).
+\item[\done] \textbf{D2} Kho lưu trữ: trong bộ nhớ \code{system\_server}; khởi động lại = thu hồi.
+\item[\done] \textbf{D3} Principal tác nhân: 3 kiểu (UID app / UID shell-UiAutomation / serialize) + bảng điểm chặn.
+\item[\done] \textbf{D4} Giảm \code{u} tại bước giữ chỗ (bảo thủ).
+\item[\done] \textbf{D5} WebView: T1 chỉ view gốc; WebView fail-closed.
+\end{chk}
+
+\subsection*{B2. Track A --- khởi động việc độ trễ dài}
+\begin{chk}
+\item[\todo] \code{repo sync} AOSP ngay (hàng chục--trăm GB, nhiều giờ).
+\item[\todo] Ghim commit/branch AOSP + thiết bị Pixel; ghi provenance.
+\item[\todo] Build AOSP; flash/boot được (điều kiện G0).
+\item[\todo] Kế hoạch môi trường thay thế emulator/Cuttlefish (nếu chưa có Pixel).
+\end{chk}
+
+\subsection*{B3. Track B --- môi trường \& cấp phát}
+\begin{chk}
+\item[\todo] Dựng Python 3.11/3.12; \code{python -m pip install -e '.[dev]'}.
+\item[\todo] Xác nhận \code{ruff} + \code{mypy} chạy được (ghi nhận nếu thiếu).
+\item[\todo] Tạo repo Git integration \emph{tách} khỏi package tham chiếu (AOSP patch, adapter, tác nhân).
+\item[\todo] Dựng EC2 cô lập: volume/user riêng, tường lửa chặt, credential trong secret manager (không trong YAML/log/repo).
+\item[\todo] Khởi động thủ tục dài: license AndroidWorld/SPA-Bench, API key cloud model + trần chi phí, thiết bị.
+\item[\todo] \textbf{Tái hiện tấn công B0} (OTP-forwarding) trên Android stock; đo tỉ lệ khai thác.
+\item[\todo] Dựng disclosure monitor bản đầu.
+\item[\todo] Khung đạo đức: quy trình canary, endpoint cô lập, không dữ liệu thật; kiểm yêu cầu IRB/hội đồng + mục ethics CFP.
+\item[\todo] Ghim phiên bản Python/OS/công cụ thống kê vào provenance.
+\end{chk}
+
+\subsection*{B4. DoD của G0}
+\begin{chk}
+\item[\done] \code{pytest} xanh 100\% (hiện 39 passed).
+\item[\todo] Không có bí mật thật trong repo.
+\item[\todo] AOSP đang sync/build.
+\item[\todo] B0 tái hiện được.
+\item[\done] D0--D5 có tài liệu quyết định.
+\item[\todo] Khung đạo đức xong.
+\item[\todo] \textbf{Qua G0 (25/10/2026)} --- viết biên bản cổng.
+\end{chk}
+
+\section*{PHẦN C --- Giai đoạn 1: Củng cố mô hình tham chiếu Python (W1--W2)}
+\begin{chk}
+\item[\todo] Soát \code{core/crypto/policy/store/redaction/metrics/statistics} đối chiếu Algorithm 1--3 + \code{paper\_to\_code\_traceability.csv}; áp dụng D1, D4.
+\item[\todo] Test dựa tính chất: giao hội chính sách không mở rộng quyền; single-use đồng thời; đơn điệu hết hạn.
+\item[\todo] Test dựa mô hình: lịch trình crash/đồng thời tại mỗi ranh giới reserve/register/inject/commit.
+\item[\todo] Đóng băng hợp đồng adapter: \code{AospAdapter}, \code{PlatformFlowAdapter}, \code{AgentRunnerAdapter}, \code{BenchmarkAdapter}.
+\item[\todo] Property test: không trường bí mật rò qua serialization công khai/audit.
+\item[\todo] Mở rộng oracle tiết lộ: exact, base64, URL, JSON, Unicode-normalized, numeric-normalized, số tách bởi space/gạch.
+\item[\todo] Chạy \code{ruff} + \code{mypy}, xử lý cảnh báo.
+\item[\todo] Cập nhật \code{SecretHandle/audits/} sau mỗi thay đổi ngữ nghĩa.
+\item[\todo] \textbf{DoD:} test xanh; mọi thay đổi ngữ nghĩa có test; traceability phủ 100\% đối tượng paper đã cài.
+\end{chk}
+
+\section*{PHẦN D --- Giai đoạn 2: Walking skeleton (W3--W5, cổng G1, Track A+B)}
+\begin{chk}
+\item[\todo] Lát cắt dọc đầu: SMS $\to$ mint $\to$ \code{ENTER} $\to$ ô nhập app đăng nhập.
+\item[\todo] Dịch vụ \code{system\_server} với AIDL tối thiểu: \code{mint} (allowlist), \code{resolve}, \code{revoke}; kho trong bộ nhớ (D2).
+\item[\todo] Adapter SMS/thông báo bản test (emulator console hoặc app SMS test); che mã khỏi thông báo hướng tác nhân.
+\item[\todo] Resolver tối thiểu: \code{ResolveFreshTargetContext} (package + field + tác vụ); từ chối nếu không khớp.
+\item[\todo] Giữ chỗ nguyên tử bằng khóa kho.
+\item[\todo] Đường vào cho tác nhân ADB: \code{cmd secrethandle enter} chạy UID shell; resolver kiểm tra UID; giá trị không qua stdout/log.
+\item[\todo] Redaction cây trợ năng theo principal (so khớp giá trị chính xác) + che cửa sổ nguồn.
+\item[\todo] App A (đăng nhập + OTP) + endpoint verifier/attacker cô lập.
+\item[\todo] Adapter tác nhân $\to$ \code{ENTER(handle)}.
+\item[\todo] Disclosure monitor.
+\item[\todo] Killer thu nhỏ $n=30$ B0 vs B3 với planner kịch bản + 1 tác nhân thật.
+\item[\todo] \textbf{Không làm ở giai đoạn này:} kho bền vững, khóa phần cứng, xác nhận, WebView, ví, đa người dùng.
+\item[\todo] \textbf{DoD G1:} \code{ENTER(handle)} vào trường OTP hợp lệ nhập đúng một lần; đích sai bị từ chối; canary vắng trong cây trợ năng + log tác nhân.
+\item[\todo] \textbf{Qua G1 (15/11/2026)} --- biên bản cổng. Nếu redaction ảnh chụp bất khả thi $\to$ lùi về che theo cửa sổ, ghi giới hạn.
+\end{chk}
+
+\section*{PHẦN E --- Giai đoạn 3: Hoàn thiện lõi dịch vụ \& resolver (W6--W8, Track A)}
+\begin{chk}
+\item[\todo] AIDL đầy đủ: \code{mint} (chỉ adapter allowlist), \code{listHandles}, \code{resolve}, \code{revoke}, \code{exportAudit} (bảo vệ, rate-limit).
+\item[\todo] Mô hình quyền: xác thực caller/provenance trước khi đúc; task-token verifier, source allowlist, quota, rate limit.
+\item[\todo] \textbf{Target node token}: ràng buộc window/connection/node/generation/package UID + TTL ngắn.
+\item[\todo] Phân loại trường: input type framework, autofill hints, view semantics; không nhất quán $\to$ fail-closed.
+\item[\todo] Giữ chỗ nguyên tử (CAS/khóa) live$\to$reserved; tái xác thực đích trước nhập; inject một lần ràng buộc reservation.
+\item[\todo] Mã hóa chuẩn tắc metadata, tách khóa, độ dài tag (nếu giữ MAC theo D1); báo cáo security level thực (TEE/StrongBox/none).
+\item[\todo] Thu hồi: kết thúc tác vụ, khóa thiết bị, đổi profile, đổi package đích.
+\item[\todo] Bảng xử lý lỗi (unknown handle, expired, mismatch, target vanished, redactor mất theo dõi, crash), tất cả value-oblivious; wipe bộ đệm mọi đường thoát.
+\item[\todo] Test đồng thời đầu-cuối + \code{kill system\_server} tại từng ranh giới reserve/register/inject/commit.
+\item[\todo] \textbf{DoD:} test binder allowlist xanh; không có lịch trình đồng thời nào giao hai lần; kill giữa chừng không giao hai lần.
+\end{chk}
+
+\section*{PHẦN F --- Giai đoạn 4: Redaction quan sát \& đường nhập riêng (W6--W9, Track A)}
+\begin{chk}
+\item[\todo] Đường nhập riêng (private input) bỏ qua đường thao tác hướng tác nhân + lịch sử/gợi ý IME.
+\item[\todo] Đăng ký nghĩa vụ redaction $\rho$ \textbf{trước} khi giao giá trị.
+\item[\todo] Redaction trợ năng theo principal: thay giá trị/text/sự kiện bằng mask theo kiểu.
+\item[\todo] Redaction ảnh chụp \textbf{trước khi} buffer map vào tiến trình tác nhân (không overlay sau); phủ \code{screencap}, UiAutomation, MediaProjection, \code{takeScreenshot}.
+\item[\todo] Theo dõi định danh view/window ổn định; tính lại bounds tại capture; không định danh lại được $\to$ che window 1 frame hoặc bỏ frame.
+\item[\todo] Che bề mặt nguồn theo cửa sổ (thông báo, ứng dụng SMS, màn hình khóa) suốt đời handle.
+\item[\todo] Loại action echo, debug text, content description chứa tài liệu bảo vệ.
+\item[\todo] Kết thúc redaction khi trường xóa/window đóng/tác vụ kết thúc/trạng thái app tin cậy --- \textbf{không} chỉ hẹn giờ.
+\item[\todo] Harness đọc lại: sau nhập, thu ảnh chụp, cây trợ năng, text-change event, clipboard, IME, \code{logcat}, \code{dumpsys} qua UID app, UID shell, quan sát serialize; oracle mã hóa đa dạng.
+\item[\todo] (T3) WebView origin binding, Protected Confirmation; nếu chưa $\to$ dialog hệ thống + nhãn assurance yếu hơn.
+\item[\todo] \textbf{DoD (G2):} pilot $n=100$ sau nhập giá trị vắng mặt trong mọi kênh trên cả 3 kiểu principal; mọi trường hợp không chắc chắn fail-closed.
+\item[\todo] \textbf{Qua G2 (06/12/2026)} --- nếu không qua $\to$ chuyển Plan B, không mở T2/T3.
+\end{chk}
+
+\section*{PHẦN G --- Giai đoạn 5: Ứng dụng, endpoint, tác nhân, monitor (Track B, W1--W9)}
+\begin{chk}
+\item[\todo] App A: đăng nhập + OTP SMS (T1).
+\item[\todo] App B: 2FA nhiều trang với preview tin nhắn đối kháng (T1).
+\item[\todo] App C: checkout địa chỉ + điện thoại (T2).
+\item[\todo] App D: checkout token ví + xác nhận mỗi lần (T3).
+\item[\todo] Mỗi app chỉ ghi ground-truth vào harness bảo vệ: định danh đích, đã giao/chưa, server chấp nhận, hoàn tất.
+\item[\todo] Endpoint verifier (đo tính sẵn có định danh) + endpoint attacker cô lập (đích ngoài $d$), không mạng thật.
+\item[\todo] Ghim nguồn + build + băm APK (SHA-256); ghi schema oracle server.
+\item[\todo] Tác nhân: chọn 1 runner chính (AppAgent hoặc runner tương thích AndroidWorld đang bảo trì); thử tái hiện B0 ở G0.
+\item[\todo] Tác nhân thứ hai (Mobile-Agent, DroidRun nếu ổn định) --- T2.
+\item[\todo] Mô hình: 1 cloud + 1 local/open-weights nếu khả thi, nếu không 2 cloud khác; ghim định danh + ngày chạy.
+\item[\todo] Disclosure monitor: tìm canary chính xác + mã hóa cấu trúc trong prompt, ảnh (OCR), cây trợ năng, tool call, trace, model traffic, planner state, actions, clipboard, IME, logs, crash data, attacker traffic.
+\item[\todo] Hồi quy tác vụ chung (AndroidWorld/SPA-Bench) --- T2.
+\item[\todo] \textbf{DoD:} chạy được 1 luồng app A dưới giám sát disclosure, tái lập với seed cố định; build tái lập; hash khớp.
+\end{chk}
+
+\section*{PHẦN H --- Giai đoạn 6: Baseline \& ablation (W6--W10)}
+\begin{chk}
+\item[\todo] \textbf{B0} (không bảo vệ): chỉ canary tổng hợp + đích trong bộ nhớ cô lập.
+\item[\todo] \textbf{B1} (placeholder phát hiện được): bộ phát hiện tham chiếu tất định \textbf{hoặc} cài đặt thực của tác giả (cần duyệt); ghi rõ phạm vi.
+\item[\todo] \textbf{B3} (SecretHandle): adapter AOSP đầy đủ cho T1 (mint, target token, private input, redaction, audit).
+\item[\todo] \textbf{B2} (T2): Autofill/OTP Autofill/Credential Manager cho app hợp tác; \code{FLAG\_SECURE}, che trường mật khẩu, content sensitivity; workflow không hỗ trợ ghi \code{not\_applicable}.
+\item[\todo] Ablation T1 (tắt từng thứ): đúc nguồn (thay bằng cạo màn hình), ràng buộc đích, ràng buộc tác vụ, vòng đời nguyên tử, redaction sau nhập; kiểm origin là T3.
+\item[\todo] Biến thể không an toàn \textbf{chỉ} dùng canary tổng hợp + endpoint cô lập.
+\item[\todo] \textbf{Đóng băng tham số trước khi xem kết quả}: bits định danh, bits tag, TTL, ngân sách dùng, rate limit, thời lượng quan sát, số lặp, số bootstrap, chính sách outlier, cỡ mẫu từng ô.
+\item[\todo] \textbf{DoD (G3):} chuyển B0$\leftrightarrow$B3 không đổi text tác vụ; audit hiển thị quyết định; oracle cô lập; tham số đóng băng.
+\item[\todo] \textbf{Qua G3 (20/12/2026)} --- đóng băng mã hệ thống, từ đây chỉ sửa lỗi có ghi nhận.
+\end{chk}
+
+\section*{PHẦN I --- Giai đoạn 7: Chạy thí nghiệm (W10--W13)}
+\begin{chk}
+\item[\todo] Provisioning theo \code{docs/ec2\_experiment\_guide.md}; đặt tệp theo \code{docs/data\_format.md}; clone repo tác nhân/benchmark tại commit đã audit.
+\item[\todo] Copy \code{configs/experiment\_template.yaml}; đặt đường dẫn/ID đã cấp phát; đóng băng tham số.
+\item[\todo] Smoke test canary cô lập: xác nhận không có dữ liệu thật.
+\item[\todo] \textbf{Killer experiment đầy đủ} (B0 vs B3 trên app A), B3 $n \ge 300$: kiểm 3 điều kiện (a)(b)(c).
+\item[\todo] Ma trận T1 (\textasciitilde8.000 trial LLM) trên emulator/Cuttlefish; đo độ trễ/bộ nhớ trên Pixel thật.
+\item[\todo] Họ tấn công kịch bản (3, 4, TOCTOU của 7) với $n \ge 10^4$, không LLM.
+\item[\todo] Ghi \textbf{mọi} loại trừ theo nhóm (agent crash, platform crash, network outage, user cancel, định danh không hỗ trợ); chặn trước chính sách outlier.
+\item[\todo] Xuất raw secret-free: \code{trials.jsonl}, \code{summary.json}, \code{metrics.csv}, \code{provenance.json} mở rộng (hash git/AOSP/build/kernel/APK/model/prompt/policy).
+\item[\todo] Sinh bảng/hình \textbf{chỉ} từ raw.
+\item[\todo] \textbf{DoD:} (a) giá trị thô vắng mọi artifact; (b) redirect bị từ chối; (c) login hợp lệ thành công; mọi loại trừ được ghi; bảng/hình sinh từ raw.
+\end{chk}
+
+\section*{PHẦN J --- Giai đoạn 8--9: Mở rộng T2/T3 (chỉ khi G2 qua)}
+\begin{chk}
+\item[\todo] (T2) Adapter clipboard nhạy cảm: thay nội dung clip hướng tác nhân bằng projection công khai; giữ dán thường cho người dùng.
+\item[\todo] (T2) App C (địa chỉ + điện thoại); B2 + so sánh cơ chế che nền tảng.
+\item[\todo] (T2) Đo năng lượng (Perfetto/Batterystats); tác nhân thứ hai; hồi quy tác vụ chung.
+\item[\todo] (T2) WebView fail-closed: đo tỉ lệ từ chối sai, ghi \code{unsupported}.
+\item[\todo] (T3) Credential Manager adapter; ví + Protected Confirmation (app D).
+\item[\todo] (T3) Xác thực WebView origin (node$\to$frame$\to$origin); fail-closed nếu không đủ.
+\item[\todo] (T3) Kho bền vững + nhật ký sự cố + đa người dùng/sao lưu; khóa StrongBox/Knox; thiết bị OEM.
+\item[\todo] Lưu ý: hạng mục T3 \textbf{không} nêu trong đóng góp nếu chưa làm --- chuyển sang Giới hạn/Hướng phát triển.
+\end{chk}
+
+\section*{PHẦN K --- Giai đoạn 10: Phân tích \& viết bài (W9--W15)}
+\begin{chk}
+\item[\todo] Rút gọn bản thảo 53 trang về giới hạn venue (\textasciitilde12--13 trang thân bài; xác nhận CFP); chuyển chứng minh/thí nghiệm bổ sung sang phụ lục/technical report.
+\item[\todo] Báo cáo nhị phân dạng ``0 of n'' + Wilson CI; không tuyên bố tuyệt đối từ zero.
+\item[\todo] Độ trễ: trung vị, phân vị đuôi, bootstrap interval (theo cụm), phân phối đầy đủ.
+\item[\todo] So sánh cặp: McNemar chính xác / permutation cặp; RQ1--RQ4 là primary.
+\item[\todo] Thay \textbf{mọi} gạch/TODO trong bảng kết quả/tham số/ablation/tương thích bằng giá trị đo/\code{unsupported}/\code{not applicable}.
+\item[\todo] Thay/gỡ tọa độ PGFPlots khái niệm (\code{figures/pgfplots\_placeholder\_results.tex}).
+\item[\todo] Kiểm giả định định lý bằng oracle thực nghiệm; nêu giả định nào còn kiến trúc.
+\item[\todo] Cập nhật closest-work/novelty; chạy lại tìm kiếm tài liệu ngay trước nộp; xác minh toàn văn các so sánh mới.
+\item[\todo] Chuyển sang class/mẫu LaTeX của venue; điền metadata tác giả/cơ quan/tuyên bố lợi ích/dữ liệu/đạo đức; tuân chính sách ẩn danh/đạo đức/AI-LLM.
+\item[\todo] \textbf{DoD (G4):} không còn TODO/gạch trong bảng; mọi hình/bảng tái tạo từ raw; metadata cuối điền; checker nộp xanh.
+\item[\todo] \textbf{Qua G4 (17/01/2027)} --- đóng băng số liệu + bản thảo.
+\end{chk}
+
+\section*{PHẦN L --- Trích dẫn \& bằng chứng}
+\begin{chk}
+\item[\todo] Nâng so sánh chỉ-abstract trong \code{citation\_claim\_map.csv} lên xác minh full-text trang/mục (đặc biệt vai trò AutoDroid; bằng chứng thực tế ở \code{sections/}).
+\item[\todo] Chạy lại tìm kiếm tài liệu ngay trước nộp; cập nhật closest-work/novelty.
+\item[\todo] Thay arXiv bằng bản archival khi có; xác minh tác giả/trang/DOI/venue.
+\item[\todo] Giải quyết trích dẫn archival ổn định cho DroidRun nếu dùng làm tác nhân đánh giá.
+\item[\todo] Giữ HaS, Rescriber, PAPILLON, PrivacyRestore, Dual-LLM pattern, trang sự kiện/sản phẩm ở ngoài trừ khi xác minh bản ghi/claim chính.
+\item[\todo] Archive snapshot các trang Android Developers/AOSP dùng trích dẫn (kèm access date).
+\end{chk}
+
+\section*{PHẦN M --- Artifact \& nộp bài (W15--W16, Giai đoạn 11)}
+\begin{chk}
+\item[\todo] Phát hành: patch set AOSP, build manifest, hash app/tác nhân/mô hình, prompt, seed, canary monitor, schema raw-data, script phân tích, license.
+\item[\todo] Phụ lục Open Science (USENIX yêu cầu) + mô tả artifact; tách test thiết bị khỏi test emulator; tài liệu tính năng OEM không có.
+\item[\todo] Một lệnh build/run + smoke test canary cô lập offline; CI Python 3.11/3.12 + pipeline thiết bị kích hoạt thủ công.
+\item[\todo] Rà \code{TODO\_before\_submission.md} lần cuối; chạy checker LaTeX, kiểm accessibility, plagiarism/self-overlap, camera-ready.
+\item[\todo] Render lại mọi hình/bảng sau thay đổi class cuối; lặp \code{figure\_quality\_audit.md}.
+\item[\todo] Nộp \textbf{trước} hạn $\ge$ 4 ngày (mục tiêu 22/01/2027; hạn 26/01/2027; đăng ký bắt buộc 19/01/2027).
+\end{chk}
+
+\section*{PHẦN N --- Audit bảo trì (chạy lại sau mỗi thay đổi lớn)}
+\begin{chk}
+\item[\todo] \code{math\_audit.md} + \code{theorem\_dependency\_graph.md} sau đổi định lý.
+\item[\todo] \code{notation\_consistency\_check.md} sau đổi ký hiệu.
+\item[\todo] \code{citation\_consistency\_report.md} + \code{citation\_claim\_map.csv} sau đổi trích dẫn.
+\item[\todo] \code{figure\_quality\_audit.md} sau render lại hình.
+\item[\todo] \code{claim\_strength\_audit.md} sau đổi tuyên bố.
+\item[\todo] \code{topic\_alignment\_check.md} + \code{idea\_fidelity\_report.md} sau đổi phạm vi/đóng góp.
+\item[\todo] \code{SecretHandle/audits/*} sau mỗi thay đổi ngữ nghĩa mã.
+\item[\todo] \code{reviewer\_audit.md} sau mỗi vòng soát.
+\end{chk}
+
+\section*{Rủi ro chính \& phương án}
+\begin{tabularx}{\textwidth}{@{}p{5.0cm}X@{}}
+\toprule
+\textbf{Rủi ro} & \textbf{Phương án} \\
+\midrule
+Tác nhân ADB chạy UID shell/root & D3; đánh giá \code{adb unroot} + SELinux enforcing; thử 3 kiểu principal \\
+Bề mặt nguồn lộ OTP trước \code{ENTER} & Che theo cửa sổ nguồn; fail-closed; kiểm trong tấn công họ 1 \\
+Redaction ảnh chụp trước khi map khó & Lùi về che cửa sổ/bỏ frame; ghi giới hạn \\
+Nút cổ chai Track A (1 kỹ sư) & Cắt T3; walking skeleton sớm; nhân mốc A $\times$1{,}5 \\
+Thông lượng thiết bị \& chi phí LLM & Emulator/Cuttlefish; tách tấn công kịch bản; trần chi phí API \\
+Bản thảo 53 trang vượt giới hạn & Rút từ W9; chứng minh/thí nghiệm sang phụ lục \\
+Không kịp có số đo thật & Bắt buộc killer + ma trận T1; không chuyển placeholder thành kết quả \\
+\bottomrule
+\end{tabularx}
+
+\section*{5 hành động tiếp theo (ưu tiên ngay, tuần này)}
+\begin{enumerate}
+\item \done{} Chốt \textbf{D0--D5} trong \code{SecretHandle/docs/design\_decisions.md} (đã hoàn tất 2026-10-17).
+\item \todo{} Kích hoạt \textbf{\code{repo sync} AOSP} (việc độ trễ dài nhất) + ghim commit/thiết bị.
+\item \todo{} Dựng môi trường dev (\code{pip install -e '.[dev]'}), xác nhận \code{ruff}/\code{mypy}; chạy \code{python -m pytest -q}.
+\item \todo{} Khởi động \textbf{cấp phát dài hạn}: license AndroidWorld/SPA-Bench, API model + trần chi phí, EC2 cô lập.
+\item \todo{} \textbf{Tái hiện B0} trên Android stock + dựng disclosure monitor bản đầu.
+\end{enumerate}
+
+\vspace{0.6em}
+\noindent\emph{Ghi chú:} Khi một mục xong, đổi \todo{} $\to$ \done{} và ghi ngày. Khi cổng G0--G4 đạt, viết biên bản cổng ngắn (kết quả đo, quyết định, thay đổi phạm vi). Biên dịch: \code{xelatex MASTER\_CHECKLIST.tex} hai lần.
+
+\end{document}
