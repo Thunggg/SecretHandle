@@ -1,4 +1,4 @@
-# Nhật ký quyết định thiết kế (D0–D5)
+# Nhật ký quyết định thiết kế (D0–D6)
 
 Tài liệu này ghi lại các quyết định làm thay đổi phạm vi, chứng minh và mã nguồn, theo yêu cầu của Giai đoạn 0 trong `instructions/SecretHandle_HuongDan.tex`. Mỗi quyết định phải được chốt **trước cổng G0 (25/10/2026)**.
 
@@ -13,32 +13,41 @@ Tài liệu này ghi lại các quyết định làm thay đổi phạm vi, ch�
 
 | Mã | Quyết định | Khuyến nghị | Trạng thái | Ngày chốt | Người chốt |
 |----|------------|-------------|------------|-----------|------------|
-| D0 | Venue và lịch nộp | USENIX Security '27 Cycle 2 (MVP T1), giữ Plan B | **đã chốt — A** | 2026-10-17 | Nhóm đề tài |
+| D0 | Venue và lịch nộp | **MobiSys 2027, Emerging Ideas track**; full paper để Plan B | **đã chốt — MobiSys** | 2026-10-17 (cập nhật 2026-10-17) | Nhóm đề tài |
 | D1 | Authenticator `a` (MAC hay tra bảng) | Giữ MAC (HMAC-SHA-256) | **đã chốt — B** | 2026-10-17 | Nhóm đề tài |
 | D2 | Kho lưu trữ | Chỉ trong bộ nhớ `system_server`; khởi động lại = thu hồi | **đã chốt — A** | 2026-10-17 | Nhóm đề tài |
 | D3 | Principal tác nhân | Hỗ trợ 3 kiểu: UID app, UID shell/UiAutomation, quan sát serialize | **đã chốt — 3 kiểu** | 2026-10-17 | Nhóm đề tài |
 | D4 | Thời điểm giảm ngân sách dùng `u` | Giảm tại bước giữ chỗ; hoàn trả chỉ khi chứng minh chưa giao | **đã chốt — bảo thủ** | 2026-10-17 | Nhóm đề tài |
 | D5 | WebView | T1 chỉ view gốc (native/Compose); WebView fail-closed | **đã chốt — A** | 2026-10-17 | Nhóm đề tài |
+| D6 | Môi trường chạy (không có Pixel) | Emulator/Cuttlefish với ảnh AOSP tự build; số đo thiết bị thật là future work | **đã chốt — ảo** | 2026-10-17 | Nhóm đề tài |
 
 ---
 
 ## D0 — Venue và lịch nộp
 
-- **Trạng thái:** đã chốt
+- **Trạng thái:** đã chốt (cập nhật 2026-10-17 sau khi CFP MobiSys 2027 công bố)
 - **Ngày/người chốt:** 2026-10-17, nhóm đề tài
-- **Câu hỏi:** Nhắm venue/hạn nào, với phạm vi nào (MVP T1 hay đầy đủ)?
+- **Câu hỏi:** Nhắm venue/hạn nào, với phạm vi nào (Emerging Ideas / MVP hay đầy đủ)?
 - **Phương án:**
   - A. USENIX Security '27 Cycle 2, phạm vi MVP (T1). Đăng ký 19/01/2027, nộp 26/01/2027, artifact 29/01/2027 (theo CFP sơ bộ, cần xác minh).
-  - B. MobiSys 2027, phạm vi đầy đủ. Hạn ước tính 04–05/12/2026 (chưa công bố chính thức) — không đủ thời gian cho số đo thật.
-  - C. Plan B: kỳ nộp kế tiếp của MobiSys / NDSS / IEEE S&P / USENIX Security.
-- **Khuyến nghị:** Phương án A (MVP T1), giữ C làm dự phòng.
-- **Quyết định:** **Phương án A.** Nhắm USENIX Security '27 Cycle 2 với phạm vi MVP (Tier T1); giữ C làm Plan B.
-- **Lý do:** Chỉ hạn 26/01/2027 cho một bài có số đo thật (killer experiment + ma trận T1). Hạn MobiSys 2027 ước tính đầu 12/2026 chỉ còn ~8 tuần — không đủ để xây prototype AOSP và đo. Plan B dự phòng nếu G2 không qua. Đây cũng là quyết định trong Phụ lục D của tài liệu hướng dẫn (v2).
+  - B. **MobiSys 2027, Emerging Ideas track.** Đăng ký abstract 27/11/2026, nộp 04/12/2026 (AoE, không gia hạn). Track dành cho ý tưởng sớm, ưu tiên insight/originality hơn độ hoàn thiện.
+  - C. MobiSys 2027, **full paper**. Cùng hạn 04/12/2026 nhưng đòi evaluation đầy đủ — không khả thi (xem lý do).
+  - D. Plan B: kỳ nộp kế tiếp (MobiSys 2028 / USENIX Security / NDSS / IEEE S&P) cho bản full có số đo thật.
+- **Khuyến nghị:** Phương án B cho hạn 04/12/2026; giữ D cho bản full.
+- **Quyết định:** **Phương án B — MobiSys 2027, Emerging Ideas track.** Tiêu đề bài nộp bắt đầu bằng `[Emerging Ideas]`; giữ D làm Plan B.
+- **Lý do:**
+  1. **Hạn đã xác nhận qua CFP chính thức** (`sigmobile.org/mobisys/2027/call_for_papers/`): abstract 27/11/2026, nộp 04/12/2026 — còn **~7 tuần** tính từ 17/10/2026. Hội nghị 21–25/06/2027, TP. Hồ Chí Minh.
+  2. **Không đủ thời gian cho full paper.** Cổng G2 (T1 đủ chức năng) trong kế hoạch cũ là 06/12/2026 — *sau* hạn nộp. Track A (AOSP) chưa bắt đầu; và **không có thiết bị Pixel** (xem D6) nên không thể flash/một số đo thiết bị thật kịp hạn. Bài full đòi evaluation thực (killer experiment + ma trận T1 trên B3) — bất khả thi trong 7 tuần.
+  3. **Emerging Ideas khớp đúng trạng thái hiện tại:** vấn đề + mô hình đe dọa + thiết kế + tái hiện tấn công B0 thực + bằng chứng sơ bộ từ mô hình tham chiếu, *chưa* đánh giá đầy đủ. Track nêu rõ ưu tiên "originality, clarity of insight, and potential to shape future directions rather than completeness".
+  4. **Trung thực:** không đẩy placeholder thành kết quả; mọi số liệu sơ bộ được ghi rõ là từ mô hình tham chiếu, không phải hệ thống AOSP.
 - **Hệ quả:**
-  - Chốt ma trận T1 (~8.000 trial) và cỡ mẫu trong `docs/ec2_experiment_guide.md`.
-  - Kiểm chính sách ẩn danh / đạo đức / AI-LLM / artifact của venue ở G0.
-  - Chuyển `main.tex` khỏi class `elsarticle` chung nếu venue yêu cầu.
-- **Điều kiện xem lại:** khi CFP chính thức của venue mục tiêu được công bố.
+  - **Bản nộp 04/12/2026** là bài Emerging Ideas (12 trang thân bài, `\documentclass[sigconf,10pt]{acmart}`, US Letter, double-column).
+  - **Single-blind từ 2026: phải ghi tên/cơ quan tác giả** (không ẩn danh) — bản thảo hiện đang ẩn danh/`elsarticle` phải chuyển.
+  - Phải **gán nhãn văn bản do LLM tạo**; điền tuyên bố đạo đức (bài dùng canary tổng hợp ⇒ *không* human subjects).
+  - **AOSP sync/build vẫn khởi động sớm** nhưng là đường Plan B (chuẩn bị bản full), *không* là điều kiện của cổng G0/G1 phiên bản MobiSys.
+  - Đổi tên cổng theo lịch mới (xem `MASTER_CHECKLIST.tex` và HuongDan): G0 25/10, G1 15/11, G2 27/11 (đăng ký abstract), G3 01/12 (đóng băng bản thảo), nộp 04/12.
+  - Lưu ý đụng độ: abstract 27/11 chỉ là đăng ký tiêu đề + abstract ≥100 từ (không được "TBD"/"XXX"), không phải cam kết kết quả.
+- **Điều kiện xem lại:** nếu nhóm quyết định chờ bản full có số đo thật (chuyển sang D), hoặc nếu MobiSys ra thông báo mới.
 
 ---
 
@@ -149,8 +158,32 @@ Tài liệu này ghi lại các quyết định làm thay đổi phạm vi, ch�
 
 ---
 
+## D6 — Môi trường chạy (không có thiết bị Pixel)
+
+- **Trạng thái:** đã chốt
+- **Ngày/người chốt:** 2026-10-17, nhóm đề tài
+- **Câu hỏi:** Chạy và đánh giá hệ thống trên thiết bị thật hay thiết bị ảo, khi nhóm **không có Google Pixel**?
+- **Bối cảnh:** Dịch vụ nằm trong `system_server` (đúc tại OS) và cần **ảnh AOSP do nhóm tự build** — không thể cài trên máy stock. AOSP chỉ flash được lên thiết bị có device tree chính thức (thực tế là Pixel) hoặc chạy trên thiết bị ảo.
+- **Phương án:**
+  - A. **Emulator/Cuttlefish với ảnh AOSP tự build.** Dev và chạy chức năng hoàn toàn trên thiết bị ảo.
+  - B. Mua/borrow **Pixel cũ** (6a/7a/8) để có số đo thiết bị thật.
+  - C. Cả hai: A cho dev/eval hàng loạt, B cho một phần số đo thiết bị thật nếu tiếp cận được.
+- **Khuyến nghị:** A cho giai đoạn hiện tại (MobiSys Emerging Ideas); C nếu tiếp cận được máy thật cho bản full.
+- **Quyết định:** **Phương án A** là môi trường chính; số đo thiết bị thật chuyển sang future work/Plan B (khuyến nghị bổ sung một Pixel cũ ở giai đoạn full).
+- **Lý do:** Không có Pixel; build AOSP trên Windows cần máy Linux/WSL hoặc instance GCP (Cuttlefish cần KVM). Emulator/Cuttlefish chạy đúng ảnh AOSP đã sửa nên đủ cho **đánh giá chức năng** (mint, resolver, target token, private input, redaction, read-back harness) và cho **trial hàng loạt**.
+- **Hệ quả:**
+  - **Độ trễ/năng lượng** trên thiết bị ảo không đại diện → chuyển sang **Limitations**; không dùng làm số liệu tuyên bố.
+  - **Keystore** trên emulator/Cuttlefish là mức **phần mềm** (không TEE/StrongBox) → báo cáo `security level = software`, không tuyên bố bảo vệ phần cứng.
+  - Ghi rõ môi trường (image build, commit AOSP, cấu hình emulator/Cuttlefish) trong provenance.
+  - B0/tấn công/monitor vẫn tái hiện được trên emulator **và** trên Android stock bất kỳ (không cần Pixel).
+- **Điều kiện xem lại:** khi tiếp cận được thiết bị có device tree AOSP (Pixel hoặc tương đương) cho bản full.
+
+---
+
 ## Lịch sử thay đổi
 
 | Ngày | Mã | Thay đổi | Lý do | Người thực hiện |
 |------|----|----------|-------|-----------------|
 | 2026-10-17 | D0–D5 | Chốt toàn bộ: D0=A, D1=B, D2=A, D3=3 kiểu, D4=bảo thủ, D5=A | Thiết lập baseline thiết kế trước cổng G0 | Nhóm đề tài |
+| 2026-10-17 | D0 | Đổi A (USENIX '27 C2) → **B (MobiSys 2027, Emerging Ideas)** | CFP MobiSys xác nhận hạn 04/12/2026; nhóm không có Pixel; không đủ 7 tuần cho full paper | Nhóm đề tài |
+| 2026-10-17 | D6 | Thêm quyết định môi trường = emulator/Cuttlefish (không có Pixel) | Không có thiết bị có device tree AOSP; cần môi trường ảo chạy ảnh AOSP tự build | Nhóm đề tài |
