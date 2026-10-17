@@ -33,7 +33,7 @@
 \If{$z\ne\mathsf{live}$ or $t\notin[t_i,t_e)$ or $u=0$ or $\tau'\ne\tau$ or $\Match(d,x)=0$}
   \State rollback; \Return $\Reject$
 \EndIf
-\State $r\sample\bits^\lambda$; atomically set $(z,r)\gets(\mathsf{reserved},r)$; commit
+\State $r\sample\bits^\lambda$; atomically set $(z,r,u)\gets(\mathsf{reserved},r,u-1)$; commit
 \State $\gamma\gets\mathsf{ObtainConfirmation}(c,n,d,\tau,r)$
 \If{$\mathsf{ConfirmOK}(c,\gamma)=0$}
   \State finalize reservation according to type policy; \Return $\Reject$
@@ -42,7 +42,7 @@
 \If{$x'\ne x$ or $\Match(d,x')=0$} \State conservatively finalize; \Return $\Reject$ \EndIf
 \State register redaction obligation for $(V,n,q)$ before delivery
 \State $ok\gets\mathsf{InjectInternal}(V,s,r)$
-\State begin transaction; decrement $u$; set $z\gets\mathsf{consumed}$ if $u=0$ or delivery uncertain; commit
+\State begin transaction; set $z\gets\mathsf{consumed}$ if $u=0$ or delivery uncertain; commit
 \State wipe transient buffers; \Return $ok$ with value-oblivious status
 \end{algorithmic}
 \end{algorithm}
@@ -66,6 +66,11 @@
 \State \Return $O'$ through a principal-specific buffer
 \end{algorithmic}
 \end{algorithm}
+
+\subsection{Lifecycle state and the authenticated budget}
+\label{sec:lifecycle-budget}
+
+Mint authenticates the initial lifecycle parameters together with the handle identity, so a compromised caller cannot widen the initial budget or expiry. Because the running use count changes over the handle's lifetime, the store keeps the authenticated metadata immutable and tracks the remaining uses as mutable record state: the reservation step decrements the remaining count (\cref{alg:resolve}, Line~36) and refunds it only when delivery is proven impossible, while finalization settles only the terminal state (Line~45). This keeps the authenticator valid across multiple uses of a long-lived identifier while still failing closed on replay and concurrency. The reference implementation follows the conservative rule of decision~D4: the budget is consumed at reservation, not deferred to the delivery step.
 
 \subsection{Framework integration points}
 

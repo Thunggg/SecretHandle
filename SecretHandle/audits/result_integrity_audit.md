@@ -1,6 +1,6 @@
 # Result integrity audit
 
-Audit date: 2026-10-03.
+Audit date: 2026-10-03; addendum 2026-10-17.
 
 - **Real experiments run:** no.
 - **Device/AOSP/agent/benchmark execution:** none.
@@ -25,3 +25,8 @@ Audit date: 2026-10-03.
 | `outputs/synthetic_demo/plots/*.png` | `make_plots` from `metrics.csv` | visually labeled synthetic charts |
 
 Result: **integrity policy satisfied for an offline smoke-test repository; no paper-level result exists.**
+
+## Addendum 2026-10-17
+
+- A second synthetic configuration, `configs/preliminary_evidence.yaml` (seed 20261017, 200 trials per attack over 8 attack families and 4 conditions, 6400 trials), emits the same labeled synthetic outputs and contains no canaries. Its results are documented as preliminary reference-model evidence, not device measurements.
+- Decision D4 changed when the use budget is decremented (at reservation) and moved the remaining budget out of the authenticated metadata (`H` stays immutable). This only changes internal state transitions; no serialized result field changes and no new output channel is introduced, so the non-leakage conclusions above are unaffected.

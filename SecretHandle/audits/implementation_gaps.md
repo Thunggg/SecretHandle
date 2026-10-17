@@ -25,7 +25,9 @@
 - Python cannot reliably wipe immutable byte copies or lock memory.
 - Synthetic HMAC keys derived from seeds are test-only and intentionally insecure for production.
 - Deterministic latency values test analysis plumbing; they are not performance data.
-- The disclosure oracle covers exact, base64, URL, JSON, Unicode-normalized, and numeric-normalized forms. OCR and image-content scanning require an external adapter.
+- The disclosure oracle covers exact, base64, URL, JSON, Unicode-normalized, numeric-normalized, and space/dash-separated digit forms. OCR and image-content scanning require an external adapter.
+- The adapter interfaces are frozen at contract v1 (2026-10-17); external implementations must satisfy `tests/test_adapter_contracts.py`.
+- The authenticated metadata `H` is immutable; the remaining use budget is tracked as mutable record state and decremented at reservation (decision D4), so `a = F_K(enc(H))` stays valid for the handle's whole lifetime.
 - The reference redactor masks items associated with a registered target token; propagation to application-created echo views remains an AOSP taint/obligation problem.
 - Exact computational non-disclosure, complete-channel closure, and EUF-CMA security are assumptions/theorems, not pytest outcomes.
 

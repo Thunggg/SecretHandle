@@ -40,7 +40,7 @@ def _record(use_budget: int = 1, expires_at: float = 1060.0) -> SecretRecord:
         use_budget=use_budget,
         confirmation=ConfirmationMode.NONE,
     )
-    return SecretRecord(b"123456", metadata, b"tag")
+    return SecretRecord(b"123456", metadata, b"tag", use_budget)
 
 
 def test_crash_between_reserve_and_commit_consumes_single_use():

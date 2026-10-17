@@ -117,7 +117,7 @@ class SecretHandleService:
             confirmation=self._required_confirmation(secret_type, policy_hints.confirmation),
         )
         tag = authenticate(self._key, metadata)
-        self.store.insert(SecretRecord(bytes(secret), metadata, tag))
+        self.store.insert(SecretRecord(bytes(secret), metadata, tag, policy_hints.use_budget))
         self._audit(metadata, "mint", "accepted", None)
         return OpaqueHandle(identifier, secret_type, tag.hex())
 
@@ -156,7 +156,7 @@ class SecretHandleService:
             record.state is not LifecycleState.LIVE
             or current < record.metadata.issued_at
             or current >= record.metadata.expires_at
-            or record.metadata.use_budget <= 0
+            or record.remaining_uses <= 0
         ):
             self.store.expire(current)
             return self._reject(handle.identifier, "unavailable handle", record)
@@ -212,7 +212,7 @@ class SecretHandleService:
         return (
             record.state is LifecycleState.LIVE
             and metadata.issued_at <= now < metadata.expires_at
-            and metadata.use_budget > 0
+            and record.remaining_uses > 0
             and task.task_id == metadata.task_id
             and matches(metadata.destination, target)
         )

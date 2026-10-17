@@ -113,11 +113,18 @@ class OpaqueHandle:
 
 @dataclass
 class SecretRecord:
-    """Equation (1). The secret field must never enter public serialization."""
+    """Equation (1). The secret field must never enter public serialization.
+
+    ``metadata`` (the authenticated ``H``) stays immutable so the authenticator
+    ``a=F_K(enc(H))`` remains valid for the whole lifetime; the mutable use
+    budget is tracked separately in ``remaining_uses`` and decremented at the
+    reservation step (decision D4), never inside ``H``.
+    """
 
     secret: bytes = field(repr=False)
     metadata: HandleMetadata
     authenticator: bytes = field(repr=False)
+    remaining_uses: int
     state: LifecycleState = LifecycleState.LIVE
     reservation_nonce: str | None = None
     version: int = 0

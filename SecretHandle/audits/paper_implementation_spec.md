@@ -12,14 +12,14 @@ Source: `../main.pdf` (53 pages), inspected 2026-10-03.
 ## Algorithms
 
 1. **Algorithm 1, Mint (PDF p.26):** authenticate source, verify task token, intersect task/source/type destinations, derive lifecycle, sample identifier, construct metadata, authenticate canonical encoding, atomically store the secret record, suppress the source-side value, and return an opaque handle.
-2. **Algorithm 2, ENTER/Resolve (PDF p.27):** verify task, load and authenticate the record, resolve a fresh trusted target context, test eligibility, reserve atomically, obtain confirmation, revalidate target, register redaction before delivery, inject through a private adapter, then decrement/consume conservatively.
+2. **Algorithm 2, ENTER/Resolve (PDF p.27):** verify task, load and authenticate the record, resolve a fresh trusted target context, test eligibility, reserve atomically (decrementing the remaining use budget at reservation per decision D4), obtain confirmation, revalidate target, register redaction before delivery, inject through a private adapter, then settle the terminal state (consume conservatively on uncertainty) without mutating the authenticated metadata.
 3. **Algorithm 3, Observation Redactor (PDF p.28):** for each active obligation visible to an agent principal, resolve stable identity/bounds and mask accessibility/pixel/action/debug fields; fail closed by masking the containing window or suppressing a frame.
 4. **Lifecycle/recovery rules (pp.18-20, 24, 28-29, 41-42):** atomic live-to-reserved transition, single-use linearizability, monotonic expiry, revocation, conservative handling of uncertain delivery, and safe rollback only when non-delivery is proven.
 5. **Policy attenuation/intersection (pp.17, 25, 27):** destination predicates are conjunctive over package, origin, field, and node; missing mandatory identity fails closed; intersection may narrow but never widen authority.
 
 ## Equations and formal objects
 
-- **Eq. (1):** store record `Omega[n] = (s, H, a, z, r)`.
+- **Eq. (1):** store record `Omega[n] = (s, H, a, z, r)`. The authenticated metadata `H` is immutable so `a = F_K(enc(H))` stays valid for the handle's whole lifetime; the running use budget is separate mutable record state (`remaining_uses`) decremented at reservation per decision D4, never inside `H`.
 - **Eq. (2):** `Mint(s, q, sigma, d, tau, c, ti, te, u; Omega)`.
 - **Eq. (3):** `Resolve(h, x, tau', t, gamma; Omega)`.
 - **Eq. (4):** `Redact(O, R)`.

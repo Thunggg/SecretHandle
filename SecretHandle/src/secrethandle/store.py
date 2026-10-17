@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import copy
 import threading
-from dataclasses import replace
 
 from .schemas import LifecycleState, SecretRecord
 
@@ -36,7 +35,11 @@ class SecretStore:
             return None if record is None else copy.deepcopy(record)
 
     def reserve(self, identifier: str, nonce: str, now: float) -> SecretRecord | None:
-        """Atomic live-to-reserved transition used by Proposition 1."""
+        """Atomic live-to-reserved transition used by Proposition 1.
+
+        Decision D4: the use budget is decremented here, at reservation, so a
+        concurrent or crashed attempt cannot replay the gap before delivery.
+        """
 
         with self._lock:
             record = self._records.get(identifier)
@@ -46,20 +49,21 @@ class SecretStore:
                 record.state = LifecycleState.EXPIRED
                 record.version += 1
                 return None
-            if record.state is not LifecycleState.LIVE or record.metadata.use_budget <= 0:
+            if record.state is not LifecycleState.LIVE or record.remaining_uses <= 0:
                 return None
             record.state = LifecycleState.RESERVED
             record.reservation_nonce = nonce
+            record.remaining_uses -= 1
             record.version += 1
             return copy.deepcopy(record)
 
     def commit(self, identifier: str, nonce: str, uncertain: bool = False) -> SecretRecord:
         with self._lock:
             record = self._require_reserved(identifier, nonce)
-            remaining = record.metadata.use_budget - 1
-            record.metadata = replace(record.metadata, use_budget=remaining)
             record.state = (
-                LifecycleState.CONSUMED if uncertain or remaining <= 0 else LifecycleState.LIVE
+                LifecycleState.CONSUMED
+                if uncertain or record.remaining_uses <= 0
+                else LifecycleState.LIVE
             )
             record.reservation_nonce = None
             record.version += 1
@@ -71,6 +75,7 @@ class SecretStore:
         with self._lock:
             record = self._require_reserved(identifier, nonce)
             record.state = LifecycleState.LIVE
+            record.remaining_uses += 1  # refund the reservation; delivery never happened
             record.reservation_nonce = None
             record.version += 1
             return copy.deepcopy(record)
