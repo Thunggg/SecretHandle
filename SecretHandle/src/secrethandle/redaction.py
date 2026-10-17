@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 import threading
-from typing import Dict, Iterable, Optional
 
 from .schemas import Observation, ObservationItem, RedactionObligation, SecretType
-
 
 _DEFAULT_MASKS = {
     SecretType.OTP: "[OTP PROTECTED]",
@@ -19,7 +17,7 @@ _DEFAULT_MASKS = {
 
 class ObservationRedactor:
     def __init__(self) -> None:
-        self._obligations: Dict[str, RedactionObligation] = {}
+        self._obligations: dict[str, RedactionObligation] = {}
         self._lock = threading.RLock()
 
     def register(

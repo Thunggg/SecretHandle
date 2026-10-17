@@ -86,10 +86,10 @@ Plan B & 2027 & Full paper (T1 + số đo thiết bị thật) cho MobiSys 2028 
 \section*{PHẦN 0 --- Phạm vi nộp 04/12/2026: Emerging Ideas}
 {\small Track Emerging Ideas ưu tiên \emph{originality, clarity of insight, potential} hơn độ hoàn thiện; \emph{không} đòi evaluation đầy đủ. Vì vậy bản nộp gồm:}
 \begin{chk}
-\item[\doing] \textbf{Vấn đề \& tác động}: OTP/bí mật lộ cho tác nhân AI di động (attack B0 tái hiện được).
+\item[\doing] \textbf{Vấn đề \& tác động}: OTP/bí mật lộ cho tác nhân AI di động (attack B0 \textbf{đã tái hiện} trên emulator, 10/10).
 \item[\doing] \textbf{Mô hình đe dọa \& principal}: 3 kiểu caller (D3).
 \item[\doing] \textbf{Thiết kế} \SH: đúc tại nguồn OS, ràng buộc đích + tác vụ, vòng đời một lần, redaction quan sát.
-\item[\todo] \textbf{Bằng chứng sơ bộ}: kết quả từ \emph{mô hình tham chiếu Python} (đã ghi rõ là mô phỏng, \emph{không} phải hệ thống AOSP) + tái hiện tấn công thực.
+\item[\doing] \textbf{Bằng chứng sơ bộ}: tái hiện tấn công B0 thực trên emulator (xong 2026-10-17); kết quả từ \emph{mô hình tham chiếu Python} (đã ghi rõ là mô phỏng, \emph{không} phải hệ thống AOSP) đang hoàn thiện.
 \item[\todo] \textbf{Kế hoạch đánh giá} đầy đủ (killer experiment, ma trận T1) cho bản full.
 \item[\todo] Nêu rõ \textbf{giới hạn}: chưa có số đo thiết bị thật; keystore mức phần mềm; hệ thống AOSP là công việc đang tiến hành.
 \item[\todo] Tuân thủ format: 12 trang thân bài, \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}}, US Letter, double-column.
@@ -106,9 +106,9 @@ Tài liệu ý tưởng + bản thảo + mô hình tham chiếu & \done{} \texta
 Audit cấp bản thảo (citation/figure/math/reviewer/notation) & \done \\
 Quyết định D0--D6 & \done{} (đã chốt 2026-10-17) \\
 Triển khai AOSP (Track A) & \todo{} 0\% (đường Plan B) \\
-Ứng dụng/tác nhân/harness (Track B) & \todo{} 0\% \\
+Ứng dụng/tác nhân/harness (Track B) & \doing{} \textasciitilde15\% (agent B0 + monitor) \\
 Baseline/ablation thực & \doing{} chỉ có bản tổng hợp \\
-Thí nghiệm thực \& số đo & \todo{} 0\% \\
+Thí nghiệm thực \& số đo & \doing{} có B0-rate trên emulator (chưa phải số paper) \\
 Phân tích thống kê / viết lại theo venue & \todo{} 0\% \\
 Artifact \& nộp & \todo{} 0\% \\
 \bottomrule
@@ -150,13 +150,13 @@ Artifact \& nộp & \todo{} 0\% \\
 
 \subsection*{B3. Track B --- môi trường \& cấp phát}
 \begin{chk}
-\item[\todo] Dựng Python 3.11/3.12; \code{python -m pip install -e '.[dev]'}.
-\item[\todo] Xác nhận \code{ruff} + \code{mypy} chạy được (ghi nhận nếu thiếu).
+\item[\done] Dựng Python 3.12; \code{python -m pip install -e '.[dev]'} (venv \code{SecretHandle/.venv}).
+\item[\done] Xác nhận \code{ruff} 0.17.1 + \code{mypy} 2.4.0 chạy được; \textbf{đã xử lý} hết cảnh báo ruff + lỗi mypy (PHẦN C, 2026-10-17).
 \item[\todo] Tạo repo Git integration \emph{tách} khỏi package tham chiếu (AOSP patch, adapter, tác nhân).
 \item[\todo] Dựng EC2 cô lập: volume/user riêng, tường lửa chặt, credential trong secret manager (không trong YAML/log/repo).
 \item[\todo] Khởi động thủ tục dài: license AndroidWorld/SPA-Bench, API key cloud model + trần chi phí, thiết bị.
-\item[\todo] \textbf{Tái hiện tấn công B0} (OTP-forwarding) trên Android stock; đo tỉ lệ khai thác.
-\item[\todo] Dựng disclosure monitor bản đầu.
+\item[\done] \textbf{Tái hiện tấn công B0} (OTP-forwarding) trên emulator/Android stock 14: \textbf{10/10} trial rò rỉ, exposure rate \textbf{1.0} (Wilson 95\% [0.72, 1.0]; \code{rate\_results.json}).
+\item[\done] Dựng disclosure monitor bản đầu (\code{monitor/monitor.py}, \code{run\_rate.py}; log \code{exfil\_log.jsonl}).
 \item[\todo] Khung đạo đức: quy trình canary, endpoint cô lập, không dữ liệu thật; kiểm yêu cầu IRB/hội đồng + mục ethics CFP.
 \item[\todo] Ghim phiên bản Python/OS/công cụ thống kê vào provenance.
 \end{chk}
@@ -165,8 +165,8 @@ Artifact \& nộp & \todo{} 0\% \\
 \begin{chk}
 \item[\done] \code{pytest} xanh 100\% (hiện 39 passed).
 \item[\todo] Không có bí mật thật trong repo.
-\item[\todo] Môi trường dev sẵn sàng (venv 3.12 + \code{ruff}/\code{mypy}); emulator/Cuttlefish chạy được ảnh AOSP.
-\item[\todo] \textbf{B0 tái hiện được} trên emulator/stock Android (điều kiện cứng của G0).
+\item[\doing] Môi trường dev sẵn sàng (venv 3.12 + \code{ruff}/\code{mypy}); emulator chạy \textbf{ảnh stock} (chưa phải ảnh AOSP tự build).
+\item[\done] \textbf{B0 tái hiện được} trên emulator/stock Android (điều kiện cứng của G0) --- 2026-10-17, 10/10 rò rỉ.
 \item[\done] D0--D6 có tài liệu quyết định.
 \item[\todo] Khung đạo đức xong (canary tổng hợp, endpoint cô lập, không dữ liệu thật).
 \item[\todo] \textbf{Qua G0 (25/10/2026)} --- viết biên bản cổng.
@@ -180,7 +180,7 @@ Artifact \& nộp & \todo{} 0\% \\
 \item[\todo] Đóng băng hợp đồng adapter: \code{AospAdapter}, \code{PlatformFlowAdapter}, \code{AgentRunnerAdapter}, \code{BenchmarkAdapter}.
 \item[\todo] Property test: không trường bí mật rò qua serialization công khai/audit.
 \item[\todo] Mở rộng oracle tiết lộ: exact, base64, URL, JSON, Unicode-normalized, numeric-normalized, số tách bởi space/gạch.
-\item[\todo] Chạy \code{ruff} + \code{mypy}, xử lý cảnh báo.
+\item[\done] Chạy \code{ruff} + \code{mypy}, xử lý cảnh báo: \textbf{0 cảnh báo, 0 lỗi} (2026-10-17). Ghim cấu hình ruff tường minh trong \code{pyproject.toml}; nâng \code{requires-python} lên \code{>=3.10} để hiện đại hóa typing; thêm \code{types-PyYAML}. \code{pytest} vẫn 39 passed.
 \item[\todo] Cập nhật \code{SecretHandle/audits/} sau mỗi thay đổi ngữ nghĩa.
 \item[\todo] \textbf{DoD:} test xanh; mọi thay đổi ngữ nghĩa có test; traceability phủ 100\% đối tượng paper đã cài.
 \end{chk}
@@ -358,8 +358,8 @@ Format/venue (12 trang, sigconf, single-blind, LLM) & Cài \code{acmart} sigconf
 \section*{5 hành động tiếp theo (ưu tiên ngay, tuần này)}
 \begin{enumerate}
 \item \done{} Chốt \textbf{D0--D6} trong \code{SecretHandle/docs/design\_decisions.md}: D0 nay là \textbf{MobiSys 2027 Emerging Ideas}, thêm D6 (môi trường không Pixel) --- đã hoàn tất 2026-10-17.
-\item \todo{} \textbf{Tái hiện B0} (OTP-forwarding) trên \textbf{emulator/Android stock} + dựng disclosure monitor bản đầu (đường găng của G0).
-\item \todo{} Dựng môi trường dev: venv \textbf{Python 3.12} + \code{pip install -e '.[dev]'}, xác nhận \code{ruff}/\code{mypy}, chạy \code{python -m pytest -q}.
+\item \done{} \textbf{Tái hiện B0} (OTP-forwarding) trên \textbf{emulator/Android stock} + dựng disclosure monitor bản đầu --- xong 2026-10-17 (10/10 rò rỉ, rate 1.0).
+\item \done{} Dựng môi trường dev: venv \textbf{Python 3.12} + \code{pip install -e '.[dev]'}, xác nhận \code{ruff}/\code{mypy}, \code{pytest} 39 passed --- xong 2026-10-17.
 \item \todo{} Khởi động \textbf{khung bản thảo Emerging Ideas}: problem/threat-model/design; cài \code{acmart} sigconf; ghi tên tác giả; dự kiến gán nhãn LLM.
 \item \todo{} Dựng \textbf{bằng chứng sơ bộ} từ mô hình tham chiếu Python (ghi rõ là mô phỏng) + viết kế hoạch đánh giá đầy đủ cho bản full.
 \end{enumerate}

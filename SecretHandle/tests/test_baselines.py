@@ -1,4 +1,8 @@
-from secrethandle.baselines import DetectedPlaceholderBaseline, PlatformFlowBaseline, UnprotectedBaseline
+from secrethandle.baselines import (
+    DetectedPlaceholderBaseline,
+    PlatformFlowBaseline,
+    UnprotectedBaseline,
+)
 
 
 def test_unprotected_and_placeholder_are_distinct():

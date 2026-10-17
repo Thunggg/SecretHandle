@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Mapping, Optional, Sequence, Tuple
 
 from .schemas import Artifact
 
@@ -12,9 +11,9 @@ from .schemas import Artifact
 @dataclass(frozen=True)
 class BaselineResult:
     public_value: str
-    delivered_value: Optional[str]
+    delivered_value: str | None
     bound_to_destination: bool
-    artifacts: Tuple[Artifact, ...]
+    artifacts: tuple[Artifact, ...]
     applicable: bool = True
     note: str = ""
 

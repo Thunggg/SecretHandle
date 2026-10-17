@@ -22,7 +22,7 @@ See [the implementation specification](audits/paper_implementation_spec.md), [tr
 
 ## Installation
 
-Python 3.11+ is recommended for EC2. The local validation environment used Python 3.9 compatibility mode.
+Python 3.10+ is required (the package metadata sets `requires-python = ">=3.10"`; the local validation environment used Python 3.12, and Python 3.11+ is recommended for EC2).
 
 ```bash
 python3 -m venv .venv
@@ -91,7 +91,7 @@ python3 -m pytest -q
 
 The suite covers imports, schemas, policy intersection, canonical authentication, lifecycle, expiry, concurrency, resolver decisions, redaction, oracles, metrics, confidence intervals, baselines, config validation, CLI execution, output integrity, and fixed-seed reproducibility. It requires no network, dataset, model, GPU, Android device, or credential.
 
-`ruff` is optional (`python3 -m ruff check .`) and was not available in the initial local environment; no lint pass is claimed unless it is installed and run.
+`ruff` and `mypy` are part of the `dev` extra and are configured explicitly in `pyproject.toml` (`[tool.ruff]` / `[tool.ruff.lint]`). Both pass cleanly: `python3 -m ruff check .` and `python3 -m mypy src`.
 
 ## Repository layout
 

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 from statistics import median
-from typing import Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 from .schemas import ExperimentSummary, MetricEstimate, TrialOutcome
 from .statistics import percentile, wilson_interval
@@ -22,10 +22,10 @@ def deterministic_view_difference(left: Sequence[str], right: Sequence[str]) -> 
 
     if len(left) != len(right) or not left:
         raise ValueError("equal-length nonempty trace samples required")
-    return sum(a != b for a, b in zip(left, right)) / len(left)
+    return sum(a != b for a, b in zip(left, right, strict=False)) / len(left)
 
 
-def _estimate(name: str, values: Sequence[Optional[bool]]) -> MetricEstimate:
+def _estimate(name: str, values: Sequence[bool | None]) -> MetricEstimate:
     applicable = [bool(value) for value in values if value is not None]
     if not applicable:
         return MetricEstimate(name, 0, 0, None, None, None)
@@ -36,7 +36,7 @@ def _estimate(name: str, values: Sequence[Optional[bool]]) -> MetricEstimate:
 
 
 def aggregate_trial_metrics(
-    trials: Sequence[TrialOutcome], provenance: Optional[Mapping[str, object]] = None
+    trials: Sequence[TrialOutcome], provenance: Mapping[str, object] | None = None
 ) -> ExperimentSummary:
     if not trials:
         raise ValueError("at least one trial is required")
@@ -58,7 +58,7 @@ def aggregate_trial_metrics(
         "median_ms": None if not latencies else median(latencies),
         "p95_ms": None if not latencies else percentile(latencies, 0.95),
     }
-    exclusions: Dict[str, int] = {}
+    exclusions: dict[str, int] = {}
     for trial in trials:
         if not trial.applicable:
             reason = str(trial.metadata.get("exclusion_reason", "not_applicable"))

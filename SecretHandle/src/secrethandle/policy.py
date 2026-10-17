@@ -2,12 +2,10 @@
 
 from __future__ import annotations
 
-from typing import FrozenSet, Optional
-
 from .schemas import ConfirmationMode, DestinationPolicy, HandleMetadata, TargetContext
 
 
-def _matches(values: Optional[FrozenSet[str]], observed: Optional[str], required: bool) -> bool:
+def _matches(values: frozenset[str] | None, observed: str | None, required: bool) -> bool:
     if observed is None and required:
         return False
     if values is None:
@@ -29,8 +27,8 @@ def matches(policy: DestinationPolicy, target: TargetContext) -> bool:
 
 
 def _intersect(
-    left: Optional[FrozenSet[str]], right: Optional[FrozenSet[str]]
-) -> Optional[FrozenSet[str]]:
+    left: frozenset[str] | None, right: frozenset[str] | None
+) -> frozenset[str] | None:
     if left is None:
         return right
     if right is None:
@@ -65,7 +63,7 @@ _CONFIRMATION_STRENGTH = {
 }
 
 
-def _subset(child: Optional[FrozenSet[str]], parent: Optional[FrozenSet[str]]) -> bool:
+def _subset(child: frozenset[str] | None, parent: frozenset[str] | None) -> bool:
     if parent is None:
         return True
     if child is None:

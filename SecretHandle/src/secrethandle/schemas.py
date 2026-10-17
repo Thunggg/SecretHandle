@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict, FrozenSet, List, Mapping, Optional, Tuple
+from typing import Any
 
 
 class SecretType(str, Enum):
@@ -44,7 +45,7 @@ class Provenance:
 @dataclass(frozen=True)
 class TaskToken:
     task_id: str
-    allowed_packages: FrozenSet[str]
+    allowed_packages: frozenset[str]
     valid: bool = True
 
 
@@ -56,10 +57,10 @@ class DestinationPolicy:
     Required flags make missing target attributes fail closed even when a policy set exists.
     """
 
-    packages: Optional[FrozenSet[str]] = None
-    origins: Optional[FrozenSet[str]] = None
-    fields: Optional[FrozenSet[str]] = None
-    nodes: Optional[FrozenSet[str]] = None
+    packages: frozenset[str] | None = None
+    origins: frozenset[str] | None = None
+    fields: frozenset[str] | None = None
+    nodes: frozenset[str] | None = None
     require_origin: bool = False
     require_field: bool = False
     require_node: bool = False
@@ -75,9 +76,9 @@ class PolicyHints:
 @dataclass(frozen=True)
 class TargetContext:
     package: str
-    origin: Optional[str]
-    field_class: Optional[str]
-    node_id: Optional[str]
+    origin: str | None
+    field_class: str | None
+    node_id: str | None
     generation: int
     window_id: str
 
@@ -118,7 +119,7 @@ class SecretRecord:
     metadata: HandleMetadata
     authenticator: bytes = field(repr=False)
     state: LifecycleState = LifecycleState.LIVE
-    reservation_nonce: Optional[str] = None
+    reservation_nonce: str | None = None
     version: int = 0
 
 
@@ -140,7 +141,7 @@ class ResolveResult:
     success: bool
     status: str
     handle_id: str
-    target_package: Optional[str] = None
+    target_package: str | None = None
 
 
 @dataclass(frozen=True)
@@ -157,14 +158,14 @@ class RedactionObligation:
 class ObservationItem:
     channel: str
     text: str
-    target_token_id: Optional[str] = None
+    target_token_id: str | None = None
     stable_identity: bool = True
-    window_id: Optional[str] = None
+    window_id: str | None = None
 
 
 @dataclass(frozen=True)
 class Observation:
-    items: Tuple[ObservationItem, ...]
+    items: tuple[ObservationItem, ...]
     frame_suppressed: bool = False
 
 
@@ -176,7 +177,7 @@ class AuditEvent:
     source_class: str
     destination_class: str
     decision: str
-    latency_bucket_ms: Optional[int]
+    latency_bucket_ms: int | None
     policy_version: int = 1
 
 
@@ -192,21 +193,21 @@ class TrialOutcome:
     condition: str
     attack: str
     applicable: bool
-    exposure: Optional[bool]
-    redirection_success: Optional[bool]
-    utility_success: Optional[bool]
-    post_entry_leakage: Optional[bool]
-    forgery_acceptance: Optional[bool]
-    replay_acceptance: Optional[bool]
-    latency_ms: Optional[float]
-    policy_rejected: Optional[bool] = None
-    false_rejection: Optional[bool] = None
-    identity_available: Optional[bool] = None
+    exposure: bool | None
+    redirection_success: bool | None
+    utility_success: bool | None
+    post_entry_leakage: bool | None
+    forgery_acceptance: bool | None
+    replay_acceptance: bool | None
+    latency_ms: float | None
+    policy_rejected: bool | None = None
+    false_rejection: bool | None = None
+    identity_available: bool | None = None
     confirmations: int = 0
     synthetic: bool = True
     metadata: Mapping[str, Any] = field(default_factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         data = dict(self.__dict__)
         data["metadata"] = dict(self.metadata)
         return data
@@ -217,15 +218,15 @@ class MetricEstimate:
     name: str
     numerator: int
     denominator: int
-    value: Optional[float]
-    ci_low: Optional[float]
-    ci_high: Optional[float]
+    value: float | None
+    ci_low: float | None
+    ci_high: float | None
 
 
 @dataclass(frozen=True)
 class ExperimentSummary:
     label: str
-    metrics: Tuple[MetricEstimate, ...]
-    latency: Mapping[str, Optional[float]]
+    metrics: tuple[MetricEstimate, ...]
+    latency: Mapping[str, float | None]
     exclusions: Mapping[str, int]
     provenance: Mapping[str, Any]

@@ -7,11 +7,11 @@ name = "secrethandle"
 version = "0.1.0"
 description = "Reference model and reproducible synthetic evaluation harness for SecretHandle"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = ["PyYAML>=6.0", "matplotlib>=3.7"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.10"]
+dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.10", "types-PyYAML>=6.0"]
 
 [project.scripts]
 secrethandle = "secrethandle.cli:main"
@@ -29,4 +29,8 @@ addopts = "-ra"
 
 [tool.ruff]
 line-length = 100
-target-version = "py39"
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "RUF", "SIM", "TRY"]
+ignore = ["E501", "TRY003"]

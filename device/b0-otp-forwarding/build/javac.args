@@ -1,0 +1,13 @@
+-source
+8
+-target
+8
+-encoding
+UTF-8
+-nowarn
+-bootclasspath
+C:\Users\ASUS\AppData\Local\Android\Sdk\platforms\android-34\android.jar
+-d
+E:\NCKH\SecretHandle\device\b0-otp-forwarding\build\classes
+E:\NCKH\SecretHandle\device\b0-otp-forwarding\android\src\com\secrethandle\b0agent\MainActivity.java
+E:\NCKH\SecretHandle\device\b0-otp-forwarding\android\src\com\secrethandle\b0agent\OtpExfilService.java

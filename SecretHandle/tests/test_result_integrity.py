@@ -1,5 +1,4 @@
 import json
-from pathlib import Path
 
 from secrethandle.config import load_config
 from secrethandle.experiments import run_synthetic_demo

@@ -3,8 +3,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
-from typing import Dict, Iterable, Mapping, Optional, Sequence
+from collections.abc import Iterable, Mapping
 
 from .schemas import (
     ConfirmationEvidence,
@@ -37,8 +36,8 @@ class TargetContextResolver(ABC):
 
 
 class InMemoryTargetResolver(TargetContextResolver):
-    def __init__(self, tokens: Optional[Mapping[str, TargetToken]] = None) -> None:
-        self._tokens: Dict[str, TargetToken] = dict(tokens or {})
+    def __init__(self, tokens: Mapping[str, TargetToken] | None = None) -> None:
+        self._tokens: dict[str, TargetToken] = dict(tokens or {})
 
     def register(self, token: TargetToken) -> None:
         self._tokens[token.token_id] = token

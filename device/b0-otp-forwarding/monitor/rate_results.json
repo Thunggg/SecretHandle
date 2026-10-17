@@ -1,0 +1,34 @@
+{
+  "condition": "B0_unprotected",
+  "label": "emulator functional reproduction, not a paper number",
+  "trials": 10,
+  "leaked": 10,
+  "exposure_rate": 1.0,
+  "wilson_low": 0.7224598312333834,
+  "wilson_high": 1.0,
+  "sent_otps": [
+    "672849",
+    "965584",
+    "730661",
+    "686956",
+    "572713",
+    "565539",
+    "673711",
+    "668821",
+    "132775",
+    "754851"
+  ],
+  "leaked_otps": [
+    "672849",
+    "965584",
+    "730661",
+    "686956",
+    "572713",
+    "565539",
+    "673711",
+    "668821",
+    "132775",
+    "754851"
+  ],
+  "received_count": 10
+}

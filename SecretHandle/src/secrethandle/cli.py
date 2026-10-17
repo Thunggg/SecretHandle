@@ -5,8 +5,8 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Optional, Sequence
 
 from .config import load_config
 from .experiments import run_ablation, run_killer_experiment, run_synthetic_demo
@@ -36,7 +36,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)

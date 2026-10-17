@@ -2,15 +2,12 @@
 
 from __future__ import annotations
 
-import hashlib
-import json
 import logging
 import platform
-import random
 import sys
-import time
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+from typing import Any
 
 from .adapters import DeterministicConfirmationProvider, InMemoryInjector, InMemoryTargetResolver
 from .baselines import DetectedPlaceholderBaseline, PlatformFlowBaseline, UnprotectedBaseline
@@ -171,7 +168,7 @@ def _simple_baseline_trial(condition: str, seed: int, attack: str) -> TrialOutco
     )
 
 
-def generate_synthetic_trials(config: Mapping[str, Any]) -> List[TrialOutcome]:
+def generate_synthetic_trials(config: Mapping[str, Any]) -> list[TrialOutcome]:
     if config["data"]["mode"] != "synthetic":
         raise RuntimeError("real experiment adapters require manually provisioned external infrastructure")
     base_seed = int(config["run"]["seed"])
@@ -191,7 +188,7 @@ def generate_synthetic_trials(config: Mapping[str, Any]) -> List[TrialOutcome]:
     return trials
 
 
-def _provenance(config: Mapping[str, Any]) -> Dict[str, Any]:
+def _provenance(config: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "label": SYNTHETIC_LABEL,
         "config_sha256": config.get("_config_sha256"),
@@ -203,7 +200,7 @@ def _provenance(config: Mapping[str, Any]) -> Dict[str, Any]:
     }
 
 
-def run_synthetic_demo(config: Mapping[str, Any]) -> Dict[str, Any]:
+def run_synthetic_demo(config: Mapping[str, Any]) -> dict[str, Any]:
     trials = generate_synthetic_trials(config)
     output_dir = Path(str(config["output"]["dir"]))
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -225,14 +222,14 @@ def run_synthetic_demo(config: Mapping[str, Any]) -> Dict[str, Any]:
                 "ci_high": metric.ci_high,
             })
     atomic_write_jsonl(output_dir / "trials.jsonl", [trial.to_dict() for trial in trials])
-    atomic_write_json(output_dir / "summary.json", {key: value for key, value in summaries.items()})
+    atomic_write_json(output_dir / "summary.json", dict(summaries.items()))
     atomic_write_json(output_dir / "provenance.json", {**provenance, "config": public_config(config)})
     write_metrics_csv(output_dir / "metrics.csv", metric_rows)
     LOGGER.info("wrote %d synthetic trials to %s", len(trials), output_dir)
     return {"output_dir": str(output_dir), "trial_count": len(trials), "label": SYNTHETIC_LABEL}
 
 
-def run_killer_experiment(config: Mapping[str, Any]) -> Dict[str, bool]:
+def run_killer_experiment(config: Mapping[str, Any]) -> dict[str, bool]:
     seed = int(config["run"]["seed"])
     bits = int(config["security"]["lambda_bits"])
     benign = _b3_trial(seed, "benign", bits)
@@ -251,7 +248,7 @@ def run_killer_experiment(config: Mapping[str, Any]) -> Dict[str, bool]:
     }
 
 
-def run_ablation(config: Mapping[str, Any]) -> Dict[str, Any]:
+def run_ablation(config: Mapping[str, Any]) -> dict[str, Any]:
     """Create synthetic ablation manifests without hard-coded paper results."""
 
     components = [

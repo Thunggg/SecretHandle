@@ -1,6 +1,6 @@
 import pytest
 
-from secrethandle.schemas import DestinationPolicy, PolicyHints, SecretType, TrialOutcome
+from secrethandle.schemas import PolicyHints, SecretType, TrialOutcome
 
 
 def test_trial_output_never_has_secret_field():

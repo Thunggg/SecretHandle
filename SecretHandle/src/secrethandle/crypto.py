@@ -5,16 +5,16 @@ from __future__ import annotations
 import hashlib
 import hmac
 import json
-from typing import Any, Dict, Optional
+from typing import Any
 
 from .schemas import DestinationPolicy, HandleMetadata
 
 
-def _sorted(values: Optional[frozenset]) -> Optional[list]:
+def _sorted(values: frozenset | None) -> list | None:
     return None if values is None else sorted(values)
 
 
-def metadata_dict(metadata: HandleMetadata) -> Dict[str, Any]:
+def metadata_dict(metadata: HandleMetadata) -> dict[str, Any]:
     destination: DestinationPolicy = metadata.destination
     return {
         "confirmation": metadata.confirmation.value,

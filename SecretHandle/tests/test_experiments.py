@@ -1,10 +1,12 @@
 import json
 from pathlib import Path
 
-import yaml
-
 from secrethandle.config import load_config
-from secrethandle.experiments import generate_synthetic_trials, run_killer_experiment, run_synthetic_demo
+from secrethandle.experiments import (
+    generate_synthetic_trials,
+    run_killer_experiment,
+    run_synthetic_demo,
+)
 
 
 def config_for(tmp_path):

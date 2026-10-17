@@ -5,7 +5,6 @@ from __future__ import annotations
 import copy
 import threading
 from dataclasses import replace
-from typing import Dict, Iterable, Optional
 
 from .schemas import LifecycleState, SecretRecord
 
@@ -21,7 +20,7 @@ class SecretStore:
     """
 
     def __init__(self) -> None:
-        self._records: Dict[str, SecretRecord] = {}
+        self._records: dict[str, SecretRecord] = {}
         self._lock = threading.RLock()
 
     def insert(self, record: SecretRecord) -> None:
@@ -31,12 +30,12 @@ class SecretStore:
                 raise StoreError("identifier collision")
             self._records[identifier] = copy.deepcopy(record)
 
-    def load(self, identifier: str) -> Optional[SecretRecord]:
+    def load(self, identifier: str) -> SecretRecord | None:
         with self._lock:
             record = self._records.get(identifier)
             return None if record is None else copy.deepcopy(record)
 
-    def reserve(self, identifier: str, nonce: str, now: float) -> Optional[SecretRecord]:
+    def reserve(self, identifier: str, nonce: str, now: float) -> SecretRecord | None:
         """Atomic live-to-reserved transition used by Proposition 1."""
 
         with self._lock:
@@ -126,7 +125,7 @@ class SecretStore:
                     count += 1
             return count
 
-    def states(self) -> Dict[str, str]:
+    def states(self) -> dict[str, str]:
         with self._lock:
             return {key: value.state.value for key, value in self._records.items()}
 

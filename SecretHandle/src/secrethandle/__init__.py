@@ -7,5 +7,5 @@ Android/AOSP enforcement implementation.
 from .core import SecretHandleService
 from .schemas import OpaqueHandle, SecretType, TargetContext
 
-__all__ = ["SecretHandleService", "OpaqueHandle", "SecretType", "TargetContext"]
+__all__ = ["OpaqueHandle", "SecretHandleService", "SecretType", "TargetContext"]
 __version__ = "0.1.0"

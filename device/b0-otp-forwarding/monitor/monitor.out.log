@@ -1,0 +1,4 @@
+B0 disclosure monitor listening on 0.0.0.0:8787 (host LAN ip 192.168.1.199)
+emulator should POST to http://10.0.2.2:8787/exfil
+canary = '482913'; log = E:\NCKH\SecretHandle\device\b0-otp-forwarding\monitor\exfil_log.jsonl
+[2026-10-17T08:46:12.737822+00:00] LEAK: {"source": "com.google.android.apps.messaging", "otp": "482913", "context": "(555) 123-4567 Your SecretHandle verification code is 482913. Do not share it. (555) 123-4567 android.app.Notification$MessagingStyle Your SecretHandle verification code is 482913. Do not share it. androidx.core.app.NotificationCompat$MessagingStyle You +15551234567 1"}

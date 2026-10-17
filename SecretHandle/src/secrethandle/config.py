@@ -3,20 +3,20 @@
 from __future__ import annotations
 
 import hashlib
-import json
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Dict, Mapping
+from typing import Any
 
 import yaml
 
 
-def load_config(path: str) -> Dict[str, Any]:
+def load_config(path: str) -> dict[str, Any]:
     config_path = Path(path)
     if not config_path.is_file():
         raise FileNotFoundError(f"configuration not found: {config_path}")
     data = yaml.safe_load(config_path.read_text(encoding="utf-8"))
     if not isinstance(data, dict):
-        raise ValueError("configuration root must be a mapping")
+        raise TypeError("configuration root must be a mapping")
     validate_config(data)
     data["_config_path"] = str(config_path.resolve())
     data["_config_sha256"] = hashlib.sha256(config_path.read_bytes()).hexdigest()
@@ -43,7 +43,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         raise ValueError("data.root is required for real mode")
 
 
-def public_config(config: Mapping[str, Any]) -> Dict[str, Any]:
+def public_config(config: Mapping[str, Any]) -> dict[str, Any]:
     """Return config data safe for provenance; reject obvious credential fields."""
 
     forbidden = {"secret", "token", "api_key", "password", "credential"}

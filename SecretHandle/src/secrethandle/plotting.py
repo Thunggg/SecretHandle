@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Dict, Iterable, List, Mapping, Sequence
 
 import matplotlib
 
@@ -12,11 +11,10 @@ import matplotlib.pyplot as plt
 
 from .io import read_metrics_csv
 
-
 SYNTHETIC_LABEL = "Synthetic smoke-test output, not a paper result"
 
 
-def make_plots(input_csv: str, output_dir: str) -> List[str]:
+def make_plots(input_csv: str, output_dir: str) -> list[str]:
     rows = read_metrics_csv(input_csv)
     if not rows:
         raise ValueError("metrics CSV is empty")
@@ -32,7 +30,7 @@ def make_plots(input_csv: str, output_dir: str) -> List[str]:
             match = next((row for row in rows if row["condition"] == condition and row["metric"] == metric), None)
             is_available = match is not None and match["value"] not in {"", "None"}
             available.append(is_available)
-            values.append(float(match["value"]) if is_available else 0.0)
+            values.append(float(match["value"]) if is_available and match is not None else 0.0)
         fig, axis = plt.subplots(figsize=(8, 4.5))
         bars = axis.bar(
             conditions,
@@ -41,7 +39,7 @@ def make_plots(input_csv: str, output_dir: str) -> List[str]:
             edgecolor=["#2f6b9a" if item else "#5f6770" for item in available],
             hatch=["" if item else "//" for item in available],
         )
-        for bar, value, is_available in zip(bars, values, available):
+        for bar, value, is_available in zip(bars, values, available, strict=False):
             label = f"{value:.2f}" if is_available else "N/A"
             axis.text(
                 bar.get_x() + bar.get_width() / 2,

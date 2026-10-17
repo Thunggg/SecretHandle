@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import math
 import random
+from collections.abc import Callable, Sequence
 from statistics import median
-from typing import Callable, Iterable, List, Optional, Sequence, Tuple
 
 
-def wilson_interval(successes: int, total: int, z: float = 1.959963984540054) -> Tuple[float, float]:
+def wilson_interval(successes: int, total: int, z: float = 1.959963984540054) -> tuple[float, float]:
     """Two-sided Wilson score interval for a binomial proportion."""
 
     if total <= 0 or successes < 0 or successes > total:
@@ -26,8 +26,8 @@ def percentile(values: Sequence[float], q: float) -> float:
         raise ValueError("nonempty values and q in [0, 1] required")
     ordered = sorted(float(v) for v in values)
     position = (len(ordered) - 1) * q
-    lower = int(math.floor(position))
-    upper = int(math.ceil(position))
+    lower = math.floor(position)
+    upper = math.ceil(position)
     if lower == upper:
         return ordered[lower]
     weight = position - lower
@@ -40,7 +40,7 @@ def bootstrap_interval(
     confidence: float = 0.95,
     repetitions: int = 1000,
     seed: int = 0,
-) -> Tuple[float, float]:
+) -> tuple[float, float]:
     if not values or repetitions <= 0 or not 0.0 < confidence < 1.0:
         raise ValueError("valid values, repetitions, and confidence are required")
     rng = random.Random(seed)
@@ -58,8 +58,8 @@ def exact_mcnemar(left: Sequence[bool], right: Sequence[bool]) -> float:
 
     if len(left) != len(right) or not left:
         raise ValueError("paired nonempty sequences required")
-    b = sum(bool(a) and not bool(c) for a, c in zip(left, right))
-    c = sum(not bool(a) and bool(c_) for a, c_ in zip(left, right))
+    b = sum(bool(a) and not bool(c) for a, c in zip(left, right, strict=False))
+    c = sum(not bool(a) and bool(c_) for a, c_ in zip(left, right, strict=False))
     n = b + c
     if n == 0:
         return 1.0
@@ -73,7 +73,7 @@ def paired_permutation_pvalue(
 ) -> float:
     if len(left) != len(right) or not left or repetitions <= 0:
         raise ValueError("paired nonempty sequences and positive repetitions required")
-    differences = [float(a) - float(b) for a, b in zip(left, right)]
+    differences = [float(a) - float(b) for a, b in zip(left, right, strict=False)]
     observed = abs(sum(differences) / len(differences))
     rng = random.Random(seed)
     extreme = 0

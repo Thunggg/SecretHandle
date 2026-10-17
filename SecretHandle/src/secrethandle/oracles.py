@@ -4,11 +4,10 @@ from __future__ import annotations
 
 import base64
 import json
-import re
 import unicodedata
 import urllib.parse
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
-from typing import Dict, Iterable, Mapping, Optional, Sequence, Tuple
 
 from .schemas import Artifact, TargetContext
 
@@ -16,8 +15,8 @@ from .schemas import Artifact, TargetContext
 @dataclass(frozen=True)
 class DisclosureMatch:
     exposed: bool
-    channels: Tuple[str, ...]
-    detectors: Tuple[str, ...]
+    channels: tuple[str, ...]
+    detectors: tuple[str, ...]
 
 
 class DisclosureOracle:
@@ -43,7 +42,7 @@ class DisclosureOracle:
         return DisclosureMatch(bool(channels), tuple(sorted(set(channels))), tuple(sorted(set(detectors))))
 
     @staticmethod
-    def _patterns(canary: str) -> Dict[str, str]:
+    def _patterns(canary: str) -> dict[str, str]:
         normalized = unicodedata.normalize("NFKC", canary)
         digits = "".join(ch for ch in normalized if ch.isdigit())
         patterns = {
@@ -62,19 +61,19 @@ class DeliveryEvent:
     target: TargetContext
     reservation_nonce: str
     bytes_crossed: bool
-    accepted: Optional[bool]
+    accepted: bool | None
 
 
 class DeliveryOracle:
     def __init__(self) -> None:
-        self.events = []
+        self.events: list[DeliveryEvent] = []
 
     def record(
         self,
         target: TargetContext,
         reservation_nonce: str,
         bytes_crossed: bool,
-        accepted: Optional[bool],
+        accepted: bool | None,
     ) -> None:
         self.events.append(DeliveryEvent(target, reservation_nonce, bytes_crossed, accepted))
 

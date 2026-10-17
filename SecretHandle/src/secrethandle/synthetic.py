@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import hashlib
 import random
-from dataclasses import dataclass
-from typing import Iterable, Iterator, Tuple
 
 from .schemas import SecretType, TargetContext, TargetToken
 
@@ -30,7 +28,7 @@ def canary(seed: int, secret_type: SecretType = SecretType.OTP) -> str:
     return f"SH-{secret_type.value.upper()}-{rng.getrandbits(48):012x}"
 
 
-def target_tokens(now: float = 1000.0) -> Tuple[TargetToken, TargetToken, TargetToken]:
+def target_tokens(now: float = 1000.0) -> tuple[TargetToken, TargetToken, TargetToken]:
     legitimate = TargetToken(
         "node-good",
         TargetContext("com.example.bank", "https://bank.example", "otp", "otp-field", 1, "win-bank"),

@@ -6,7 +6,7 @@ import hashlib
 import hmac
 import secrets
 import time
-from typing import Callable, FrozenSet, Iterable, Optional, Tuple
+from collections.abc import Callable, Iterable
 
 from .adapters import (
     ConfirmationProvider,
@@ -33,7 +33,7 @@ from .schemas import (
     SecretType,
     TaskToken,
 )
-from .store import SecretStore, StoreError
+from .store import SecretStore
 
 
 class MintRejected(ValueError):
@@ -61,11 +61,11 @@ class SecretHandleService:
     def __init__(
         self,
         key: bytes,
-        store: Optional[SecretStore] = None,
-        redactor: Optional[ObservationRedactor] = None,
-        task_verifier: Optional[TaskTokenVerifier] = None,
-        approved_sources: Optional[Iterable[str]] = None,
-        identifier_source: Optional[Callable[[], str]] = None,
+        store: SecretStore | None = None,
+        redactor: ObservationRedactor | None = None,
+        task_verifier: TaskTokenVerifier | None = None,
+        approved_sources: Iterable[str] | None = None,
+        identifier_source: Callable[[], str] | None = None,
         clock: Callable[[], float] = time.monotonic,
     ) -> None:
         if len(key) < 16:
@@ -77,7 +77,7 @@ class SecretHandleService:
         self.approved_sources = frozenset(approved_sources or {"sms", "credential", "clipboard", "wallet"})
         self.identifier_source = identifier_source or RandomIdentifierSource()
         self.clock = clock
-        self.audit_events = []
+        self.audit_events: list[AuditEvent] = []
 
     def mint(
         self,
@@ -87,7 +87,7 @@ class SecretHandleService:
         task_token: TaskToken,
         source_policy: DestinationPolicy,
         policy_hints: PolicyHints,
-        now: Optional[float] = None,
+        now: float | None = None,
     ) -> OpaqueHandle:
         """Implement Algorithm 1 and Equation (2)."""
 
@@ -129,7 +129,7 @@ class SecretHandleService:
         target_resolver: TargetContextResolver,
         confirmation_provider: ConfirmationProvider,
         injector: PrivateInjector,
-        now: Optional[float] = None,
+        now: float | None = None,
     ) -> ResolveResult:
         """Implement Algorithm 2 and Equation (3) with conservative failure handling."""
 
@@ -243,14 +243,14 @@ class SecretHandleService:
         return DestinationPolicy(require_field=True)
 
     def _reject(
-        self, handle_id: str, status: str, record: Optional[SecretRecord]
+        self, handle_id: str, status: str, record: SecretRecord | None
     ) -> ResolveResult:
         if record is not None:
             self._audit(record.metadata, "resolve", status, None)
         return ResolveResult(False, status, handle_id)
 
     def _audit(
-        self, metadata: HandleMetadata, event: str, decision: str, latency_ms: Optional[float]
+        self, metadata: HandleMetadata, event: str, decision: str, latency_ms: float | None
     ) -> None:
         pseudonym = hmac.new(self._key, metadata.identifier.encode(), hashlib.sha256).hexdigest()[:16]
         bucket = None if latency_ms is None else int(round(latency_ms / 5.0) * 5)

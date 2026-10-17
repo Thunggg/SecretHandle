@@ -1,16 +1,20 @@
 import pytest
 
-from secrethandle.metrics import aggregate_trial_metrics, deterministic_view_difference, exposure_rate
+from secrethandle.metrics import (
+    aggregate_trial_metrics,
+    deterministic_view_difference,
+    exposure_rate,
+)
 from secrethandle.schemas import TrialOutcome
 
 
 def trial(**overrides):
-    data = dict(
-        trial_id="t", condition="B3", attack="benign", applicable=True,
-        exposure=False, redirection_success=None, utility_success=True,
-        post_entry_leakage=False, forgery_acceptance=None, replay_acceptance=None,
-        latency_ms=1.0,
-    )
+    data = {
+        "trial_id": "t", "condition": "B3", "attack": "benign", "applicable": True,
+        "exposure": False, "redirection_success": None, "utility_success": True,
+        "post_entry_leakage": False, "forgery_acceptance": None, "replay_acceptance": None,
+        "latency_ms": 1.0,
+    }
     data.update(overrides)
     return TrialOutcome(**data)
 

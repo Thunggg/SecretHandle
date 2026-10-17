@@ -6,13 +6,14 @@ import csv
 import json
 import os
 import tempfile
+from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import asdict, is_dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, Mapping, Sequence
+from typing import Any
 
 
 def _json_default(value: Any) -> Any:
-    if is_dataclass(value):
+    if is_dataclass(value) and not isinstance(value, type):
         return asdict(value)
     if hasattr(value, "value"):
         return value.value

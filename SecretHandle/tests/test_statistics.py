@@ -1,4 +1,3 @@
-import pytest
 
 from secrethandle.statistics import (
     bootstrap_interval,
