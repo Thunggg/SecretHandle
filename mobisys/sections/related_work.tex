@@ -1,7 +1,7 @@
 \section{Related Work}
 \label{sec:related}
 
-\paragraph{Placeholder and anonymization defenses.} Mobile placeholder schemes replace sensitive rendered text with a type-preserving token and reverse the mapping at use time \cite{zhao2026anonymization,wen2023autodroid}; the closest recent work resolves a \texttt{type(PLACEHOLDER)} locally but is detector-based, session-scoped, and validates index ranges rather than which field receives a resolved value. We differ on mint source (authoritative OS source, not screen scraping), unforgeability, destination-and-task binding, typed lifecycle, and a threat model that includes redirection.
+\paragraph{Placeholder and anonymization defenses.} Mobile placeholder schemes replace sensitive rendered text with a type-preserving token and reverse the mapping at use time \cite{zhao2026anonymization}; the closest recent work resolves a \texttt{type(PLACEHOLDER)} locally but is detector-based, session-scoped, and validates index ranges rather than which field receives a resolved value. We differ on mint source (authoritative OS source, not screen scraping), unforgeability, destination-and-task binding, typed lifecycle, and a threat model that includes redirection.
 
 \paragraph{Capability and isolation approaches.} Planner-side capability schemes and dual-model patterns hide values from the planner in tool-calling settings \cite{debenedetti2025camel,costa2025fides}; isolation and privilege-minimization designs restrict what a tool agent may do \cite{bagdasarian2024airgap,wu2025isolategpt,shi2025progent}. These operate in the planning/tool layer rather than enforcing at the point where a secret crosses from an OS source into a UI field.
 

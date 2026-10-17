@@ -74,7 +74,7 @@
 \textbf{Cổng} & \textbf{Hạn} & \textbf{Điều kiện qua (tóm tắt)} \\
 \midrule
 G0 & 25/10/2026 (W2) & Môi trường dev sẵn sàng; \textbf{B0 tái hiện được} trên emulator/stock; chốt D0--D6 \quad\textbf{(ĐẠT 2026-10-17)} \\
-G1 & 15/11/2026 (W5) & Tái hiện đầy đủ họ tấn công (1,3,4,7) + bằng chứng sơ bộ từ mô hình tham chiếu + khung bản thảo (problem/threat/design) \\
+G1 & 15/11/2026 (W5) & Tái hiện đầy đủ họ tấn công (1,3,4,7) + bằng chứng sơ bộ từ mô hình tham chiếu + khung bản thảo (problem/threat/design) \quad\textbf{(ĐẠT 2026-10-17; \code{docs/gates/G1.md})} \\
 G2 & 27/11/2026 (W7) & \textbf{Đăng ký abstract} (tiêu đề + abstract $\ge$100 từ, không ``TBD''); bản thảo gần hoàn chỉnh \\
 G3 & 01/12/2026 (W7) & Đóng băng bản thảo 12 trang + phụ lục; chuyển \code{acmart} sigconf; \textbf{ghi tên tác giả}; gán nhãn LLM \\
 Nộp & 04/12/2026 (AoE) & \textbf{MobiSys 2027 --- Emerging Ideas} (tiêu đề bắt đầu \code{[Emerging Ideas]}) \\
@@ -92,7 +92,7 @@ Plan B & 2027 & Full paper (T1 + số đo thiết bị thật) cho MobiSys 2028 
 \item[\done] \textbf{Bằng chứng sơ bộ}: tái hiện tấn công B0 thực trên emulator (xong 2026-10-17); \emph{mô hình tham chiếu Python} mô hình hóa tường minh họ \textbf{1,3,4,7} (thêm \code{read\_exfil}, \code{ambiguous\_identity}) --- 6400 trial, seed 20261017, đã ghi rõ là mô phỏng (không phải AOSP) tại \code{docs/preliminary\_evidence.md}.
 \item[\done] \textbf{Kế hoạch đánh giá} đầy đủ (killer experiment, ma trận T1, cỡ mẫu, thống kê) cho bản full tại \code{docs/evaluation\_plan.md}.
 \item[\done] Nêu rõ \textbf{giới hạn} tại \code{mobisys/sections/limitations.tex}: chưa có số đo thiết bị thật; keystore mức phần mềm; WebView fail-closed; binding không bảo đảm dùng trung thực.
-\item[\doing] Tuân thủ format: 12 trang thân bài, \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}} (đã có \code{mobisys/main.tex}, tiêu đề đã thêm \code{[Emerging Ideas]}), US Letter, double-column. Hiện 7 trang (đã thêm hình kiến trúc \code{figure*}); còn 5 trang.
+\item[\doing] Tuân thủ format: \textbf{tối đa} 12 trang thân bài (đây là \emph{mức tối đa}, \textbf{không} phải mục tiêu; phụ lục + tham khảo không tính), \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}} (đã có \code{mobisys/main.tex}, tiêu đề đã thêm \code{[Emerging Ideas]}), US Letter, double-column, cỡ chữ $\ge$10pt. \textbf{CFP đã đối chiếu 2026-10-17.} Hiện \textbf{7 trang} $\Rightarrow$ \textbf{hợp lệ}. Còn: điền tên/cơ quan tác giả (single-blind) + kiểm số trang.
 \item[\done] Single-blind + đạo đức + LLM tại \code{mobisys/sections/ethics.tex} (canary tổng hợp $\Rightarrow$ không human subjects; gán nhãn LLM). \textbf{Còn:} điền tên/cơ quan tác giả (đang TBD trong \code{mobisys/main.tex}).
 \end{chk}
 
@@ -310,7 +310,7 @@ Artifact \& nộp & \todo{} 0\% \\
 
 \section*{PHẦN L --- Trích dẫn \& bằng chứng}
 \begin{chk}
-\item[\todo] Nâng so sánh chỉ-abstract trong \code{citation\_claim\_map.csv} lên xác minh full-text trang/mục (đặc biệt vai trò AutoDroid; bằng chứng thực tế ở \code{sections/}).
+\item[\doing] Nâng so sánh chỉ-abstract trong \code{citation\_claim\_map.csv} lên xác minh full-text trang/mục (đặc biệt vai trò AutoDroid; bằng chứng thực tế ở \code{sections/}). \textbf{2026-10-17:} closest-work \code{zhao2026anonymization} đã xác minh full-text (arXiv HTML v3, Sec.~3.2/3.5); \textbf{sửa lỗi} \code{wen2023autodroid} --- trước đây bị xếp nhầm là baseline placeholder/anonymization (không có thành phần privacy/placeholder), nay chỉ trích dẫn đúng vai trò hệ tác nhân di động; đã sửa ở cả \code{mobisys/} và bản full. Còn: \code{debenedetti2025camel}, \code{costa2025fides}, \code{shi2025progent}, \code{du2025mobileattacks}.
 \item[\todo] Chạy lại tìm kiếm tài liệu ngay trước nộp; cập nhật closest-work/novelty.
 \item[\todo] Thay arXiv bằng bản archival khi có; xác minh tác giả/trang/DOI/venue.
 \item[\todo] Giải quyết trích dẫn archival ổn định cho DroidRun nếu dùng làm tác nhân đánh giá.
