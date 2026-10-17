@@ -9,8 +9,31 @@
 
 \paragraph{Attacker goals.} (G1) read a secret the agent handles; (G2) redirect a secret to an attacker-controlled destination; (G3) replay or reuse a secret; (G4) forge a handle.
 
-\paragraph{Security goals.} For a task that legitimately requires a secret, \SH{} aims to guarantee: (S1) the raw value never enters the agent's observation or a non-bound destination; (S2) handles are unforgeable OS capabilities; (S3) resolved values are redacted from subsequent agent observation; (S4) single-use secrets cannot be reused. The utility goal is that login, 2FA, and checkout flows still complete.
+\paragraph{Security goals.} For a task that legitimately requires a secret, \SH{} aims to guarantee: (S1) the raw value never enters the agent's observation or a non-bound destination; (S2) handles are unforgeable OS capabilities and can only be resolved into their bound destination and task; (S3) resolved values are redacted from subsequent agent observation; (S4) single-use secrets cannot be reused. The utility goal is that login, 2FA, and checkout flows still complete.
+
+Table~\ref{tab:goals} maps each attacker goal to the security goal that counters it and to the mechanism that enforces it. The mapping is the organizing principle of the design: every attacker goal is answered by a property that a specific OS component is responsible for, rather than by a heuristic over untrusted text.
+
+\begin{table}[t]
+\centering
+\caption{Attacker goals, the security goal that answers each, and its enforcement point.}
+\label{tab:goals}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{1.35cm}>{\raggedright\arraybackslash}p{2.15cm}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Goal & Security goal & Enforced by \\
+\midrule
+G1 read & S1 non-disclosure & mint before observation; principal-specific redaction \\
+G2 redirect & S2 destination confinement & destination predicate $d$ + task $\tau$ checked at resolve \\
+G3 replay & S4 lifecycle safety & atomic reservation, use budget, TTL, revocation \\
+G4 forge & S2 unforgeability & authenticated metadata $a=F_K(\enc(H))$ against the OS store \\
+(G1, reread) & S3 observation closure & redaction obligation active during and after injection \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \paragraph{Agent principals.} Mobile agents reach a device in more than one way, so the agent is not a single principal. We model three: (i) an accessibility/media-projection service of an application (application UID); (ii) an ADB/UiAutomation process, which many open runners use and which runs as the \texttt{shell} UID; and (iii) a remote agent that only receives serialized observations. The resolver authenticates the caller's UID at entry, and the redactor keys redaction to the principal at the screenshot and accessibility boundaries. If the agent has root, or the device is not SELinux-enforcing under an unrooted ADB, the redaction boundary is void and results are not meaningful; enforcement is therefore evaluated under \texttt{adb unroot} with SELinux enforcing.
+
+\paragraph{Reference-monitor assumptions.} The guarantees of Section~\ref{sec:model} hold only under explicit architectural assumptions: the OS service, store, resolver, redaction registry, and trusted target-context extraction cannot be modified by the adversary and mediate every resolve; only an approved source adapter can mint a protected-source handle, and the task token cannot be forged; the authenticator key is secret and the encoding canonical; the target identity the resolver reads equals the actual injection target at commit time; and every agent-visible screenshot, tree, event, and log applies the same value-independent mask. Section~\ref{sec:model} states these formally, so each guarantee is a conditional statement about an implementation that satisfies them rather than an unconditional claim about all Android devices.
 
 \paragraph{Out of scope.} Semantic misuse \emph{inside} an allowed destination (e.g., an agent tricked into initiating a legitimate-but-unwanted action), WebView-origin attestation (fields in a WebView are rejected fail-closed rather than bound), and side channels outside the modeled observation boundary. These are residual risks and are discussed in the evaluation plan and limitations, not claimed to be eliminated.

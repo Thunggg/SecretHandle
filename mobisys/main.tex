@@ -5,7 +5,11 @@
 
 \usepackage{microtype}
 \usepackage{booktabs}
+\usepackage{tabularx}
 \usepackage{enumitem}
+\usepackage{amsmath,amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
@@ -17,6 +21,22 @@
 \newcommand{\Mint}{\ensuremath{\mathsf{Mint}}}
 \newcommand{\Resolve}{\ensuremath{\mathsf{Resolve}}}
 \newcommand{\Redact}{\ensuremath{\mathsf{Redact}}}
+\newcommand{\Reject}{\ensuremath{\mathsf{Reject}}}
+\newcommand{\Adv}{\ensuremath{\mathsf{Adv}}}
+\newcommand{\Match}{\ensuremath{\mathsf{Match}}}
+\newcommand{\View}{\ensuremath{\mathsf{View}}}
+\newcommand{\Real}{\ensuremath{\mathsf{Real}}}
+\newcommand{\bits}{\{0,1\}}
+\newcommand{\sample}{\xleftarrow{\$}}
+\newcommand{\enc}{\ensuremath{\mathsf{enc}}}
+
+% acmart creates theorem/definition/proposition/lemma/corollary in \AtEndPreamble,
+% so define the extra environments after they exist.
+\AtEndPreamble{%
+  \theoremstyle{acmplain}%
+  \newtheorem{assumption}[theorem]{Assumption}%
+  \newtheorem{remark}[theorem]{Remark}%
+}
 
 \settopmatter{printacmref=false}
 \renewcommand\footnotetextcopyrightpermission[1]{}
@@ -74,6 +94,8 @@
 \input{sections/threat_model}
 \input{sections/architecture}
 \input{sections/design}
+\input{sections/model}
+\input{sections/algorithm}
 \input{sections/evidence}
 \input{sections/related_work}
 \input{sections/limitations}
