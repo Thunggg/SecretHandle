@@ -149,7 +149,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--passes", type=int, default=2)
     parser.add_argument("--timeout", type=int, default=300)
     parser.add_argument("--json", dest="json_out", help="write a JSON summary to this path")
-    parser.add_argument("--allow-commented", action="store_true", help="do not fail on markers in % comments")
+    parser.add_argument("--allow-commented", action="store_true", help="do not fail on markers in %% comments")
     args = parser.parse_args(argv)
 
     summary: dict[str, object] = {"targets": args.targets}

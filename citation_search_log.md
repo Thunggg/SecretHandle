@@ -87,3 +87,28 @@ Re-checked the four remaining abstract-only arXiv entries against their current 
 - arXiv:2510.27140 (mobile attack measurement) — **v3 (2026-07-07)**. Full text inspected (Sec. IV-C): the paper documents the Alipay verification-code harvesting workflow that motivates the threat model. **Version/title drift:** v3 retitles the paper to *Exploiting Mobile LLM Agents as Confused Deputies via Non-App-Controlled Channels*; the arXiv metadata title still shows the v1/v2 title. The bibliography keeps the stable arXiv ID.
 
 Open decision: for arXiv:2510.27140, choose whether the bibliography title should follow the revised v3 document title or the current arXiv metadata title; keep whichever matches the version cited at submission.
+
+## Archival-version upgrade pass (2026-10-17)
+
+Upgraded 10 entries from `@article` (arXiv preprint) to `@inproceedings` (published venue). All verified against official proceedings/DOI/publisher pages. arXiv IDs retained where useful via DOI/URL.
+
+- `wen2023autodroid` → MobiCom 2024. DOI 10.1145/3636534.3649379.
+- `debenedetti2024agentdojo` → NeurIPS 2024 Datasets and Benchmarks Track. OpenReview s80yaEXev6.
+- `zhan2024injecagent` → Findings of ACL 2024, pp. 10471–10506. DOI 10.18653/v1/2024.findings-acl.624.
+- `greshake2023indirect` → ACM AISec 2023, pp. 79–90. DOI 10.1145/3605764.3623985.
+- `xie2024osworld` → NeurIPS 2024 Datasets and Benchmarks Track. OpenReview Mk2A6hJcDp.
+- `rawles2024androidworld` → ICLR 2025. OpenReview 0J7Qg3qI2O.
+- `rawles2023aitw` → NeurIPS 2023 Datasets and Benchmarks Track.
+- `zhang2023appagent` → CHI 2025, pp. 1–17. DOI 10.1145/3706598.3713600.
+- `wang2024mobileagentv2` → NeurIPS 2024.
+- `wang2024mobileagent` (Mobile-Agent v1) → First International Workshop on Large Language Model Agents (at ICLR 2024).
+
+Verified but intentionally left as `@article` (arXiv-only; no published venue confirmed):
+
+- `toyama2021androidenv` — arXiv:2105.13231 carries no journal-ref; remains a technical report.
+
+Deferred pending venue confirmation:
+
+- `chen2024spabench` — NeurIPS 2024 OWA workshop vs ICLR 2025 proceedings conflict; left arXiv until the correct venue is established.
+- `chong2024casper` — IEEE Xplore abstract 11261423; specific conference not yet confirmed.
+- Remaining 2024–2026 arXiv-only entries (CaMeL, Fides, Progent, FinePrint, EIA, AEIA, ScreenAgent, Mobile-Agent-v3, mobile-attack measurement, anonymization) — no confirmed archival venue as of this pass.
