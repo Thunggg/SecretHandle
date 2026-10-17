@@ -16,10 +16,12 @@ experiment:
     - B3_secrethandle
   attacks:
     - benign
+    - read_exfil
     - redirect
     - forgery
     - replay
     - reread
     - expired
+    - ambiguous_identity
 output:
   dir: outputs/preliminary_evidence

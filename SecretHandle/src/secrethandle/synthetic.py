@@ -28,6 +28,16 @@ def canary(seed: int, secret_type: SecretType = SecretType.OTP) -> str:
     return f"SH-{secret_type.value.upper()}-{rng.getrandbits(48):012x}"
 
 
+def ambiguous_target_token(now: float = 1000.0) -> TargetToken:
+    """A node whose package matches but whose origin identity cannot be established (family 7)."""
+
+    return TargetToken(
+        "node-ambiguous",
+        TargetContext("com.example.bank", None, "otp", "otp-field", 1, "win-bank"),
+        now + 600,
+    )
+
+
 def target_tokens(now: float = 1000.0) -> tuple[TargetToken, TargetToken, TargetToken]:
     legitimate = TargetToken(
         "node-good",

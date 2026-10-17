@@ -29,7 +29,13 @@ from .schemas import (
     TaskToken,
     TrialOutcome,
 )
-from .synthetic import SeededIdentifierSource, canary, synthetic_key, target_tokens
+from .synthetic import (
+    SeededIdentifierSource,
+    ambiguous_target_token,
+    canary,
+    synthetic_key,
+    target_tokens,
+)
 
 LOGGER = logging.getLogger(__name__)
 SYNTHETIC_LABEL = "synthetic smoke-test output, not a paper result"
@@ -46,7 +52,8 @@ def _service(seed: int, lambda_bits: int) -> SecretHandleService:
 def _b3_trial(seed: int, attack: str, lambda_bits: int) -> TrialOutcome:
     service = _service(seed, lambda_bits)
     good, attacker, stale = target_tokens()
-    resolver = InMemoryTargetResolver({t.token_id: t for t in (good, attacker, stale)})
+    ambiguous = ambiguous_target_token()
+    resolver = InMemoryTargetResolver({t.token_id: t for t in (good, attacker, stale, ambiguous)})
     injector = InMemoryInjector()
     confirmation = DeterministicConfirmationProvider(True)
     task = TaskToken("task-login", frozenset({"com.example.bank"}))
@@ -69,7 +76,28 @@ def _b3_trial(seed: int, attack: str, lambda_bits: int) -> TrialOutcome:
     exposure = False
     redirect = utility = leakage = forgery = replay = None
     rejected = False
-    if attack == "benign":
+    identity_available = True
+    if attack == "read_exfil":
+        # Family 1: the agent may only observe the handle, never the raw value.
+        visible = Observation(
+            (
+                ObservationItem("accessibility", f"otp:{handle.identifier}", good.token_id, True, "win-bank"),
+                ObservationItem("screenshot", f"otp:{handle.identifier}", good.token_id, True, "win-bank"),
+            )
+        )
+        redacted = service.redactor.redact(visible)
+        exposure = DisclosureOracle().scan(
+            secret, [Artifact(i.channel, i.text) for i in redacted.items]
+        ).exposed
+    elif attack == "ambiguous_identity":
+        # Family 7: destination identity cannot be established; must fail closed.
+        result = service.resolve(
+            handle, task, ambiguous.token_id, resolver, confirmation, injector, 1001.0
+        )
+        redirect = bool(injector.deliveries)
+        rejected = not result.success
+        identity_available = False
+    elif attack == "benign":
         result = service.resolve(handle, task, good.token_id, resolver, confirmation, injector, 1001.0)
         utility = result.success
         observation = Observation((ObservationItem("accessibility", secret, good.token_id, True, "win-bank"),))
@@ -122,7 +150,7 @@ def _b3_trial(seed: int, attack: str, lambda_bits: int) -> TrialOutcome:
         latency_ms=latency,
         policy_rejected=rejected,
         false_rejection=False if attack == "benign" else None,
-        identity_available=True,
+        identity_available=identity_available,
         synthetic=True,
         metadata={"label": SYNTHETIC_LABEL, "seed": seed},
     )
@@ -145,24 +173,26 @@ def _simple_baseline_trial(condition: str, seed: int, attack: str) -> TrialOutco
             synthetic=True, metadata={"exclusion_reason": "external_platform_unavailable", "label": SYNTHETIC_LABEL},
         )
     exposure = DisclosureOracle().scan(secret, result.artifacts).exposed
-    redirect = result.delivered_value == secret and attack == "redirect" and not result.bound_to_destination
+    redirect_unbound = result.delivered_value == secret and not result.bound_to_destination
+    redirect = redirect_unbound if attack in {"redirect", "ambiguous_identity"} else None
     utility = result.delivered_value == secret if attack == "benign" else None
     leakage = None
     if condition == "B1_detected_placeholder" and attack == "reread":
         leakage = True
+    identity_available = attack != "ambiguous_identity"
     return TrialOutcome(
         trial_id=f"{condition}-{attack}-{seed}",
         condition=condition,
         attack=attack,
         applicable=True,
         exposure=exposure,
-        redirection_success=redirect if attack == "redirect" else None,
+        redirection_success=redirect,
         utility_success=utility,
         post_entry_leakage=leakage,
         forgery_acceptance=None,
         replay_acceptance=None,
         latency_ms=None,
-        identity_available=True,
+        identity_available=identity_available,
         synthetic=True,
         metadata={"label": SYNTHETIC_LABEL, "reference_baseline": True},
     )
