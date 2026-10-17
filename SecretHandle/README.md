@@ -93,6 +93,22 @@ The suite covers imports, schemas, policy intersection, canonical authentication
 
 `ruff` and `mypy` are part of the `dev` extra and are configured explicitly in `pyproject.toml` (`[tool.ruff]` / `[tool.ruff.lint]`). Both pass cleanly: `python3 -m ruff check .` and `python3 -m mypy src`.
 
+### One-command checks
+
+The `Makefile` bundles the routine entry points (override `PYTHON` on Windows, e.g. `make check PYTHON=.venv/Scripts/python.exe`):
+
+```bash
+make lint        # ruff check .
+make typecheck   # mypy src
+make test        # pytest -q
+make smoke       # offline canary-isolation smoke (see below)
+make check       # lint + typecheck + test + smoke
+```
+
+`make smoke` runs `scripts/smoke_check.py`: it executes the deterministic synthetic pipeline, reconstructs every canary the run could have minted, and fails if any canary appears in a generated artifact. It also asserts the `real_experiment=false` and `paper_placeholder_numbers_used=false` provenance flags. The check is fully offline (no network, dataset, model, device, or credential).
+
+CI lives at the repository root in `.github/workflows/`: `ci.yml` runs lint, type-check, tests, and the canary smoke on Python 3.11 and 3.12; `device.yml` is `workflow_dispatch`-only and runs the B0 emulator canary harness on a provisioned self-hosted Android runner.
+
 ## Repository layout
 
 ```text

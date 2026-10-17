@@ -119,8 +119,8 @@ Artifact \& nộp & \todo{} 0\% \\
 \begin{chk}
 \item[\done] Ý tưởng gốc: \code{idea.tex} / \code{idea.pdf} (5 trang) + \code{idea\_fidelity\_report.md}, \code{topic\_signature.json}.
 \item[\done] Bản thảo 53 trang: \code{main.tex} + 13 \code{sections/} + 2 \code{appendix/} + 6 hình TikZ/PGFPlots; \code{main.pdf}.
-\item[\done] Mô hình tham chiếu Python \code{SecretHandle/src/secrethandle/} (core, crypto, policy, store, redaction, metrics, statistics, adapters, baselines, oracles, experiments, plotting, synthetic, cli).
-\item[\done] Bộ test offline: \textbf{73 passed} (\code{python -m pytest -q}).
+\item[\done] Mô hình tham chiếu Python \code{SecretHandle/src/secrethandle/} (core, crypto, policy, store, redaction, metrics, statistics, adapters, baselines, oracles, experiments, plotting, synthetic, integrity, cli).
+\item[\done] Bộ test offline: \textbf{74 passed} (\code{python -m pytest -q}).
 \item[\done] Harness + config tổng hợp + script demo/plot/experiment.
 \item[\done] Audit cấp bản thảo: \code{citation\_claim\_map.csv}, \code{citation\_consistency\_report.md}, \code{math\_audit.md}, \code{claim\_strength\_audit.md}, \code{figure\_quality\_audit.md}, \code{notation\_consistency\_check.md}, \code{reviewer\_audit.md}, \code{theorem\_dependency\_graph.md}, \code{topic\_alignment\_check.md}.
 \item[\done] Audit cấp mã: \code{SecretHandle/audits/} (paper\_implementation\_spec, paper\_to\_code\_traceability, math\_to\_code\_audit, implementation\_gaps, result\_integrity\_audit).
@@ -163,7 +163,7 @@ Artifact \& nộp & \todo{} 0\% \\
 
 \subsection*{B4. DoD của G0}
 \begin{chk}
-\item[\done] \code{pytest} xanh 100\% (hiện 73 passed).
+\item[\done] \code{pytest} xanh 100\% (hiện 74 passed).
 \item[\done] Không có bí mật thật trong repo (quét mẫu high-signal = 0; không \code{.env}/tệp khóa; \code{debug.keystore} là keystore debug dùng-một-lần).
 \item[\doing] Môi trường dev sẵn sàng (venv 3.12 + \code{ruff}/\code{mypy}); emulator chạy \textbf{ảnh stock} (chưa phải ảnh AOSP tự build).
 \item[\done] \textbf{B0 tái hiện được} trên emulator/stock Android (điều kiện cứng của G0) --- 2026-10-17, 10/10 rò rỉ.
@@ -180,9 +180,9 @@ Artifact \& nộp & \todo{} 0\% \\
 \item[\done] Đóng băng hợp đồng adapter (contract v1, 2026-10-17): bốn adapter AOSP/platform-flow/agent-runner/benchmark cùng các protocol tin cậy; \code{test\_adapter\_contracts.py} khóa chữ ký phương thức.
 \item[\done] Property test: không trường bí mật rò qua serialization công khai/audit --- trong \code{test\_properties.py} (repr handle/record/store + audit; cả dạng hex).
 \item[\done] Mở rộng oracle tiết lộ: exact, base64, URL, JSON, chuẩn hóa Unicode, chuẩn hóa chữ số và dạng ngăn cách (space/gạch) --- \code{oracles.DisclosureOracle} (2026-10-17).
-\item[\done] Chạy \code{ruff} + \code{mypy}, xử lý cảnh báo: \textbf{0 cảnh báo, 0 lỗi} (2026-10-17). Ghim cấu hình ruff tường minh trong \code{pyproject.toml}; nâng \code{requires-python} lên \code{>=3.10} để hiện đại hóa typing; thêm \code{types-PyYAML}. \code{pytest}: 39 $\to$ 42 (họ 1,7) $\to$ 53 (property/model) $\to$ 58 (adapter contract) $\to$ \textbf{73 passed} (2026-10-17).
+\item[\done] Chạy \code{ruff} + \code{mypy}, xử lý cảnh báo: \textbf{0 cảnh báo, 0 lỗi} (2026-10-17). Ghim cấu hình ruff tường minh trong \code{pyproject.toml}; nâng \code{requires-python} lên \code{>=3.10} để hiện đại hóa typing; thêm \code{types-PyYAML}. \code{pytest}: 39 $\to$ 42 (họ 1,7) $\to$ 53 (property/model) $\to$ 58 (adapter contract) $\to$ 73 (2026-10-17) $\to$ \textbf{74 passed} (thêm smoke canary, PHẦN M).
 \item[\done] Cập nhật \code{SecretHandle/audits/} sau mỗi thay đổi ngữ nghĩa --- 2026-10-17: cập nhật traceability, math-to-code, gaps, spec và phụ lục result-integrity.
-\item[\done] \textbf{DoD:} test xanh (73 passed); mọi thay đổi ngữ nghĩa có test (D4 có \code{test\_store}/\code{test\_model}, oracle có \code{test\_oracles}, adapter có \code{test\_adapter\_contracts}); traceability phủ 100\% đối tượng paper đã cài.
+\item[\done] \textbf{DoD:} test xanh (74 passed); mọi thay đổi ngữ nghĩa có test (D4 có \code{test\_store}/\code{test\_model}, oracle có \code{test\_oracles}, adapter có \code{test\_adapter\_contracts}); traceability phủ 100\% đối tượng paper đã cài.
 \end{chk}
 
 \vspace{0.6em}
@@ -271,7 +271,7 @@ Artifact \& nộp & \todo{} 0\% \\
 \begin{chk}
 \item[\todo] Provisioning theo \code{docs/ec2\_experiment\_guide.md}; đặt tệp theo \code{docs/data\_format.md}; clone repo tác nhân/benchmark tại commit đã audit.
 \item[\todo] Copy \code{configs/experiment\_template.yaml}; đặt đường dẫn/ID đã cấp phát; đóng băng tham số.
-\item[\todo] Smoke test canary cô lập: xác nhận không có dữ liệu thật.
+\item[\doing] Smoke test canary cô lập: xác nhận không có dữ liệu thật. Bản offline tổng hợp đã có (chi tiết ở PHẦN M); bản thiết bị thật còn chờ.
 \item[\todo] \textbf{Killer experiment đầy đủ} (B0 vs B3 trên app A), B3 $n \ge 300$: kiểm 3 điều kiện (a)(b)(c).
 \item[\todo] Ma trận T1 (\textasciitilde8.000 trial LLM) trên emulator/Cuttlefish; đo độ trễ/bộ nhớ trên Pixel thật.
 \item[\todo] Họ tấn công kịch bản (3, 4, TOCTOU của 7) với $n \ge 10^4$, không LLM.
@@ -320,9 +320,9 @@ Artifact \& nộp & \todo{} 0\% \\
 
 \section*{PHẦN M --- Artifact \& nộp bài (W15--W16, Giai đoạn 11)}
 \begin{chk}
-\item[\todo] Phát hành: patch set AOSP, build manifest, hash app/tác nhân/mô hình, prompt, seed, canary monitor, schema raw-data, script phân tích, license.
+\item[\doing] Phát hành: patch set AOSP, build manifest, hash app/tác nhân/mô hình, prompt, seed, canary monitor, schema raw-data, script phân tích, license. \textbf{Đã có:} seed ghim trong cấu hình, canary monitor, schema, script phân tích/kiểm. \textbf{Còn:} \code{LICENSE} (chờ chọn giấy phép + tên giữ bản quyền); patch set AOSP/build manifest chờ build thiết bị.
 \item[\todo] Phụ lục artifact + mô tả (MobiSys artifact evaluation \emph{tùy chọn}, sau khi được nhận); tách test thiết bị khỏi test emulator; tài liệu tính năng OEM không có.
-\item[\todo] Một lệnh build/run + smoke test canary cô lập offline; CI Python 3.11/3.12 + pipeline thiết bị kích hoạt thủ công.
+\item[\done] Một lệnh build/run + smoke test canary cô lập offline; CI Python 3.11/3.12 + pipeline thiết bị kích hoạt thủ công. \code{make check}/\code{scripts/smoke\_check.py} (offline, 1599 canary, 0 rò rỉ); \code{.github/workflows/ci.yml} (3.11/3.12) + \code{device.yml} (\code{workflow\_dispatch}); local verify 74 passed (2026-10-17).
 \item[\todo] Rà \code{TODO\_before\_submission.md} lần cuối; chạy checker LaTeX, kiểm accessibility, plagiarism/self-overlap, camera-ready.
 \item[\todo] Render lại mọi hình/bảng sau thay đổi class cuối; lặp \code{figure\_quality\_audit.md}.
 \item[\todo] Nộp \textbf{trước} hạn vài ngày (hạn kỳ sau --- tra cứu CFP tại thời điểm lập lịch).
@@ -359,7 +359,7 @@ Format/venue (12 trang, sigconf, single-blind, LLM) & Cài \code{acmart} sigconf
 \begin{enumerate}
 \item \done{} Chốt \textbf{D0--D6} trong \code{SecretHandle/docs/design\_decisions.md}: D0 nay là \textbf{MobiSys 2027 Emerging Ideas}, thêm D6 (môi trường không Pixel) --- đã hoàn tất 2026-10-17.
 \item \done{} \textbf{Tái hiện B0} (OTP-forwarding) trên \textbf{emulator/Android stock} + dựng disclosure monitor bản đầu --- xong 2026-10-17 (10/10 rò rỉ, rate 1.0).
-\item \done{} Dựng môi trường dev: venv \textbf{Python 3.12} + \code{pip install -e '.[dev]'}, xác nhận \code{ruff}/\code{mypy}, \code{pytest} 73 passed --- xong 2026-10-17.
+\item \done{} Dựng môi trường dev: venv \textbf{Python 3.12} + \code{pip install -e '.[dev]'}, xác nhận \code{ruff}/\code{mypy}, \code{pytest} 74 passed --- xong 2026-10-17.
 \item \doing{} \textbf{Khung bản thảo Emerging Ideas} \code{mobisys/}: \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}} + problem/threat-model/design/bằng chứng/giới hạn/đạo đức/kế hoạch (build 7 trang, 0 undefined, đã thêm hình kiến trúc \code{figure*}). Còn: điền tên/cơ quan tác giả (đang TBD), mở rộng tới 12 trang, gán nhãn LLM.
 \item \done{} Dựng \textbf{bằng chứng sơ bộ} từ mô hình tham chiếu Python (6400 trial, 8 họ tấn công, ghi rõ là mô phỏng; \code{docs/preliminary\_evidence.md}) + viết \textbf{kế hoạch đánh giá} đầy đủ cho bản full (\code{docs/evaluation\_plan.md}) --- xong 2026-10-17.
 \end{enumerate}

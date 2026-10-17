@@ -1,0 +1,38 @@
+name: device
+
+# Manually triggered only. The device pipeline requires a provisioned
+# self-hosted runner with a running AOSP userdebug/emulator target and adb, so
+# it is never started automatically by push or pull request events.
+on:
+  workflow_dispatch:
+    inputs:
+      trials:
+        description: "Number of OTP-forwarding trials for the B0 rate run"
+        required: false
+        default: "10"
+
+jobs:
+  b0-emulator-canary:
+    name: B0 OTP-forwarding canary (self-hosted)
+    runs-on: [self-hosted, android]
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: device/b0-otp-forwarding
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the B0 agent APK
+        run: pwsh -File build.ps1
+      - name: Install and grant notification access
+        run: |
+          $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
+          & $adb install -r -g build\b0agent.apk
+          & $adb shell settings put secure enabled_notification_listeners "com.secrethandle.b0agent/com.secrethandle.b0agent.OtpExfilService"
+      - name: Run the B0 exposure-rate harness
+        run: python monitor\run_rate.py ${{ github.event.inputs.trials }} 2.5
+      - name: Upload monitor logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b0-monitor-logs
+          path: device/b0-otp-forwarding/monitor/*.json*
