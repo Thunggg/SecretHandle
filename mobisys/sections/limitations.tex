@@ -1,0 +1,12 @@
+\section{Limitations}
+\label{sec:limitations}
+
+\paragraph{No real-device measurements.} This paper reports an emulator reproduction and a clearly labeled simulation; it contains no device latency, energy, or hardware-keystore numbers. On an emulator or Cuttlefish image the keystore is software-only, so we report \texttt{security level = software} and make no hardware-protection claim. Device measurements are future work.
+
+\paragraph{Binding is not honest use.} Destination binding constrains \emph{where} a value may be resolved, not how a trusted app then uses it. An injected instruction can still cause an agent to perform a legitimate-but-unwanted action inside an allowed destination; we scope this out and quantify it as a residual risk in the evaluation plan.
+
+\paragraph{WebView fail-closed.} Binding a field to a WebView document origin requires node-to-frame-to-origin attestation, which we do not solve here; web fields are rejected rather than bound. This trades some utility for honesty.
+
+\paragraph{Screenshot-only agents.} An agent that can only act on pixels without naming a stable target node cannot be given a bound field; such agents need a trusted target-selection adapter or user confirmation and are out of scope.
+
+\paragraph{Simulation is not evidence.} The reference model demonstrates design trends under synthetic canaries. It does not establish the absence of exposure on uninstrumented channels and is not a substitute for the device evaluation.

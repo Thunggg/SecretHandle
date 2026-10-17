@@ -1,0 +1,8 @@
+\section{Ethics, Reproducibility, and LLM Use}
+\label{sec:ethics}
+
+\paragraph{Ethics.} Every experiment uses randomly generated synthetic canaries, an isolated loopback endpoint, and open test flows. No real credential, payment instrument, or production OTP is used or collected, and no human subjects are involved. The on-emulator reproduction runs only against a local endpoint controlled by the authors.
+
+\paragraph{Reproducibility.} The reference-model configuration pins the seed, the attack set, and the number of trials; the provenance record stores the Python version, platform, configuration hash, and an explicit \texttt{real\_experiment=false} flag. Regenerating every reported simulation number requires a single command from the configuration file. The paper distinguishes simulated from measured results throughout.
+
+\paragraph{LLM use.} Portions of the manuscript text were drafted with the assistance of a large language model; all technical claims, configuration, and numbers were reviewed and produced by the authors. This disclosure is provided for transparency.

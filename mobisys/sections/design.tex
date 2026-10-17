@@ -13,19 +13,8 @@ A \emph{secret handle} is an unforgeable capability object minted by the OS at t
 
 \paragraph{Resolution as the enforcement point.} The security hinges on resolution: a value is injected only if the handle authenticates and the target is inside the binding. An injected instruction that targets an attacker package, a foreign origin, a non-bound field, or a stale/recycled node is rejected, regardless of how convincingly the agent was manipulated. A booking of one use under a lock makes replay and concurrent double-resolution fail. After injection, the redactor prevents the value from reappearing in the next accessibility tree or screenshot.
 
-\paragraph{Constructive building blocks.} Destination binding reuses Android package identity and WebView origin; unforgeability uses a message authenticator \cite{rfc2104} over a canonical encoding of handle fields with a key separated from the value; lifecycle and reservation are ordinary OS state transitions. The main engineering is wiring the mint points and the resolver into the input path; the design composes with blind-actuation approaches (the agent acts on a node it cannot read).
+\paragraph{Policy language.} A handle's destination predicate is a finite record over four attribute sets---package, document origin, field class, and target node---each with a \emph{require} flag. An attribute that is required but absent at the target fails closed. A minted handle's policy is the intersection of three policies: the task policy (which packages the task authorizes), the source policy (what the authoritative source can bind, such as an SMS Retriever app hash), and the type policy (e.g., an OTP must land in a field classified as an OTP field). Intersection is monotone and can only shrink the allowed destination, so a compromise anywhere in the chain cannot broaden where a value may go. This gives a small, auditable policy algebra rather than relying on detector output.
 
-\begin{figure}[t]
-\centering
-\begin{tikzpicture}[node distance=6mm and 8mm]
-  \node[sh/source] (src) {Authoritative\\source};
-  \node[sh/component,right=of src] (mint) {Mint\\(typed, bound)};
-  \node[sh/defense,right=of mint] (res) {Resolver\\(bind + lifecycle)};
-  \node[sh/component,below=of res] (ag) {Agent observes\\handle only};
-  \draw[sh/flow] (src) -- (mint);
-  \draw[sh/secureflow] (mint) -- (res);
-  \draw[sh/flow] (ag) -- node[sh/label,right]{\texttt{ENTER(handle)}} (res);
-\end{tikzpicture}
-\caption{\SH{} flow: the value stays inside the OS from source to a bound destination; the agent sees only an opaque handle.}
-\label{fig:design}
-\end{figure}
+\paragraph{Lifecycle and reservation.} A record moves through \textsc{live}, \textsc{reserved}, \textsc{consumed}, and the terminal \textsc{expired}/\textsc{revoked} states. Resolution reserves the record under an atomic transition that decrements the use budget \emph{at reservation time} (not at delivery), so a concurrent or crashed attempt cannot be replayed into a second delivery; a reservation whose delivery is uncertain is consumed conservatively for single-use types. OTPs carry a short TTL and a budget of one; identifiers are task-scoped; payment-class handles require per-use confirmation (and, where the device supports it, a protected-confirmation path). Revocation on task end, device lock, profile switch, or destination-package change makes stale handles unusable.
+
+\paragraph{Constructive building blocks.} Destination binding reuses Android package identity and WebView origin; unforgeability uses a message authenticator \cite{rfc2104} over a canonical encoding of handle fields with a key separated from the value; lifecycle and reservation are ordinary OS state transitions. The main engineering is wiring the mint points and the resolver into the input path; the design composes with blind-actuation approaches (the agent acts on a node it cannot read). Figure~\ref{fig:architecture} shows how the components fit together: the value travels only along the protected path from an authoritative source to a bound destination, while the agent sees an opaque handle.
