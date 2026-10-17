@@ -1,0 +1,4 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+\SH{} reframes how an untrusted mobile agent handles secrets: instead of reading a value and typing it, the agent receives an opaque, unforgeable, destination- and task-bound handle and asks the OS to resolve it into a bound field. The raw value never enters the agent's observation, cannot be rerouted by injection, cannot be replayed past its lifecycle, and is redacted after entry. We have framed the problem, stated the threat model, described the design, reproduced the motivating attack on an emulator, and specified a reproducible evaluation for the full system. The next step is to implement the mint points and resolver in AOSP and run the killer experiment on a real device.

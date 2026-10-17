@@ -1,0 +1,31 @@
+\section{Design: Usable but Invisible Secrets}
+\label{sec:design}
+
+A \emph{secret handle} is an unforgeable capability object minted by the OS at the authoritative source. It carries (i) a secret \emph{type}, (ii) a \emph{destination binding}---an allowed package and, for web, a document origin, plus an allowed field class---derived from the task and, where available, from the source's own binding (e.g., the app hash used by the SMS Retriever \cite{androidSmsRetriever}), and (iii) a \emph{lifecycle}: single-use with a TTL for OTPs, task-scoped for identifiers, and confirm-per-use for payment. The agent observes only the handle and reasons about it (``the code arrived; enter it into the login field''); it never observes the value.
+
+\paragraph{Architecture.} Four components sit inside the OS:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Handle mint} (new system service): hooks the OTP pipeline, Credential Manager, clipboard, and wallet to mint typed, bound, unforgeable handles; keys live in hardware-backed storage.
+  \item \textbf{Resolver} (input-dispatch / accessibility action path): on \texttt{ENTER(handle)}, authenticates the handle, checks the target node's package/origin/field class against the binding, injects the value, and enforces use count and TTL under a reservation lock.
+  \item \textbf{Observation redactor} (accessibility service and the agent's screenshot path): masks resolved values in the agent's view.
+  \item \textbf{Agent SDK}: surfaces handles in the observation, provides the \texttt{ENTER(handle)} action, and adapts open-source agents.
+\end{itemize}
+
+\paragraph{Resolution as the enforcement point.} The security hinges on resolution: a value is injected only if the handle authenticates and the target is inside the binding. An injected instruction that targets an attacker package, a foreign origin, a non-bound field, or a stale/recycled node is rejected, regardless of how convincingly the agent was manipulated. A booking of one use under a lock makes replay and concurrent double-resolution fail. After injection, the redactor prevents the value from reappearing in the next accessibility tree or screenshot.
+
+\paragraph{Constructive building blocks.} Destination binding reuses Android package identity and WebView origin; unforgeability uses a message authenticator \cite{rfc2104} over a canonical encoding of handle fields with a key separated from the value; lifecycle and reservation are ordinary OS state transitions. The main engineering is wiring the mint points and the resolver into the input path; the design composes with blind-actuation approaches (the agent acts on a node it cannot read).
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=6mm and 8mm]
+  \node[sh/source] (src) {Authoritative\\source};
+  \node[sh/component,right=of src] (mint) {Mint\\(typed, bound)};
+  \node[sh/defense,right=of mint] (res) {Resolver\\(bind + lifecycle)};
+  \node[sh/component,below=of res] (ag) {Agent observes\\handle only};
+  \draw[sh/flow] (src) -- (mint);
+  \draw[sh/secureflow] (mint) -- (res);
+  \draw[sh/flow] (ag) -- node[sh/label,right]{\texttt{ENTER(handle)}} (res);
+\end{tikzpicture}
+\caption{\SH{} flow: the value stays inside the OS from source to a bound destination; the agent sees only an opaque handle.}
+\label{fig:design}
+\end{figure}

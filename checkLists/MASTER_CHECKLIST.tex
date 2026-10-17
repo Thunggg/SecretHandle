@@ -89,10 +89,10 @@ Plan B & 2027 & Full paper (T1 + số đo thiết bị thật) cho MobiSys 2028 
 \item[\doing] \textbf{Vấn đề \& tác động}: OTP/bí mật lộ cho tác nhân AI di động (attack B0 \textbf{đã tái hiện} trên emulator, 10/10).
 \item[\doing] \textbf{Mô hình đe dọa \& principal}: 3 kiểu caller (D3).
 \item[\doing] \textbf{Thiết kế} \SH: đúc tại nguồn OS, ràng buộc đích + tác vụ, vòng đời một lần, redaction quan sát.
-\item[\doing] \textbf{Bằng chứng sơ bộ}: tái hiện tấn công B0 thực trên emulator (xong 2026-10-17); kết quả từ \emph{mô hình tham chiếu Python} (đã ghi rõ là mô phỏng, \emph{không} phải hệ thống AOSP) đang hoàn thiện.
-\item[\todo] \textbf{Kế hoạch đánh giá} đầy đủ (killer experiment, ma trận T1) cho bản full.
+\item[\done] \textbf{Bằng chứng sơ bộ}: tái hiện tấn công B0 thực trên emulator (xong 2026-10-17); kết quả từ \emph{mô hình tham chiếu Python} (4800 trial, seed 20261017, đã ghi rõ là mô phỏng) tại \code{docs/preliminary\_evidence.md} --- không phải hệ thống AOSP.
+\item[\done] \textbf{Kế hoạch đánh giá} đầy đủ (killer experiment, ma trận T1, cỡ mẫu, thống kê) cho bản full tại \code{docs/evaluation\_plan.md}.
 \item[\todo] Nêu rõ \textbf{giới hạn}: chưa có số đo thiết bị thật; keystore mức phần mềm; hệ thống AOSP là công việc đang tiến hành.
-\item[\todo] Tuân thủ format: 12 trang thân bài, \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}}, US Letter, double-column.
+\item[\doing] Tuân thủ format: 12 trang thân bài, \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}} (đã có \code{mobisys/main.tex}), US Letter, double-column.
 \item[\todo] Single-blind: \textbf{ghi tên/cơ quan tác giả}; tuyên bố đạo đức (canary tổng hợp $\Rightarrow$ không human subjects); gán nhãn văn bản LLM.
 \end{chk}
 
@@ -360,8 +360,8 @@ Format/venue (12 trang, sigconf, single-blind, LLM) & Cài \code{acmart} sigconf
 \item \done{} Chốt \textbf{D0--D6} trong \code{SecretHandle/docs/design\_decisions.md}: D0 nay là \textbf{MobiSys 2027 Emerging Ideas}, thêm D6 (môi trường không Pixel) --- đã hoàn tất 2026-10-17.
 \item \done{} \textbf{Tái hiện B0} (OTP-forwarding) trên \textbf{emulator/Android stock} + dựng disclosure monitor bản đầu --- xong 2026-10-17 (10/10 rò rỉ, rate 1.0).
 \item \done{} Dựng môi trường dev: venv \textbf{Python 3.12} + \code{pip install -e '.[dev]'}, xác nhận \code{ruff}/\code{mypy}, \code{pytest} 39 passed --- xong 2026-10-17.
-\item \todo{} Khởi động \textbf{khung bản thảo Emerging Ideas}: problem/threat-model/design; cài \code{acmart} sigconf; ghi tên tác giả; dự kiến gán nhãn LLM.
-\item \todo{} Dựng \textbf{bằng chứng sơ bộ} từ mô hình tham chiếu Python (ghi rõ là mô phỏng) + viết kế hoạch đánh giá đầy đủ cho bản full.
+\item \doing{} \textbf{Khung bản thảo Emerging Ideas} \code{mobisys/}: \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}} + problem/threat-model/design/bằng chứng/kế hoạch (build 5 trang, 0 undefined). Còn: điền tên/cơ quan tác giả (đang TBD), mở rộng tới 12 trang, thêm hình, gán nhãn LLM.
+\item \done{} Dựng \textbf{bằng chứng sơ bộ} từ mô hình tham chiếu Python (4800 trial, ghi rõ là mô phỏng; \code{docs/preliminary\_evidence.md}) + viết \textbf{kế hoạch đánh giá} đầy đủ cho bản full (\code{docs/evaluation\_plan.md}) --- xong 2026-10-17.
 \end{enumerate}
 
 \noindent\textbf{Song song (Plan B, không gấp):} kích hoạt \code{repo sync} AOSP + ghim commit; cấp phát license AndroidWorld/SPA-Bench, API model + trần chi phí, EC2 cô lập.

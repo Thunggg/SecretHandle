@@ -1,0 +1,14 @@
+\section{Threat Model}
+\label{sec:threat}
+
+\paragraph{Assets.} OTPs; account credentials; phone numbers, email addresses, and postal addresses; payment and account identifiers; and any secret whose value is usable if disclosed.
+
+\paragraph{Trusted.} The \texttt{system\_server} and the \SH{} service; the OS source pipelines (SMS/notification OTP classifier, Credential Manager, clipboard, wallet); and hardware-backed key storage (StrongBox, or a software keystore where hardware is unavailable).
+
+\paragraph{Untrusted.} The agent and its model, which may be prompt-injected; third-party applications, one of which may render handle-like strings or send a fake OTP message; cloud model endpoints; and web content reached through an in-app WebView.
+
+\paragraph{Attacker goals.} (G1) read a secret the agent handles; (G2) redirect a secret to an attacker-controlled destination; (G3) replay or reuse a secret; (G4) forge a handle.
+
+\paragraph{Security goals.} For a task that legitimately requires a secret, \SH{} aims to guarantee: (S1) the raw value never enters the agent's observation or a non-bound destination; (S2) handles are unforgeable OS capabilities; (S3) resolved values are redacted from subsequent agent observation; (S4) single-use secrets cannot be reused. The utility goal is that login, 2FA, and checkout flows still complete.
+
+\paragraph{Out of scope.} Semantic misuse \emph{inside} an allowed destination (e.g., an agent tricked into initiating a legitimate-but-unwanted action) and side channels outside the modeled observation boundary. These are residual risks and are discussed in the evaluation plan, not claimed to be eliminated.
