@@ -227,6 +227,27 @@ def _provenance(config: Mapping[str, Any]) -> dict[str, Any]:
         "seed": config["run"]["seed"],
         "real_experiment": False,
         "paper_placeholder_numbers_used": False,
+        "git": {
+            "commit": None,
+            "dirty": None,
+        },
+        "aosp": {
+            "branch": None,
+            "commit": None,
+            "build_id": None,
+            "hashes": None,
+        },
+        "build": {
+            "kernel_version": None,
+            "toolchain": None,
+        },
+        "artifacts": {
+            "apps": [],
+            "agent_repo": None,
+            "agent_commit": None,
+            "agent_model": None,
+            "prompts_sha256": [],
+        },
     }
 
 

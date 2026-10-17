@@ -8,6 +8,7 @@ import logging
 from collections.abc import Sequence
 from pathlib import Path
 
+from .analysis import analyze_trials_from_dir, analyze_trials_from_file
 from .config import load_config
 from .experiments import run_ablation, run_killer_experiment, run_synthetic_demo
 from .plotting import make_plots
@@ -29,6 +30,10 @@ def build_parser() -> argparse.ArgumentParser:
     experiment.add_argument(
         "--stage", required=True, choices=["evaluate", "ablation", "killer"]
     )
+
+    analyze = subparsers.add_parser("analyze", help="analyze raw secret-free trials")
+    analyze.add_argument("--input", required=True, help="trials.jsonl file or output directory containing trials.jsonl")
+    analyze.add_argument("--output", required=True, help="output directory for derived tables/analyses")
 
     plot = subparsers.add_parser("plot", help="plot a generated metrics CSV")
     plot.add_argument("--input", required=True)
@@ -55,6 +60,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         else:
             result = run_killer_experiment(config)
+    elif args.command == "analyze":
+        input_path = Path(args.input)
+        if input_path.is_dir():
+            result = analyze_trials_from_dir(input_path, Path(args.output))
+        else:
+            result = analyze_trials_from_file(input_path, Path(args.output))
     else:
         generated = make_plots(args.input, args.output)
         result = {"generated": generated}
