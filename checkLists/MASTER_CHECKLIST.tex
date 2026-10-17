@@ -73,7 +73,7 @@
 \toprule
 \textbf{Cổng} & \textbf{Hạn} & \textbf{Điều kiện qua (tóm tắt)} \\
 \midrule
-G0 & 25/10/2026 (W2) & Môi trường dev sẵn sàng; \textbf{B0 tái hiện được} trên emulator/stock; chốt D0--D6 \\
+G0 & 25/10/2026 (W2) & Môi trường dev sẵn sàng; \textbf{B0 tái hiện được} trên emulator/stock; chốt D0--D6 \quad\textbf{(ĐẠT 2026-10-17)} \\
 G1 & 15/11/2026 (W5) & Tái hiện đầy đủ họ tấn công (1,3,4,7) + bằng chứng sơ bộ từ mô hình tham chiếu + khung bản thảo (problem/threat/design) \\
 G2 & 27/11/2026 (W7) & \textbf{Đăng ký abstract} (tiêu đề + abstract $\ge$100 từ, không ``TBD''); bản thảo gần hoàn chỉnh \\
 G3 & 01/12/2026 (W7) & Đóng băng bản thảo 12 trang + phụ lục; chuyển \code{acmart} sigconf; \textbf{ghi tên tác giả}; gán nhãn LLM \\
@@ -157,19 +157,19 @@ Artifact \& nộp & \todo{} 0\% \\
 \item[\todo] Khởi động thủ tục dài: license AndroidWorld/SPA-Bench, API key cloud model + trần chi phí, thiết bị.
 \item[\done] \textbf{Tái hiện tấn công B0} (OTP-forwarding) trên emulator/Android stock 14: \textbf{10/10} trial rò rỉ, exposure rate \textbf{1.0} (Wilson 95\% [0.72, 1.0]; \code{rate\_results.json}).
 \item[\done] Dựng disclosure monitor bản đầu (\code{monitor/monitor.py}, \code{run\_rate.py}; log \code{exfil\_log.jsonl}).
-\item[\todo] Khung đạo đức: quy trình canary, endpoint cô lập, không dữ liệu thật; kiểm yêu cầu IRB/hội đồng + mục ethics CFP.
+\item[\done] Khung đạo đức: quy trình canary, endpoint cô lập, không dữ liệu thật; kiểm yêu cầu IRB/hội đồng + mục ethics CFP (\code{docs/ethics.md}, 2026-10-17).
 \item[\todo] Ghim phiên bản Python/OS/công cụ thống kê vào provenance.
 \end{chk}
 
 \subsection*{B4. DoD của G0}
 \begin{chk}
 \item[\done] \code{pytest} xanh 100\% (hiện 39 passed).
-\item[\todo] Không có bí mật thật trong repo.
+\item[\done] Không có bí mật thật trong repo (quét mẫu high-signal = 0; không \code{.env}/tệp khóa; \code{debug.keystore} là keystore debug dùng-một-lần).
 \item[\doing] Môi trường dev sẵn sàng (venv 3.12 + \code{ruff}/\code{mypy}); emulator chạy \textbf{ảnh stock} (chưa phải ảnh AOSP tự build).
 \item[\done] \textbf{B0 tái hiện được} trên emulator/stock Android (điều kiện cứng của G0) --- 2026-10-17, 10/10 rò rỉ.
 \item[\done] D0--D6 có tài liệu quyết định.
-\item[\todo] Khung đạo đức xong (canary tổng hợp, endpoint cô lập, không dữ liệu thật).
-\item[\todo] \textbf{Qua G0 (25/10/2026)} --- viết biên bản cổng.
+\item[\done] Khung đạo đức xong (canary tổng hợp, endpoint cô lập, không dữ liệu thật) --- \code{docs/ethics.md}.
+\item[\done] \textbf{Qua G0 (25/10/2026)} --- biên bản cổng: \code{docs/gates/G0.md} (lập 2026-10-17, kết luận ĐẠT kèm ghi chú ảnh stock).
 \end{chk}
 
 \section*{PHẦN C --- Giai đoạn 1: Củng cố mô hình tham chiếu Python (W1--W2)}
