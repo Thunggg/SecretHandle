@@ -23,6 +23,24 @@ python3 scripts/run_experiment.py --config configs/synthetic_demo.yaml --stage k
 
 Compare semantic trial JSON after excluding environment-specific provenance paths. Fixed-seed unit tests exercise this requirement.
 
+## Test tiers (offline vs device vs emulator)
+
+Tests are separated by pytest marker so CI and reviewers can run the offline tier alone:
+
+- default / offline: pure-Python reference model and synthetic pipeline (`pytest`, no Android required).
+- `emulator`: requires a running Android emulator (adb); not run in GitHub CI.
+- `device`: requires a physical Android device (adb); not run in GitHub CI.
+
+Run only the offline tier:
+
+```bash
+python3 -m pytest -m "not device and not emulator" -q
+# or
+make test-offline
+```
+
+The hardware tiers are driven by `device/` harnesses (see `.github/workflows/device.yml`, `workflow_dispatch`). Hardware-backed behavior (StrongBox/attestation, Protected Confirmation) is only claimed at the tier where it is actually exercised; see `docs/oem_features.md`.
+
 ## Integrity
 
 Plots read `metrics.csv`; metrics are derived from `trials.jsonl`; no table or figure contains hard-coded paper outcomes. The result-integrity audit identifies every shipped generated artifact.

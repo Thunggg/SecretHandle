@@ -33,5 +33,5 @@
 - [ ] Add property-based policy tests and model-based crash/concurrency schedules.
 - [ ] Add Android instrumented/unit/end-to-end tests separated from emulator-only tests.
 - [x] Run `ruff` and `mypy` in a provisioned development environment and resolve findings (0 findings as of 2026-10-17; ruff config pinned in `pyproject.toml`, requires-python raised to `>=3.10`).
-- [ ] Add CI for Python 3.11/3.12 and a separate manually triggered device pipeline.
-- [ ] Publish source/build manifests, scripts, schemas, raw secret-free outcomes, licenses, and a one-command isolated canary smoke test.
+- [x] Add CI for Python 3.11/3.12 and a separate manually triggered device pipeline (`.github/workflows/ci.yml` matrix 3.11/3.12; `.github/workflows/device.yml` `workflow_dispatch`; 2026-10-17).
+- [ ] Publish source/build manifests, scripts, schemas, raw secret-free outcomes, licenses, and a one-command isolated canary smoke test. (smoke test + schemas + scripts done; licenses and AOSP/build manifests pending)

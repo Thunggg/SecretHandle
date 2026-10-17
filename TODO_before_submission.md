@@ -31,4 +31,9 @@
 - Replace anonymous author, institution, city, country, journal name, competing-interest text, and data/code statement with final approved metadata.
 - Reconcile the final page limit; the current expanded preprint is 53 pages including appendices and 57 references.
 - Run the publisher's final LaTeX checker, accessibility check, plagiarism/self-overlap review, and camera-ready PDF validation.
+  - LaTeX/placeholder checker: `tools/manuscript_check.py` (added 2026-10-17). mobisys builds with 0 undefined references/citations and 0 overfull; `sections/`+`appendix/` have no leftover placeholder markers. Run before submission: `python tools/manuscript_check.py mobisys/main.tex --build --bibtex --passes 3`.
+  - Accessibility: `accessibility_audit.md` (added 2026-10-17). `accessibility.sty` is not installed in the current TeX distribution, so `\Description{}` is deferred; a guarded `\IfFileExists` option is documented.
+  - Self-overlap: `tools/self_overlap.py` + `self_overlap_report.md` (added 2026-10-17). Internal reuse short↔full is 3.2% of 15-grams; longest shared span ≈50 words. External plagiarism check still required by the publisher.
+  - Camera-ready PDF validation: pending acceptance.
 - Re-render every figure and table after the last class/style change and repeat `figure_quality_audit.md`.
+  - 2026-10-17 refresh: previews regenerated (full pages 11/13/17/21/30/34; mobisys page 4); figure sources unchanged since 2026-10-03. Final pass still needs the chosen venue class and a visual check of the new mobisys figure.

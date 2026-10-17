@@ -2,13 +2,17 @@ PYTHON ?= python3
 CONFIG ?= configs/synthetic_demo.yaml
 SMOKE_CONFIG ?= configs/preliminary_evidence.yaml
 
-.PHONY: install test lint typecheck smoke evidence demo plots killer check ci clean-generated
+.PHONY: install test test-offline lint typecheck smoke evidence demo plots killer check ci clean-generated
 
 install:
 	$(PYTHON) -m pip install -e ".[dev]"
 
 test:
 	$(PYTHON) -m pytest -q
+
+# Offline tier only: skip hardware-dependent tests (markers: device, emulator).
+test-offline:
+	$(PYTHON) -m pytest -m "not device and not emulator" -q
 
 lint:
 	$(PYTHON) -m ruff check .

@@ -76,3 +76,14 @@ See `references_rejected.md`. The most important exclusions are the Brave Comet 
 - Final verified bibliography: 57 entries.
 - Every final entry is cited; every citation key resolves.
 - The majority are directly tied to the locked topic; peripheral systems-security foundations support explicit design statements only.
+
+## Re-verification pass (2026-10-17)
+
+Re-checked the four remaining abstract-only arXiv entries against their current official pages:
+
+- arXiv:2503.18813 (CaMeL) — v2 (2025-06-24); title/authors unchanged; claim confirmed at abstract level.
+- arXiv:2505.23643 (Fides) — v2 (2025-09-03); title/authors unchanged; claim confirmed at abstract level.
+- arXiv:2504.11703 (Progent) — **v3 (2026-05-14)**; title/authors unchanged; privilege-control claim confirmed.
+- arXiv:2510.27140 (mobile attack measurement) — **v3 (2026-07-07)**. Full text inspected (Sec. IV-C): the paper documents the Alipay verification-code harvesting workflow that motivates the threat model. **Version/title drift:** v3 retitles the paper to *Exploiting Mobile LLM Agents as Confused Deputies via Non-App-Controlled Channels*; the arXiv metadata title still shows the v1/v2 title. The bibliography keeps the stable arXiv ID.
+
+Open decision: for arXiv:2510.27140, choose whether the bibliography title should follow the revised v3 document title or the current arXiv metadata title; keep whichever matches the version cited at submission.

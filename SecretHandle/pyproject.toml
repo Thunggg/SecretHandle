@@ -26,6 +26,10 @@ where = ["src"]
 pythonpath = ["src"]
 testpaths = ["tests"]
 addopts = "-ra"
+markers = [
+    "emulator: requires a running Android emulator (adb); excluded from CI",
+    "device: requires a physical Android device (adb); excluded from CI",
+]
 
 [tool.ruff]
 line-length = 100
