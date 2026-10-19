@@ -109,6 +109,6 @@ Verified but intentionally left as `@article` (arXiv-only; no published venue co
 
 Deferred pending venue confirmation:
 
-- `chen2024spabench` — NeurIPS 2024 OWA workshop vs ICLR 2025 proceedings conflict; left arXiv until the correct venue is established.
-- `chong2024casper` — IEEE Xplore abstract 11261423; specific conference not yet confirmed.
+- `chong2024casper` — **resolved (2026-10-17)**: IEEE CSCloud 2025 (12th Int'l Conf on Cyber Security and Cloud Computing), pp. 122–131, DOI 10.1109/CSCloud66326.2025.00027. Note the published version revises the evaluation (4500 synthesized + 2000 real prompts; PII accuracy 92.6%, topic accuracy 92.5–94.0%) relative to the arXiv v1 (4000 prompts; 98.5%/89.9%); the manuscript cites only the qualitative "detects and removes sensitive prompt content locally," which both versions support.
+- `chen2024spabench` — **resolved (2026-10-17)**: ICLR 2025 (Spotlight; earlier a NeurIPS 2024 OWA workshop poster). OpenReview OZbFRNhpwr. Key retained as `chen2024spabench`; manuscript cites it only for benchmark breadth.
 - Remaining 2024–2026 arXiv-only entries (CaMeL, Fides, Progent, FinePrint, EIA, AEIA, ScreenAgent, Mobile-Agent-v3, mobile-attack measurement, anonymization) — no confirmed archival venue as of this pass.

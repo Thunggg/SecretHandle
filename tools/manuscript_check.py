@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -114,8 +115,9 @@ def build(tex: Path, bibtex: bool, passes: int, engine: str, timeout: int) -> tu
         if proc.returncode != 0 and n == passes - 1:
             notes.append(f"{engine} returned exit code {proc.returncode} on pass {n + 1}")
         if bibtex and n == 0:
+            bibtex_exe = shutil.which("bibtex") or "bibtex"
             try:
-                bproc = run([bibtex, str(tex.stem)], tex.parent, timeout)
+                bproc = run([bibtex_exe, str(tex.stem)], tex.parent, timeout)
             except subprocess.TimeoutExpired:
                 notes.append(f"bibtex timed out after {timeout}s")
                 continue
