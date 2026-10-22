@@ -52,7 +52,7 @@ Outputs go to `outputs/synthetic_demo/` (not committed; excluded by `.gitignore`
 
 ## License
 
-TBD: choose and record a license for the artifact (code, configs, schemas, and analysis scripts) before submission. See #323 in the checklist.
+The artifact (code, configs, schemas, and analysis scripts) is released under the [Apache License 2.0](../LICENSE) ("SecretHandle Authors"). Apache-2.0 was chosen so the package stays uniformly licensed with any AOSP patches (AOSP itself is Apache-2.0) and carries an explicit patent grant for reuse. See decision log #323 in the master checklist.
 
 ## Artifact evaluation
 

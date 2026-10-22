@@ -312,8 +312,8 @@
   Huang}, \bibinfo{person}{Tingxuan Tang}, \bibinfo{person}{Zihao Wang},
   \bibinfo{person}{Adwait Nadkarni}, {and} \bibinfo{person}{Yue Xiao}.}
   \bibinfo{year}{2025}\natexlab{}.
-\newblock \showarticletitle{Measuring the Security of Mobile {LLM} Agents under
-  Adversarial Prompts from Untrusted Third-Party Channels}.
+\newblock \showarticletitle{Exploiting Mobile {LLM} Agents as Confused Deputies
+  via Non-App-Controlled Channels}.
 \newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2510.27140}}
   (\bibinfo{year}{2025}).
 \newblock

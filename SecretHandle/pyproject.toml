@@ -8,6 +8,8 @@ version = "0.1.0"
 description = "Reference model and reproducible synthetic evaluation harness for SecretHandle"
 readme = "README.md"
 requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 dependencies = ["PyYAML>=6.0", "matplotlib>=3.7"]
 
 [project.optional-dependencies]

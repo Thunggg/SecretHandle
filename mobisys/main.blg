@@ -81,7 +81,7 @@ Warning--no number and no volume in zhao2026anonymization
 Warning--page numbers missing in both pages and numpages fields in zhao2026anonymization
 You've used 45 entries,
             6335 wiz_defined-function locations,
-            1798 strings with 30644 characters,
+            1798 strings with 30620 characters,
 and the built_in function-call counts, 51071 in all, are:
 = -- 5732
 > -- 2266

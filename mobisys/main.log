@@ -1,7 +1,6 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  20 OCT 2026 00:35
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  22 OCT 2026 20:41
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
 **./main.tex
 (main.tex
@@ -3196,22 +3195,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 328--338
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11.11]
 Underfull \hbox (badness 1558) in paragraph at lines 358--365
 []\TU/LinLibertine(1)/m/n/8 Daniel Fett, Brian Campbell, John Bradley, Torsten 
 Lodderstedt,
  []
 
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11.11]
 LaTeX Info: Redefining \tempurl on input line 476.
 LaTeX Info: Redefining \tempurl on input line 491.
 LaTeX Info: Redefining \tempurl on input line 544.
 LaTeX Info: Redefining \tempurl on input line 561.
+LaTeX Info: Redefining \tempurl on input line 575.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \tempurl on input line 575.
 LaTeX Info: Redefining \tempurl on input line 605.
 
 Underfull \hbox (badness 6001) in paragraph at lines 599--608
@@ -3271,7 +3271,7 @@ Underfull \hbox (badness 2753) in paragraph at lines 6--7
  []
 
 
-Underfull \vbox (badness 3482) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12.12]
 Underfull \hbox (badness 1371) in paragraph at lines 14--15
@@ -3388,7 +3388,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  55563 strings out of 402987
  1246417 string characters out of 5448730
- 1907088 words of memory out of 5000000
+ 1906089 words of memory out of 5000000
  83317 multiletter control sequences out of 15000+600000
  635694 words of font info for 159 fonts, out of 8000000 for 9000
  1509 hyphenation exceptions out of 8191
