@@ -86,7 +86,7 @@ Plan B & 2027 & Full paper (T1 + số đo thiết bị thật) cho MobiSys 2028 
 \section*{PHẦN 0 --- Phạm vi nộp 04/12/2026: Emerging Ideas}
 {\small Track Emerging Ideas ưu tiên \emph{originality, clarity of insight, potential} hơn độ hoàn thiện; \emph{không} đòi evaluation đầy đủ. Vì vậy bản nộp gồm:}
 \begin{chk}
-\item[\doing] \textbf{Vấn đề \& tác động}: OTP/bí mật lộ cho tác nhân AI di động (attack B0 \textbf{đã tái hiện} trên emulator, 10/10).
+\item[\done] \textbf{Vấn đề \& tác động}: OTP/bí mật lộ cho tác nhân AI di động (attack B0 \textbf{đã tái hiện} trên emulator, 10/10). \textbf{2026-10-22:} tái tái lập Gate G1 (10/10, Wilson [0.722, 1.0]) + build fixture giờ byte-deterministic.
 \item[\done] \textbf{Mô hình đe dọa \& principal}: 3 kiểu caller (D3) đã đưa vào \code{mobisys/sections/threat\_model.tex} (app UID / shell-UiAutomation / serialize; root vô hiệu hóa).
 \item[\done] \textbf{Thiết kế} \SH: đúc tại nguồn OS, ràng buộc đích + tác vụ, vòng đời một lần, redaction quan sát. \textbf{2026-10-22:} ngôn ngữ chính sách + vòng đời đã có trong \code{mobisys/sections/design.tex} (\S Policy language, \S Lifecycle and reservation); người dùng tự lo phần này.
 \item[\done] \textbf{Bằng chứng sơ bộ}: tái hiện tấn công B0 thực trên emulator (xong 2026-10-17); \emph{mô hình tham chiếu Python} mô hình hóa tường minh họ \textbf{1,3,4,7} (thêm \code{read\_exfil}, \code{ambiguous\_identity}) --- 6400 trial, seed 20261017, đã ghi rõ là mô phỏng (không phải AOSP) tại \code{docs/preliminary\_evidence.md}.
@@ -102,15 +102,15 @@ Plan B & 2027 & Full paper (T1 + số đo thiết bị thật) cho MobiSys 2028 
 \toprule
 \textbf{Nhóm} & \textbf{Trạng thái} \\
 \midrule
-Tài liệu ý tưởng + bản thảo + mô hình tham chiếu & \done{} \textasciitilde85\% \\
+Tài liệu ý tưởng + bản thảo + mô hình tham chiếu & \done{} \textasciitilde90\% (khung mobisys \done; điền tên tác giả do người dùng) \\
 Audit cấp bản thảo (citation/figure/math/reviewer/notation) & \done \\
 Quyết định D0--D6 & \done{} (đã chốt 2026-10-17) \\
 Triển khai AOSP (Track A) & \todo{} 0\% (đường Plan B) \\
-Ứng dụng/tác nhân/harness (Track B) & \doing{} \textasciitilde15\% (agent B0 + monitor) \\
+Ứng dụng/tác nhân/harness (Track B) & \doing{} \textasciitilde35\% (repo integration + deterministic build + gate G0/G1 PASS; runner Mobile-Agent pinned) \\
 Baseline/ablation thực & \doing{} chỉ có bản tổng hợp \\
-Thí nghiệm thực \& số đo & \doing{} có B0-rate trên emulator (chưa phải số paper) \\
-Phân tích thống kê / viết lại theo venue & \todo{} 0\% \\
-Artifact \& nộp & \todo{} 0\% \\
+Thí nghiệm thực \& số đo & \doing{} có B0-rate trên emulator (chưa phải số paper; tái xác minh 2026-10-22) \\
+Phân tích thống kê / viết lại theo venue & \doing{} \textasciitilde60\% (bản thảo mobisys theo CFP xong; thống kê bản full chưa bắt đầu) \\
+Artifact \& nộp & \doing{} \textasciitilde40\% (LICENSE Apache-2.0, docs artifact, CI, checker; còn nộp bài + patch set AOSP) \\
 \bottomrule
 \end{tabularx}
 
@@ -152,13 +152,13 @@ Artifact \& nộp & \todo{} 0\% \\
 \begin{chk}
 \item[\done] Dựng Python 3.12; \code{python -m pip install -e '.[dev]'} (venv \code{SecretHandle/.venv}).
 \item[\done] Xác nhận \code{ruff} 0.17.1 + \code{mypy} 2.4.0 chạy được; \textbf{đã xử lý} hết cảnh báo ruff + lỗi mypy (PHẦN C, 2026-10-17).
-\item[\todo] Tạo repo Git integration \emph{tách} khỏi package tham chiếu (AOSP patch, adapter, tác nhân).
-\item[\todo] Dựng EC2 cô lập: volume/user riêng, tường lửa chặt, credential trong secret manager (không trong YAML/log/repo).
+\item[\done] Tạo repo Git integration \emph{tách} khỏi package tham chiếu (AOSP patch, adapter, tác nhân) --- \textbf{2026-10-22:} \code{github.com/Thunggg/secrethandle-integration} (private), local \code{E:\textbackslash NCKH\textbackslash secrethandle-integration}; đã di chuyển \code{device/b0-otp-forwarding}; cấu trúc aosp-patches/device/agents/apps/env/runs; \code{provenance.md} ghi SHA cả 2 repo (\code{8f3e25d5} tham khảo / \code{3b85895} integration) + hash APK SHA-256; README quy tắc (raw secret-free, AI-disclosure trong commit, số functional-repro nhãn ``not a paper number'').
+\item[\doing] Dựng EC2 cô lập: volume/user riêng, tường lửa chặt, credential trong secret manager (không trong YAML/log/repo). \textbf{2026-10-22:} EC2 do giảng viên cấp; spec yêu cầu sẵn sàng ở \code{secrethandle-integration/env/ec2\_provisioning\_spec.md} (m6i.2xlarge pilot $\to$ m6i.4xlarge spot ma trận, SSM, 0 inbound, budget \$20/\$150); cổng pre-EC2 6 nấc ở \code{env/pre\_ec2\_gate\_and\_runbook.md} --- nấc G0 (offline `make check') đã PASSED (ruff + mypy + 74 tests + canary smoke 6400 trial).
 \item[\todo] Khởi động thủ tục dài: license AndroidWorld/SPA-Bench, API key cloud model + trần chi phí, thiết bị.
 \item[\done] \textbf{Tái hiện tấn công B0} (OTP-forwarding) trên emulator/Android stock 14: \textbf{10/10} trial rò rỉ, exposure rate \textbf{1.0} (Wilson 95\% [0.72, 1.0]; \code{rate\_results.json}).
 \item[\done] Dựng disclosure monitor bản đầu (\code{monitor/monitor.py}, \code{run\_rate.py}; log \code{exfil\_log.jsonl}).
 \item[\done] Khung đạo đức: quy trình canary, endpoint cô lập, không dữ liệu thật; kiểm yêu cầu IRB/hội đồng + mục ethics CFP (\code{docs/ethics.md}, 2026-10-17).
-\item[\todo] Ghim phiên bản Python/OS/công cụ thống kê vào provenance.
+\item[\done] Ghim phiên bản Python/OS/công cụ thống kê vào provenance --- \textbf{2026-10-22:} \code{docs/toolchain\_pins.json} (Python 3.12.10 / Windows-11-26300 / numpy 2.5.4 / matplotlib 3.11.2 / PyYAML 6.0.3 / ruff 0.17.1 / mypy 2.4.0, gắn HEAD \code{8f3e25d5}); chạy lại và ghi lạipin khi đổi ngữ nghĩa tham chiếu.
 \end{chk}
 
 \subsection*{B4. DoD của G0}

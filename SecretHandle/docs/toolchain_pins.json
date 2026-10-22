@@ -1,0 +1,13 @@
+{
+  "recorded": "2026-10-22",
+  "purpose": "Toolchain version pins for statistical/provenance reproducibility (checklist B3: pin Python/OS/statistical-tool versions)",
+  "reference_repo_head": "8f3e25d5c8bada0eeb0db14db06774f560405ae5",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.10",
+  "numpy": "2.5.4",
+  "matplotlib": "3.11.2",
+  "pyyaml": "6.0.3",
+  "ruff": "0.17.1",
+  "mypy": "2.4.0",
+  "note": "Any semantic change to the reference model requires re-running pytest (74 passed at pin time) and re-recording pins."
+}
