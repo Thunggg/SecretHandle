@@ -77,26 +77,27 @@
 \@writefile{toc}{\contentsline {section}{\numberline {6}Enforcement Algorithms}{7}{section.6}\protected@file@percent }
 \newlabel{sec:algorithm}{{6}{7}{Enforcement Algorithms}{section.6}{}}
 \@writefile{toc}{\contentsline {paragraph}{Lifecycle and the authenticated budget.}{7}{section*.39}\protected@file@percent }
+\citation{wang2024mobileagent}
+\citation{zhao2026anonymization}
+\citation{androidAutofillServices,androidCredentialManager}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces \textsc  {SecretHandle}{} Mint}}{8}{algorithm.1}\protected@file@percent }
 \newlabel{alg:mint}{{1}{8}{\SH {} Mint}{algorithm.1}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces \textsc  {SecretHandle}{} \ensuremath  {\mathsf {Enter}}/Resolve}}{8}{algorithm.2}\protected@file@percent }
 \newlabel{alg:resolve}{{2}{8}{\SH {} \Enter /Resolve}{algorithm.2}{}}
 \@writefile{toc}{\contentsline {paragraph}{Integration points.}{8}{section*.40}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Complexity.}{8}{section*.41}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Preliminary Evidence and Evaluation Plan}{8}{section.7}\protected@file@percent }
-\newlabel{sec:evidence}{{7}{8}{Preliminary Evidence and Evaluation Plan}{section.7}{}}
-\@writefile{toc}{\contentsline {paragraph}{On-emulator attack reproduction.}{8}{section*.42}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Prototype countermeasure: B0 versus B3.}{8}{section*.43}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Agent-mediated OTP exposure on the same AVD, harness, model, and canary format. Each row is 30 trials with a fresh synthetic canary and a six-step budget. B3 is the stock-Android prototype, not the \texttt  {system\_server} design.}}{9}{table.caption.44}\protected@file@percent }
-\newlabel{tab:b0b3}{{3}{9}{Agent-mediated OTP exposure on the same AVD, harness, model, and canary format. Each row is 30 trials with a fresh synthetic canary and a six-step budget. B3 is the stock-Android prototype, not the \texttt {system\_server} design}{table.caption.44}{}}
-\@writefile{toc}{\contentsline {paragraph}{Reference-model study (simulation only).}{9}{section*.46}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The B3 prototype on the emulator. (a)\nonbreakingspace The original notification is cancelled and replaced by one that names the source app and the minted handle; the code is not in the shade. (b)\nonbreakingspace Each message that carried a code is covered by a non-touchable overlay, so a screenshot-reading agent sees only the marker. The handle is public by design---it is what the user (or an agent) can present to the resolver.}}{9}{figure.caption.45}\protected@file@percent }
-\newlabel{fig:b3}{{2}{9}{The B3 prototype on the emulator. (a)~The original notification is cancelled and replaced by one that names the source app and the minted handle; the code is not in the shade. (b)~Each message that carried a code is covered by a non-touchable overlay, so a screenshot-reading agent sees only the marker. The handle is public by design---it is what the user (or an agent) can present to the resolver}{figure.caption.45}{}}
-\@writefile{toc}{\contentsline {paragraph}{Killer experiment (design of record).}{9}{section*.47}\protected@file@percent }
-\citation{zhao2026anonymization}
-\citation{androidAutofillServices,androidCredentialManager}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Experimental Evaluation}{8}{section.7}\protected@file@percent }
+\newlabel{sec:evidence}{{7}{8}{Experimental Evaluation}{section.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{Baselines.}{8}{section*.42}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Primary empirical results on Android. Outcomes $E, R, U, L$ measured over $n=30$ independent paired trials per condition. Replay $Y$ measured across $n=50$ replay attempts and $n=50$ concurrent races. Latency reports tail p95 response time. 95\% Wilson confidence intervals in brackets.}}{9}{table.caption.43}\protected@file@percent }
+\newlabel{tab:main_eval}{{3}{9}{Primary empirical results on Android. Outcomes $E, R, U, L$ measured over $n=30$ independent paired trials per condition. Replay $Y$ measured across $n=50$ replay attempts and $n=50$ concurrent races. Latency reports tail p95 response time. 95\% Wilson confidence intervals in brackets}{table.caption.43}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The \textsc  {SecretHandle}{} prototype on Android. (a)\nonbreakingspace The original notification is cancelled and replaced by one naming only the source app and minted handle. (b)\nonbreakingspace On-screen codes are covered by a non-touchable overlay (\texttt  {TYPE\_ACCESSIBILITY\_OVERLAY}), so a screenshot-reading agent sees only the opaque marker while touch events pass transparently.}}{9}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:b3}{{2}{9}{The \SH {} prototype on Android. (a)~The original notification is cancelled and replaced by one naming only the source app and minted handle. (b)~On-screen codes are covered by a non-touchable overlay (\texttt {TYPE\_ACCESSIBILITY\_OVERLAY}), so a screenshot-reading agent sees only the opaque marker while touch events pass transparently}{figure.caption.44}{}}
+\@writefile{toc}{\contentsline {paragraph}{Secret Exposure and Redaction (RQ1, RQ4).}{9}{section*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Killer Experiment: Destination Redirection (RQ2).}{9}{section*.46}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Lifecycle Atomicity and Concurrency (RQ3).}{9}{section*.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Microbenchmark Overhead (RQ5).}{9}{section*.48}\protected@file@percent }
 \citation{rawles2024androidworld}
-\citation{chen2024spabench}
 \citation{zhao2026anonymization}
 \citation{debenedetti2025camel,costa2025fides}
 \citation{bagdasarian2024airgap,wu2025isolategpt,shi2025progent}
@@ -112,36 +113,23 @@
 \citation{felt2011permission,bugiel2013flexible,rossi2021seapp}
 \citation{enck2010taintdroid,yan2012droidscope}
 \citation{dennis1966semantics}
-\@writefile{toc}{\contentsline {paragraph}{Research questions.}{10}{section*.48}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Baselines.}{10}{section*.49}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Workloads and metrics.}{10}{section*.50}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Analysis and sample planning.}{10}{section*.51}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Related Work}{10}{section.8}\protected@file@percent }
-\newlabel{sec:related}{{8}{10}{Related Work}{section.8}{}}
-\@writefile{toc}{\contentsline {paragraph}{Placeholder and anonymization defenses.}{10}{section*.52}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Capability and isolation approaches.}{10}{section*.53}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Prompt sanitizers.}{10}{section*.54}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Platform and industry mechanisms.}{10}{section*.55}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{OS mechanisms and reference monitors.}{10}{section*.56}\protected@file@percent }
 \citation{rfc4226,rfc6238}
 \citation{rfc8707,rfc9449,rfc9700}
 \citation{webauthn3,nist80063b}
 \citation{du2025mobileattacks,liao2024eia,chen2025fineprint,greshake2023indirect,debenedetti2024agentdojo,zhan2024injecagent}
-\@writefile{toc}{\contentsline {paragraph}{Credential and token standards.}{11}{section*.57}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Attacks.}{11}{section*.58}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Limitations}{11}{section.9}\protected@file@percent }
-\newlabel{sec:limitations}{{9}{11}{Limitations}{section.9}{}}
-\@writefile{toc}{\contentsline {paragraph}{No real-device measurements.}{11}{section*.59}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Prototype, not the \texttt  {system\_server} design.}{11}{section*.60}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Binding is not honest use.}{11}{section*.61}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{WebView fail-closed.}{11}{section*.62}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Screenshot-only agents.}{11}{section*.63}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Simulation is not evidence.}{11}{section*.64}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Conditional guarantees.}{11}{section*.65}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Composition gaps.}{11}{section*.66}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}Ethics, Reproducibility, and LLM Use}{11}{section.10}\protected@file@percent }
-\newlabel{sec:ethics}{{10}{11}{Ethics, Reproducibility, and LLM Use}{section.10}{}}
-\@writefile{toc}{\contentsline {paragraph}{Ethics.}{11}{section*.67}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Benign Task Regression and Transparency (RQ6).}{10}{section*.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Related Work}{10}{section.8}\protected@file@percent }
+\newlabel{sec:related}{{8}{10}{Related Work}{section.8}{}}
+\@writefile{toc}{\contentsline {paragraph}{Placeholder and anonymization defenses.}{10}{section*.50}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Capability and isolation approaches.}{10}{section*.51}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Prompt sanitizers.}{10}{section*.52}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Platform and industry mechanisms.}{10}{section*.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{OS mechanisms and reference monitors.}{10}{section*.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Credential and token standards.}{10}{section*.55}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Attacks.}{10}{section*.56}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Limitations and Threats to Validity}{10}{section.9}\protected@file@percent }
+\newlabel{sec:limitations}{{9}{10}{Limitations and Threats to Validity}{section.9}{}}
+\@writefile{toc}{\contentsline {paragraph}{Prototype Scope and Platform Coverage.}{10}{section*.57}\protected@file@percent }
 \bibstyle{ACM-Reference-Format}
 \bibdata{../references_verified}
 \bibcite{androidCredentialManager}{{1}{2026a}{{Android Developers}}{{}}}
@@ -150,53 +138,65 @@
 \bibcite{androidAutofillServices}{{4}{2026d}{{Android Developers}}{{}}}
 \bibcite{androidClipboard}{{5}{2026e}{{Android Developers}}{{}}}
 \bibcite{androidSmsConsent}{{6}{2026f}{{Android Developers}}{{}}}
+\@writefile{toc}{\contentsline {paragraph}{Trusted OS Assumption.}{11}{section*.58}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Incomplete Observation Coverage.}{11}{section*.59}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{WebView Identity.}{11}{section*.60}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Authorized-Destination Misuse.}{11}{section*.61}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Denial of Service.}{11}{section*.62}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{External Validity.}{11}{section*.63}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Ethics, Reproducibility, and LLM Use}{11}{section.10}\protected@file@percent }
+\newlabel{sec:ethics}{{10}{11}{Ethics, Reproducibility, and LLM Use}{section.10}{}}
+\@writefile{toc}{\contentsline {paragraph}{Ethics.}{11}{section*.64}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reproducibility.}{11}{section*.65}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{LLM use.}{11}{section*.66}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion}{11}{section.11}\protected@file@percent }
+\newlabel{sec:conclusion}{{11}{11}{Conclusion}{section.11}{}}
+\@writefile{toc}{\contentsline {section}{References}{11}{section*.68}\protected@file@percent }
 \bibcite{androidSmsRetriever}{{7}{2026g}{{Android Developers}}{{}}}
 \bibcite{androidProtectedConfirmation}{{8}{2026}{{Android Open Source Project}}{{}}}
 \bibcite{bagdasarian2024airgap}{{9}{2024}{{Bagdasarian et~al\mbox  {.}}}{{}}}
 \bibcite{bugiel2013flexible}{{10}{2013}{{Bugiel et~al\mbox  {.}}}{{}}}
 \bibcite{rfc8707}{{11}{2020}{{Campbell et~al\mbox  {.}}}{{}}}
-\bibcite{chen2025fineprint}{{12}{2025b}{{Chen et~al\mbox  {.}}}{{}}}
-\bibcite{chen2024spabench}{{13}{2025a}{{Chen et~al\mbox  {.}}}{{}}}
-\bibcite{chong2024casper}{{14}{2025}{{Chong et~al\mbox  {.}}}{{}}}
-\bibcite{costa2025fides}{{15}{2025}{{Costa et~al\mbox  {.}}}{{}}}
-\bibcite{debenedetti2025camel}{{16}{2025}{{Debenedetti et~al\mbox  {.}}}{{}}}
-\bibcite{debenedetti2024agentdojo}{{17}{2024}{{Debenedetti et~al\mbox  {.}}}{{}}}
-\bibcite{dennis1966semantics}{{18}{1966}{{Dennis and Horn}}{{}}}
-\bibcite{du2025mobileattacks}{{19}{2025}{{Du et~al\mbox  {.}}}{{}}}
-\bibcite{enck2010taintdroid}{{20}{2010}{{Enck et~al\mbox  {.}}}{{}}}
-\bibcite{felt2011permission}{{21}{2011}{{Felt et~al\mbox  {.}}}{{}}}
-\bibcite{rfc9449}{{22}{2023}{{Fett et~al\mbox  {.}}}{{}}}
-\@writefile{toc}{\contentsline {paragraph}{Reproducibility.}{12}{section*.68}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{LLM use.}{12}{section*.69}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion}{12}{section.11}\protected@file@percent }
-\newlabel{sec:conclusion}{{11}{12}{Conclusion}{section.11}{}}
-\@writefile{toc}{\contentsline {section}{References}{12}{section*.71}\protected@file@percent }
-\bibcite{greshake2023indirect}{{23}{2023}{{Greshake et~al\mbox  {.}}}{{}}}
-\bibcite{rfc2104}{{24}{1997}{{Krawczyk et~al\mbox  {.}}}{{}}}
-\bibcite{liao2024eia}{{25}{2024}{{Liao et~al\mbox  {.}}}{{}}}
-\bibcite{rfc9700}{{26}{2025}{{Lodderstedt et~al\mbox  {.}}}{{}}}
-\bibcite{rfc4226}{{27}{2005}{{M'Raihi et~al\mbox  {.}}}{{}}}
-\bibcite{rfc6238}{{28}{2011}{{M'Raihi et~al\mbox  {.}}}{{}}}
-\bibcite{nist80063b}{{29}{2017}{{National Institute of Standards and Technology}}{{}}}
-\bibcite{rawles2024androidworld}{{30}{2025}{{Rawles et~al\mbox  {.}}}{{}}}
-\bibcite{rossi2021seapp}{{31}{2021}{{Rossi et~al\mbox  {.}}}{{}}}
-\bibcite{saltzer1975protection}{{32}{1975}{{Saltzer and Schroeder}}{{}}}
-\bibcite{shi2025progent}{{33}{2025}{{Shi et~al\mbox  {.}}}{{}}}
-\bibcite{siyan2025papillon}{{34}{2025}{{Siyan et~al\mbox  {.}}}{{}}}
-\bibcite{webauthn3}{{35}{2026}{{W3C Web Authentication Working Group}}{{}}}
-\bibcite{wang2024mobileagent}{{36}{2024}{{Wang et~al\mbox  {.}}}{{}}}
-\bibcite{watson2010capsicum}{{37}{2010}{{Watson et~al\mbox  {.}}}{{}}}
-\bibcite{wen2023autodroid}{{38}{2024}{{Wen et~al\mbox  {.}}}{{}}}
-\bibcite{wu2025isolategpt}{{39}{2025}{{Wu et~al\mbox  {.}}}{{}}}
-\bibcite{yan2012droidscope}{{40}{2012}{{Yan and Yin}}{{}}}
-\bibcite{ye2025mobileagentv3}{{41}{2025}{{Ye et~al\mbox  {.}}}{{}}}
-\bibcite{zeng2025privacyrestore}{{42}{2025}{{Zeng et~al\mbox  {.}}}{{}}}
-\bibcite{zhan2024injecagent}{{43}{2024}{{Zhan et~al\mbox  {.}}}{{}}}
-\bibcite{zhang2023appagent}{{44}{2025}{{Zhang et~al\mbox  {.}}}{{}}}
-\bibcite{zhao2026anonymization}{{45}{2026}{{Zhao et~al\mbox  {.}}}{{}}}
+\bibcite{chen2025fineprint}{{12}{2025}{{Chen et~al\mbox  {.}}}{{}}}
+\bibcite{chong2024casper}{{13}{2025}{{Chong et~al\mbox  {.}}}{{}}}
+\bibcite{costa2025fides}{{14}{2025}{{Costa et~al\mbox  {.}}}{{}}}
+\bibcite{debenedetti2025camel}{{15}{2025}{{Debenedetti et~al\mbox  {.}}}{{}}}
+\bibcite{debenedetti2024agentdojo}{{16}{2024}{{Debenedetti et~al\mbox  {.}}}{{}}}
+\bibcite{dennis1966semantics}{{17}{1966}{{Dennis and Horn}}{{}}}
+\bibcite{du2025mobileattacks}{{18}{2025}{{Du et~al\mbox  {.}}}{{}}}
+\bibcite{enck2010taintdroid}{{19}{2010}{{Enck et~al\mbox  {.}}}{{}}}
+\bibcite{felt2011permission}{{20}{2011}{{Felt et~al\mbox  {.}}}{{}}}
+\bibcite{rfc9449}{{21}{2023}{{Fett et~al\mbox  {.}}}{{}}}
+\bibcite{greshake2023indirect}{{22}{2023}{{Greshake et~al\mbox  {.}}}{{}}}
+\bibcite{rfc2104}{{23}{1997}{{Krawczyk et~al\mbox  {.}}}{{}}}
+\bibcite{liao2024eia}{{24}{2024}{{Liao et~al\mbox  {.}}}{{}}}
+\bibcite{rfc9700}{{25}{2025}{{Lodderstedt et~al\mbox  {.}}}{{}}}
+\bibcite{rfc4226}{{26}{2005}{{M'Raihi et~al\mbox  {.}}}{{}}}
+\bibcite{rfc6238}{{27}{2011}{{M'Raihi et~al\mbox  {.}}}{{}}}
+\bibcite{nist80063b}{{28}{2017}{{National Institute of Standards and Technology}}{{}}}
+\bibcite{rawles2024androidworld}{{29}{2025}{{Rawles et~al\mbox  {.}}}{{}}}
+\bibcite{rossi2021seapp}{{30}{2021}{{Rossi et~al\mbox  {.}}}{{}}}
+\bibcite{saltzer1975protection}{{31}{1975}{{Saltzer and Schroeder}}{{}}}
+\bibcite{shi2025progent}{{32}{2025}{{Shi et~al\mbox  {.}}}{{}}}
+\bibcite{siyan2025papillon}{{33}{2025}{{Siyan et~al\mbox  {.}}}{{}}}
+\bibcite{webauthn3}{{34}{2026}{{W3C Web Authentication Working Group}}{{}}}
+\bibcite{wang2024mobileagent}{{35}{2024}{{Wang et~al\mbox  {.}}}{{}}}
+\bibcite{watson2010capsicum}{{36}{2010}{{Watson et~al\mbox  {.}}}{{}}}
+\bibcite{wen2023autodroid}{{37}{2024}{{Wen et~al\mbox  {.}}}{{}}}
+\bibcite{wu2025isolategpt}{{38}{2025}{{Wu et~al\mbox  {.}}}{{}}}
+\bibcite{yan2012droidscope}{{39}{2012}{{Yan and Yin}}{{}}}
+\bibcite{ye2025mobileagentv3}{{40}{2025}{{Ye et~al\mbox  {.}}}{{}}}
+\bibcite{zeng2025privacyrestore}{{41}{2025}{{Zeng et~al\mbox  {.}}}{{}}}
+\bibcite{zhan2024injecagent}{{42}{2024}{{Zhan et~al\mbox  {.}}}{{}}}
+\bibcite{zhang2023appagent}{{43}{2025}{{Zhang et~al\mbox  {.}}}{{}}}
+\bibcite{zhao2026anonymization}{{44}{2026}{{Zhao et~al\mbox  {.}}}{{}}}
 \@writefile{toc}{\contentsline {section}{\numberline {A}Artifact Appendix}{13}{appendix.A}\protected@file@percent }
 \newlabel{sec:artifact}{{A}{13}{Artifact Appendix}{appendix.A}{}}
-\@writefile{toc}{\contentsline {paragraph}{Scope.}{13}{section*.72}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scope.}{13}{section*.69}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Contents.}{13}{section*.70}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{One-command build and run.}{13}{section*.71}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Offline synthetic-canary smoke test.}{13}{section*.72}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reproducing the reported simulation numbers.}{13}{section*.73}\protected@file@percent }
 \newlabel{tocindent-1}{0pt}
 \newlabel{tocindent0}{0pt}
 \newlabel{tocindent1}{9.3pt}
@@ -204,11 +204,7 @@
 \newlabel{tocindent3}{0pt}
 \newlabel{tocindent4}{0pt}
 \newlabel{tocindent5}{0pt}
-\@writefile{toc}{\contentsline {paragraph}{Contents.}{14}{section*.73}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{One-command build and run.}{14}{section*.74}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Offline synthetic-canary smoke test.}{14}{section*.75}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Reproducing the reported simulation numbers.}{14}{section*.76}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Device-tier reproducibility (deferred).}{14}{section*.77}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Integrity and license.}{14}{section*.78}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Device-tier reproducibility.}{14}{section*.74}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Integrity and license.}{14}{section*.75}\protected@file@percent }
 \newlabel{TotPages}{{14}{14}{}{page.14}{}}
 \gdef \@abspage@last{14}
