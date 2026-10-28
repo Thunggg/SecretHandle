@@ -2,12 +2,12 @@
 ["bibtex main"] 0 "main.aux" "main.bbl" "main" 0 -1
   "../references_verified.bib" 1792676446 21567 a35639c9c0c07212d4c06ac632bb9933 ""
   "C:/Program Files/MiKTeX/bibtex/bst/acmart/ACM-Reference-Format.bst" 1787996669 94292 6c9c536013d461258ea4a4813fe90aa8 ""
-  "main.aux" 1793220624 20600 ef3c9da1de6c607c83e3ad05fb2b240d "pdflatex"
+  "main.aux" 1793220709 17468 383ead34b114b4456be5967ab0252e62 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1793220622.01812 "e:/NCKH/SecretHandle/mobisys/main.tex" "main.pdf" "main" 1793220625.26964 2
+["pdflatex"] 1793220707.66615 "e:/NCKH/SecretHandle/mobisys/main.tex" "main.pdf" "main" 1793220711.28954 2
   "../figures/b3_masked_sms.png" 1793206384 16316 8899375277945b119a8c2055fee09dce ""
   "../figures/b3_redacted_shade.png" 1793206282 33932 ec631049be56a225e1666d5b857b993e ""
   "../figures/tikz_styles.tex" 1790962894 1817 27e72d62bd376bab40eb879f0893b8ec ""
@@ -361,13 +361,13 @@
   "C:/Users/ASUS/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/ASUS/AppData/Local/Programs/MiKTeX/tex/latex/xstring/xstring.sty" 1693735632 123 a302f2c651a95033260db60e51527ae8 ""
   "e:/NCKH/SecretHandle/mobisys/main.tex" 1793220423 4138 7ecc4459d679ec5a293a90dd59a0357d ""
-  "main.aux" 1793220624 20600 ef3c9da1de6c607c83e3ad05fb2b240d "pdflatex"
-  "main.bbl" 1793220618 29041 393b3020db623c6fe3882759605500fd "bibtex main"
-  "main.out" 1793220624 2618 9d547f107d6a00a13cb79ab965c37277 "pdflatex"
+  "main.aux" 1793220709 17468 383ead34b114b4456be5967ab0252e62 "pdflatex"
+  "main.bbl" 1793220705 0 d41d8cd98f00b204e9800998ecf8427e "bibtex main"
+  "main.out" 1793220709 2522 8ac7a60ad5809941e07134a37a81105b "pdflatex"
   "main.tex" 1793220423 4138 7ecc4459d679ec5a293a90dd59a0357d ""
   "sections/abstract.tex" 1793218056 1787 fda7e3c67552e158788620339259830a ""
   "sections/algorithm.tex" 1792241434 4665 0eba801666ae534e691ed96d35d192ba ""
-  "sections/architecture.tex" 1793220429 3503 2624175ef2d18fed5b5e7b37e5a1bfd2 ""
+  "sections/architecture.tex" 1793220700 3468 5411cd3087fe0d55e98061cdb92b6594 ""
   "sections/artifact.tex" 1793218232 3952 aa32e87b17b912069f226717e06fe025 ""
   "sections/background.tex" 1792239642 2494 7234834f8bf75cea273ba2c34e725911 ""
   "sections/conclusion.tex" 1793220074 1174 c8bfbd2463e94748b9d6977e8952e749 ""

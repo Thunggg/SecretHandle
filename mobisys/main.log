@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.28)  29 OCT 2026 03:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.28)  29 OCT 2026 03:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1557,54 +1557,58 @@ Underfull \hbox (badness 1248) in paragraph at lines 37--38
 
 ) (sections/architecture.tex
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 5.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 8.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 10.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.6pt on input line 47.
+(Font)              scaled to size 6.6pt on input line 10.
 LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 10.
 LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 6.6pt on input line 47.
+(Font)              scaled to size 6.6pt on input line 10.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 10.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 6.6pt on input line 47.
+(Font)              scaled to size 6.6pt on input line 10.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 10.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 6.6pt on input line 47.
+(Font)              scaled to size 6.6pt on input line 10.
 LaTeX Font Info:    Font shape `OT1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 10.
 LaTeX Font Info:    Font shape `OT1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 6.6pt on input line 47.
+(Font)              scaled to size 6.6pt on input line 10.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 10.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 6.6pt on input line 47.
+(Font)              scaled to size 6.6pt on input line 10.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 10.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 6.6pt on input line 47.
+(Font)              scaled to size 6.6pt on input line 10.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 10.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 6.6pt on input line 47.
+(Font)              scaled to size 6.6pt on input line 10.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 9.0pt on input line 47.
+(Font)              scaled to size 9.0pt on input line 10.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 6.6pt on input line 47.
+(Font)              scaled to size 6.6pt on input line 10.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 47.
+(Font)              scaled to size 7.0pt on input line 24.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 47.
+(Font)              scaled to size 7.0pt on input line 24.
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 7.0pt on input line 47.
+(Font)              scaled to size 7.0pt on input line 29.
+
+Overfull \hbox (12.57301pt too wide) in paragraph at lines 45--46
+ [][] 
+ []
 
 
-Class acmart Warning: A possible image without description on input line 50.
+Class acmart Warning: A possible image without description on input line 48.
 
 ) (sections/design.tex
 
@@ -1614,9 +1618,6 @@ Package natbib Warning: Citation `androidSmsRetriever' on page 3 undefined on in
 Underfull \hbox (badness 1062) in paragraph at lines 10--11
 []\T1/LinuxLibertineT-TLF/b/n/10 (+20) Observation redac-tor \T1/LinuxLibertineT-TLF/m/n/10 (+20) (ac-ces-si-bil-ity ser-vice and the
  []
-
-
-Underfull \vbox (badness 3724) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1629,6 +1630,9 @@ LaTeX Warning: Reference `prop:singleuse' on page 5 undefined on input line 24.
 LaTeX Warning: Reference `tab:failures' on page 5 undefined on input line 26.
 
 
+Underfull \vbox (badness 2698) has occurred while \output is active []
+
+
 Underfull \hbox (badness 4108) in paragraph at lines 30--30
 []\T1/LinuxLibertineT-TLF/b/n/10 (+20) Table 2: |Fail-ure han-dling is ex-plicit and value-
  []
@@ -1639,9 +1643,9 @@ Package natbib Warning: Citation `rfc2104' on page 5 undefined on input line 52.
 
 LaTeX Warning: Reference `fig:architecture' on page 5 undefined on input line 52.
 
-) (sections/model.tex
+) (sections/model.tex [5.5]
 
-LaTeX Warning: Reference `sec:evidence' on page 5 undefined on input line 4.
+LaTeX Warning: Reference `sec:evidence' on page 6 undefined on input line 4.
 
 
 Underfull \hbox (badness 1210) in paragraph at lines 10--12
@@ -1658,7 +1662,7 @@ Underfull \hbox (badness 2326) in paragraph at lines 10--12
 \OML/nxlmi/m/it/10 z \LMS/ntxsy/m/n/10 2 f[]\OML/nxlmi/m/it/10 ; []; []; []; []\LMS/ntxsy/m/n/10 g$ \T1/LinuxLibertineT-TLF/m/n/10 (+20) is the
  []
 
-[5.5]
+
 Underfull \hbox (badness 1072) in paragraph at lines 23--24
  []\T1/LinuxLibertineT-TLF/m/it/10 (+20) Reference-monitor as-sump-tions.[] \T1/LinuxLibertineT-TLF/m/n/10 (+20) The guar-an-tees be-low
  []
@@ -1766,7 +1770,10 @@ Underfull \hbox (badness 1565) in paragraph at lines 17--18
 []$\OML/nxlmi/m/it/10 n [] \LMS/ntxsy/m/n/10 f\OT1/LinuxLibertineT-TLF/m/n/10 (+20) 0\OML/nxlmi/m/it/10 ; \OT1/LinuxLibertineT-TLF/m/n/10 (+20) 1\LMS/ntxsy/m/n/10 g[]$\T1/LinuxLibertineT-TLF/m/n/10 (+20) ; $\OML/nxlmi/m/it/10 H \LMS/ntxsy/m/n/10   ¹\OML/nxlmi/m/it/10 n; q; ^^[; d; ^^\; t[]; t[]; u; c\LMS/ntxsy/m/n/10 º$\T1/LinuxLibertineT-TLF/m/n/10 (+20) ; $\OML/nxlmi/m/it/10 a \LMS/ntxsy/m/n/10  
  []
 
-[7.7]) (sections/evidence.tex
+
+Underfull \vbox (badness 1127) has occurred while \output is active []
+
+ [7.7]) (sections/evidence.tex
 
 Package natbib Warning: Citation `wang2024mobileagent' on page 8 undefined on input line 4.
 
@@ -1791,12 +1798,12 @@ Package natbib Warning: Citation `androidCredentialManager' on page 8 undefined 
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
 (Font)              scaled to size 9.0pt on input line 27.
-<../figures/b3_redacted_shade.png, id=127, 1003.75pt x 406.51875pt>
+<../figures/b3_redacted_shade.png, id=125, 1003.75pt x 406.51875pt>
 File: ../figures/b3_redacted_shade.png Graphic file (type png)
 <use ../figures/b3_redacted_shade.png>
 Package pdftex.def Info: ../figures/b3_redacted_shade.png  used on input line 34.
 (pdftex.def)             Requested size: 125.39772pt x 50.78369pt.
-<../figures/b3_masked_sms.png, id=128, 747.79375pt x 684.5575pt>
+<../figures/b3_masked_sms.png, id=126, 747.79375pt x 684.5575pt>
 File: ../figures/b3_masked_sms.png Graphic file (type png)
 <use ../figures/b3_masked_sms.png>
 Package pdftex.def Info: ../figures/b3_masked_sms.png  used on input line 39.
@@ -1819,7 +1826,10 @@ LaTeX Warning: Reference `fig:b3' on page 8 undefined on input line 47.
 
 LaTeX Warning: Reference `fig:b3' on page 8 undefined on input line 47.
 
-[8.8{C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_tlukpt.enc} <../figures/b3_redacted_shade.png (PNG copy)> <../figures/b3_masked_sms.png (PNG copy)>]
+[8.8]
+Underfull \vbox (badness 1655) has occurred while \output is active []
+
+
 Underfull \hbox (badness 1755) in paragraph at lines 55--59
 \T1/LinuxLibertineT-TLF/m/it/10 (+20) ex-piry\T1/LinuxLibertineT-TLF/m/n/10 (+20) : At-tempt-ing res-o-lu-tion af-ter TTL ex-pi-ra-tion (5
  []
@@ -1852,15 +1862,12 @@ Underfull \hbox (badness 1939) in paragraph at lines 61--66
 
 Package natbib Warning: Citation `rawles2024androidworld' on page 9 undefined on input line 68.
 
-
+[9.9{C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_tlukpt.enc} <../figures/b3_redacted_shade.png (PNG copy)> <../figures/b3_masked_sms.png (PNG copy)>]
 Underfull \hbox (badness 2799) in paragraph at lines 80--81
 \T1/LinuxLibertineT-TLF/m/n/10 (+20) SMS at the tele-phony bound-ary be-fore ren-der-ing. It
  []
 
 
-Underfull \vbox (badness 2698) has occurred while \output is active []
-
- [9.9]
 Underfull \hbox (badness 10000) in paragraph at lines 86--88
 \T1/LinuxLibertineT-TLF/m/n/10 (+20) The re-solver im-me-di-ately halts res-o-lu-tion, emits a
  []
@@ -1962,52 +1969,52 @@ Package natbib Warning: Citation `androidClipboard' on page 10 undefined on inpu
 
 Package natbib Warning: Citation `androidProtectedConfirmation' on page 10 undefined on input line 35.
 
-
-Package natbib Warning: Citation `saltzer1975protection' on page 10 undefined on input line 37.
-
-
-Package natbib Warning: Citation `watson2010capsicum' on page 10 undefined on input line 37.
-
-
-Package natbib Warning: Citation `felt2011permission' on page 10 undefined on input line 37.
-
-
-Package natbib Warning: Citation `bugiel2013flexible' on page 10 undefined on input line 37.
-
-
-Package natbib Warning: Citation `rossi2021seapp' on page 10 undefined on input line 37.
-
-
-Package natbib Warning: Citation `enck2010taintdroid' on page 10 undefined on input line 37.
-
-
-Package natbib Warning: Citation `yan2012droidscope' on page 10 undefined on input line 37.
-
-
-Package natbib Warning: Citation `dennis1966semantics' on page 10 undefined on input line 37.
-
-
-Package natbib Warning: Citation `rfc4226' on page 10 undefined on input line 39.
-
-
-Package natbib Warning: Citation `rfc6238' on page 10 undefined on input line 39.
-
-
-Package natbib Warning: Citation `rfc8707' on page 10 undefined on input line 39.
-
-
-Package natbib Warning: Citation `rfc9449' on page 10 undefined on input line 39.
-
-
-Package natbib Warning: Citation `rfc9700' on page 10 undefined on input line 39.
-
-
-Package natbib Warning: Citation `webauthn3' on page 10 undefined on input line 39.
-
-
-Package natbib Warning: Citation `nist80063b' on page 10 undefined on input line 39.
-
 [10.10]
+
+Package natbib Warning: Citation `saltzer1975protection' on page 11 undefined on input line 37.
+
+
+Package natbib Warning: Citation `watson2010capsicum' on page 11 undefined on input line 37.
+
+
+Package natbib Warning: Citation `felt2011permission' on page 11 undefined on input line 37.
+
+
+Package natbib Warning: Citation `bugiel2013flexible' on page 11 undefined on input line 37.
+
+
+Package natbib Warning: Citation `rossi2021seapp' on page 11 undefined on input line 37.
+
+
+Package natbib Warning: Citation `enck2010taintdroid' on page 11 undefined on input line 37.
+
+
+Package natbib Warning: Citation `yan2012droidscope' on page 11 undefined on input line 37.
+
+
+Package natbib Warning: Citation `dennis1966semantics' on page 11 undefined on input line 37.
+
+
+Package natbib Warning: Citation `rfc4226' on page 11 undefined on input line 39.
+
+
+Package natbib Warning: Citation `rfc6238' on page 11 undefined on input line 39.
+
+
+Package natbib Warning: Citation `rfc8707' on page 11 undefined on input line 39.
+
+
+Package natbib Warning: Citation `rfc9449' on page 11 undefined on input line 39.
+
+
+Package natbib Warning: Citation `rfc9700' on page 11 undefined on input line 39.
+
+
+Package natbib Warning: Citation `webauthn3' on page 11 undefined on input line 39.
+
+
+Package natbib Warning: Citation `nist80063b' on page 11 undefined on input line 39.
+
 
 Package natbib Warning: Citation `du2025mobileattacks' on page 11 undefined on input line 41.
 
@@ -2027,6 +2034,9 @@ Package natbib Warning: Citation `debenedetti2024agentdojo' on page 11 undefined
 Package natbib Warning: Citation `zhan2024injecagent' on page 11 undefined on input line 41.
 
 ) (sections/discussion.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 LaTeX Warning: Reference `sec:design' on page 11 undefined on input line 9.
 
@@ -2065,7 +2075,7 @@ Underfull \hbox (badness 7186) in paragraph at lines 12--14
 \T1/LinuxLibertineT-TLF/m/n/10 (+20) re-ceipt (\T1/zi4/m/n/10 AttestedResolutionReceipt\T1/LinuxLibertineT-TLF/m/n/10 (+20) ) signed by the
  []
 
-
+[11.11]
 Underfull \hbox (badness 2818) in paragraph at lines 16--17
  []\T1/LinuxLibertineT-TLF/m/it/10 (+20) Ephemeral Mem-ory Hy-giene and Re-vo-ca-tion.[] \T1/LinuxLibertineT-TLF/m/n/10 (+20) A core
  []
@@ -2086,85 +2096,11 @@ Underfull \hbox (badness 2762) in paragraph at lines 16--17
  []
 
 
-LaTeX Warning: Reference `sec:artifact' on page 11 undefined on input line 22.
+LaTeX Warning: Reference `sec:artifact' on page 12 undefined on input line 22.
 
-[11.11]) (sections/conclusion.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
+) (sections/conclusion.tex) [12.12] (main.bbl) (sections/artifact.tex
 
-) (main.bbl
-LaTeX Info: Redefining \tempurl on input line 64.
-LaTeX Info: Redefining \tempurl on input line 78.
-LaTeX Info: Redefining \tempurl on input line 92.
-LaTeX Info: Redefining \tempurl on input line 107.
-LaTeX Info: Redefining \tempurl on input line 122.
-LaTeX Info: Redefining \tempurl on input line 136.
-LaTeX Info: Redefining \tempurl on input line 150.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 166.
-
-Underfull \vbox (badness 2698) has occurred while \output is active []
-
- [12.12]
-LaTeX Info: Redefining \tempurl on input line 183.
-
-Underfull \hbox (badness 1490) in paragraph at lines 251--258
-[]\T1/LinuxLibertineT-TLF/m/n/8 (+20) Edoardo Debenedetti, Ilia Shu-mailov, Tianqi Fan, Jamie Hayes,
- []
-
-LaTeX Info: Redefining \tempurl on input line 272.
-LaTeX Info: Redefining \tempurl on input line 314.
-
-Underfull \hbox (badness 4193) in paragraph at lines 307--317
-\T1/LinuxLibertineT-TLF/m/n/8 (+20) Jaeyeon Jung, Patrick Mc-Daniel, and An-mol N. Sheth. 2010.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 307--317
-\T1/LinuxLibertineT-TLF/m/n/8 (+20) Taint-Droid: An Information-Flow Track-ing Sys-tem for Re-
- []
-
-
-Underfull \hbox (badness 6944) in paragraph at lines 307--317
-\T1/LinuxLibertineT-TLF/m/n/8 (+20) al-time Pri-vacy Mon-i-tor-ing on Smart-phones. In \T1/LinuxLibertineT-TLF/m/it/8 (+20) 9th USENIX
- []
-
-
-Underfull \hbox (badness 5189) in paragraph at lines 307--317
-\T1/LinuxLibertineT-TLF/m/it/8 (+20) Sym-po-sium on Op-er-at-ing Sys-tems De-sign and Im-ple-men-ta-tion\T1/LinuxLibertineT-TLF/m/n/8 (+20) .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 307--317
-[]$\T1/LinuxLibertineT-TLF/m/n/8 (+20) https : / / www . usenix . org / conference / osdi10 / taintdroid -[] information -[]
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \tempurl on input line 455.
-LaTeX Info: Redefining \tempurl on input line 470.
-LaTeX Info: Redefining \tempurl on input line 523.
-LaTeX Info: Redefining \tempurl on input line 540.
-LaTeX Info: Redefining \tempurl on input line 554.
-LaTeX Info: Redefining \tempurl on input line 584.
-
-Underfull \hbox (badness 3439) in paragraph at lines 578--587
-\T1/LinuxLibertineT-TLF/m/it/8 (+20) Se-cu-rity Sym-po-sium\T1/LinuxLibertineT-TLF/m/n/8 (+20) .   []$https : / / www . ndss -[] symposium . org / ndss -[]
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [13.13]
-LaTeX Info: Redefining \tempurl on input line 599.
-
-Underfull \hbox (badness 1838) in paragraph at lines 666--674
-[]\T1/LinuxLibertineT-TLF/m/n/8 (+20) Lepeng Zhao, Zhen-hua Zou, Shuo Li, and Zhuo-tao Liu. 2026.
- []
-
-) (sections/artifact.tex
-
-LaTeX Warning: Reference `sec:evidence' on page 14 undefined on input line 4.
+LaTeX Warning: Reference `sec:evidence' on page 13 undefined on input line 4.
 
 
 Underfull \hbox (badness 5802) in paragraph at lines 6--7
@@ -2227,7 +2163,7 @@ Underfull \hbox (badness 1173) in paragraph at lines 16--17
  []
 
 
-LaTeX Warning: Reference `sec:evidence' on page 14 undefined on input line 18.
+LaTeX Warning: Reference `sec:evidence' on page 13 undefined on input line 18.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 18--19
@@ -2247,23 +2183,12 @@ Class acmart Warning: Some images may lack descriptions.
 Package balance Warning: You have called \balance in second column
 (balance)                Columns might not be balanced.
 
-[14.14{C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-ts1.enc}]
-Overfull \vbox (12.0pt too high) has occurred while \output is active []
+[13.13{C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-ts1.enc}]
 
-
-Overfull \vbox (14.36pt too high) has occurred while \output is active []
-
- [15.15]
-
-LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (1 not 15).
+LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (1 not 13).
                Rerun to correct this.
 
-(main.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
+(main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -2282,20 +2207,20 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `main.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  9D547F107D6A00A13CB79AB965C37277;2618.
+(rerunfilecheck)             After:  8AC7A60AD5809941E07134A37A81105B;2522.
  ) 
 Here is how much of TeX's memory you used:
- 45031 strings out of 467871
- 995499 string characters out of 5418860
- 1544981 words of memory out of 5000000
- 71857 multiletter control sequences out of 15000+600000
- 905790 words of font info for 711 fonts, out of 8000000 for 9000
+ 44692 strings out of 467871
+ 987542 string characters out of 5418860
+ 1542981 words of memory out of 5000000
+ 71697 multiletter control sequences out of 15000+600000
+ 886764 words of font info for 623 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 90i,14n,131p,1929b,1007s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,14n,131p,1929b,984s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI5.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathRM.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumT.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumTB.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsym.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
-Output written on main.pdf (15 pages, 718911 bytes).
+Output written on main.pdf (13 pages, 682711 bytes).
 PDF statistics:
- 448 PDF objects out of 1000 (max. 8388607)
- 171 named destinations out of 1000 (max. 500000)
- 150571 words of extra memory for PDF output out of 154059 (max. 10000000)
+ 318 PDF objects out of 1000 (max. 8388607)
+ 123 named destinations out of 1000 (max. 500000)
+ 146475 words of extra memory for PDF output out of 154059 (max. 10000000)
 
