@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  28 OCT 2026 23:58
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 02:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -663,18 +663,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 83--83
 []|\TU/TimesNewRoman(0)/m/n/10.95 04/12/2026
  []
 
-
-Underfull \hbox (badness 1354) in paragraph at lines 92--93
-\TU/TimesNewRoman(0)/b/n/10.95 2026-10-28: \TU/TimesNewRoman(0)/m/n/10.95 thêm 
-cặp \TU/TimesNewRoman(0)/b/n/10.95 B0-vs-B3 \TU/TimesNewRoman(0)/m/n/10.95 thực
- trên emulator (B0 10/10 rò rỉ; B3 prototype 0/10; đối
- []
-
 [1
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 115--115
-[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 ~55% (repo
+[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 ~75% (repo
  []
 
 
@@ -703,18 +696,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 115--115
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 115--115
+\TU/TimesNewRoman(0)/m/n/10.95 + đo B0-vs-B3
+ []
+
+
 Underfull \hbox (badness 1215) in paragraph at lines 115--115
 []|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 chỉ có bản tổng
  []
 
 
-Underfull \hbox (badness 2181) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 phải số paper, cần
+Underfull \hbox (badness 5862) in paragraph at lines 115--115
+[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 B0-rate và cặp
+ []
+
+
+Underfull \hbox (badness 3471) in paragraph at lines 115--115
+\TU/TimesNewRoman(0)/m/n/10.95 B0-vs-B3 trên em-
+ []
+
+
+Underfull \hbox (badness 3449) in paragraph at lines 115--115
+\TU/TimesNewRoman(0)/m/n/10.95 ulator ($\OML/cmm/m/it/10.95 n \OT1/cmr/m/n/10.9
+5 = 30$\TU/TimesNewRoman(0)/m/n/10.95 ,
  []
 
 
 Underfull \hbox (badness 1448) in paragraph at lines 115--115
-[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 ~60% (bản thảo
+[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 ~65% (bản thảo
  []
 
 
@@ -831,36 +840,14 @@ l verify 74
  []
 
 [9]
-Underfull \hbox (badness 1688) in paragraph at lines 361--361
-[]|\TU/TimesNewRoman(0)/m/n/10.95 Hạn 04/12/2026 còn  7 tuần,
- []
-
-
-Underfull \hbox (badness 1577) in paragraph at lines 361--361
-[]|\TU/TimesNewRoman(0)/m/n/10.95 AOSP build không kịp (Win-
- []
-
-
-Underfull \hbox (badness 5359) in paragraph at lines 361--361
-[]|\TU/TimesNewRoman(0)/m/n/10.95 AOSP là Plan B; dùng emulator/custom image ho
-ặc Cuttlefish;
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 361--361
-[]|\TU/TimesNewRoman(0)/m/n/10.95 Tác nhân ADB chạy UID
- []
-
-
-Underfull \hbox (badness 2547) in paragraph at lines 361--361
-[]|\TU/TimesNewRoman(0)/m/n/10.95 Bề mặt nguồn lộ OTP trước
+Underfull \hbox (badness 1127) in paragraph at lines 348--348
+|\TU/TimesNewRoman(0)/b/n/14.4 LỘ TRÌNH THỰC NGHIỆM BẢN FULL (FULL RESEARCH PAP
+ER
  []
 
 [10]
-Underfull \hbox (badness 1259) in paragraph at lines 372--373
-\TU/TimesNewRoman(0)/b/n/10.95 Song song (Plan B, không gấp): \TU/TimesNewRoman
-(0)/m/n/10.95 kích hoạt \TU/Consolas(0)/m/n/10 repo sync \TU/TimesNewRoman(0)/m
-/n/10.95 AOSP + ghim commit; cấp phát license
+Underfull \hbox (badness 2726) in paragraph at lines 408--408
+[]|\TU/TimesNewRoman(0)/m/n/10.95 Kẻ tấn công bypass lớp phủ
  []
 
 [11] (MASTER_CHECKLIST.aux)
@@ -872,12 +859,12 @@ Package rerunfilecheck Info: File `MASTER_CHECKLIST.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13737 strings out of 402987
- 258760 string characters out of 5448730
- 745912 words of memory out of 5000000
- 42258 multiletter control sequences out of 15000+600000
+ 13740 strings out of 402987
+ 258841 string characters out of 5448730
+ 746912 words of memory out of 5000000
+ 42261 multiletter control sequences out of 15000+600000
  637959 words of font info for 134 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,14n,93p,1584b,472s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,1584b,566s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on MASTER_CHECKLIST.pdf (11 pages).

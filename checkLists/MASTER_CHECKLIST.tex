@@ -345,33 +345,78 @@ Artifact \& nộp & \doing{} \textasciitilde50\% (LICENSE Apache-2.0, docs artif
 \item[\todo] \code{reviewer\_audit.md} sau mỗi vòng soát.
 \end{chk}
 
-\section*{Rủi ro chính \& phương án (MobiSys Emerging Ideas)}
+\section*{LỘ TRÌNH THỰC NGHIỆM BẢN FULL (FULL RESEARCH PAPER ROADMAP)}
+{\small Mục tiêu: Bổ sung đầy đủ 6 hạng mục thực nghiệm empirical trên Android Emulator / Thiết bị thật để trả lời hoàn chỉnh 6 câu hỏi nghiên cứu (RQ1--RQ6) phục vụ bản Full Paper.}
+
+\begin{chk}
+\item[\doing] \textbf{Hạng mục 1: Tấn công Đọc \& Lộ OTP (Attack 1 --- Read \& Exfiltrate OTP) [RQ1, RQ4]}
+  \begin{itemize}
+    \item[\done] Tái hiện $B_0$ (Unprotected) trên Android Emulator ($n=30$ trials, $29/30$ rò rỉ, Wilson $[0.833, 0.994]$).
+    \item[\done] Đo nguyên mẫu $B_3$ (SecretHandle Prototype) trên Android Emulator ($n=30$ trials, $0/30$ rò rỉ, Wilson $[0.000, 0.114]$).
+    \item[\todo] Đo đối chứng bổ sung với mô hình LLM khác (Claude 3.5 Haiku, GPT-4o) để chứng minh tính bất biến theo model.
+  \end{itemize}
+
+\item[\todo] \textbf{Hạng mục 2: Thí nghiệm then chốt: Chống chuyển hướng độc hại (Attack 2 --- Destination Redirection / Killer Experiment) [RQ2]}
+  \begin{itemize}
+    \item[\todo] Dựng ứng dụng độc hại (Attacker Receiver App / Malicious Intent Destination) trên emulator.
+    \item[\todo] Kích hoạt Agent nhận handle \code{SH-XXXXXX} và cố tình điền vào ô input của app độc hại.
+    \item[\todo] Thu thập log chứng minh: SecretHandle Resolver xác thực UID/Package/TaskToken và từ chối giải mã (\code{Reject}, an toàn $100\%$).
+    \item[\todo] Ngược lại: Khi điền vào app hợp lệ (Legitimate App) $\to$ giải mã thành công $100\%$.
+  \end{itemize}
+
+\item[\todo] \textbf{Hạng mục 3: So sánh đối đầu với Baseline $B_1$ (Detected Placeholder / Anonymizer) [RQ2]}
+  \begin{itemize}
+    \item[\todo] Cài đặt baseline $B_1$: Che số OTP bằng regex/LLM placeholder nhưng KHÔNG có ràng buộc đích (destination binding).
+    \item[\todo] Chạy kịch bản Attack 2 đối đầu $B_1$: Chứng minh $B_1$ bị lừa chuyển hướng (redirection leakage $= 1.0$), trong khi $B_3$ (SecretHandle) giữ vững $= 0.0$.
+  \end{itemize}
+
+\item[\todo] \textbf{Hạng mục 4: Kiểm tra vòng đời \& Chống Replay (Attack 4 --- Replay, Concurrency \& Expiry) [RQ3]}
+  \begin{itemize}
+    \item[\todo] Kiểm tra Replay: Tái sử dụng cùng một handle \code{SH-XXXXXX} lần thứ hai $\to$ Resolver từ chối với lỗi \code{ALREADY\_RESOLVED}.
+    \item[\todo] Kiểm tra Expiry: Giải mã sau khi hết hạn TTL (5 phút) $\to$ Resolver từ chối với lỗi \code{HANDLE\_EXPIRED}.
+    \item[\todo] Kiểm tra Race condition: Gửi đồng thời hai yêu cầu resolve song song $\to$ chỉ đúng một yêu cầu được chấp nhận.
+  \end{itemize}
+
+\item[\todo] \textbf{Hạng mục 5: Đo đạc hiệu năng \& độ trễ (Overhead Benchmark --- RQ5)}
+  \begin{itemize}
+    \item[\todo] Microbenchmark độ trễ (100 lần lặp, ghi nhận mean, median, 95th-percentile ms):
+      \begin{itemize}
+        \item Thời gian tạo handle (\code{Mint latency}).
+        \item Thời gian giải mã (\code{Resolve latency}).
+        \item Thời gian phủ overlay (\code{Redact latency}).
+      \end{itemize}
+    \item[\todo] Đo đạc tài nguyên: Mức tiêu thụ bộ nhớ RAM (MB) và CPU overhead của tiến trình SecretHandle.
+  \end{itemize}
+
+\item[\todo] \textbf{Hạng mục 6: Đa dạng hóa Ứng dụng \& Hồi quy tác vụ chung (Workloads \& Benign Regression) [RQ6]}
+  \begin{itemize}
+    \item[\todo] Workload B: Đăng nhập 2FA nhiều bước với tin nhắn đối kháng preview.
+    \item[\todo] Workload C: Điền thông tin cá nhân/địa chỉ (Checkout form).
+    \item[\todo] AndroidWorld Benign Regression: Chạy các tác vụ thông thường của AndroidWorld (không có OTP) để đo độ ảnh hưởng của SecretHandle đến năng lực điều khiển của Agent (chứng minh regression $\approx 0\%$).
+  \end{itemize}
+\end{chk}
+
+\section*{Rủi ro chính \& phương án}
 \begin{tabularx}{\textwidth}{@{}p{5.0cm}X@{}}
 \toprule
 \textbf{Rủi ro} & \textbf{Phương án} \\
 \midrule
-Hạn 04/12/2026 còn ~7 tuần, chưa có số đo & Nộp \textbf{Emerging Ideas} (không đòi evaluation đầy đủ); bằng chứng sơ bộ từ mô hình tham chiếu; kế hoạch đánh giá cho bản full \\
-Không có thiết bị thật (Pixel) & D6: emulator/Cuttlefish; độ trễ/năng lượng + keystore phần cứng chuyển sang Limitations \\
-AOSP build không kịp (Windows/Linux) & AOSP là Plan B; dùng emulator/custom image hoặc Cuttlefish; B0/monitor không cần AOSP \\
-Bị coi là ``chưa hoàn chỉnh'' & Emerging Ideas ưu tiên insight; nêu rõ giới hạn; \emph{không} biến placeholder thành kết quả \\
-Tác nhân ADB chạy UID shell/root & D3; đánh giá \code{adb unroot} + SELinux enforcing; thử 3 kiểu principal \\
-Bề mặt nguồn lộ OTP trước \code{ENTER} & Che theo cửa sổ nguồn; fail-closed; kiểm trong tấn công họ 1 \\
-Format/venue (12 trang, sigconf, single-blind, LLM) & Cài \code{acmart} sigconf; ghi tên tác giả; gán nhãn LLM; đọc kỹ CFP \\
+Thiếu thiết bị thật Pixel & Chạy toàn bộ ma trận tấn công trên Android Emulator (máy chủ EC2 có KVM) với Android 14 API 33/34; ghi rõ phạm vi trong Methodology. \\
+Thời gian chạy LLM lâu & Dùng Bedrock bearer token trực tiếp qua bridge cục bộ; tự động hóa batch chạy ban đêm trên EC2. \\
+Kẻ tấn công bypass lớp phủ screenshot & SecretHandle kết hợp cả chặn notification và che phủ overlay; trên bản full kết hợp thêm \code{system\_server} private input. \\
 \bottomrule
 \end{tabularx}
 
-\section*{5 hành động tiếp theo (ưu tiên ngay, tuần này)}
+\section*{5 hành động tiếp theo (ưu tiên ngay)}
 \begin{enumerate}
-\item \done{} Chốt \textbf{D0--D6} trong \code{SecretHandle/docs/design\_decisions.md}: D0 nay là \textbf{MobiSys 2027 Emerging Ideas}, thêm D6 (môi trường không Pixel) --- đã hoàn tất 2026-10-17.
-\item \done{} \textbf{Tái hiện B0} (OTP-forwarding) trên \textbf{emulator/Android stock} + dựng disclosure monitor bản đầu --- xong 2026-10-17 (10/10 rò rỉ, rate 1.0).
-\item \done{} Dựng môi trường dev: venv \textbf{Python 3.12} + \code{pip install -e '.[dev]'}, xác nhận \code{ruff}/\code{mypy}, \code{pytest} 74 passed --- xong 2026-10-17.
-\item \done{} \textbf{Khung bản thảo Emerging Ideas} \code{mobisys/}: \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}} + problem/threat-model/design/mô hình hình thức/thuật toán/bằng chứng/giới hạn/đạo đức/kế hoạch (build \textbf{12 trang}, 0 overfull, 0 undefined; thêm \S\code{model} (định nghĩa + 4 bảo đảm) và \S\code{algorithm} (Mint/Resolve), bảng goals/failures, ví dụ xuyên suốt, hình kiến trúc \code{figure*}). \textbf{2026-10-22:} khung xem như xong; điền tên/cơ quan tác giả người dùng tự làm trực tiếp trong \code{mobisys/main.tex} trước khi nộp (nhắc lại ở G3).
-\item \done{} Dựng \textbf{bằng chứng sơ bộ} từ mô hình tham chiếu Python (6400 trial, 8 họ tấn công, ghi rõ là mô phỏng; \code{docs/preliminary\_evidence.md}) + viết \textbf{kế hoạch đánh giá} đầy đủ cho bản full (\code{docs/evaluation\_plan.md}) --- xong 2026-10-17.
+\item \done{} \textbf{Hoàn thành $n=30$ trials cho Attack 1} ($B_0$ vs $B_3$ trên EC2, Wilson CI [0.83, 0.99] vs [0, 0.114]).
+\item \todo{} \textbf{Triển khai Attack 2 (Destination Redirection)}: Thiết lập kịch bản agent cố giải mã handle vào app độc hại trên EC2 $\to$ chứng minh Resolver chặn $100\%$.
+\item \todo{} \textbf{Chạy Microbenchmark đo độ trễ \& RAM (RQ5)}: Thu thập số đo mili-giây cho Mint, Resolve, Redact để lấp đầy bảng kết quả hiệu năng.
+\item \todo{} \textbf{Đo đối đầu với Baseline $B_1$}: Chứng minh các giải pháp che giấu không ràng buộc đích đều thất bại trước Attack 2.
+\item \todo{} \textbf{Tự động hóa kịch bản test Replay \& Expiry (Attack 4)}: Đo 100 lần thử lặp lại handle và kiểm tra cơ chế thu hồi.
 \end{enumerate}
 
-\noindent\textbf{Song song (Plan B, không gấp):} kích hoạt \code{repo sync} AOSP + ghim commit; cấp phát license AndroidWorld/SPA-Bench, API model + trần chi phí, EC2 cô lập.
-
 \vspace{0.6em}
-\noindent\emph{Ghi chú:} Khi một mục xong, đổi \todo{} $\to$ \done{} và ghi ngày. Khi cổng G0--G3 đạt, viết biên bản cổng ngắn (kết quả đo, quyết định, thay đổi phạm vi). Biên dịch: \code{xelatex MASTER\_CHECKLIST.tex} hai lần.
+\noindent\emph{Ghi chú:} Khi một mục xong, đổi \todo{} $\to$ \done{} và ghi ngày. Biên dịch: \code{xelatex MASTER\_CHECKLIST.tex} hai lần.
 
 \end{document}
