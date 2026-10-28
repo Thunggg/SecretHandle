@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 03:25
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 03:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -3259,7 +3259,7 @@ Underfull \hbox (badness 2932) in paragraph at lines 37--38
 n
  []
 
-) (sections/limitations.tex
+) (sections/discussion.tex
 Underfull \hbox (badness 1655) in paragraph at lines 41--1
  []\TU/LinLibertine(0)/m/it/10 Attacks.[] \TU/LinLibertine(1)/m/n/10 Documented
  agent OTP exfiltration and for-
@@ -3269,6 +3269,71 @@ Underfull \hbox (badness 1655) in paragraph at lines 41--1
 Underfull \hbox (badness 6268) in paragraph at lines 41--1
 \TU/LinLibertine(1)/m/n/10 warding, plus environmental and fine-print injection
 ,
+ []
+
+
+Underfull \hbox (badness 1968) in paragraph at lines 4--5
+\TU/LinLibertine(1)/m/n/10 considerations for transitioning \TU/LinLibertine(0)
+/m/sc/10 SecretHandle \TU/LinLibertine(1)/m/n/10 from a
+ []
+
+[11.11]
+Underfull \hbox (badness 1226) in paragraph at lines 11--12
+[]\TU/LinLibertine(0)/b/n/10 Unified System Service: \TU/LinLibertine(1)/m/n/10
+ Mint points and the Vault
+ []
+
+
+Underfull \hbox (badness 1048) in paragraph at lines 15--17
+\TU/LinLibertine(1)/m/n/10 banking, fintech, and enterprise applications deploy
+ so-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--17
+\TU/LinLibertine(1)/m/n/10 programmatic touch injection, lack of accelerometer
+ []
+
+
+Underfull \hbox (badness 1308) in paragraph at lines 15--17
+\TU/LinLibertine(1)/m/n/10 jitter, or absence of human keystroke latency). An a
+u-
+ []
+
+
+Underfull \hbox (badness 6708) in paragraph at lines 15--17
+\TU/LinLibertine(1)/m/n/10 inadvertently trigger fraud alerts and account locks
+.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--17
+\TU/LinLibertine(1)/m/n/10 cryptographic receipt (\TU/inconsolata(0)/m/n/10 Att
+estedResolutionReceipt\TU/LinLibertine(1)/m/n/10 )
+ []
+
+
+Underfull \hbox (badness 1571) in paragraph at lines 15--17
+\TU/LinLibertine(1)/m/n/10 without disclosure to the untrusted agent. This allo
+ws
+ []
+
+
+Underfull \hbox (badness 1742) in paragraph at lines 21--22
+[]\TU/LinLibertine(0)/b/n/10 Secure Memory Scrubbing: \TU/LinLibertine(1)/m/n/1
+0 Secrets held in the in-
+ []
+
+) (sections/limitations.tex
+Underfull \hbox (badness 10000) in paragraph at lines 26--1
+ []\TU/LinLibertine(0)/m/it/10 Agent-Agnostic Generality.[] \TU/LinLibertine(1)
+/m/n/10 Because \TU/LinLibertine(0)/m/sc/10 SecretHandle
+ []
+
+
+Underfull \hbox (badness 3449) in paragraph at lines 26--1
+\TU/LinLibertine(1)/m/n/10 completely agnostic to the agent’s internal reasonin
+g
  []
 
 
@@ -3289,7 +3354,7 @@ Underfull \hbox (badness 1112) in paragraph at lines 4--5
 and
  []
 
-[11.11]
+
 Underfull \hbox (badness 2119) in paragraph at lines 6--7
 \TU/LinLibertine(1)/m/n/10 promise can read values, forge target identity, bypa
 ss
@@ -3325,7 +3390,7 @@ Underfull \hbox (badness 1067) in paragraph at lines 10--11
 er
  []
 
-
+[12.12]
 Underfull \hbox (badness 1173) in paragraph at lines 12--13
  []\TU/LinLibertine(0)/m/it/10 Authorized-Destination Misuse.[] \TU/LinLibertin
 e(1)/m/n/10 An injected instruction
@@ -3349,41 +3414,37 @@ Underfull \hbox (badness 1248) in paragraph at lines 12--13
 
  []
 
-) (sections/ethics.tex
-Underfull \vbox (badness 2698) has occurred while \output is active []
-
-)
-(sections/conclusion.tex)
-Underfull \hbox (badness 2538) in paragraph at lines 4--104
+) (sections/ethics.tex) (sections/conclusion.tex)
+Underfull \hbox (badness 2538) in paragraph at lines 4--105
 \TU/LinLibertine(0)/m/sc/10 SecretHandle \TU/LinLibertine(1)/m/n/10 reframes ho
 w an untrusted mobile AI
  []
 
 
-Underfull \hbox (badness 1297) in paragraph at lines 4--104
+Underfull \hbox (badness 1297) in paragraph at lines 4--105
 \TU/LinLibertine(1)/m/n/10 relying on fragile prompt adherence, the OS mints an
 
  []
 
 
-Underfull \hbox (badness 2865) in paragraph at lines 4--104
+Underfull \hbox (badness 2865) in paragraph at lines 4--105
 \TU/LinLibertine(1)/m/n/10 visual observation. Our extensive empirical evaluati
 on
  []
 
 
-Underfull \hbox (badness 2343) in paragraph at lines 4--104
+Underfull \hbox (badness 2343) in paragraph at lines 4--105
 \TU/LinLibertine(1)/m/n/10 on Android 14 across 10 benchmark applications and
  []
 
 
-Underfull \hbox (badness 1783) in paragraph at lines 4--104
+Underfull \hbox (badness 1783) in paragraph at lines 4--105
 \TU/LinLibertine(1)/m/n/10 6 research questions demonstrates that \TU/LinLibert
 ine(0)/m/sc/10 SecretHandle
  []
 
 
-Underfull \hbox (badness 1297) in paragraph at lines 4--104
+Underfull \hbox (badness 1297) in paragraph at lines 4--105
 \TU/LinLibertine(1)/m/n/10 OS-level secret mediation in autonomous mobile agent
 
  []
@@ -3393,7 +3454,6 @@ LaTeX Info: Redefining \tempurl on input line 64.
 LaTeX Info: Redefining \tempurl on input line 78.
 LaTeX Info: Redefining \tempurl on input line 92.
 LaTeX Info: Redefining \tempurl on input line 107.
- [12.12]
 LaTeX Info: Redefining \tempurl on input line 122.
 
 Underfull \hbox (badness 1057) in paragraph at lines 116--127
@@ -3418,6 +3478,9 @@ Underfull \hbox (badness 2173) in paragraph at lines 175--186
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13.13]
 Underfull \hbox (badness 2762) in paragraph at lines 251--258
 []\TU/LinLibertine(1)/m/n/8 Edoardo Debenedetti, Ilia Shumailov, Tianqi Fan, Ja
 mie Hayes,
@@ -3468,21 +3531,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 307--317
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 Underfull \hbox (badness 1558) in paragraph at lines 337--344
 []\TU/LinLibertine(1)/m/n/8 Daniel Fett, Brian Campbell, John Bradley, Torsten 
 Lodderstedt,
  []
 
-LaTeX Info: Redefining \tempurl on input line 455.
-LaTeX Info: Redefining \tempurl on input line 470.
-LaTeX Info: Redefining \tempurl on input line 523.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13.13]
+LaTeX Info: Redefining \tempurl on input line 455.
+LaTeX Info: Redefining \tempurl on input line 470.
+LaTeX Info: Redefining \tempurl on input line 523.
 LaTeX Info: Redefining \tempurl on input line 540.
 LaTeX Info: Redefining \tempurl on input line 554.
 LaTeX Info: Redefining \tempurl on input line 584.
@@ -3502,6 +3561,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 578--587
 
 LaTeX Info: Redefining \tempurl on input line 599.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14.14]
 Underfull \hbox (badness 5050) in paragraph at lines 639--647
 \TU/LinLibertine(1)/m/n/8 InjecAgent: Benchmarking Indirect Prompt Injections i
 n Tool-
@@ -3597,20 +3659,20 @@ Underfull \hbox (badness 5417) in paragraph at lines 24--25
 /m/n/10 provenance.json\TU/LinLibertine(1)/m/n/10 ;
  []
 
-[14.14]
+
 Underfull \hbox (badness 5288) in paragraph at lines 26--27
  []\TU/LinLibertine(0)/m/it/10 Device-tier reproducibility.[] \TU/LinLibertine(
 1)/m/n/10 In addition to the offline
  []
 
 )
-Underfull \hbox (badness 4505) in paragraph at lines 28--110
+Underfull \hbox (badness 4505) in paragraph at lines 28--111
  []\TU/LinLibertine(0)/m/it/10 Integrity and license.[] \TU/LinLibertine(1)/m/n
 /10 Configuration files are hashed
  []
 
 
-Underfull \hbox (badness 1418) in paragraph at lines 28--110
+Underfull \hbox (badness 1418) in paragraph at lines 28--111
 \TU/LinLibertine(1)/m/n/10 at load time, and keys whose names resemble secrets,
 
  []
@@ -3637,7 +3699,8 @@ Class acmart Warning: ACM reference format is mandatory
 (acmart)              \settopmatter command..
 
 
-Overfull \vbox (2.13998pt too high) has occurred while \output is active []
+Package balance Warning: You have called \balance in second column
+(balance)                Columns might not be balanced.
 
 
 (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-pdfdoc.de
@@ -3653,15 +3716,15 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 6008ED0714AF7A8E8CD90D7A68A8022A;2338.
+(rerunfilecheck)             Checksum: E01C5CCB5E4F49E376820DDA07D190E8;2575.
  ) 
 Here is how much of TeX's memory you used:
- 55596 strings out of 402987
- 1247513 string characters out of 5448730
- 1911136 words of memory out of 5000000
- 83344 multiletter control sequences out of 15000+600000
+ 55605 strings out of 402987
+ 1247742 string characters out of 5448730
+ 1913539 words of memory out of 5000000
+ 83350 multiletter control sequences out of 15000+600000
  635775 words of font info for 162 fonts, out of 8000000 for 9000
  1509 hyphenation exceptions out of 8191
- 105i,14n,131p,1902b,32915s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 105i,14n,131p,1902b,32907s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on main.pdf (15 pages).
