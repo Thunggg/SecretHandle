@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  22 OCT 2026 20:41
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  28 OCT 2026 23:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2515,26 +2515,15 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `inconsolata' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-)
-Underfull \hbox (badness 2671) in paragraph at lines 1--90
-\TU/LinLibertine(0)/m/n/10 resolved field from subsequent agent observation. We
-
- []
-
-
-Underfull \hbox (badness 1708) in paragraph at lines 1--90
-\TU/LinLibertine(0)/m/n/10 experiment, attack families, and baselines) for the 
-full
- []
-
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LibertinusMath-Regular.otf' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `TU/LibertinusMath-Regular.otf(2)/m/n' will be
-(Font)              scaled to size 10.38101pt on input line 90.
+(Font)              scaled to size 10.38101pt on input line 1.
 LaTeX Font Info:    Font shape `TU/LibertinusMath-Regular.otf(3)/m/n' will be
-(Font)              scaled to size 10.37888pt on input line 90.
+(Font)              scaled to size 10.37888pt on input line 1.
+
 (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
@@ -2545,6 +2534,27 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `latinmodern-math.otf' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
+)
+Underfull \hbox (badness 2671) in paragraph at lines 1--90
+\TU/LinLibertine(0)/m/n/10 resolved field from subsequent agent observation. We
+
+ []
+
+
+Underfull \hbox (badness 7576) in paragraph at lines 1--90
+\TU/LinLibertine(0)/m/n/10 labeled, \TU/LinLibertine(0)/m/it/10 simulation-only
+ \TU/LinLibertine(0)/m/n/10 reference-model study whose
+ []
+
+
+Underfull \hbox (badness 1708) in paragraph at lines 1--90
+\TU/LinLibertine(0)/m/n/10 experiment, attack families, and baselines) for the 
+full
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 
 (sections/introduction.tex
 Underfull \hbox (badness 5388) in paragraph at lines 4--5
@@ -2552,19 +2562,13 @@ Underfull \hbox (badness 5388) in paragraph at lines 4--5
 e
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 LaTeX Font Info:    Font shape `TU/LinBiolinum(1)/m/n' will be
 (Font)              scaled to size 10.0pt on input line 6.
 LaTeX Font Info:    Font shape `TU/LinBiolinum(1)/m/n' will be
 (Font)              scaled to size 8.0pt on input line 6.
 LaTeX Font Info:    Font shape `TU/LinBiolinum(1)/m/n' will be
 (Font)              scaled to size 6.0pt on input line 6.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1.1
+[1.1
 
 ]
 Underfull \hbox (badness 1515) in paragraph at lines 12--13
@@ -2590,9 +2594,21 @@ Underfull \hbox (badness 2050) in paragraph at lines 14--15
  []
 
 
-Underfull \hbox (badness 3323) in paragraph at lines 14--15
-\TU/LinLibertine(0)/m/n/10 simulation-only reference-model study (§[]7[]); and 
-(v) a
+Underfull \hbox (badness 1248) in paragraph at lines 14--15
+\TU/LinLibertine(0)/m/n/10 reproduction of the motivating attack, a stock-Andro
+id
+ []
+
+
+Underfull \hbox (badness 1082) in paragraph at lines 14--15
+\TU/LinLibertine(0)/m/n/10 a clearly labeled simulation-only reference-model st
+udy
+ []
+
+
+Underfull \hbox (badness 1237) in paragraph at lines 14--15
+\TU/LinLibertine(0)/m/n/10 (§[]7[]); and (v) a preregistration-style evaluation
+ plan for
  []
 
 ) (sections/background.tex
@@ -2632,6 +2648,13 @@ Underfull \hbox (badness 1221) in paragraph at lines 9--10
  []
 
 ) (sections/threat_model.tex
+Underfull \vbox (badness 1062) has occurred while \output is active []
+
+LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 1.
+LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 1.
+ [2.2]
 Underfull \hbox (badness 2452) in paragraph at lines 6--7
  []\TU/LinLibertine(0)/m/it/10 Trusted.[] \TU/LinLibertine(0)/m/n/10 The \TU/in
 consolata(0)/m/n/10 system_server \TU/LinLibertine(0)/m/n/10 and the \TU/LinLib
@@ -2650,11 +2673,7 @@ Underfull \hbox (badness 6461) in paragraph at lines 6--7
 and
  []
 
-LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 8.
-LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 8.
-[2.2]
+
 Underfull \hbox (badness 2903) in paragraph at lines 8--9
  []\TU/LinLibertine(0)/m/it/10 Untrusted.[] \TU/LinLibertine(0)/m/n/10 The agen
 t and its model, which may be
@@ -2723,17 +2742,11 @@ Underfull \hbox (badness 1102) in paragraph at lines 8--9
 
  []
 
-
+[3.3]
 Underfull \hbox (badness 2856) in paragraph at lines 10--11
 []\TU/LinLibertine(0)/b/n/10 Observation redactor \TU/LinLibertine(0)/m/n/10 (a
 ccessibility service and the
  []
-
-
-Underfull \vbox (badness 1681) has occurred while \output is active []
-
- [3.3]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2874,13 +2887,13 @@ Underfull \hbox (badness 1442) in paragraph at lines 62--63
 he
  []
 
-
+[6.6]
 Underfull \hbox (badness 1210) in paragraph at lines 75--76
 [][][]\TU/LinLibertine(0)/m/sc/10 Theorem 5.11 (Handle unforgeability). []\TU/L
 inLibertine(0)/m/it/10 Let an ad-
  []
 
-[6.6]
+
 Underfull \hbox (badness 10000) in paragraph at lines 83--84
 [][][]\TU/LinLibertine(0)/m/sc/10 Proposition 5.12 (Single-use linearizability)
 .
@@ -2984,82 +2997,136 @@ Underfull \hbox (badness 1540) in paragraph at lines 48--49
 ndle
  []
 
-[7.7]
-Underfull \vbox (badness 1609) has occurred while \output is active []
+[7.7]) (sections/evidence.tex
+Underfull \hbox (badness 1694) in paragraph at lines 4--5
+\TU/LinLibertine(1)/m/n/10 replaced the scripted reader with an off-the-shelf G
+UI
+ []
 
-)
-(sections/evidence.tex
-Underfull \hbox (badness 1147) in paragraph at lines 6--7
+
+Underfull \hbox (badness 1137) in paragraph at lines 4--5
+\TU/LinLibertine(1)/m/n/10 agent (Mobile-Agent v3.5 driven by Claude Sonnet 4.6
+,
+ []
+
+
+Underfull \hbox (badness 4832) in paragraph at lines 6--7
+ []\TU/LinLibertine(0)/m/it/10 Prototype countermeasure: B0 versus B3.[] \TU/Li
+nLibertine(1)/m/n/10 We built a
+ []
+
+
+Underfull \hbox (badness 5924) in paragraph at lines 6--7
+\TU/LinLibertine(1)/m/n/10 stock-Android prototype of the mint-and-redact path
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 6--7
+\TU/LinLibertine(1)/m/n/10 handle (\TU/inconsolata(0)/m/n/10 SH-XXXXXX\TU/LinLi
+bertine(1)/m/n/10 ) for a code found in a notification,
+ []
+
+
+Underfull \hbox (badness 3049) in paragraph at lines 6--7
+\TU/LinLibertine(1)/m/n/10 exactly once; and an accessibility service that cove
+rs
+ []
+
+
+Underfull \hbox (badness 3428) in paragraph at lines 6--7
+\TU/LinLibertine(1)/m/n/10 budget after long-press, copy-and-paste, contact-ava
+tar
+ []
+
+[8.8]
+LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
+(Font)              scaled to size 9.0pt on input line 13.
+LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 13.
+
+Overfull \hbox (9.9386pt too wide) in paragraph at lines 13--21
+ [][] 
+ []
+
+File: ../figures/b3_redacted_shade.png Graphic file (type bmp)
+<../figures/b3_redacted_shade.png>
+File: ../figures/b3_masked_sms.png Graphic file (type bmp)
+<../figures/b3_masked_sms.png>
+
+Class acmart Warning: A possible image without description on input line 31.
+
+
+Underfull \hbox (badness 1147) in paragraph at lines 33--34
  []\TU/LinLibertine(0)/m/it/10 Reference-model study (simulation only).[] \TU/L
 inLibertine(1)/m/n/10 To check the
  []
 
 
-Underfull \hbox (badness 6927) in paragraph at lines 6--7
+Underfull \hbox (badness 6927) in paragraph at lines 33--34
 \TU/LinLibertine(1)/m/n/10 Python reference model on synthetic canaries (seed
  []
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 6--7
+Underfull \hbox (badness 1281) in paragraph at lines 33--34
 \TU/LinLibertine(1)/m/n/10 baseline removed the literal value from the immediat
 e
  []
 
-[8.8]
-Underfull \hbox (badness 5245) in paragraph at lines 10--11
+
+Underfull \hbox (badness 5245) in paragraph at lines 37--38
  []\TU/LinLibertine(0)/m/it/10 Research questions.[] \TU/LinLibertine(1)/m/n/10
  The full evaluation is organized
  []
 
 
-Underfull \hbox (badness 1571) in paragraph at lines 10--11
+Underfull \hbox (badness 1571) in paragraph at lines 37--38
 \TU/LinLibertine(1)/m/n/10 injection-driven redirection without blocking legiti
 mate
  []
 
-
-Underfull \hbox (badness 7963) in paragraph at lines 12--13
+[9.9]
+Underfull \hbox (badness 7963) in paragraph at lines 39--40
  []\TU/LinLibertine(0)/m/it/10 Baselines.[] \TU/LinLibertine(1)/m/n/10 The eval
 uation compares four conditions:
  []
 
 
-Underfull \hbox (badness 2626) in paragraph at lines 12--13
+Underfull \hbox (badness 2626) in paragraph at lines 39--40
 \TU/LinLibertine(1)/m/n/10 resolves it without destination binding, approximati
 ng
  []
 
 
-Underfull \hbox (badness 3108) in paragraph at lines 12--13
+Underfull \hbox (badness 3108) in paragraph at lines 39--40
 \TU/LinLibertine(1)/m/n/10 the Android platform flow (Autofill, OTP Autofill, o
 r
  []
 
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 14.
+(Font)              scaled to size 10.0pt on input line 41.
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/b/n' will be
-(Font)              scaled to size 8.0pt on input line 14.
+(Font)              scaled to size 8.0pt on input line 41.
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/b/n' will be
-(Font)              scaled to size 6.0pt on input line 14.
+(Font)              scaled to size 6.0pt on input line 41.
 
-Underfull \hbox (badness 6001) in paragraph at lines 14--15
+Underfull \hbox (badness 6001) in paragraph at lines 41--42
  []\TU/LinLibertine(0)/m/it/10 Workloads and metrics.[] \TU/LinLibertine(1)/m/n
 /10 Four open test applications
  []
 
 
-Underfull \hbox (badness 1789) in paragraph at lines 14--15
+Underfull \hbox (badness 1789) in paragraph at lines 41--42
 \TU/LinLibertine(1)/m/n/10 address and phone-number checkout, and wallet-token
  []
 
 
-Underfull \hbox (badness 1365) in paragraph at lines 14--15
+Underfull \hbox (badness 1365) in paragraph at lines 41--42
 \TU/LinLibertine(1)/m/n/10 injection, redaction), memory, energy where supporte
 d,
  []
 
 ) (sections/related_work.tex
-Underfull \hbox (badness 1331) in paragraph at lines 16--1
+Underfull \hbox (badness 1331) in paragraph at lines 43--1
 \TU/LinLibertine(1)/m/n/10 unsupported identity—are reported by category. Devic
 e
  []
@@ -3077,15 +3144,12 @@ a
  []
 
 
-Underfull \vbox (badness 3482) has occurred while \output is active []
-
- [9.9]
 Underfull \hbox (badness 2932) in paragraph at lines 12--13
 \TU/LinLibertine(1)/m/n/10 is complementary but observability-oriented: they ca
 n
  []
 
-) (sections/limitations.tex
+[10.10]) (sections/limitations.tex
 Underfull \hbox (badness 1655) in paragraph at lines 16--1
  []\TU/LinLibertine(0)/m/it/10 Attacks.[] \TU/LinLibertine(1)/m/n/10 Documented
  agent OTP exfiltration and for-
@@ -3097,20 +3161,29 @@ Underfull \hbox (badness 6268) in paragraph at lines 16--1
 ,
  []
 
+
+LaTeX Font Warning: Font shape `TU/inconsolata(0)/m/it' undefined
+(Font)              using `TU/inconsolata(0)/m/n' instead on input line 6.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+ []\TU/LinLibertine(0)/m/it/10 Prototype, not the \TU/inconsolata(0)/m/n/10 sys
+tem_server \TU/LinLibertine(0)/m/it/10 design.[] \TU/LinLibertine(1)/m/n/10 The
+ B3
+ []
+
 ) (sections/ethics.tex
-Underfull \hbox (badness 10000) in paragraph at lines 16--1
+Underfull \hbox (badness 10000) in paragraph at lines 18--1
  []\TU/LinLibertine(0)/m/it/10 Composition gaps.[] \TU/LinLibertine(1)/m/n/10 A
  deployment combines several
  []
 
 
-Underfull \hbox (badness 1565) in paragraph at lines 16--1
+Underfull \hbox (badness 1565) in paragraph at lines 18--1
 \TU/LinLibertine(1)/m/n/10 sources, an agent framework, input components, OEM
  []
 
-[10.10]) (sections/conclusion.tex) (main.bbl
-LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 52.
+) (sections/conclusion.tex [11.11]) (main.bbl
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/b/n' will be
 (Font)              scaled to size 5.0pt on input line 52.
 LaTeX Info: Redefining \tempurl on input line 64.
@@ -3126,9 +3199,6 @@ Underfull \hbox (badness 1057) in paragraph at lines 116--127
 
 LaTeX Info: Redefining \tempurl on input line 136.
 LaTeX Info: Redefining \tempurl on input line 150.
-
-Underfull \vbox (badness 2698) has occurred while \output is active []
-
 LaTeX Info: Redefining \tempurl on input line 183.
 
 Underfull \hbox (badness 3989) in paragraph at lines 175--186
@@ -3203,15 +3273,12 @@ Lodderstedt,
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11.11]
+ [12.12]
 LaTeX Info: Redefining \tempurl on input line 476.
 LaTeX Info: Redefining \tempurl on input line 491.
 LaTeX Info: Redefining \tempurl on input line 544.
 LaTeX Info: Redefining \tempurl on input line 561.
 LaTeX Info: Redefining \tempurl on input line 575.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 LaTeX Info: Redefining \tempurl on input line 605.
 
 Underfull \hbox (badness 6001) in paragraph at lines 599--608
@@ -3226,6 +3293,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 599--608
 ][][][][][][] [][] [][][][][][][][][][][][] [][] [][][] [][] [][][] [][] [][][]
 [][] [][]
  []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Info: Redefining \tempurl on input line 620.
 
@@ -3270,10 +3340,7 @@ Underfull \hbox (badness 2753) in paragraph at lines 6--7
 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [12.12]
+[13.13]
 Underfull \hbox (badness 1371) in paragraph at lines 14--15
 \TU/LinLibertine(1)/m/n/10 type-check (\TU/inconsolata(0)/m/n/10 mypy\TU/LinLib
 ertine(1)/m/n/10 ), the offline pytest suite, and the ca-
@@ -3377,21 +3444,25 @@ File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-utf32be.d
 ef
 File: se-utf32be.def 2019/11/29 v1.12 stringenc: UTF-32BE
-) [13.13] (main.aux)
+) [14.14] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 25F0562DED20A4842D67C2763C8A2A0E;2300.
+(rerunfilecheck)             Checksum: E0F6DACC19C0F08CC41DB6B8617D5E4C;2300.
  ) 
 Here is how much of TeX's memory you used:
- 55563 strings out of 402987
- 1246417 string characters out of 5448730
- 1906089 words of memory out of 5000000
- 83317 multiletter control sequences out of 15000+600000
- 635694 words of font info for 159 fonts, out of 8000000 for 9000
+ 55593 strings out of 402987
+ 1247333 string characters out of 5448730
+ 1906686 words of memory out of 5000000
+ 83343 multiletter control sequences out of 15000+600000
+ 635702 words of font info for 160 fonts, out of 8000000 for 9000
  1509 hyphenation exceptions out of 8191
- 105i,14n,131p,1594b,32907s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 105i,14n,131p,2053b,32907s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (13 pages).
+Output written on main.pdf (14 pages).

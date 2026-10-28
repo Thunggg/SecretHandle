@@ -1,7 +1,9 @@
 \section{Limitations}
 \label{sec:limitations}
 
-\paragraph{No real-device measurements.} This paper reports an emulator reproduction and a clearly labeled simulation; it contains no device latency, energy, or hardware-keystore numbers. On an emulator or Cuttlefish image the keystore is software-only, so we report \texttt{security level = software} and make no hardware-protection claim. Device measurements are future work.
+\paragraph{No real-device measurements.} This paper reports an emulator reproduction, a prototype measurement on the same emulator, and a clearly labeled simulation; it contains no device latency, energy, or hardware-keystore numbers. On an emulator or Cuttlefish image the keystore is software-only, so we report \texttt{security level = software} and make no hardware-protection claim. Device measurements are future work.
+
+\paragraph{Prototype, not the \texttt{system\_server} design.} The B3 measurement comes from a grant-based prototype: a notification listener, an in-process vault, and an accessibility overlay. It therefore covers the notification channel and the screenshot channel only. The accessibility tree still exports the underlying text to an agent that reads it directly; the clipboard is not mediated (our agent did try long-press, copy, and paste); and a production design would redact node text in the framework instead of covering pixels. The reveal is a plain button rather than a user-presence gate, and \texttt{FLAG\_SECURE} prevents capture, not accessibility-tree reads. With ten trials per condition, one emulator image, and one model, the $10/10$ versus $0/10$ comparison is a directional signal, not a device result.
 
 \paragraph{Binding is not honest use.} Destination binding constrains \emph{where} a value may be resolved, not how a trusted app then uses it. An injected instruction can still cause an agent to perform a legitimate-but-unwanted action inside an allowed destination; we scope this out and quantify it as a residual risk in the evaluation plan.
 

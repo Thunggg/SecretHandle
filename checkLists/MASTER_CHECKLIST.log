@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  28 OCT 2026 23:27
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  28 OCT 2026 23:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -663,6 +663,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 83--83
 []|\TU/TimesNewRoman(0)/m/n/10.95 04/12/2026
  []
 
+
+Underfull \hbox (badness 1354) in paragraph at lines 92--93
+\TU/TimesNewRoman(0)/b/n/10.95 2026-10-28: \TU/TimesNewRoman(0)/m/n/10.95 thêm 
+cặp \TU/TimesNewRoman(0)/b/n/10.95 B0-vs-B3 \TU/TimesNewRoman(0)/m/n/10.95 thực
+ trên emulator (B0 10/10 rò rỉ; B3 prototype 0/10; đối
+ []
+
 [1
 
 ]
@@ -720,7 +727,7 @@ Underfull \hbox (badness 3000) in paragraph at lines 115--115
 \TU/TimesNewRoman(0)/m/n/10.95 tifact, CI, checker;
  []
 
-
+[2]
 Overfull \hbox (3.50578pt too wide) in paragraph at lines 125--126
 []\TU/TimesNewRoman(0)/m/n/10.95 Audit cấp bản thảo: \TU/Consolas(0)/m/n/10 cit
 ation_claim_map.csv\TU/TimesNewRoman(0)/m/n/10.95 , \TU/Consolas(0)/m/n/10 cita
@@ -736,7 +743,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--126
 .95 ,
  []
 
-[2]
+
 Underfull \hbox (badness 1365) in paragraph at lines 126--127
 []\TU/TimesNewRoman(0)/m/n/10.95 Audit cấp mã: \TU/Consolas(0)/m/n/10 SecretHan
 dle/audits/ \TU/TimesNewRoman(0)/m/n/10.95 (paper_implementation_spec, paper_to
@@ -765,7 +772,7 @@ Overfull \hbox (180.22781pt too wide) in paragraph at lines 156--157
 spec.md
  []
 
-
+[3]
 Overfull \hbox (8.39063pt too wide) in paragraph at lines 157--158
 []\TU/TimesNewRoman(0)/b/n/10.95 G3 — bridge $\OMS/cmsy/m/n/10.95 !$ \TU/TimesN
 ewRoman(0)/b/n/10.95 Bedrock thật \TU/TimesNewRoman(0)/m/n/10.95 (\TU/TimesNewR
@@ -788,7 +795,7 @@ Underfull \hbox (badness 2970) in paragraph at lines 157--158
 solas(0)/m/n/10 /healthz \TU/TimesNewRoman(0)/m/n/10.95 chỉ báo
  []
 
-[3]
+
 Overfull \hbox (15.84412pt too wide) in paragraph at lines 166--167
 []\TU/TimesNewRoman(0)/m/n/10.95 Ghim phiên bản Python/OS/công cụ thống kê vào 
 provenance — \TU/TimesNewRoman(0)/b/n/10.95 2026-10-22: \TU/Consolas(0)/m/n/10 
@@ -871,6 +878,6 @@ Here is how much of TeX's memory you used:
  42258 multiletter control sequences out of 15000+600000
  637959 words of font info for 134 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,15n,93p,1584b,474s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,1584b,472s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on MASTER_CHECKLIST.pdf (11 pages).
