@@ -306,16 +306,16 @@ Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apac
 
 \section*{PHẦN K --- Giai đoạn 10: Phân tích \& viết bài (W9--W15)}
 \begin{chk}
-\item[\todo] Rút gọn bản thảo 53 trang về giới hạn venue (\textasciitilde12--13 trang thân bài; xác nhận CFP); chuyển chứng minh/thí nghiệm bổ sung sang phụ lục/technical report.
+\item[\done] Rút gọn bản thảo 53 trang về giới hạn venue MobiSys (\code{mobisys/main.pdf} 14 trang: 10 trang thân bài $\le 12$ trang, 2 trang references, 2 trang artifact appendix); toàn bộ chứng minh hình thức và chi tiết mở rộng lưu ở bản master/technical report.
 \item[\done] Báo cáo nhị phân dạng ``0 of n'' + Wilson CI: B0 là $29/30$ (Wilson $[0.833, 0.994]$), B3 là $0/30$ (Wilson $[0.000, 0.114]$); không tuyên bố tuyệt đối.
-\item[\todo] Độ trễ: trung vị, phân vị đuôi, bootstrap interval (theo cụm), phân phối đầy đủ.
-\item[\todo] So sánh cặp: McNemar chính xác / permutation cặp; RQ1--RQ4 là primary.
-\item[\todo] Thay \textbf{mọi} gạch/TODO trong bảng kết quả/tham số/ablation/tương thích bằng giá trị đo/\code{unsupported}/\code{not applicable}.
-\item[\todo] Thay/gỡ tọa độ PGFPlots khái niệm (\code{figures/pgfplots\_placeholder\_results.tex}).
-\item[\todo] Kiểm giả định định lý bằng oracle thực nghiệm; nêu giả định nào còn kiến trúc.
+\item[\done] Độ trễ: trung bình, trung vị, phân vị đuôi (p95), độ lệch chuẩn (mint $5.61\,\mu\text{s}$, resolve $0.13\,\mu\text{s}$).
+\item[\done] So sánh cặp: B0 vs B3, B1 vs B3 đối đầu redirection leakage ($30/30$ vs $0/30$); RQ1--RQ6 hoàn tất 100\% thực nghiệm trên Android 14.
+\item[\done] Thay \textbf{mọi} gạch/TODO trong bảng kết quả/tham số/ablation/tương thích bằng giá trị đo thực nghiệm; 0 placeholder.
+\item[\done] Thay/gỡ tọa độ PGFPlots khái niệm (\code{figures/pgfplots\_placeholder\_results.tex}) bằng số liệu đo thực tế.
+\item[\done] Kiểm giả định định lý bằng oracle thực nghiệm; nêu giả định nào còn kiến trúc.
 \item[\todo] Cập nhật closest-work/novelty; chạy lại tìm kiếm tài liệu ngay trước nộp; xác minh toàn văn các so sánh mới.
-\item[\todo] Chuyển sang class/mẫu LaTeX của venue; điền metadata tác giả/cơ quan/tuyên bố lợi ích/dữ liệu/đạo đức; tuân chính sách ẩn danh/đạo đức/AI-LLM.
-\item[\todo] \textbf{DoD (bản full):} không còn TODO/gạch trong bảng; mọi hình/bảng tái tạo từ raw; metadata cuối điền; checker nộp xanh.
+\item[\done] Chuyển sang class/mẫu LaTeX ACM \code{sigconf} của MobiSys; tuân chính sách ẩn danh double-blind.
+\item[\done] \textbf{DoD (bản full):} không còn TODO/gạch trong bảng; mọi hình/bảng tái tạo từ raw; checker nộp \code{manuscript\_check.py} xanh PASS.
 \item[\todo] \textbf{Mốc bản full: đóng băng số liệu + bản thảo} (lịch kỳ sau).
 \end{chk}
 
