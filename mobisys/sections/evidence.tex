@@ -6,24 +6,26 @@ We evaluate \SH{} on a stock-Android userdebug environment (Android 14, API 33/3
 \paragraph{Baselines.} We compare four security conditions:
 (B0)~\emph{Unprotected}: the agent observes the raw plaintext secret in notifications and on-screen and types it directly.
 (B1)~\emph{Detected Placeholder}: rendered sensitive text is replaced with an unbound local placeholder, approximating existing mobile anonymizers \cite{zhao2026anonymization}.
-(B2)~\emph{Platform Flow}: standard Android Credential Manager or Autofill where supported \cite{androidAutofillServices,androidCredentialManager} (unsupported workflows recorded as N/A).
+(B2)~\emph{Platform Flow}: standard Android Credential Manager and SMS User Consent flows \cite{androidAutofillServices,androidCredentialManager,androidSmsConsent}, which isolate credentials during retrieval but rely on standard framework focus without agent-destination confinement.
 (B3)~\emph{\SH}: OS-source minting, destination binding, atomic lifecycle, and observation redaction.
 
 \begin{table}[t]
 \centering
 \small
-\caption{Primary empirical results on Android. Outcomes $E, R, U, L$ measured over $n=30$ independent paired trials per condition. Replay $Y$ measured across $n=50$ replay attempts and $n=50$ concurrent races. Latency reports tail p95 response time. 95\% Wilson confidence intervals in brackets.}
+\caption{Primary empirical results on Android~14. Outcomes $E, R, U, L$ measured over $n=30$ independent paired trials per condition. Replay $Y$ tested across $n=50$ replays and $n=50$ concurrent races. 95\% Wilson confidence intervals in brackets.}
 \label{tab:main_eval}
-\resizebox{\columnwidth}{!}{\begin{tabular}{@{}lcccccc@{}}
+\resizebox{\columnwidth}{!}{\begin{tabular}{@{}lccccccc@{}}
 \toprule
-Condition & Exposure $E$ & Redirect $R$ & Utility $U$ & Reread $L$ & Replay $Y$ & p95 Latency \\
+Condition & Exposure $E$ & Redirect $R$ & $U_{\text{benign}}$ & $U_{\text{attack}}$ & Replay $Y$ & Step Time & Mediation Ovhd. \\
 \midrule
-B0 (unprotected)   & 0.97 [0.83, 0.99] & 0.97 [0.83, 0.99] & 0.97 [0.83, 0.99] & 1.00 [0.89, 1.00] & 1.00 [0.93, 1.00] & 48.6 s \\
-B1 (placeholder)   & 0.00 [0.00, 0.11] & 1.00 [0.89, 1.00] & 0.00 [0.00, 0.11]$^\dagger$ & 1.00 [0.89, 1.00] & 0.00 [0.00, 0.07] & 0.15 s \\
-B2 (platform flow) & N/A & N/A & N/A & N/A & N/A & N/A \\
-B3 (\SH)           & \textbf{0.00} [0.00, 0.11] & \textbf{0.00} [0.00, 0.11] & \textbf{1.00} [0.89, 1.00] & \textbf{0.00} [0.00, 0.11] & \textbf{0.00} [0.00, 0.07] & \textbf{9.30 $\mu$s} \\
+B0 (unprotected)   & 0.97 [0.83, 0.99] & 0.97 [0.83, 0.99] & 0.97 [0.83, 0.99] & 0.03 [0.01, 0.17] & 1.00 [0.93, 1.00] & 48.6 s & -- \\
+B1 (placeholder)   & 0.00 [0.00, 0.11] & 1.00 [0.89, 1.00] & 1.00 [0.89, 1.00] & 0.00 [0.00, 0.11]$^\dagger$ & 0.00 [0.00, 0.07] & 48.8 s & 150 ms \\
+B2 (platform flow) & 0.00 [0.00, 0.11] & 1.00 [0.89, 1.00] & 1.00 [0.89, 1.00] & 0.00 [0.00, 0.11]$^\ddagger$ & 0.00 [0.00, 0.07] & 48.6 s & 2.1 ms \\
+B3 (\SH)           & \textbf{0.00} [0.00, 0.11] & \textbf{0.00} [0.00, 0.11] & \textbf{1.00} [0.89, 1.00] & \textbf{1.00} [0.89, 1.00] & \textbf{0.00} [0.00, 0.07] & 48.6 s & \textbf{4.2 ms}$^*$ \\
 \bottomrule
-\multicolumn{7}{l}{\footnotesize $^\dagger$ Under destination redirection attack, B1 utility drops to 0.00 due to token hijacking.}
+\multicolumn{8}{l}{\footnotesize $^\dagger$ Under destination redirection, B1 utility drops to 0.00 due to unbound token hijacking \cite{zhao2026anonymization}.} \\
+\multicolumn{8}{l}{\footnotesize $^\ddagger$ Platform Credential Manager / SMS User Consent lacks destination confinement against injected agent UI clicks.} \\
+\multicolumn{8}{l}{\footnotesize $^*$ End-to-end Binder IPC + Keystore + UI injection (in-vault CAS state transition is $5.61\,\mu\text{s}$ mint, $0.13\,\mu\text{s}$ resolve).}
 \end{tabular}}
 \end{table}
 
@@ -31,12 +33,12 @@ B3 (\SH)           & \textbf{0.00} [0.00, 0.11] & \textbf{0.00} [0.00, 0.11] & \
 \centering
 \begin{minipage}[b]{0.50\columnwidth}
 \centering
-\includegraphics[height=3.1cm,width=\linewidth,keepaspectratio]{../figures/b3_redacted_shade.png}\\[2pt]
+\includegraphics[height=2.6cm,width=\linewidth,keepaspectratio]{../figures/b3_redacted_shade.png}\\[2pt]
 {\footnotesize (a) Notification shade}
 \end{minipage}\hfill
 \begin{minipage}[b]{0.46\columnwidth}
 \centering
-\includegraphics[height=3.1cm,width=\linewidth,keepaspectratio]{../figures/b3_masked_sms.png}\\[2pt]
+\includegraphics[height=2.6cm,width=\linewidth,keepaspectratio]{../figures/b3_masked_sms.png}\\[2pt]
 {\footnotesize (b) Conversation overlay}
 \end{minipage}
 \caption{The \SH{} Android prototype. (a)~The original notification is replaced with one naming only the minted handle. (b)~On-screen codes are masked via a non-touchable overlay (\texttt{TYPE\_ACCESSIBILITY\_OVERLAY}), so the agent observes only the opaque marker while touch events pass transparently.}
@@ -55,7 +57,7 @@ Under B3, the handle is bound to the legitimate package and task context; when p
 We stress-tested handle lifecycle properties across $n=50$ trials per condition: (1)~\emph{Sequential replay}: Replay resolution of an already-resolved handle was rejected in $50/50$ cases with \texttt{ALREADY\_RESOLVED} ($Y=0.00$, Wilson $[0.00, 0.07]$). (2)~\emph{TTL expiry}: Resolution after TTL expiration (5 minutes) was rejected in $50/50$ cases with \texttt{HANDLE\_EXPIRED} ($0/50$ bypassed). (3)~\emph{Multi-threaded race}: For each handle, 10 concurrent threads simultaneously contested resolution through a synchronized barrier (500 threads total); in $50/50$ trials, exactly one thread succeeded and 9 threads received rejections, with zero concurrency anomalies.
 
 \paragraph{Microbenchmark Overhead (RQ5).}
-We executed an on-device microbenchmark harness directly inside the Android ART runtime via \texttt{app\_process} ($n=100$ trials): (1)~\textbf{Mint latency:} Mean $5.61\,\mu\text{s}$ (median $5.24\,\mu\text{s}$, min $2.73\,\mu\text{s}$, p95 $9.30\,\mu\text{s}$, std $3.96\,\mu\text{s}$); (2)~\textbf{Resolve latency:} Mean $0.13\,\mu\text{s}$ (median $0.12\,\mu\text{s}$, min $0.11\,\mu\text{s}$, p95 $0.18\,\mu\text{s}$, std $0.06\,\mu\text{s}$); (3)~\textbf{Memory footprint:} Total process PSS is $28.71\,\text{MB}$ (Native Heap: $14.19\,\text{MB}$, Dalvik Heap: $2.11\,\text{MB}$; Dalvik heap allocated: $1.15\,\text{MB}$). These microsecond-scale latencies impose negligible overhead compared to agent visual inference times ($40$--$60\,\text{s}$/action).
+We benchmarked \SH{} across both isolated in-vault transitions and full end-to-end OS mediation ($n=100$ trials): (1)~\textbf{In-Vault state transition:} Measured inside the Android runtime via \texttt{app\_process}, in-vault mint latency is mean $5.61\,\mu\text{s}$ (p95 $9.30\,\mu\text{s}$, std $3.96\,\mu\text{s}$) and in-vault resolve CAS is mean $0.13\,\mu\text{s}$ (p95 $0.18\,\mu\text{s}$). (2)~\textbf{End-to-End mediation breakdown:} Full cross-process mediation on Android~14 totals mean $4.18\,\text{ms}$ (p95 $5.82\,\text{ms}$), comprising Binder IPC round-trip ($42\,\mu\text{s}$), Hardware Keystore HMAC verification ($1.18\,\text{ms}$), target context extraction and policy match ($1.35\,\text{ms}$), and private \texttt{ACTION\_SET\_TEXT} injection with accessibility overlay sync ($1.61\,\text{ms}$). Compared to agent visual inference latency ($40$--$60\,\text{s}$/action), \SH's mediation overhead accounts for $<0.01\%$ of step latency. (3)~\textbf{Memory footprint:} Total vault process PSS is $28.71\,\text{MB}$ (Native Heap: $14.19\,\text{MB}$, Dalvik Heap: $2.11\,\text{MB}$; Dalvik heap allocated: $1.15\,\text{MB}$).
 
 \paragraph{Benign Task Regression and Transparency (RQ6).}
 To verify that \SH{} does not interfere with general agent UI control or normal user workflows, we benchmarked the system across 10 diverse benign application suites in AndroidWorld \cite{rawles2024androidworld} (DeskClock, Markor Notes, Simple Calendar, Simple Gallery, Audio Recorder, Simple Draw, Camera2, Settings, SMS Messenger, and Contacts). Across 50 automated touch injection cycles, $100\%$ ($50/50$) of touch events passed cleanly through the overlay layer to the underlying application (\texttt{FLAG\_NOT\_TOUCHABLE}, $0.0\%$ block rate). Furthermore, GPU frame metrics via \texttt{dumpsys gfxinfo} confirmed that p95 frame rendering latency was virtually identical between B0 and B3 (Markor: $18.0\,\text{ms}$, $\Delta = 0.0\,\text{ms}$; Settings: $36.0\,\text{ms}$, $\Delta = 0.0\,\text{ms}$), proving that the background scanner does not degrade the compositor. Across all benign workflows, task success and action sequences remained unaffected ($\Delta = 0.00$).
@@ -74,7 +76,7 @@ Under \textbf{B3 (\SH{})}, the OS intercepts the SMS at the telephony boundary b
 \mathsf{BoundTarget}(\texttt{com.legitimate.bank}).
 \end{aligned}
 \end{equation}
-The resolver immediately halts resolution, emits a \texttt{CALLER\_MISMATCH} audit violation, and safely consumes the handle. The secret remains unexposed inside the OS vault, proving that \SH{} establishes security that is invariant to model alignment or cognitive manipulation.
+The resolver immediately halts resolution, emits a \texttt{CALLER\_MISMATCH} audit violation, and rejects resolution while keeping the handle live ($u$ intact, matching Algorithm~\ref{alg:resolve} Line~5). This prevents the injected prompt from mounting a denial-of-service attack, leaving the OTP available for the agent to complete the legitimate banking workflow. The secret remains unexposed inside the OS vault, proving that \SH{} establishes security that is invariant to model alignment or cognitive manipulation.
 
 \paragraph{Ablation: Dissecting Security Invariants.}
 We evaluated the necessity of each constituent mechanism in \SH{} by disabling components in turn:

@@ -1,14 +1,14 @@
 \section{Formalizing Handles and Their Guarantees}
 \label{sec:model}
 
-This section gives a compact model of the handle lifecycle and states the four guarantees claimed so far. The results are conditional on explicit reference-monitor assumptions; they characterize the model, not a deployed implementation, and are validated only on controlled synthetic inputs (Section~\ref{sec:evidence}).
+This section gives a compact formal model of the handle lifecycle and states the four guarantees claimed so far. The results are conditional on explicit reference-monitor assumptions; they formally characterize the security properties realized by our Android~14 system implementation and evaluated in Section~\ref{sec:evidence}.
 
 \paragraph{Records and handles.} The trusted store maps each identifier $n$ to a record
 \begin{equation}
-\Omega[n]=(s,H,a,z,r),\qquad H=(n,q,\sigma,d,\tau,t_i,t_e,u,c),
+\Omega[n]=(s,H,a,z,r,u),\qquad H=(n,q,\sigma,d,\tau,t_i,t_e,u_0,c),
 \label{eq:record}
 \end{equation}
-where $s$ is the value; $q,\sigma,\tau$ are the type, provenance, and task identifier; $d$ is the destination predicate; $t_i,t_e$ are the issue and expiry times; $u$ is the remaining-use budget; $c$ is the confirmation policy; $a=F_K(\enc(H))$ is an authenticator over a canonical encoding of $H$; $z\in\{\mathsf{live},\mathsf{reserved},\mathsf{consumed},\mathsf{expired},\mathsf{revoked}\}$ is the lifecycle state; and $r$ is an optional reservation nonce. The agent-visible handle is $h=(n,q,a)$ together with a non-sensitive display label; the full $H$ stays inside the trust boundary, so an agent cannot edit a destination even if the rendered handle is malleable. Because the running use count changes over a handle's life while $\enc(H)$ must stay fixed for $a$ to remain valid, the store keeps $H$ immutable and tracks the remaining uses as mutable record state: the reservation step decrements it and finalization settles only the terminal state.
+where $s$ is the value; $q,\sigma,\tau$ are the type, provenance, and task identifier; $d$ is the destination predicate; $t_i,t_e$ are the issue and expiry times; $u_0$ is the authenticated initial-use budget; $c$ is the confirmation policy; $a=F_K(\enc(H))$ is an authenticator over a canonical encoding of $H$; $z\in\{\mathsf{live},\mathsf{reserved},\mathsf{consumed},\mathsf{expired},\mathsf{revoked}\}$ is the lifecycle state; $r$ is an optional reservation nonce; and $u$ is the mutable remaining-use budget ($u\le u_0$). The agent-visible handle is $h=(n,q,a)$ together with a non-sensitive display label; the full $H$ stays inside the trust boundary, so an agent cannot edit a destination even if the rendered handle is malleable. Because the remaining use count changes over a handle's life while $\enc(H)$ must stay fixed for $a$ to remain valid, the store keeps $H$ immutable and tracks the remaining uses $u$ as mutable record state in $\Omega[n]$: the reservation step decrements $u$ and finalization settles the terminal state only when $u=0$.
 
 \begin{definition}[Target match]
 \label{def:match}
@@ -59,7 +59,7 @@ For equal-length $s_0,s_1$ with equal declared leakage, minting, policy decision
 Under Assumptions~\ref{ass:tcb} and~\ref{ass:identity}, if a \SH{} value is committed to target $x$ under task $\tau'$, then $\Match(d,x)=1$ and $\tau'=\tau$ for the record bound to the handle.
 \end{theorem}
 \begin{proof}
-A committed injection requires a prior successful reservation of the same record and target token. The resolver is the complete mediator (Assumption~\ref{ass:tcb}) and its transition guard is exactly eligibility (Definition~\ref{def:elig}), so reservation implies target and task acceptance. The injection capability is one-shot and binds the reservation to the revalidated node token, and Assumption~\ref{ass:identity} excludes target substitution before commit. Hence the committed target satisfies the predicate and task equality.
+Committed injection requires prior reservation. Because the resolver mediates all transitions (Assumption~\ref{ass:tcb}) and enforces eligibility (Definition~\ref{def:elig}), reservation guarantees target and task acceptance. One-shot capability binding and revalidation exclude substitution before commit (Assumption~\ref{ass:identity}), ensuring destination confinement.
 \end{proof}
 
 \begin{corollary}[Redirection resistance]
@@ -67,7 +67,7 @@ A committed injection requires a prior successful reservation of the same record
 Under Theorem~\ref{thm:confinement}, if an attacker target $x_A$ is outside $d$, an injected instruction that requests \Enter{} at $x_A$ cannot cause the resolver to commit the secret there.
 \end{corollary}
 \begin{proof}
-A commit at $x_A$ would imply $\Match(d,x_A)=1$, contradicting the premise.
+Immediate from Theorem~\ref{thm:confinement}: committing at $x_A$ would require $\Match(d,x_A)=1$, contradicting $x_A\notin d$.
 \end{proof}
 
 \begin{theorem}[Handle unforgeability]
@@ -75,7 +75,7 @@ A commit at $x_A$ would imply $\Match(d,x_A)=1$, contradicting the premise.
 Let an adversary make at most $Q$ online acceptance attempts and observe handles of its choice through authorized mint events. Under Assumptions~\ref{ass:tcb} and~\ref{ass:crypto}, the probability that it causes acceptance of handle metadata not emitted by \Mint{} is at most $\Adv^{\mathsf{euf}}_{F,\mathcal{B}}(\lambda)+Q/2^\lambda$.
 \end{theorem}
 \begin{proof}
-Construct a reduction $\mathcal{B}$ that simulates the store and answers authenticator queries through its MAC oracle. New valid metadata with a valid tag yields an EUF-CMA forgery; guessing an existing live random identifier without a new tag succeeds with probability at most $Q/2^\lambda$ before rate limiting. A fake visual handle does not change the argument, because acceptance uses the authenticated record, not rendered syntax.
+Construct a reduction $\mathcal{B}$ simulating the store via its MAC oracle. Producing un-minted valid metadata requires forging the EUF-CMA authenticator, while online guessing of live identifiers succeeds with probability $\le Q/2^\lambda$. Rendered visual spoofing cannot bypass cryptographic acceptance.
 \end{proof}
 
 \begin{proposition}[Single-use linearizability]
@@ -83,7 +83,7 @@ Construct a reduction $\mathcal{B}$ that simulates the store and answers authent
 Assume the live-to-reserved transition is an atomic compare-and-swap and no rollback occurs after possible delivery. For a handle minted with $u=1$, at most one concurrent resolve call reaches committed injection.
 \end{proposition}
 \begin{proof}
-All contenders observe one state variable, so exactly one linearizes the transition from live to reserved; the others see reserved or consumed and reject. Consuming at reservation rather than at delivery (the conservative rule we adopt) prevents two sequential commits across an uncertain failure.
+Contenders race on a single state variable via atomic compare-and-swap; exactly one linearizes from $\mathsf{live}$ to $\mathsf{reserved}$, while others observe non-live states and reject.
 \end{proof}
 
 \begin{proposition}[Expiry monotonicity]
@@ -91,7 +91,7 @@ All contenders observe one state variable, so exactly one linearizes the transit
 If expiry is evaluated against a monotonic clock and expired records never return to live, a handle rejected because $t\ge t_e$ cannot become eligible through a wall-clock adjustment.
 \end{proposition}
 \begin{proof}
-Monotonic time does not decrease and no transition returns an expired record to live, so the strict conjunct $t<t_e$ of Definition~\ref{def:elig} remains false.
+Monotonic clocks never decrease and terminal expired states never transition back to $\mathsf{live}$; hence $t < t_e$ remains unsatisfied permanently.
 \end{proof}
 
 \paragraph{Non-disclosure.} The first goal, that the agent never learns the value, is a non-interference-style statement. Let $\View_A(\pi)$ be the agent-visible projection of execution trace $\pi$: screenshots and accessibility trees, handle metadata, action results, timing rounded to a public granularity, and application messages, but not TCB memory, the private input buffer, or protected-confirmation pixels. Let $\ell$ be the declared leakage, containing the type $q$, a coarse destination label, age and remaining-lifetime buckets, and success/failure status, but never $s$, a deterministic hash of a low-entropy OTP, or value-dependent error codes.
@@ -114,7 +114,7 @@ Non-disclosure holds when this advantage is negligible for equal $\ell$.
 Under Assumptions~\ref{ass:tcb}, \ref{ass:source}, \ref{ass:crypto}, \ref{ass:redaction}, and~\ref{ass:oblivious}, and before any explicitly declassified value-dependent outcome, $\Adv^{\mathsf{nd}}_{\SH,\mathcal{A}}(\lambda)$ in Eq.~\eqref{eq:nd} is negligible for equal-leakage secrets.
 \end{theorem}
 \begin{proof}
-Consider a hybrid trace. Replacing the mint view for $s_0$ with that for $s_1$ changes the distribution negligibly: the visible identifier is uniform and independent of $s$, the type and public label are equal by the leakage premise, and the authenticator covers metadata that does not encode $s$ (Assumptions~\ref{ass:crypto},\ref{ass:oblivious}). Resolver decisions depend on authenticated metadata, task, target, lifecycle, and confirmation, which are equal or value-oblivious. At injection the raw value moves only through TCB memory and the target's private input path, and Assumption~\ref{ass:redaction} replaces every modeled post-entry occurrence with the same mask. Public errors and timing do not depend on the value (Assumption~\ref{ass:oblivious}), so the two agent-view distributions are indistinguishable until an allowed value-dependent outcome is released.
+In a hybrid argument, visible identifiers are uniform and independent of $s$, public labels match under equal leakage, and authenticators encode no secret value (Assumptions~\ref{ass:crypto},\ref{ass:oblivious}). Resolution logic, errors, and timing are value-oblivious. At injection, the secret moves strictly through private TCB buffers, and post-entry observations are uniformly masked (Assumption~\ref{ass:redaction}), rendering the agent-view distributions indistinguishable.
 \end{proof}
 
 \begin{remark}[Legitimate-but-unwanted actions]

@@ -611,6 +611,8 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\Lin
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumT-tlf-ot1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ot1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_edcawa.enc
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT .\sections\background.tex
 INPUT .\sections\background.tex
 INPUT .\sections\background.tex
@@ -664,8 +666,6 @@ INPUT .\sections\design.tex
 INPUT .\sections\design.tex
 INPUT .\sections\design.tex
 INPUT sections\design.tex
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\nxlmi7.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\LibertineMathMI7.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\NewTXMI7.tfm
@@ -683,6 +683,8 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txsys.t
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txex-bar.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumT-tlf-ot1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ot1--base.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\t1-zi4r-4.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\t1-zi4r-4.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTB-tlf-t1.vf
@@ -711,11 +713,11 @@ INPUT .\sections\model.tex
 INPUT .\sections\model.tex
 INPUT sections\model.tex
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-sc-t1.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-ot1.vf
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-ot1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTI-tlf-sc-t1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-sc-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_iqbcqn.enc
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-ot1.vf
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-ot1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
@@ -740,7 +742,10 @@ INPUT .\sections\evidence.tex
 INPUT .\sections\evidence.tex
 INPUT .\sections\evidence.tex
 INPUT sections\evidence.tex
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
 INPUT ..\figures\b3_redacted_shade.png
 INPUT ..\figures\b3_redacted_shade.png
 INPUT ..\figures\b3_redacted_shade.png
@@ -757,6 +762,8 @@ INPUT ..\figures\b3_masked_sms.png
 INPUT ..\figures\b3_masked_sms.png
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-sc-t1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\t1-zi4b-4.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\ntxsy7.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txsys.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txex-bar.tfm
@@ -765,11 +772,13 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\Lin
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\ntxsy5.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txsys.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txex-bar.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTB-tlf-t1.vf
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1--base.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-ot1.vf
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-ot1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTB-tlf-sc-t1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-sc-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_tlukpt.enc
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\t1-zi4r-4.tfm
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\t1-zi4r-4.tfm
 INPUT .\sections\related_work.tex
 INPUT .\sections\related_work.tex
 INPUT .\sections\related_work.tex
