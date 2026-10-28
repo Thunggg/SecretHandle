@@ -1,39 +1,48 @@
 \begin{figure*}[t]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tikzpicture}[node distance=13mm and 22mm]
-\node[sh/source] (sms) {\textbf{SMS / notification}\\OTP source};
-\node[sh/source,below=of sms] (cred) {\textbf{Credential}\\Manager};
-\node[sh/source,below=of cred] (clip) {\textbf{Clipboard / wallet}\\source};
-\node[sh/defense,right=24mm of cred] (mint) {\textbf{Handle Mint}\\source + task policy\\$\rightarrow$ authenticated $h$};
-\node[sh/component,right=27mm of mint] (agent) {\textbf{Untrusted agent}\\sees typed handle\\chooses target node};
-\node[sh/attack,above=14mm of agent] (attack) {Injected\\content};
-\node[sh/infrastructure,below=23mm of mint] (keys) {\textbf{Keystore / StrongBox}\\MAC key};
-\node[sh/defense,right=27mm of keys] (resolver) {\textbf{Resolver}\\authenticate + bind\\reserve lifecycle};
-\node[sh/component,right=27mm of resolver] (app) {\textbf{Target app / WebView}\\package + origin + field};
-\node[sh/defense,below=18mm of resolver] (redactor) {\textbf{Observation Redactor}\\accessibility + pixels};
-\node[sh/infrastructure,below=18mm of app] (confirm) {\textbf{Protected confirmation}\\payment-class use};
-\draw[sh/secureflow] (sms.east) -| (mint.north west);
-\draw[sh/secureflow] (cred.east) -- (mint.west);
-\draw[sh/secureflow] (clip.east) -| (mint.south west);
-\draw[sh/flow] (mint.east) -- node[sh/label,above] {opaque $h$ only} (agent.west);
-\draw[sh/attackflow] (attack.south) -- node[sh/label,right=2pt] {steers plan} (agent.north);
-\draw[sh/flow] (agent.south) -- node[sh/label,right=2pt] {\texttt{ENTER}$(h,V)$} (resolver.north);
-\draw[sh/control] (keys.east) -- node[sh/label,above] {verify} (resolver.west);
-\draw[sh/secureflow] (resolver.east) -- node[sh/label,above] {private injection} (app.west);
-\draw[sh/control] (confirm.north) -- node[sh/label,right=2pt] {approval} (app.south);
-\draw[sh/secureflow] (resolver.south) -- (redactor.north);
-\draw[sh/secureflow] (app.south west) |- node[sh/label,pos=.45] {mask subsequent view} (redactor.east);
-\draw[sh/flow] (redactor.west) -| node[sh/label,pos=.25,below] {redacted observation} ([xshift=-5mm]agent.south west);
+\begin{tikzpicture}[x=1cm,y=1cm]
+% ---- Row 0: attacker input (top right) ----
+\node[sh/attack]   (inj)   at (13.2, 6.3) {Injected content};
+% ---- Row 1: untrusted agent (wide bar) ----
+\node[sh/component, text width=13.6cm, minimum height=1.0cm] (agent) at (6.6, 4.3)
+  {\textbf{Untrusted agent}\quad sees only the typed handle and redacted observations; chooses the target node};
+% ---- Row 2: trusted reference monitor ----
+\node[sh/defense]        (mint)     at ( 0.0, 1.9) {\textbf{Handle Mint}\\source + task policy\\$\rightarrow$ authenticated $h$};
+\node[sh/infrastructure] (keys)     at ( 4.4, 1.9) {\textbf{Keystore / StrongBox}\\MAC key};
+\node[sh/defense]        (resolver) at ( 8.8, 1.9) {\textbf{Resolver}\\authenticate + bind\\reserve lifecycle};
+\node[sh/defense]        (redactor) at (13.2, 1.9) {\textbf{Observation Redactor}\\accessibility + pixels};
+% ---- Row 3: sources and target ----
+\node[sh/source, minimum height=1.7cm] (src) at (0.0,-1.0)
+  {\textbf{Authoritative OS sources}\\SMS / notification OTP,\\Credential Manager,\\clipboard / wallet};
+\node[sh/infrastructure] (confirm) at (4.4,-1.0) {\textbf{Protected confirmation}\\payment-class use};
+\node[sh/component]      (app)     at (8.8,-1.0) {\textbf{Target app / WebView}\\package + origin + field};
+
+% ---- Trusted monitor frame ----
 \begin{scope}[on background layer]
-\node[sh/group,fit=(sms)(cred)(clip),label={[font=\scriptsize]above:Authoritative OS sources}] {};
-\node[sh/group,fit=(mint)(keys)(resolver)(redactor),label={[font=\scriptsize]below:Trusted Android reference monitor}] {};
+  \node[sh/group, fit=(mint)(keys)(resolver)(redactor)] (trusted) {};
 \end{scope}
-\node[below=9mm of redactor,font=\scriptsize,align=left] (legend) {\tikz\draw[sh/flow] (0,0)--(.8,0); normal/control request\quad
-\tikz\draw[sh/secureflow] (0,0)--(.8,0); secret-protected path\quad
-\tikz\draw[sh/attackflow] (0,0)--(.8,0); adversarial influence};
-\end{tikzpicture}%
-}
-\caption{SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Colors and line styles distinguish ordinary, protected, and adversarial flows.}
+\node[font=\scriptsize\bfseries, anchor=south] at (trusted.north -| keys) {Trusted Android reference monitor};
+
+% ---- Flows (labels sit on the line, on a white background) ----
+\draw[sh/secureflow] (src.north) -- node[sh/label,midway]{raw value} (mint.south);
+\draw[sh/flow] (mint.north) -- node[sh/label,midway]{opaque handle $h$ only} (agent.south -| mint.north);
+\draw[sh/flow] (agent.south -| resolver.north) -- node[sh/label,midway]{\texttt{ENTER}$(h,V)$} (resolver.north);
+\draw[sh/flow] (redactor.north) -- node[sh/label,midway]{redacted observation} (agent.south -| redactor.north);
+\draw[sh/attackflow] (inj.south) -- node[sh/label,midway]{steers plan} (agent.north -| inj.south);
+\draw[sh/control] (keys.east) -- node[above,font=\scriptsize]{verify} (resolver.west);
+\draw[sh/secureflow] (resolver.east) -- (redactor.west);
+\draw[sh/secureflow] (resolver.south) -- node[sh/label,midway]{private injection} (app.north);
+\draw[sh/control] (confirm.east) -- node[above,font=\scriptsize]{approval} (app.west);
+\draw[sh/secureflow] (app.east) -| node[sh/label,pos=.3]{mask subsequent\\view} (redactor.south);
+
+% ---- Legend ----
+\begin{scope}[yshift=-3.0cm]
+  \draw[sh/flow]        ( 0.0,0) -- ( 0.9,0); \node[font=\scriptsize,anchor=west] at ( 1.0,0) {normal request};
+  \draw[sh/secureflow]  ( 4.2,0) -- ( 5.1,0); \node[font=\scriptsize,anchor=west] at ( 5.2,0) {secret-protected path};
+  \draw[sh/control]     ( 9.0,0) -- ( 9.9,0); \node[font=\scriptsize,anchor=west] at (10.0,0) {verify / approval};
+  \draw[sh/attackflow]  (13.0,0) -- (13.9,0); \node[font=\scriptsize,anchor=west] at (14.0,0) {adversarial influence};
+\end{scope}
+\end{tikzpicture}
+\caption{SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Line styles distinguish ordinary, protected, control, and adversarial flows.}
 \label{fig:architecture}
 \end{figure*}
