@@ -55,9 +55,9 @@
 \begin{document}
 
 \begin{center}
-{\color{shblue}\LARGE\bfseries Master Checklist --- \SH{} (A$\to$Z)}\\[4pt]
-{\large Một nguồn duy nhất để biết đã làm đến đâu và bước tiếp theo}\\[4pt]
-{\small\color{shgray} Cập nhật: 2026-10-22 \quad$\vert$\quad Mục tiêu: \textbf{ACM MobiSys 2027 --- Emerging Ideas} (nộp 04/12/2026) \quad$\vert$\quad Nguyên tắc: không placeholder nào được trình bày như kết quả.}
+{\color{shblue}\LARGE\bfseries Master Checklist --- \SH{} (Full Research Paper)}\\[4pt]
+{\large Kế hoạch toàn diện từ thiết kế hệ thống đến thực nghiệm empirical A$\to$Z}\\[4pt]
+{\small\color{shgray} Cập nhật: 2026-10-29 \quad$\vert$\quad Mục tiêu: \textbf{Full Research Paper} (ACM MobiSys / USENIX Security / ACM CCS / NDSS / IEEE S\&P) \quad$\vert$\quad Nguyên tắc: không placeholder nào được trình bày như kết quả.}
 \end{center}
 
 \vspace{0.3em}
@@ -68,32 +68,38 @@
 \block{}~Đang tắc (blocker)
 
 \vspace{0.6em}
-\section*{Mốc quan trọng (lịch MobiSys 2027)}
+\section*{Mốc quan trọng (Lộ trình Full Research Paper)}
 \begin{tabularx}{\textwidth}{@{}p{1.4cm}p{2.6cm}X@{}}
 \toprule
-\textbf{Cổng} & \textbf{Hạn} & \textbf{Điều kiện qua (tóm tắt)} \\
+\textbf{Cổng} & \textbf{Giai đoạn} & \textbf{Mục tiêu đạt được (Full Paper)} \\
 \midrule
-G0 & 25/10/2026 (W2) & Môi trường dev sẵn sàng; \textbf{B0 tái hiện được} trên emulator/stock; chốt D0--D6 \quad\textbf{(ĐẠT 2026-10-17)} \\
-G1 & 15/11/2026 (W5) & Tái hiện đầy đủ họ tấn công (1,3,4,7) + bằng chứng sơ bộ từ mô hình tham chiếu + khung bản thảo (problem/threat/design) \quad\textbf{(ĐẠT 2026-10-17; \code{docs/gates/G1.md})} \\
-G2 & 27/11/2026 (W7) & \textbf{Đăng ký abstract} (tiêu đề + abstract $\ge$100 từ, không ``TBD''); bản thảo gần hoàn chỉnh \\
-G3 & 01/12/2026 (W7) & Đóng băng bản thảo 12 trang + phụ lục; chuyển \code{acmart} sigconf; \textbf{ghi tên tác giả}; gán nhãn LLM \\
-Nộp & 04/12/2026 (AoE) & \textbf{MobiSys 2027 --- Emerging Ideas} (tiêu đề bắt đầu \code{[Emerging Ideas]}) \\
-Plan B & 2027 & Full paper (T1 + số đo thiết bị thật) cho MobiSys 2028 / USENIX / NDSS / IEEE S\&P \\
+G0 & Tuần 1--2 & Môi trường dev sẵn sàng; \textbf{B0 tái hiện được} trên emulator/stock; chốt D0--D6 \quad\textbf{(ĐẠT 2026-10-17)} \\
+G1 & Tuần 3--5 & Tái hiện đầy đủ họ tấn công (1, 3, 4, 7) + mô hình tham chiếu Python 6.400 trials + khung thiết kế hệ thống \quad\textbf{(ĐẠT 2026-10-17; \code{docs/gates/G1.md})} \\
+G2 & Tuần 6--8 & \textbf{Bộ khung thực nghiệm trên EC2}: Đo Attack 1 ($n=30$ B0 vs B3 \done); Attack 2 (Destination Redirection); Baseline $B_1$; Attack 4 (Replay \& Expiry); Microbenchmarks độ trễ ms (RQ5) \\
+G3 & Tuần 9--12 & \textbf{Đa dạng hóa ứng dụng \& Benchmark}: Workloads A--D, AndroidWorld benign regression, đa dạng hóa LLM (Claude Sonnet/Haiku, GPT-4o) \\
+Camera & Tuần 13--16 & Đóng băng số liệu thực nghiệm, hoàn thiện bản thảo Full Paper (14 trang format hội nghị) + đóng gói Artifact mã nguồn mở \\
 \bottomrule
 \end{tabularx}
 
 \vspace{0.6em}
-\section*{PHẦN 0 --- Phạm vi nộp 04/12/2026: Emerging Ideas}
-{\small Track Emerging Ideas ưu tiên \emph{originality, clarity of insight, potential} hơn độ hoàn thiện; \emph{không} đòi evaluation đầy đủ. Vì vậy bản nộp gồm:}
+\section*{PHẦN 0 --- Tiêu chuẩn \& Phạm vi của Full Research Paper}
+{\small Một bài Full Research Paper tại các hội nghị bảo mật/hệ thống hàng đầu đòi hỏi tính hoàn thiện cao cả về lý thuyết, cài đặt hệ thống và thực nghiệm empirical đối đầu:}
 \begin{chk}
-\item[\done] \textbf{Vấn đề \& tác động}: OTP/bí mật lộ cho tác nhân AI di động (attack B0 \textbf{đã tái hiện} trên emulator, 10/10). \textbf{2026-10-22:} tái tái lập Gate G1 (10/10, Wilson [0.722, 1.0]) + build fixture giờ byte-deterministic.
-\item[\done] \textbf{Mô hình đe dọa \& principal}: 3 kiểu caller (D3) đã đưa vào \code{mobisys/sections/threat\_model.tex} (app UID / shell-UiAutomation / serialize; root vô hiệu hóa).
-\item[\done] \textbf{Thiết kế} \SH: đúc tại nguồn OS, ràng buộc đích + tác vụ, vòng đời một lần, redaction quan sát. \textbf{2026-10-22:} ngôn ngữ chính sách + vòng đời đã có trong \code{mobisys/sections/design.tex} (\S Policy language, \S Lifecycle and reservation); người dùng tự lo phần này.
-\item[\done] \textbf{Bằng chứng sơ bộ}: tái hiện tấn công B0 thực trên emulator (xong 2026-10-17); \emph{mô hình tham chiếu Python} mô hình hóa tường minh họ \textbf{1,3,4,7} (thêm \code{read\_exfil}, \code{ambiguous\_identity}) --- 6400 trial, seed 20261017, đã ghi rõ là mô phỏng (không phải AOSP) tại \code{docs/preliminary\_evidence.md}. \textbf{2026-10-29:} mở rộng cặp \textbf{B0-vs-B3} thực trên emulator lên $n=30$ trial mỗi bên (B0 $29/30$ rò rỉ, Wilson $[0.83, 0.99]$; B3 prototype $0/30$ rò rỉ, Wilson $[0.00, 0.114]$; đối chứng tắt redaction $1/1$) vào \code{mobisys/sections/evidence.tex} kèm Bảng 3 + Hình 2, cập nhật abstract/introduction/limitations.
-\item[\done] \textbf{Kế hoạch đánh giá} đầy đủ (killer experiment, ma trận T1, cỡ mẫu, thống kê) cho bản full tại \code{docs/evaluation\_plan.md}.
-\item[\done] Nêu rõ \textbf{giới hạn} tại \code{mobisys/sections/limitations.tex}: chưa có số đo thiết bị thật; keystore mức phần mềm; WebView fail-closed; binding không bảo đảm dùng trung thực.
-\item[\done] Tuân thủ format: \textbf{tối đa} 12 trang thân bài (đây là \emph{mức tối đa}, \textbf{không} phải mục tiêu; phụ lục + tham khảo không tính), \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}} (đã có \code{mobisys/main.tex}, tiêu đề đã thêm \code{[Emerging Ideas]}), US Letter, double-column, cỡ chữ $\ge$10pt. \textbf{CFP đã đối chiếu 2026-10-17.} Hiện \textbf{14 trang} tổng (thân bài 12 trang, tham khảo bắt đầu từ tr.~12, phụ lục tr.~13--14; CFP \emph{không} tính tham khảo/phụ lục) $\Rightarrow$ \textbf{hợp lệ}.
-\item[\done] Single-blind + đạo đức + LLM tại \code{mobisys/sections/ethics.tex} (canary tổng hợp $\Rightarrow$ không human subjects; gán nhãn LLM).
+\item[\done] \textbf{Vấn đề \& tác động thực tế}: Rò rỉ OTP và bí mật cho tác nhân AI di động (đã tái hiện thực tế $B_0$ trên Android Emulator, $29/30$ rò rỉ, Wilson $[0.833, 0.994]$).
+\item[\done] \textbf{Mô hình đe dọa \& caller principal}: 3 kiểu caller (UID app, UID shell-UiAutomation, serialize observation) + phân định ranh giới tin cậy OS.
+\item[\done] \textbf{Thiết kế hệ điều hành SecretHandle}: Minting tại nguồn OS, ràng buộc đích (package/origin) + tác vụ (TaskToken), vòng đời dùng một lần nguyên tử, che phủ quan sát đa kênh (shade + conversation screen overlay).
+\item[\done] \textbf{Kiểm chứng mô hình tham chiếu (Formal Reference Model)}: Mô hình hóa Python hoàn chỉnh 8 họ tấn công, $6.400$ trials với seed cố định, chứng minh tính đúng đắn của State Machine.
+\item[\doing] \textbf{Đánh giá thực nghiệm empirical toàn diện (RQ1--RQ6)}:
+  \begin{itemize}
+    \item[\done] Attack 1 (Read \& Exfiltrate): Đã đo $n=30$ trials trên EC2 ($B_0$ rò rỉ $29/30$ vs $B_3$ bảo vệ $0/30$, Wilson $[0.000, 0.114]$).
+    \item[\todo] Attack 2 (Destination Redirection / Killer Experiment): Chứng minh Resolver từ chối $100\%$ khi agent cố gửi handle vào app hacker.
+    \item[\todo] Baseline $B_1$ (Detected Placeholder / Anonymizer): Chứng minh che phủ không ràng buộc đích vẫn thất bại trước Attack 2.
+    \item[\todo] Attack 4 (Replay \& Expiry): Kiểm chứng vòng đời một lần (One-time) và hết hạn 5 phút.
+    \item[\todo] Microbenchmarks độ trễ (RQ5): Đo thời gian Mint, Resolve, Redact (ms) và mức tiêu thụ RAM/CPU.
+    \item[\todo] Benign Regression: Đo đạc trên AndroidWorld để chứng minh không làm suy giảm năng lực thông thường của Agent.
+  \end{itemize}
+\item[\doing] \textbf{Định dạng bản thảo}: Bản thảo hoàn chỉnh gồm 14 trang nội dung chính (double-column, 10pt) + phụ lục chứng minh toán học và Artifact Appendix.
+\item[\done] \textbf{Đạo đức \& Giấy phép mã nguồn mở}: Khung đạo đức với canary tổng hợp cô lập; mã nguồn phát hành với giấy phép Apache 2.0 (tương thích AOSP).
 \end{chk}
 
 \vspace{0.6em}
@@ -102,15 +108,15 @@ Plan B & 2027 & Full paper (T1 + số đo thiết bị thật) cho MobiSys 2028 
 \toprule
 \textbf{Nhóm} & \textbf{Trạng thái} \\
 \midrule
-Tài liệu ý tưởng + bản thảo + mô hình tham chiếu & \done{} \textasciitilde90\% (khung mobisys \done; điền tên tác giả do người dùng) \\
-Audit cấp bản thảo (citation/figure/math/reviewer/notation) & \done \\
-Quyết định D0--D6 & \done{} (đã chốt 2026-10-17) \\
-Triển khai AOSP (Track A) & \todo{} 0\% (đường Plan B) \\
-Ứng dụng/tác nhân/harness (Track B) & \done{} \textasciitilde75\% (repo integration + deterministic build + gate G0/G1 PASS; runner Mobile-Agent pinned; B3 prototype stock-Android + đo B0-vs-B3 $n=30$) \\
-Baseline/ablation thực & \doing{} chỉ có bản tổng hợp \\
-Thí nghiệm thực \& số đo & \done{} B0-rate và cặp B0-vs-B3 trên emulator ($n=30$, B3 prototype 0/30 vs B0 29/30, Wilson [0, 0.114]) \\
-Phân tích thống kê / viết lại theo venue & \doing{} \textasciitilde65\% (bản thảo mobisys theo CFP xong; thống kê bản full chưa bắt đầu) \\
-Artifact \& nộp & \doing{} \textasciitilde50\% (LICENSE Apache-2.0, docs artifact, CI, checker; còn nộp bài + patch set AOSP) \\
+Tài liệu ý tưởng + bản thảo + mô hình tham chiếu & \done{} \textasciitilde90\% (bản thảo 53 trang preprint + khung hội nghị 14 trang; 74 tests passed) \\
+Audit cấp bản thảo (citation/figure/math/reviewer/notation) & \done{} 100\% hoàn tất \\
+Quyết định D0--D6 & \done{} (đã chốt; D0 chuyển trọng tâm Full Paper) \\
+Triển khai hệ thống & \doing{} \textasciitilde60\% (nguyên mẫu stock Android chạy trên EC2; kiến trúc AOSP system\_server) \\
+Ứng dụng/tác nhân/harness & \done{} \textasciitilde80\% (EC2 runner, Bedrock bridge Sonnet 4.6, Mobile-Agent v3.5, AndroidWorld) \\
+Baseline/ablation thực & \doing{} B0 và B3 đã đo $n=30$; chuẩn bị B1 placeholder \\
+Thí nghiệm thực \& số đo & \doing{} Attack 1 hoàn thành $n=30$; đang mở rộng Attack 2 \& Overhead RQ5 \\
+Phân tích thống kê / hoàn thiện bản thảo & \doing{} \textasciitilde70\% (Wilson CI, McNemar, bootstrap latency) \\
+Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apache-2.0, docs artifact, CI, benchmark harness) \\
 \bottomrule
 \end{tabularx}
 
@@ -124,14 +130,14 @@ Artifact \& nộp & \doing{} \textasciitilde50\% (LICENSE Apache-2.0, docs artif
 \item[\done] Harness + config tổng hợp + script demo/plot/experiment.
 \item[\done] Audit cấp bản thảo: \code{citation\_claim\_map.csv}, \code{citation\_consistency\_report.md}, \code{math\_audit.md}, \code{claim\_strength\_audit.md}, \code{figure\_quality\_audit.md}, \code{notation\_consistency\_check.md}, \code{reviewer\_audit.md}, \code{theorem\_dependency\_graph.md}, \code{topic\_alignment\_check.md}.
 \item[\done] Audit cấp mã: \code{SecretHandle/audits/} (paper\_implementation\_spec, paper\_to\_code\_traceability, math\_to\_code\_audit, implementation\_gaps, result\_integrity\_audit).
-\item[\done] Tài liệu hướng dẫn: \code{instructions/SecretHandle\_HuongDan.tex} (v2, cập nhật v3 cho MobiSys).
+\item[\done] Tài liệu hướng dẫn: \code{instructions/SecretHandle\_HuongDan.tex}.
 \item[\done] Nhật ký quyết định: \code{SecretHandle/docs/design\_decisions.md} (D0--D6 đã chốt).
 \end{chk}
 
 \section*{PHẦN B --- Giai đoạn 0: Chuẩn bị \& quyết định (W1--W2, cổng G0)}
-\subsection*{B1. Quyết định thiết kế (đã chốt 2026-10-17)}
+\subsection*{B1. Quyết định thiết kế}
 \begin{chk}
-\item[\done] \textbf{D0} Venue/lịch: \textbf{MobiSys 2027, Emerging Ideas} (nộp 04/12/2026); full paper để Plan B.
+\item[\done] \textbf{D0} Venue/lịch: \textbf{Full Research Paper} (ACM MobiSys / USENIX Security / ACM CCS / NDSS); mục tiêu bài báo nghiên cứu đầy đủ, không hạ cấp.
 \item[\done] \textbf{D1} Authenticator: giữ MAC (HMAC-SHA-256, canonical, tách khóa).
 \item[\done] \textbf{D2} Kho lưu trữ: trong bộ nhớ \code{system\_server}; khởi động lại = thu hồi.
 \item[\done] \textbf{D3} Principal tác nhân: 3 kiểu (UID app / UID shell-UiAutomation / serialize) + bảng điểm chặn.
@@ -140,9 +146,9 @@ Artifact \& nộp & \doing{} \textasciitilde50\% (LICENSE Apache-2.0, docs artif
 \item[\done] \textbf{D6} Môi trường: không có Pixel $\Rightarrow$ emulator/Cuttlefish với ảnh AOSP tự build; số đo thiết bị thật = future work.
 \end{chk}
 
-\subsection*{B2. Track A --- môi trường AOSP (đường Plan B, chạy song song)}
+\subsection*{B2. Track A --- Môi trường hệ thống AOSP}
 \begin{chk}
-\item[\todo] \code{repo sync} AOSP (hàng chục--trăm GB, nhiều giờ) --- chuẩn bị \emph{bản full}, \textbf{không} phải điều kiện nộp 04/12.
+\item[\todo] \code{repo sync} AOSP (hàng chục--trăm GB, nhiều giờ) --- chuẩn bị bản triển khai AOSP \code{system\_server}.
 \item[\todo] Ghim commit/branch AOSP; ghi provenance.
 \item[\todo] Dựng \textbf{Android Emulator} với ảnh AOSP tự build (máy Windows) \emph{hoặc} \textbf{Cuttlefish} (Linux/GCP có KVM) --- môi trường chính theo D6.
 \item[\todo] Build ảnh AOSP (thay cho flash Pixel); boot được trên emulator/Cuttlefish.
@@ -191,10 +197,10 @@ Artifact \& nộp & \doing{} \textasciitilde50\% (LICENSE Apache-2.0, docs artif
 \end{chk}
 
 \vspace{0.6em}
-\noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{\small\textbf{Các PHẦN D--N dưới đây mô tả \emph{bản full} (Plan B) với lịch W1--W16.} Với bản nộp \textbf{04/12/2026} (MobiSys Emerging Ideas), phần lớn hạng mục ở đây \emph{chưa} cần --- xem \textbf{PHẦN 0} để biết phạm vi bản nộp.}}
+\noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{\small\textbf{Toàn bộ các PHẦN D--N dưới đây là lộ trình triển khai chi tiết cho Full Research Paper.} Mọi hạng mục từ dịch vụ hệ điều hành, ma trận baseline, tấn công mở rộng đến đo đạc overhead đều là các thành phần bắt buộc của nghiên cứu.}}
 \vspace{0.6em}
 
-\section*{PHẦN D --- Giai đoạn 2: Walking skeleton (cổng G1, Track A+B) [bản full]}
+\section*{PHẦN D --- Giai đoạn 2: Walking skeleton (cổng G1, Track A+B)}
 \begin{chk}
 \item[\todo] Lát cắt dọc đầu: SMS $\to$ mint $\to$ \code{ENTER} $\to$ ô nhập app đăng nhập.
 \item[\todo] Dịch vụ \code{system\_server} với AIDL tối thiểu: \code{mint} (allowlist), \code{resolve}, \code{revoke}; kho trong bộ nhớ (D2).

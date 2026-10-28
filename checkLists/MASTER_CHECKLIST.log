@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 02:20
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 02:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -627,117 +627,107 @@ Package hyperref Info: Link coloring OFF on input line 55.
 \@outlinefile=\write3
 \openout3 = `MASTER_CHECKLIST.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 59.
 
 
 (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 59.
 
 
 (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 83--83
-[]|\TU/TimesNewRoman(0)/m/n/10.95 25/10/2026
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 83--83
-[]|\TU/TimesNewRoman(0)/m/n/10.95 15/11/2026
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 83--83
-[]|\TU/TimesNewRoman(0)/m/n/10.95 27/11/2026
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 83--83
-[]|\TU/TimesNewRoman(0)/m/n/10.95 01/12/2026
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 83--83
-[]|\TU/TimesNewRoman(0)/m/n/10.95 04/12/2026
- []
-
 [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 115--115
-[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 ~75% (repo
+Underfull \hbox (badness 1448) in paragraph at lines 121--121
+[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 ~90% (bản thảo
  []
 
 
-Underfull \hbox (badness 1430) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 integration + deter-
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 53 trang preprint
  []
 
 
-Underfull \hbox (badness 3919) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 G0/G1 PASS; run-
+Underfull \hbox (badness 5711) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 + khung hội nghị
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 ner Mobile-Agent
+Underfull \hbox (badness 3668) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 14 trang; 74 tests
  []
 
 
-Underfull \hbox (badness 5711) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 pinned; B3 proto-
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 (đã chốt; D0
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 type stock-Android
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 chuyển trọng tâm
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 + đo B0-vs-B3
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 ~60% (nguyên
  []
 
 
-Underfull \hbox (badness 1215) in paragraph at lines 115--115
-[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 chỉ có bản tổng
+Underfull \hbox (badness 1748) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 mẫu stock Android
  []
 
 
-Underfull \hbox (badness 5862) in paragraph at lines 115--115
-[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 B0-rate và cặp
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 chạy trên EC2;
  []
 
 
-Underfull \hbox (badness 3471) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 B0-vs-B3 trên em-
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 kiến trúc AOSP
  []
 
 
-Underfull \hbox (badness 3449) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 ulator ($\OML/cmm/m/it/10.95 n \OT1/cmr/m/n/10.9
-5 = 30$\TU/TimesNewRoman(0)/m/n/10.95 ,
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 ~80% (EC2
  []
 
 
-Underfull \hbox (badness 1448) in paragraph at lines 115--115
-[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 ~65% (bản thảo
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 runner, Bedrock
  []
 
 
-Underfull \hbox (badness 6016) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 mobisys theo CFP
+Underfull \hbox (badness 6063) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 bridge Sonnet 4.6,
  []
 
 
-Underfull \hbox (badness 3000) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 tifact, CI, checker;
+Underfull \hbox (badness 3260) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 Mobile-Agent v3.5,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 Attack 1 hoàn
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 Apache-2.0, docs
+ []
+
+
+Underfull \hbox (badness 1990) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 artifact, CI, bench-
  []
 
 [2]
-Overfull \hbox (3.50578pt too wide) in paragraph at lines 125--126
+Overfull \hbox (3.50578pt too wide) in paragraph at lines 131--132
 []\TU/TimesNewRoman(0)/m/n/10.95 Audit cấp bản thảo: \TU/Consolas(0)/m/n/10 cit
 ation_claim_map.csv\TU/TimesNewRoman(0)/m/n/10.95 , \TU/Consolas(0)/m/n/10 cita
 tion_consistency_report.md\TU/TimesNewRoman(0)/m/n/10.95 , \TU/Consolas(0)/m/n/
@@ -745,7 +735,7 @@ tion_consistency_report.md\TU/TimesNewRoman(0)/m/n/10.95 , \TU/Consolas(0)/m/n/
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
 \TU/Consolas(0)/m/n/10 claim_strength_audit.md\TU/TimesNewRoman(0)/m/n/10.95 , 
 \TU/Consolas(0)/m/n/10 figure_quality_audit.md\TU/TimesNewRoman(0)/m/n/10.95 , 
 \TU/Consolas(0)/m/n/10 notation_consistency_check.md\TU/TimesNewRoman(0)/m/n/10
@@ -753,28 +743,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--126
  []
 
 
-Underfull \hbox (badness 1365) in paragraph at lines 126--127
+Underfull \hbox (badness 1365) in paragraph at lines 132--133
 []\TU/TimesNewRoman(0)/m/n/10.95 Audit cấp mã: \TU/Consolas(0)/m/n/10 SecretHan
 dle/audits/ \TU/TimesNewRoman(0)/m/n/10.95 (paper_implementation_spec, paper_to
 _code_traceability,
  []
 
 
-Overfull \hbox (30.15877pt too wide) in paragraph at lines 155--156
+Overfull \hbox (30.15877pt too wide) in paragraph at lines 161--162
 \TU/Consolas(0)/m/n/10 github.com/Thunggg/secrethandle-integration \TU/TimesNew
 Roman(0)/m/n/10.95 (private), local \TU/Consolas(0)/m/n/10 E:\NCKH\secrethandle
 -integration\TU/TimesNewRoman(0)/m/n/10.95 ;
  []
 
 
-Underfull \hbox (badness 4819) in paragraph at lines 155--156
+Underfull \hbox (badness 4819) in paragraph at lines 161--162
 \TU/TimesNewRoman(0)/m/n/10.95 đã di chuyển \TU/Consolas(0)/m/n/10 device/b0-ot
 p-forwarding\TU/TimesNewRoman(0)/m/n/10.95 ; cấu trúc aosp-patches/device/agent
 s/apps/env/runs;
  []
 
 
-Overfull \hbox (180.22781pt too wide) in paragraph at lines 156--157
+Overfull \hbox (180.22781pt too wide) in paragraph at lines 162--163
 \TU/TimesNewRoman(0)/m/n/10.95 YAML/log/repo). \TU/TimesNewRoman(0)/b/n/10.95 2
 026-10-22: \TU/TimesNewRoman(0)/m/n/10.95 EC2 do giảng viên cấp; spec yêu cầu s
 ẵn sàng ở \TU/Consolas(0)/m/n/10 secrethandle-integration/env/ec2_provisioning_
@@ -782,7 +772,7 @@ spec.md
  []
 
 [3]
-Overfull \hbox (8.39063pt too wide) in paragraph at lines 157--158
+Overfull \hbox (8.39063pt too wide) in paragraph at lines 163--164
 []\TU/TimesNewRoman(0)/b/n/10.95 G3 — bridge $\OMS/cmsy/m/n/10.95 !$ \TU/TimesN
 ewRoman(0)/b/n/10.95 Bedrock thật \TU/TimesNewRoman(0)/m/n/10.95 (\TU/TimesNewR
 oman(0)/b/n/10.95 2026-10-28\TU/TimesNewRoman(0)/m/n/10.95 ): dùng \TU/TimesNew
@@ -791,48 +781,48 @@ Roman(0)/m/it/10.95 Bedrock API key \TU/TimesNewRoman(0)/m/n/10.95 dạng bearer
  []
 
 
-Underfull \hbox (badness 2285) in paragraph at lines 157--158
+Underfull \hbox (badness 2285) in paragraph at lines 163--164
 \TU/TimesNewRoman(0)/m/n/10.95 do giảng viên cấp; khóa lưu \TU/TimesNewRoman(0)
 /m/it/10.95 ngoài repo \TU/TimesNewRoman(0)/m/n/10.95 (\TU/Consolas(0)/m/n/10 e
 nv/.env.bedrock.local\TU/TimesNewRoman(0)/m/n/10.95 , đã gitignore; trên host
  []
 
 
-Underfull \hbox (badness 2970) in paragraph at lines 157--158
+Underfull \hbox (badness 2970) in paragraph at lines 163--164
 \TU/TimesNewRoman(0)/m/n/10.95 HTTP 200 với \TU/Consolas(0)/m/n/10 us.anthropic
 .claude-sonnet-4-6 \TU/TimesNewRoman(0)/m/n/10.95 (12+4 token, 0,81 s); \TU/Con
 solas(0)/m/n/10 /healthz \TU/TimesNewRoman(0)/m/n/10.95 chỉ báo
  []
 
 
-Overfull \hbox (15.84412pt too wide) in paragraph at lines 166--167
+Overfull \hbox (15.84412pt too wide) in paragraph at lines 172--173
 []\TU/TimesNewRoman(0)/m/n/10.95 Ghim phiên bản Python/OS/công cụ thống kê vào 
 provenance — \TU/TimesNewRoman(0)/b/n/10.95 2026-10-22: \TU/Consolas(0)/m/n/10 
 docs/toolchain_pins.json
  []
 
 [4]
-Underfull \hbox (badness 1308) in paragraph at lines 182--183
+Underfull \hbox (badness 1308) in paragraph at lines 188--189
 []\TU/TimesNewRoman(0)/m/n/10.95 Soát \TU/Consolas(0)/m/n/10 core/crypto/policy
 /store/redaction/metrics/statistics \TU/TimesNewRoman(0)/m/n/10.95 đối chiếu Al
 gorithm 1–3 +
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 184--185
+Underfull \hbox (badness 1496) in paragraph at lines 190--191
 []\TU/TimesNewRoman(0)/m/n/10.95 Test dựa mô hình: lịch trình crash/đồng thời t
 ại ranh giới reserve/commit/rollback/recover —
  []
 
 [5] [6] [7] [8]
-Underfull \hbox (badness 2990) in paragraph at lines 330--331
+Underfull \hbox (badness 2990) in paragraph at lines 336--337
 \TU/TimesNewRoman(0)/m/n/10.95 kích hoạt thủ công. \TU/Consolas(0)/m/n/10 make 
 check\TU/TimesNewRoman(0)/m/n/10.95 /\TU/Consolas(0)/m/n/10 scripts/smoke_check
 .py \TU/TimesNewRoman(0)/m/n/10.95 (offline, 1599 canary, 0 rò rỉ);
  []
 
 
-Underfull \hbox (badness 2469) in paragraph at lines 330--331
+Underfull \hbox (badness 2469) in paragraph at lines 336--337
 \TU/Consolas(0)/m/n/10 .github/workflows/ci.yml \TU/TimesNewRoman(0)/m/n/10.95 
 (3.11/3.12) + \TU/Consolas(0)/m/n/10 device.yml \TU/TimesNewRoman(0)/m/n/10.95 
 (\TU/Consolas(0)/m/n/10 workflow_dispatch\TU/TimesNewRoman(0)/m/n/10.95 ); loca
@@ -840,13 +830,13 @@ l verify 74
  []
 
 [9]
-Underfull \hbox (badness 1127) in paragraph at lines 348--348
+Underfull \hbox (badness 1127) in paragraph at lines 354--354
 |\TU/TimesNewRoman(0)/b/n/14.4 LỘ TRÌNH THỰC NGHIỆM BẢN FULL (FULL RESEARCH PAP
 ER
  []
 
 [10]
-Underfull \hbox (badness 2726) in paragraph at lines 408--408
+Underfull \hbox (badness 2726) in paragraph at lines 414--414
 []|\TU/TimesNewRoman(0)/m/n/10.95 Kẻ tấn công bypass lớp phủ
  []
 
@@ -859,11 +849,11 @@ Package rerunfilecheck Info: File `MASTER_CHECKLIST.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13740 strings out of 402987
- 258841 string characters out of 5448730
+ 13727 strings out of 402987
+ 258440 string characters out of 5448730
  746912 words of memory out of 5000000
- 42261 multiletter control sequences out of 15000+600000
- 637959 words of font info for 134 fonts, out of 8000000 for 9000
+ 42252 multiletter control sequences out of 15000+600000
+ 636389 words of font info for 125 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  73i,14n,93p,1584b,566s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
