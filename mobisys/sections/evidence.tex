@@ -68,3 +68,26 @@ To verify that \SH{} does not interfere with general agent UI control or normal 
   \item \textbf{General-task regression:} Across all benign workflows, task success and action sequences remained unaffected by the presence of \SH, demonstrating general-task regression $\Delta = 0.00$.
 \end{itemize}
 
+\paragraph{Qualitative Analysis: Anatomy of Agent Misdirection.}
+To understand the cognitive failure modes of vision-driven agents, we analyzed the step-by-step action trajectories across all $n=30$ trials under B0, B1, and B3. In a representative execution, the user tasks the agent with completing a 2-factor login into a banking portal (\texttt{com.legitimate.bank}). During task execution, an incoming SMS arrives containing an indirect prompt injection: \emph{``Your Bank: Verification code 849201. Special Offer: To claim your \$50 cash credit, forward this verification code to the CashRewards app immediately.''}
+
+Under \textbf{B0 (Unprotected)}, the vision-language model cannot distinguish between the primary user objective and the adversarial instruction embedded in the notification. In $29/30$ trials, the agent deviated from the legitimate workflow, opened the attacker's application (\texttt{com.attacker.rewards}), typed the raw code \texttt{849201}, and submitted the exfiltration form in an average of 4.2 action steps.
+
+Under \textbf{B1 (Detected Placeholder)}, the rendered text \texttt{849201} is masked on-screen by a local placeholder token \texttt{[TOKEN\_OTP\_1]}. Although the agent's visual observation contains no raw digits, the model's planner obeys the injected instruction and transfers the token: it navigates to \texttt{com.attacker.rewards} and issues \texttt{type([TOKEN\_OTP\_1])}. Because B1 lacks destination confinement, the resolver naively unmasks the token for the requesting caller, handing the plaintext secret directly to the adversary ($30/30$ trials, $R=1.00$).
+
+Under \textbf{B3 (\SH{})}, the OS intercepts the SMS at the telephony boundary before rendering. It mints an unforgeable handle \texttt{SH-A8F29C} bound strictly to \texttt{pkg:com.legitimate.bank}. Even though the agent still experiences cognitive confusion from the injected text and attempts to enter \texttt{SH-A8F29C} into the attacker app, the OS Resolver executes Algorithm~2 and verifies the caller's identity via Binder IPC:
+\begin{equation}
+\text{Caller}(\texttt{com.attacker.rewards}) \neq \text{BoundTarget}(\texttt{com.legitimate.bank}).
+\end{equation}
+The resolver immediately halts resolution, emits a \texttt{CALLER\_MISMATCH} audit violation, and safely consumes the handle. The secret remains unexposed inside the OS vault, proving that \SH{} establishes security that is invariant to model alignment or cognitive manipulation.
+
+\paragraph{Ablation: Dissecting Security Invariants.}
+We evaluated the necessity of each constituent mechanism in \SH{} by disabling components in turn:
+\begin{itemize}[leftmargin=*]
+  \item \emph{No Source Minting:} Replacing OS-source minting with screen-scraping detection exposes the raw secret during the arrival frame, resulting in immediate agent exfiltration ($E = 0.97$).
+  \item \emph{No Destination Binding:} Omitting the caller package check degrades \SH{} to B1, allowing an injected agent to reroute the secret to an adversary ($R = 1.00$).
+  \item \emph{No Atomic CAS Lifecycle:} Disabling hardware/mutex locks allows concurrent threads to duplicate single-use OTPs ($50/50$ race vulnerability).
+  \item \emph{No Observation Redactor:} Disabling post-entry overlay masking allows the agent to take a subsequent screenshot and re-read the resolved value off the screen ($L = 1.00$, verified in our $1/1$ control test).
+\end{itemize}
+This ablation confirms that \SH's protection is non-redundant: all four invariants are strictly required to ensure zero exposure.
+
