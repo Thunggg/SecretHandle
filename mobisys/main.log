@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 03:10
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 03:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -3095,31 +3095,88 @@ Underfull \hbox (badness 3271) in paragraph at lines 67--68
  []
 
 ) (sections/related_work.tex
-Underfull \hbox (badness 1337) in paragraph at lines 4--5
+Missing character: There is no ✓ in font [LinLibertine_R.otf]/OT:script=latn;la
+nguage=dflt;+tnum;+lnum;mapping=tex-text;!
+Missing character: There is no ✓ in font [LinLibertine_R.otf]/OT:script=latn;la
+nguage=dflt;+tnum;+lnum;mapping=tex-text;!
+Missing character: There is no ✓ in font [LinLibertine_R.otf]/OT:script=latn;la
+nguage=dflt;+tnum;+lnum;mapping=tex-text;!
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/sc' will be
+(Font)              scaled to size 9.0pt on input line 24.
+Missing character: There is no ✓ in font [LinLibertine_RB.otf]/OT:script=latn;l
+anguage=dflt;+tnum;+lnum;mapping=tex-text;!
+Missing character: There is no ✓ in font [LinLibertine_RB.otf]/OT:script=latn;l
+anguage=dflt;+tnum;+lnum;mapping=tex-text;!
+Missing character: There is no ✓ in font [LinLibertine_RB.otf]/OT:script=latn;l
+anguage=dflt;+tnum;+lnum;mapping=tex-text;!
+Missing character: There is no ✓ in font [LinLibertine_RB.otf]/OT:script=latn;l
+anguage=dflt;+tnum;+lnum;mapping=tex-text;!
+Missing character: There is no ✓ in font [LinLibertine_RB.otf]/OT:script=latn;l
+anguage=dflt;+tnum;+lnum;mapping=tex-text;!
+Missing character: There is no ✓ in font [LinLibertine_R.otf]/OT:script=latn;la
+nguage=dflt;+tnum;+lnum;mapping=tex-text;!
+
+Underfull \hbox (badness 7595) in paragraph at lines 27--28
+\TU/LinLibertine(1)/m/n/10 While existing defenses tackle individual aspects of
+
+ []
+
+
+Underfull \hbox (badness 1430) in paragraph at lines 27--28
+\TU/LinLibertine(1)/m/n/10 the problem—such as post-hoc taint tracking, heurist
+ic
+ []
+
+
+Underfull \hbox (badness 1337) in paragraph at lines 29--30
  []\TU/LinLibertine(0)/m/it/10 Placeholder and anonymization defenses.[] \TU/Li
 nLibertine(1)/m/n/10 Mobile place-
  []
 
 
-Underfull \hbox (badness 1796) in paragraph at lines 4--5
+Underfull \hbox (badness 1796) in paragraph at lines 29--30
 \TU/LinLibertine(1)/m/n/10 holder schemes replace sensitive rendered text with 
 a
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 12--13
+Underfull \hbox (badness 2376) in paragraph at lines 29--30
+\TU/LinLibertine(1)/m/n/10 itative OS source, not screen scraping), unforgeabil
+ity,
+ []
+
+
+Underfull \hbox (badness 5231) in paragraph at lines 29--30
+\TU/LinLibertine(1)/m/n/10 redirection ($[][][][][]$ leakage under Attack 2), w
+hereas
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+ []\TU/LinLibertine(0)/m/it/10 Prompt sanitizers.[] \TU/LinLibertine(1)/m/n/10 
+Detection-and-rewrite approaches
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 33--34
+\TU/LinLibertine(1)/m/n/10 more, prompt sanitization is probabilistic: adversar
+ial
+ []
+
+
+Underfull \hbox (badness 2932) in paragraph at lines 37--38
 \TU/LinLibertine(1)/m/n/10 is complementary but observability-oriented: they ca
 n
  []
 
-) (sections/limitations.tex
-Underfull \hbox (badness 1655) in paragraph at lines 16--1
+[10.10]) (sections/limitations.tex
+Underfull \hbox (badness 1655) in paragraph at lines 41--1
  []\TU/LinLibertine(0)/m/it/10 Attacks.[] \TU/LinLibertine(1)/m/n/10 Documented
  agent OTP exfiltration and for-
  []
 
 
-Underfull \hbox (badness 6268) in paragraph at lines 16--1
+Underfull \hbox (badness 6268) in paragraph at lines 41--1
 \TU/LinLibertine(1)/m/n/10 warding, plus environmental and fine-print injection
 ,
  []
@@ -3142,7 +3199,7 @@ Underfull \hbox (badness 1112) in paragraph at lines 4--5
 and
  []
 
-[10.10]
+
 Underfull \hbox (badness 2119) in paragraph at lines 6--7
 \TU/LinLibertine(1)/m/n/10 promise can read values, forge target identity, bypa
 ss
@@ -3202,7 +3259,7 @@ Underfull \hbox (badness 1248) in paragraph at lines 12--13
 
  []
 
-) (sections/ethics.tex) (sections/conclusion.tex)
+) (sections/ethics.tex) (sections/conclusion.tex [11.11])
 Underfull \hbox (badness 2538) in paragraph at lines 4--104
 \TU/LinLibertine(0)/m/sc/10 SecretHandle \TU/LinLibertine(1)/m/n/10 reframes ho
 w an untrusted mobile AI
@@ -3249,7 +3306,6 @@ Underfull \hbox (badness 1057) in paragraph at lines 116--127
  with the
  []
 
-[11.11]
 LaTeX Info: Redefining \tempurl on input line 136.
 LaTeX Info: Redefining \tempurl on input line 150.
 LaTeX Info: Redefining \tempurl on input line 183.
@@ -3317,22 +3373,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 307--317
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 Underfull \hbox (badness 1558) in paragraph at lines 337--344
 []\TU/LinLibertine(1)/m/n/8 Daniel Fett, Brian Campbell, John Bradley, Torsten 
 Lodderstedt,
  []
 
-LaTeX Info: Redefining \tempurl on input line 455.
-LaTeX Info: Redefining \tempurl on input line 470.
-LaTeX Info: Redefining \tempurl on input line 523.
-LaTeX Info: Redefining \tempurl on input line 540.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12.12]
+LaTeX Info: Redefining \tempurl on input line 455.
+LaTeX Info: Redefining \tempurl on input line 470.
+LaTeX Info: Redefining \tempurl on input line 523.
+LaTeX Info: Redefining \tempurl on input line 540.
 LaTeX Info: Redefining \tempurl on input line 554.
 LaTeX Info: Redefining \tempurl on input line 584.
 
@@ -3348,6 +3401,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 578--587
 ][][][][][][] [][] [][][][][][][][][][][][] [][] [][][] [][] [][][] [][] [][][]
 [][] [][]
  []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Info: Redefining \tempurl on input line 599.
 
@@ -3367,9 +3423,6 @@ Underfull \hbox (badness 2653) in paragraph at lines 4--5
 \TU/LinLibertine(1)/m/n/10 screenshot, accessibility, or private-input claims; 
 those
  []
-
-
-Underfull \vbox (badness 1062) has occurred while \output is active []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
@@ -3395,7 +3448,7 @@ Underfull \hbox (badness 2753) in paragraph at lines 6--7
 
  []
 
-
+[13.13]
 Underfull \hbox (badness 1371) in paragraph at lines 14--15
 \TU/LinLibertine(1)/m/n/10 type-check (\TU/inconsolata(0)/m/n/10 mypy\TU/LinLib
 ertine(1)/m/n/10 ), the offline pytest suite, and the ca-
@@ -3455,7 +3508,7 @@ Underfull \hbox (badness 5288) in paragraph at lines 26--27
 1)/m/n/10 In addition to the offline
  []
 
-[13.13])
+)
 Underfull \hbox (badness 4505) in paragraph at lines 28--110
  []\TU/LinLibertine(0)/m/it/10 Integrity and license.[] \TU/LinLibertine(1)/m/n
 /10 Configuration files are hashed
@@ -3489,6 +3542,9 @@ Class acmart Warning: ACM reference format is mandatory
 (acmart)              \settopmatter command..
 
 
+Overfull \vbox (2.09999pt too high) has occurred while \output is active []
+
+
 (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-pdfdoc.de
 f
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
@@ -3502,14 +3558,14 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 40E65737B46C032E807932F885B0E57E;2338.
+(rerunfilecheck)             Checksum: 177FFCDA2FD4418025F9F368E9489D88;2338.
  ) 
 Here is how much of TeX's memory you used:
- 55583 strings out of 402987
- 1247040 string characters out of 5448730
- 1909828 words of memory out of 5000000
- 83334 multiletter control sequences out of 15000+600000
- 635751 words of font info for 159 fonts, out of 8000000 for 9000
+ 55590 strings out of 402987
+ 1247275 string characters out of 5448730
+ 1904618 words of memory out of 5000000
+ 83340 multiletter control sequences out of 15000+600000
+ 635759 words of font info for 160 fonts, out of 8000000 for 9000
  1509 hyphenation exceptions out of 8191
  105i,14n,131p,1902b,32915s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

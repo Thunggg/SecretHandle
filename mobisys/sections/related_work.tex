@@ -1,13 +1,38 @@
 \section{Related Work}
 \label{sec:related}
 
-\paragraph{Placeholder and anonymization defenses.} Mobile placeholder schemes replace sensitive rendered text with a type-preserving token and reverse the mapping at use time \cite{zhao2026anonymization}; the closest recent work resolves a \texttt{type(PLACEHOLDER)} locally but is detector-based, session-scoped, and validates index ranges rather than which field receives a resolved value. We differ on mint source (authoritative OS source, not screen scraping), unforgeability, destination-and-task binding, typed lifecycle, and a threat model that includes redirection.
+\begin{table*}[t]
+\centering
+\small
+\caption{Comparison of mobile secret-handling and agent isolation paradigms. \SH{} uniquely combines OS-authoritative zero-observation minting, cryptographic unforgeability, strict destination and task confinement, and atomic single-use lifecycle enforcement for untrusted vision agents.}
+\label{tab:comparison}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Paradigm / Representative Systems & Enforcement Layer & Zero Observation & Destination-Bound & Task-Bound & Single-Use Lifecycle & Vision GUI Support \\
+\midrule
+Dynamic Taint Tracking (TaintDroid \cite{enck2010taintdroid}, DroidScope \cite{yan2012droidscope}) & OS / VM Runtime & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+Platform Autofill \& Credential Mgr \cite{androidAutofill,androidCredentialManager} & OS / Application & $\times$ & $\circ$ & $\times$ & $\times$ & $\times$ \\
+Prompt Sanitizers \& Guardrails (Casper \cite{chong2024casper}, PrivacyRestore \cite{zeng2025privacyrestore}) & Model / Proxy & $\circ$ & $\times$ & $\times$ & $\times$ & $\circ$ \\
+Detected Placeholders (Zhao et al. \cite{zhao2026anonymization}) & Application / User & \checkmark & $\times$ & $\times$ & $\circ$ & \checkmark \\
+Planner Capability Schemes (CAMEL \cite{debenedetti2025camel}, FIDES \cite{costa2025fides}) & Planner / Tool API & \checkmark & $\circ$ & $\circ$ & $\circ$ & $\times$ \\
+\midrule
+\textbf{\SH{} (This Work)} & \textbf{OS Reference Monitor} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} \\
+\bottomrule
+\multicolumn{7}{l}{\footnotesize \checkmark = Fully enforced / guaranteed; $\circ$ = Partial, heuristic, or bypassable under injection; $\times$ = Unsupported / vulnerable.}
+\end{tabular}%
+}
+\end{table*}
 
-\paragraph{Capability and isolation approaches.} Planner-side capability schemes and dual-model patterns hide values from the planner in tool-calling settings \cite{debenedetti2025camel,costa2025fides}; isolation and privilege-minimization designs restrict what a tool agent may do \cite{bagdasarian2024airgap,wu2025isolategpt,shi2025progent}. These operate in the planning or tool layer rather than at the point where a secret crosses from an OS source into a UI field.
+Table~\ref{tab:comparison} summarizes the structural differences across contemporary secret-handling and agent-isolation paradigms. While existing defenses tackle individual aspects of the problem---such as post-hoc taint tracking, heuristic prompt rewriting, or planner-level tool mediation---none simultaneously guarantee zero plaintext observation and destination-bound resolution for vision-driven GUI agents.
 
-\paragraph{Prompt sanitizers.} Detection-and-rewrite approaches suppress or restore sensitive spans in prompts \cite{siyan2025papillon,zeng2025privacyrestore,chong2024casper}. They reduce model-side exposure but do not bind a resolved value to a destination and are not OS-enforced.
+\paragraph{Placeholder and anonymization defenses.} Mobile placeholder schemes replace sensitive rendered text with a type-preserving token and reverse the mapping at use time \cite{zhao2026anonymization}; the closest recent work resolves a \texttt{type(PLACEHOLDER)} locally but is detector-based, session-scoped, and validates index ranges rather than which field receives a resolved value. We differ fundamentally on mint source (authoritative OS source, not screen scraping), unforgeability, destination-and-task binding, typed lifecycle, and a threat model that includes redirection. As our empirical evaluation in Section~\ref{sec:evidence} demonstrates, unbound placeholder mechanisms remain completely vulnerable to Confused Deputy redirection ($30/30$ leakage under Attack~2), whereas \SH{} prevents redirection at the OS boundary.
 
-\paragraph{Platform and industry mechanisms.} The SMS Retriever and User Consent APIs \cite{androidSmsRetriever,androidSmsConsent}, the sensitive-notification OTP pipeline \cite{android15privacy}, Credential Manager \cite{androidCredentialManager}, autofill \cite{androidAutofill,androidAutofillServices}, the clipboard sensitivity flag \cite{androidClipboard}, and Protected Confirmation \cite{androidProtectedConfirmation} are building blocks, but autofill and Credential Manager are app-initiated and trust the app, and server-side agentic-payment tokens are payment-only. \SH{} composes these and adds OS-level destination binding and lifecycle.
+\paragraph{Capability and isolation approaches.} Planner-side capability schemes and dual-model patterns hide values from the planner in tool-calling settings \cite{debenedetti2025camel,costa2025fides}; isolation and privilege-minimization designs restrict what a tool agent may do \cite{bagdasarian2024airgap,wu2025isolategpt,shi2025progent}. These operate in the planning or tool layer rather than at the point where a secret crosses from an OS source into a UI field. They assume structured API interfaces and cannot protect arbitrary graphical mobile environments where untrusted vision agents observe raw pixels and actuate via accessibility events.
+
+\paragraph{Prompt sanitizers.} Detection-and-rewrite approaches suppress or restore sensitive spans in prompts \cite{siyan2025papillon,zeng2025privacyrestore,chong2024casper}. They reduce model-side exposure but do not bind a resolved value to a destination and are not OS-enforced. Furthermore, prompt sanitization is probabilistic: adversarial formatting, obfuscation, or multilingual prompt injection can reliably evade detection filters.
+
+\paragraph{Platform and industry mechanisms.} The SMS Retriever and User Consent APIs \cite{androidSmsRetriever,androidSmsConsent}, the sensitive-notification OTP pipeline \cite{android15privacy}, Credential Manager \cite{androidCredentialManager}, autofill \cite{androidAutofill,androidAutofillServices}, the clipboard sensitivity flag \cite{androidClipboard}, and Protected Confirmation \cite{androidProtectedConfirmation} are valuable building blocks, but autofill and Credential Manager are app-initiated and trust the app, and server-side agentic-payment tokens are payment-only. \SH{} composes these and adds OS-level destination binding and lifecycle.
 
 \paragraph{OS mechanisms and reference monitors.} \SH{} is an application of complete mediation and least privilege \cite{saltzer1975protection} to a new asset class: secrets that are typed into a UI by an untrusted process. Capability systems such as Capsicum bind authority to a handle and confine it to a scope \cite{watson2010capsicum}, and Android itself mediates permissions and app isolation through its install-time and runtime models \cite{felt2011permission,bugiel2013flexible,rossi2021seapp}. Taint and dynamic-analysis systems track the flow of sensitive data through applications \cite{enck2010taintdroid,yan2012droidscope}, which is complementary but observability-oriented: they can flag a leak, whereas \SH{} prevents the value from entering the agent's observation at all. The capability concept itself originates with Dennis and Van Horn \cite{dennis1966semantics}; our contribution is the destination-and-task predicate over package, origin, and field class together with an authenticated, lifecycle-bounded handle that an accessibility agent can invoke without seeing the value.
 
