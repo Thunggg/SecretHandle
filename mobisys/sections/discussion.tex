@@ -1,26 +1,37 @@
-\section{Discussion and Deployment Roadmap}
+\section{Discussion and Limitations}
 \label{sec:discussion}
 
-We discuss key architectural, industrial, and deployment considerations for transitioning \SH{} from a userdebug research prototype to a production Android OS subsystem.
+We discuss key architectural considerations for transitioning \SH{} to production Android, followed by fundamental limitations.
+
+\subsection{Deployment Roadmap and Systems Considerations}
 
 \paragraph{Path to Google AOSP Upstream.}
-In our prototype, \SH{} was evaluated as an Android Accessibility Service and Notification Broker to facilitate non-invasive deployment on stock Android images. However, the architectural design (Section~\ref{sec:design}) is formulated for direct upstream integration into Android's \texttt{system\_server}. In an upstream AOSP deployment:
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Input Dispatch Integration:} Rather than utilizing accessibility overlay masking, the \texttt{Resolver} hooks directly into Android's \texttt{InputDispatcher} and \texttt{ViewRootImpl}. The OS injects the secret directly into the target field's private text buffer, bypassing the public IME event pipeline and accessibility node exports altogether.
-  \item \textbf{Hardware-Backed Root of Trust:} The handle authenticator key is provisioned inside Android's Hardware Keystore (backed by ARM TrustZone or a StrongBox keymaster). The key never leaves isolated hardware, guaranteeing that handle MACs cannot be forged even if an attacker gains root or shell privileges.
-  \item \textbf{Unified System Service:} Mint points and the Vault can be consolidated into a first-class \texttt{SecretHandleManagerService} exposed via AIDL, subject to strict SELinux domain isolation (\texttt{secrethandle\_service}).
-\end{itemize}
+In our prototype, \SH{} was evaluated as an Android Accessibility Service and Notification Broker to facilitate non-invasive deployment on stock Android images. However, the architectural design (Section~\ref{sec:design}) is formulated for direct upstream integration into Android's \texttt{system\_server}. An upstream AOSP deployment incorporates three primary enhancements: (1)~\textbf{Input Dispatch Integration:} Rather than utilizing accessibility overlay masking, the \texttt{Resolver} hooks directly into Android's \texttt{InputDispatcher} and \texttt{ViewRootImpl}. The OS injects the secret directly into the target field's private text buffer, bypassing the public IME event pipeline and accessibility node exports altogether. (2)~\textbf{Hardware-Backed Root of Trust:} The handle authenticator key is provisioned inside Android's Hardware Keystore (backed by ARM TrustZone or a StrongBox keymaster), guaranteeing that handle MACs cannot be forged even under root compromise. (3)~\textbf{Unified System Service:} Mint points and the Vault are consolidated into a first-class \texttt{SecretHandleManagerService} exposed via AIDL and isolated via SELinux.
 
 \paragraph{Coexistence with Anti-Bot and Fraud Detection.}
 Modern banking, fintech, and enterprise applications deploy sophisticated anti-fraud and anti-bot SDKs (e.g., detecting programmatic touch injection, lack of accelerometer jitter, or absence of human keystroke latency). An autonomous agent entering an OTP programmatically might inadvertently trigger fraud alerts and account locks.
 \SH{} resolves this tension through \emph{attested delegation}: upon successful resolution, the OS can optionally provide the destination application with an authenticated cryptographic receipt (\texttt{AttestedResolutionReceipt}) signed by the platform key. This receipt attests that: (i) the secret was fetched from an authoritative OS source (e.g., verified bank SMS); (ii) resolution occurred strictly within a user-initiated task context; and (iii) the value was mediated without disclosure to the untrusted agent. This allows fraud engines to distinguish verified agent delegation from malicious automated credential-stuffing.
 
 \paragraph{Ephemeral Memory Hygiene and Revocation.}
-A core tenet of \SH{} is fail-closed ephemeral lifetime. To defend against memory-scraping attacks or cold-boot vulnerabilities:
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Secure Memory Scrubbing:} Secrets held in the in-memory Vault are pinned to non-swappable native pages via \texttt{mlock()} and zeroed immediately upon resolution, expiry, or task completion using constant-time memory wipes (\texttt{explicit\_bzero}).
-  \item \textbf{Contextual Revocation Triggers:} In addition to TTL expiration, \SH{} registers immediate revocation listeners for: (1) device lock events (\texttt{ACTION\_SCREEN\_OFF}); (2) window focus shifts where the target package is backgrounded; and (3) multi-user profile switching. Any pending handle is instantly discarded.
-\end{itemize}
+A core tenet of \SH{} is fail-closed ephemeral lifetime. To defend against memory-scraping attacks or cold-boot vulnerabilities, secrets held in the in-memory Vault are pinned to non-swappable native pages via \texttt{mlock()} and zeroed immediately upon resolution, expiry, or task completion using constant-time memory wipes (\texttt{explicit\_bzero}). Furthermore, \SH{} registers immediate contextual revocation listeners for device lock events (\texttt{ACTION\_SCREEN\_OFF}), window focus shifts where the target package is backgrounded, and multi-user profile switching; any active handle is instantly discarded upon event receipt.
 
 \paragraph{Agent-Agnostic Generality.}
 Because \SH{} operates strictly at the OS boundary, its guarantees are completely agnostic to the agent's internal reasoning architecture. Whether a user deploys a commercial frontier VLM (e.g., Claude, GPT-4o), an open-source model (e.g., Qwen-VL), or an accessibility-tree heuristic planner, the agent interacts with handles solely through standard UI action schemas. The security boundary remains anchored in the operating system's reference monitor, insulating users from the unpredictable evolution of foundation models and prompt injection techniques.
+
+\paragraph{Ethics, Reproducibility, and Transparency.}
+All experiments exclusively utilize randomly generated synthetic canaries, isolated loopback endpoints, and open benchmark applications; no human subjects, production credentials, or real banking instruments were involved. Full runners, configuration seeds, and provenance logs are open-sourced under Apache 2.0 (detailed in Appendix~\ref{sec:artifact}). Portions of the manuscript text were drafted with LLM assistance; all technical claims, formal proofs, and empirical measurements were produced, audited, and verified by the authors.
+
+\subsection{Limitations and Threats to Validity}
+\label{sec:limitations}
+
+\paragraph{Platform Scope and Operating System Trust.}
+The empirical results validate \SH{} on an Android~14 prototype combining an SMS broker, accessibility overlay masking, and an in-memory vault resolver. While this confirms core capability invariants against vision-driven agents on stock emulator runtimes, in-framework hardening (e.g., in-tree \texttt{system\_server} private input dispatch, hardware-keystore isolation, and full-stack AOSP patches) remains necessary for non-userdebug consumer deployments. Furthermore, our model trusts the underlying OS kernel and system server. A compromised kernel can forge target identities or bypass redaction; hardware-backed keystores protect against key exfiltration but do not guarantee correct policy enforcement by a compromised framework. Finally, uninstrumented platform channels (e.g., vendor crash dumps, GPU memory mirrors, or OEM screen readers) could invalidate non-disclosure if left unmonitored.
+
+\paragraph{Web Views and Origin Binding.}
+Package identity is insufficient for origin-level confinement in browser and hybrid-app contexts. Enforcing reliable destination binding between a target input field, enclosing frame, and authenticated document origin requires deeper Chromium and WebView framework attestation. In the presence of complex redirects, cross-origin iframes, or custom tabs, \SH's safe fallback is fail-closed rejection or explicit user confirmation, trading convenience for confidentiality.
+
+\paragraph{Authorized-Destination Misuse and Availability.}
+Destination binding restricts \emph{where} a secret can be resolved, but cannot prevent an injected agent from executing an unwanted action \emph{inside} a legitimate destination (e.g., selecting an adversary's beneficiary account inside a banking app prior to resolving a bound OTP). While task tokens, transaction summaries, and Android Protected Confirmation mitigate this risk, full semantics require application cooperation. Additionally, an adversarial agent can mount denial-of-service by repeatedly requesting invalid resolutions, driving single-use handles to premature consumption.
+
+\paragraph{External Validity and Model Drift.}
+Our empirical evaluation focused on stock Android 14 and Mobile-Agent v3.5 (Sonnet 4.6). Although \SH's guarantees are model-agnostic, commercial apps with proprietary obfuscation may require tailored source adapters. Longitudinal evaluations across diverse physical devices remain essential future work.

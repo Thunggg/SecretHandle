@@ -1,21 +1,22 @@
 \begin{figure*}[t]
 \centering
+\resizebox{0.90\textwidth}{!}{%
 \begin{tikzpicture}[x=1cm,y=1cm]
 % ---- Row 0: attacker input (top right) ----
-\node[sh/attack]   (inj)   at (13.2, 6.3) {Injected content};
+\node[sh/attack]   (inj)   at (13.2, 4.0) {Injected content};
 % ---- Row 1: untrusted agent (wide bar) ----
-\node[sh/component, text width=13.6cm, minimum height=1.0cm] (agent) at (6.6, 4.3)
+\node[sh/component, text width=13.6cm, minimum height=0.8cm] (agent) at (6.6, 2.7)
   {\textbf{Untrusted agent}\quad sees only the typed handle and redacted observations; chooses the target node};
 % ---- Row 2: trusted reference monitor ----
-\node[sh/defense]        (mint)     at ( 0.0, 1.9) {\textbf{Handle Mint}\\source + task policy\\$\rightarrow$ authenticated $h$};
-\node[sh/infrastructure] (keys)     at ( 4.4, 1.9) {\textbf{Keystore / StrongBox}\\MAC key};
-\node[sh/defense]        (resolver) at ( 8.8, 1.9) {\textbf{Resolver}\\authenticate + bind\\reserve lifecycle};
-\node[sh/defense]        (redactor) at (13.2, 1.9) {\textbf{Observation Redactor}\\accessibility + pixels};
+\node[sh/defense]        (mint)     at ( 0.0, 1.2) {\textbf{Handle Mint}\\source + task policy\\$\rightarrow$ authenticated $h$};
+\node[sh/infrastructure] (keys)     at ( 4.4, 1.2) {\textbf{Keystore / StrongBox}\\MAC key};
+\node[sh/defense]        (resolver) at ( 8.8, 1.2) {\textbf{Resolver}\\authenticate + bind\\reserve lifecycle};
+\node[sh/defense]        (redactor) at (13.2, 1.2) {\textbf{Observation Redactor}\\accessibility + pixels};
 % ---- Row 3: sources and target ----
-\node[sh/source, minimum height=1.7cm] (src) at (0.0,-1.0)
+\node[sh/source, minimum height=1.5cm] (src) at (0.0,-0.6)
   {\textbf{Authoritative OS sources}\\SMS / notification OTP,\\Credential Manager,\\clipboard / wallet};
-\node[sh/infrastructure] (confirm) at (4.4,-1.0) {\textbf{Protected confirmation}\\payment-class use};
-\node[sh/component]      (app)     at (8.8,-1.0) {\textbf{Target app / WebView}\\package + origin + field};
+\node[sh/infrastructure] (confirm) at (4.4,-0.6) {\textbf{Protected confirmation}\\payment-class use};
+\node[sh/component]      (app)     at (8.8,-0.6) {\textbf{Target app / WebView}\\package + origin + field};
 
 % ---- Trusted monitor frame ----
 \begin{scope}[on background layer]
@@ -36,13 +37,14 @@
 \draw[sh/secureflow] (app.east) -| node[sh/label,pos=.3]{mask subsequent\\view} (redactor.south);
 
 % ---- Legend ----
-\begin{scope}[yshift=-3.0cm]
+\begin{scope}[yshift=-2.0cm]
   \draw[sh/flow]        ( 0.0,0) -- ( 0.9,0); \node[font=\scriptsize,anchor=west] at ( 1.0,0) {normal request};
   \draw[sh/secureflow]  ( 4.2,0) -- ( 5.1,0); \node[font=\scriptsize,anchor=west] at ( 5.2,0) {secret-protected path};
   \draw[sh/control]     ( 9.0,0) -- ( 9.9,0); \node[font=\scriptsize,anchor=west] at (10.0,0) {verify / approval};
   \draw[sh/attackflow]  (13.0,0) -- (13.9,0); \node[font=\scriptsize,anchor=west] at (14.0,0) {adversarial influence};
 \end{scope}
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \caption{SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Line styles distinguish ordinary, protected, control, and adversarial flows.}
 \label{fig:architecture}
 \end{figure*}

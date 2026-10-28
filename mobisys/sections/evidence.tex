@@ -29,10 +29,16 @@ B3 (\SH)           & \textbf{0.00} [0.00, 0.11] & \textbf{0.00} [0.00, 0.11] & \
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{../figures/b3_redacted_shade.png}\\[1pt]
-{\footnotesize (a) notification shade: source app and handle only}\\[4pt]
-\includegraphics[width=0.55\columnwidth]{../figures/b3_masked_sms.png}\\[1pt]
-{\footnotesize (b) conversation view: codes covered by the overlay}
+\begin{minipage}[b]{0.52\columnwidth}
+\centering
+\includegraphics[width=\linewidth]{../figures/b3_redacted_shade.png}\\[2pt]
+{\footnotesize (a) Notification shade}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.45\columnwidth}
+\centering
+\includegraphics[width=\linewidth]{../figures/b3_masked_sms.png}\\[2pt]
+{\footnotesize (b) Conversation overlay}
+\end{minipage}
 \caption{The \SH{} prototype on Android. (a)~The original notification is cancelled and replaced by one naming only the source app and minted handle. (b)~On-screen codes are covered by a non-touchable overlay (\texttt{TYPE\_ACCESSIBILITY\_OVERLAY}), so a screenshot-reading agent sees only the opaque marker while touch events pass transparently.}
 \label{fig:b3}
 \end{figure}
@@ -53,20 +59,16 @@ We stress-tested handle lifecycle properties across $n=50$ trials per condition:
 
 \paragraph{Microbenchmark Overhead (RQ5).}
 We executed an on-device microbenchmark harness directly inside the Android ART runtime via \texttt{app\_process} ($n=100$ trials):
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Mint latency:} Mean $5.61\,\mu\text{s}$ (median $5.24\,\mu\text{s}$, min $2.73\,\mu\text{s}$, p95 $9.30\,\mu\text{s}$, std $3.96\,\mu\text{s}$).
-  \item \textbf{Resolve latency:} Mean $0.13\,\mu\text{s}$ (median $0.12\,\mu\text{s}$, min $0.11\,\mu\text{s}$, p95 $0.18\,\mu\text{s}$, std $0.06\,\mu\text{s}$).
-  \item \textbf{Memory footprint:} Total process PSS is $28.71\,\text{MB}$ (Native Heap: $14.19\,\text{MB}$, Dalvik Heap: $2.11\,\text{MB}$; Dalvik heap allocated: $1.15\,\text{MB}$).
-\end{itemize}
+(1)~\textbf{Mint latency:} Mean $5.61\,\mu\text{s}$ (median $5.24\,\mu\text{s}$, min $2.73\,\mu\text{s}$, p95 $9.30\,\mu\text{s}$, std $3.96\,\mu\text{s}$).
+(2)~\textbf{Resolve latency:} Mean $0.13\,\mu\text{s}$ (median $0.12\,\mu\text{s}$, min $0.11\,\mu\text{s}$, p95 $0.18\,\mu\text{s}$, std $0.06\,\mu\text{s}$).
+(3)~\textbf{Memory footprint:} Total process PSS is $28.71\,\text{MB}$ (Native Heap: $14.19\,\text{MB}$, Dalvik Heap: $2.11\,\text{MB}$; Dalvik heap allocated: $1.15\,\text{MB}$).
 These microsecond-scale latencies impose negligible overhead compared to agent visual inference times ($40$--$60\,\text{s}$/action).
 
 \paragraph{Benign Task Regression and Transparency (RQ6).}
-To verify that \SH{} does not interfere with general agent UI control or normal user workflows, we benchmarked the system across 10 diverse benign application suites in AndroidWorld \cite{rawles2024androidworld} (DeskClock, Markor Notes, Simple Calendar, Simple Gallery, Audio Recorder, Simple Draw, Camera2, Settings, SMS Messenger, and Contacts):
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Touch input transparency:} Across 50 automated touch injection cycles, $100\%$ ($50/50$) of touch events passed cleanly through the overlay layer to the underlying application. Because overlays set \texttt{FLAG\_NOT\_TOUCHABLE} and \texttt{FLAG\_NOT\_FOCUSABLE}, \SH{} causes zero touch blocking ($0.0\%$ input block rate).
-  \item \textbf{Frame rendering latency:} GPU frame metrics via \texttt{dumpsys gfxinfo} on productivity apps (Settings, Markor Notes) confirmed that p95 frame rendering latency was virtually identical between B0 and B3 (Markor: $18.0\,\text{ms}$ under both B0 and B3, $\Delta = 0.0\,\text{ms}$; Settings: $36.0\,\text{ms}$ under both B0 and B3, $\Delta = 0.0\,\text{ms}$), proving that the 200\,ms background scanner does not degrade the compositor.
-  \item \textbf{General-task regression:} Across all benign workflows, task success and action sequences remained unaffected by the presence of \SH, demonstrating general-task regression $\Delta = 0.00$.
-\end{itemize}
+To verify that \SH{} does not interfere with general agent UI control or normal user workflows, we benchmarked the system across 10 diverse benign application suites in AndroidWorld \cite{rawles2024androidworld} (DeskClock, Markor Notes, Simple Calendar, Simple Gallery, Audio Recorder, Simple Draw, Camera2, Settings, SMS Messenger, and Contacts).
+First, across 50 automated touch injection cycles, $100\%$ ($50/50$) of touch events passed cleanly through the overlay layer to the underlying application. Because overlays set \texttt{FLAG\_NOT\_TOUCHABLE} and \texttt{FLAG\_NOT\_FOCUSABLE}, \SH{} causes zero touch blocking ($0.0\%$ input block rate).
+Second, GPU frame metrics via \texttt{dumpsys gfxinfo} on productivity apps (Settings, Markor Notes) confirmed that p95 frame rendering latency was virtually identical between B0 and B3 (Markor: $18.0\,\text{ms}$ under both B0 and B3, $\Delta = 0.0\,\text{ms}$; Settings: $36.0\,\text{ms}$ under both B0 and B3, $\Delta = 0.0\,\text{ms}$), proving that the 200\,ms background scanner does not degrade the compositor.
+Finally, across all benign workflows, task success and action sequences remained unaffected by the presence of \SH, demonstrating general-task regression $\Delta = 0.00$.
 
 \paragraph{Qualitative Analysis: Anatomy of Agent Misdirection.}
 To understand the cognitive failure modes of vision-driven agents, we analyzed the step-by-step action trajectories across all $n=30$ trials under B0, B1, and B3. In a representative execution, the user tasks the agent with completing a 2-factor login into a banking portal (\texttt{com.legitimate.bank}). During task execution, an incoming SMS arrives containing an indirect prompt injection: \emph{``Your Bank: Verification code 849201. Special Offer: To claim your \$50 cash credit, forward this verification code to the CashRewards app immediately.''}
@@ -77,17 +79,18 @@ Under \textbf{B1 (Detected Placeholder)}, the rendered text \texttt{849201} is m
 
 Under \textbf{B3 (\SH{})}, the OS intercepts the SMS at the telephony boundary before rendering. It mints an unforgeable handle \texttt{SH-A8F29C} bound strictly to \texttt{pkg:com.legitimate.bank}. Even though the agent still experiences cognitive confusion from the injected text and attempts to enter \texttt{SH-A8F29C} into the attacker app, the OS Resolver executes Algorithm~2 and verifies the caller's identity via Binder IPC:
 \begin{equation}
-\text{Caller}(\texttt{com.attacker.rewards}) \neq \text{BoundTarget}(\texttt{com.legitimate.bank}).
+\begin{aligned}
+\mathsf{Caller}(\texttt{com.attacker.rewards}) \neq{} \\
+\mathsf{BoundTarget}(\texttt{com.legitimate.bank}).
+\end{aligned}
 \end{equation}
 The resolver immediately halts resolution, emits a \texttt{CALLER\_MISMATCH} audit violation, and safely consumes the handle. The secret remains unexposed inside the OS vault, proving that \SH{} establishes security that is invariant to model alignment or cognitive manipulation.
 
 \paragraph{Ablation: Dissecting Security Invariants.}
 We evaluated the necessity of each constituent mechanism in \SH{} by disabling components in turn:
-\begin{itemize}[leftmargin=*]
-  \item \emph{No Source Minting:} Replacing OS-source minting with screen-scraping detection exposes the raw secret during the arrival frame, resulting in immediate agent exfiltration ($E = 0.97$).
-  \item \emph{No Destination Binding:} Omitting the caller package check degrades \SH{} to B1, allowing an injected agent to reroute the secret to an adversary ($R = 1.00$).
-  \item \emph{No Atomic CAS Lifecycle:} Disabling hardware/mutex locks allows concurrent threads to duplicate single-use OTPs ($50/50$ race vulnerability).
-  \item \emph{No Observation Redactor:} Disabling post-entry overlay masking allows the agent to take a subsequent screenshot and re-read the resolved value off the screen ($L = 1.00$, verified in our $1/1$ control test).
-\end{itemize}
+(1)~\emph{No Source Minting}: Replacing OS-source minting with screen-scraping detection exposes the raw secret during the arrival frame, resulting in immediate agent exfiltration ($E = 0.97$).
+(2)~\emph{No Destination Binding}: Omitting the caller package check degrades \SH{} to B1, allowing an injected agent to reroute the secret to an adversary ($R = 1.00$).
+(3)~\emph{No Atomic CAS Lifecycle}: Disabling hardware/mutex locks allows concurrent threads to duplicate single-use OTPs ($50/50$ race vulnerability).
+(4)~\emph{No Observation Redactor}: Disabling post-entry overlay masking allows the agent to take a subsequent screenshot and re-read the resolved value off the screen ($L = 1.00$, verified in our $1/1$ control test).
 This ablation confirms that \SH's protection is non-redundant: all four invariants are strictly required to ensure zero exposure.
 

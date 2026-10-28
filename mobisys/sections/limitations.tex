@@ -1,16 +1,3 @@
-\section{Limitations and Threats to Validity}
-\label{sec:limitations}
-
-\paragraph{Prototype Scope and Platform Coverage.} The empirical results demonstrate the effectiveness of \SH{} on an Android~14 userdebug prototype with an SMS broker, accessibility overlay masking, and destination-bound vault. While this validates the core security invariants against vision-driven agents on emulator instances, complete system-level hardening (e.g., in-framework \texttt{system\_server} private input paths, hardware-keystore integration, and full-stack AOSP upstream patches) remains necessary for non-userdebug consumer deployments.
-
-\paragraph{Trusted OS Assumption.} The analysis trusts substantial Android framework code. Kernel or system-server compromise can read values, forge target identity, bypass redaction, or inject directly. Hardware-backed keys protect key extraction but do not make a compromised framework enforce the correct policy. Protected Confirmation strengthens a narrow user-approval path, not the entire resolver.
-
-\paragraph{Incomplete Observation Coverage.} The model names screenshots, accessibility trees/events, action echoes, logs, clipboard, and IME state, but real devices may expose additional channels: vendor services, notifications, crash dumps, GPU buffers, screen readers, backups, or analytics. The prototype must enumerate and instrument actual flows. A single uncovered path invalidates the non-disclosure assumption for that configuration.
-
-\paragraph{WebView Identity.} Package identity is insufficient for origin-level confinement. Reliable binding between a target node, frame, and authenticated origin requires browser and WebView integration. Custom tabs, redirects, nested frames, and origin transitions complicate the model. The safe fallback is rejection or explicit user confirmation.
-
-\paragraph{Authorized-Destination Misuse.} An injected instruction can still cause a legitimate but unwanted action inside the allowed destination. Examples include selecting an attacker's account before entering a bound OTP, confirming an unintended checkout, or submitting a form whose semantics changed. Task tokens, form-level binding, transaction summaries, and protected confirmation reduce this risk but are not solved by a package/origin predicate alone.
-
-\paragraph{Denial of Service.} An agent can repeatedly request invalid resolves, navigate targets away, or force conservative consumption after uncertain failures. Rate limits, quotas, and user-visible recovery reduce abuse but cannot guarantee availability against an agent controlling the UI.
-
-\paragraph{External Validity.} Open test apps and a small set of emulators may not represent commercial banking, WebView, or wallet implementations. Agent behavior changes across model versions. Results pin versions and avoid claiming universal effectiveness from observed zero failures.
+% Note: Content has been consolidated into sections/discussion.tex 
+% under \subsection{Limitations and Threats to Validity} to ensure cohesive 
+% section structure and strict compliance with the ACM MobiSys 12-page budget.

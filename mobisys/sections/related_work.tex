@@ -11,15 +11,15 @@
 \toprule
 Paradigm / Representative Systems & Enforcement Layer & Zero Observation & Destination-Bound & Task-Bound & Single-Use Lifecycle & Vision GUI Support \\
 \midrule
-Dynamic Taint Tracking (TaintDroid \cite{enck2010taintdroid}, DroidScope \cite{yan2012droidscope}) & OS / VM Runtime & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-Platform Autofill \& Credential Mgr \cite{androidAutofill,androidCredentialManager} & OS / Application & $\times$ & $\circ$ & $\times$ & $\times$ & $\times$ \\
-Prompt Sanitizers \& Guardrails (Casper \cite{chong2024casper}, PrivacyRestore \cite{zeng2025privacyrestore}) & Model / Proxy & $\circ$ & $\times$ & $\times$ & $\times$ & $\circ$ \\
-Detected Placeholders (Zhao et al. \cite{zhao2026anonymization}) & Application / User & \checkmark & $\times$ & $\times$ & $\circ$ & \checkmark \\
-Planner Capability Schemes (CAMEL \cite{debenedetti2025camel}, FIDES \cite{costa2025fides}) & Planner / Tool API & \checkmark & $\circ$ & $\circ$ & $\circ$ & $\times$ \\
+Dynamic Taint Tracking (TaintDroid \cite{enck2010taintdroid}, DroidScope \cite{yan2012droidscope}) & OS / VM Runtime & \xmark & \xmark & \xmark & \xmark & \xmark \\
+Platform Autofill \& Credential Mgr \cite{androidAutofill,androidCredentialManager} & OS / Application & \xmark & \pmark & \xmark & \xmark & \xmark \\
+Prompt Sanitizers \& Guardrails (Casper \cite{chong2024casper}, PrivacyRestore \cite{zeng2025privacyrestore}) & Model / Proxy & \pmark & \xmark & \xmark & \xmark & \pmark \\
+Detected Placeholders (Zhao et al. \cite{zhao2026anonymization}) & Application / User & \cmark & \xmark & \xmark & \pmark & \cmark \\
+Planner Capability Schemes (CAMEL \cite{debenedetti2025camel}, FIDES \cite{costa2025fides}) & Planner / Tool API & \cmark & \pmark & \pmark & \pmark & \xmark \\
 \midrule
-\textbf{\SH{} (This Work)} & \textbf{OS Reference Monitor} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} \\
+\textbf{\SH{} (This Work)} & \textbf{OS Reference Monitor} & \textbf{\cmark} & \textbf{\cmark} & \textbf{\cmark} & \textbf{\cmark} & \textbf{\cmark} \\
 \bottomrule
-\multicolumn{7}{l}{\footnotesize \checkmark = Fully enforced / guaranteed; $\circ$ = Partial, heuristic, or bypassable under injection; $\times$ = Unsupported / vulnerable.}
+\multicolumn{7}{l}{\footnotesize \cmark{} = Fully enforced / guaranteed; \pmark{} = Partial, heuristic, or bypassable under injection; \xmark{} = Unsupported / vulnerable.}
 \end{tabular}%
 }
 \end{table*}
