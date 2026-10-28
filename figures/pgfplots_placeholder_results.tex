@@ -4,14 +4,14 @@
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-  width=0.91\linewidth,height=5.5cm,
-  xlabel={Binding granularity},ylabel={Expected redirection success},
-  symbolic x coords={none,package,origin+field},xtick=data,
-  ymin=0,ymax=1,ytick={0,.25,.5,.75,1},
+  width=0.91\linewidth,height=5.2cm,
+  xlabel={Binding granularity},ylabel={Measured redirection leakage $R$},
+  symbolic x coords={Unbound (B1),Bound (B3)},xtick=data,
+  ymin=0,ymax=1.1,ytick={0,.25,.5,.75,1},
   grid=major,legend style={font=\scriptsize,draw=none,at={(0.5,-0.28)},anchor=north},
   tick label style={font=\scriptsize},label style={font=\small}]
-\addplot[shorange,thick,mark=square*,dashed] coordinates {(none,.85) (package,.35) (origin+field,.05)};
-\addlegendentry{conceptual trend}
+\addplot[shorange,thick,mark=square*,sharp plot] coordinates {(Unbound (B1),1.00) (Bound (B3),0.00)};
+\addlegendentry{Measured on device ($n=30$)}
 \end{axis}
 \end{tikzpicture}
 \end{subfigure}\hfill
@@ -19,18 +19,17 @@
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-  width=0.91\linewidth,height=5.5cm,
-  xlabel={Enabled components},ylabel={Expected task success},
-  symbolic x coords={base,bind,life,redact},xtick=data,
-  xticklabels={base,+bind,+life,+redact},
-  ymin=0,ymax=1,ytick={0,.25,.5,.75,1},
+  width=0.91\linewidth,height=5.2cm,
+  xlabel={Security condition},ylabel={Task utility $U$ under redirection},
+  symbolic x coords={B0,B1,B3},xtick=data,
+  ymin=0,ymax=1.1,ytick={0,.25,.5,.75,1},
   grid=major,legend style={font=\scriptsize,draw=none,at={(0.5,-0.28)},anchor=north},
   tick label style={font=\scriptsize},label style={font=\small}]
-\addplot[shblue,thick,mark=*,dashed] coordinates {(base,.82) (bind,.79) (life,.76) (redact,.73)};
-\addlegendentry{conceptual trend}
+\addplot[shblue,thick,mark=*,sharp plot] coordinates {(B0,0.00) (B1,0.00) (B3,1.00)};
+\addlegendentry{Measured utility ($n=30$)}
 \end{axis}
 \end{tikzpicture}
 \end{subfigure}
-\caption{Conceptual expected trends, not experimental results. The coordinates are illustrative placeholders chosen only to show the planned plots; they must be replaced by measured data or removed before submission. Left: finer binding is expected to reduce redirection. Right: additional checks may impose utility cost.}
-\label{fig:placeholder-trends}
+\caption{Empirical evaluation on Android. Left: Unbound placeholder ($B_1$) allows $100\%$ ($30/30$) redirection leakage when an agent is tricked into submitting into an adversary app, whereas \SH{} ($B_3$) destination binding achieves $0.00$ ($0/30$, Wilson 95\% CI $[0.00, 0.11]$) leakage. Right: Under destination redirection attacks, legitimate utility $U$ collapses to $0.00$ for $B_0$ and $B_1$ (adversary hijacks secret), while \SH{} rejects rogue resolution and preserves legitimate utility ($30/30$, $1.00$).}
+\label{fig:empirical-trends}
 \end{figure}

@@ -1,0 +1,32 @@
+{"benchmark_mode":"all",
+"overhead": {
+  "trials": 100,
+  "mint_latency_us": {"mean": 5.61, "median": 5.24, "min": 2.73, "max": 41.64, "p95": 9.30, "p99": 41.64, "std": 3.96},
+  "resolve_latency_us": {"mean": 0.13, "median": 0.12, "min": 0.11, "max": 0.67, "p95": 0.18, "p99": 0.67, "std": 0.06},
+  "heap_alloc_bytes": 1151680,
+  "heap_total_bytes": 8388608
+},
+"lifecycle": {
+  "trials": 50,
+  "replay_blocked": 50,
+  "replay_accepted": 0,
+  "expiry_blocked": 50,
+  "expiry_bypassed": 0,
+  "concurrency_correct_single_use": 50,
+  "concurrency_anomalies": 0
+},
+"redirection": {
+  "trials": 30,
+  "b3_secrethandle": {
+    "redirection_leaks": 0,
+    "redirection_rate": 0.0,
+    "legitimate_utility": 30,
+    "utility_rate": 1.0
+  },
+  "b1_placeholder": {
+    "redirection_leaks": 30,
+    "redirection_rate": 1.0,
+    "legitimate_utility": 0,
+    "utility_rate": 0.0
+  }
+}}

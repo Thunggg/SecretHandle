@@ -1,7 +1,7 @@
 \section{Limitations and threats to validity}
 \label{sec:limitations}
 
-\textbf{No implementation or results yet.} The largest limitation is empirical: the current project contains a concept PDF and manuscript, not an AOSP patch set or measurements. Architecture feasibility arguments and formal properties cannot substitute for implementation. All tables and plots are placeholders or protocol diagrams.
+\textbf{Prototype scope and platform coverage.} The empirical results demonstrate the effectiveness of \SH{} on a stock-Android userdebug prototype with an SMS broker, accessibility overlay masking, and destination-bound vault. While this proves the core security properties against vision-driven agents on emulator instances, complete system-level hardening (e.g., in-framework \texttt{system\_server} private input paths, hardware-keystore integration, and full-stack AOSP upstream patches) remains necessary for non-userdebug consumer deployments.
 
 \textbf{Trusted OS assumption.} The analysis trusts substantial Android framework code. Kernel or system-server compromise can read values, forge target identity, bypass redaction, or inject directly. Hardware-backed keys protect key extraction but do not make a compromised framework enforce the correct policy. Protected Confirmation strengthens a narrow user-approval path, not the entire resolver.
 

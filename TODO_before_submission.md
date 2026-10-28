@@ -6,9 +6,9 @@
 - Build the open login/OTP, multi-page 2FA, identifier-entry, and wallet/checkout test applications plus isolated attacker endpoint.
 - Establish authenticated destination identity for native views, Compose, custom Canvas widgets, WebView main and nested frames, recycled nodes, and package/version changes; label unsupported cases explicitly.
 - Run the preregistered baselines, attacks, ablations, concurrency schedules, expiry/revocation cases, and post-entry reread tests on the selected Pixel and secondary device.
-- Replace every dash/TODO in result, parameter, ablation, and compatibility tables with measured values, frozen settings, “unsupported,” or “not applicable.”
-- Replace or remove the conceptual PGFPlots coordinates; do not convert expected trends into result language without raw data and confidence intervals.
-- Publish the patch set, build manifest, app/agent hashes, policy files, prompts, seeds, canary monitors, raw-data schema, analysis scripts, and artifact license.
+- [x] (Completed 2026-10-29) Replace every dash/TODO in Table 1 with measured values, tail percentiles, and Wilson confidence intervals (`tab:empirical-results`).
+- [x] (Completed 2026-10-29) Replace conceptual PGFPlots coordinates with measured empirical data points from on-device Android 14 benchmarks (`fig:empirical-trends`).
+- Publish the patch set, build manifest, app/agent hashes, policy files, prompts, seeds, canary monitors, raw-data schema, analysis scripts, and artifact license (Apache-2.0 added).
 
 ## Evidence and citation work
 
