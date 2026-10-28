@@ -14,6 +14,8 @@ Reallocating 'glb_str_end' (item size: 4) to 20 items.
 Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
 Reallocating 'global_strs' (item size: 1) to 4000000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
+Warning--empty publisher in andrus2015rushmore
+Warning--empty address in andrus2015rushmore
 Warning--empty publisher in bagdasarian2024airgap
 Warning--empty address in bagdasarian2024airgap
 Warning--empty publisher in bugiel2013flexible
@@ -22,6 +24,8 @@ Warning--no number and no volume in chen2025fineprint
 Warning--page numbers missing in both pages and numpages fields in chen2025fineprint
 Warning--empty publisher in chong2024casper
 Warning--empty address in chong2024casper
+Warning--empty publisher in continella2020schrodintext
+Warning--empty address in continella2020schrodintext
 Warning--no number and no volume in costa2025fides
 Warning--page numbers missing in both pages and numpages fields in costa2025fides
 Warning--no number and no volume in debenedetti2025camel
@@ -39,8 +43,13 @@ Warning--empty address in enck2010taintdroid
 Warning--page numbers missing in both pages and numpages fields in enck2010taintdroid
 Warning--empty publisher in felt2011permission
 Warning--empty address in felt2011permission
+Warning--empty publisher in fratantonio2017cloak
+Warning--empty address in fratantonio2017cloak
 Warning--empty publisher in greshake2023indirect
 Warning--empty address in greshake2023indirect
+Warning--empty publisher in jang2014gyrus
+Warning--empty address in jang2014gyrus
+Warning--page numbers missing in both pages and numpages fields in jang2014gyrus
 Warning--no number and no volume in liao2024eia
 Warning--page numbers missing in both pages and numpages fields in liao2024eia
 Warning--empty publisher in rawles2024androidworld
@@ -76,45 +85,45 @@ Warning--empty publisher in zhang2023appagent
 Warning--empty address in zhang2023appagent
 Warning--no number and no volume in zhao2026anonymization
 Warning--page numbers missing in both pages and numpages fields in zhao2026anonymization
-You've used 44 entries,
+You've used 48 entries,
             6335 wiz_defined-function locations,
-            1794 strings with 30244 characters,
-and the built_in function-call counts, 49442 in all, are:
-= -- 5604
-> -- 2124
+            1815 strings with 31361 characters,
+and the built_in function-call counts, 54436 in all, are:
+= -- 6113
+> -- 2304
 < -- 7
-+ -- 735
-- -- 727
-* -- 3922
-:= -- 5101
-add.period$ -- 220
-call.type$ -- 44
-change.case$ -- 399
-chr.to.int$ -- 38
-cite$ -- 106
-duplicate$ -- 4201
-empty$ -- 2985
-format.name$ -- 863
-if$ -- 11497
++ -- 796
+- -- 784
+* -- 4284
+:= -- 5575
+add.period$ -- 239
+call.type$ -- 48
+change.case$ -- 434
+chr.to.int$ -- 42
+cite$ -- 119
+duplicate$ -- 4692
+empty$ -- 3328
+format.name$ -- 936
+if$ -- 12688
 int.to.chr$ -- 8
 int.to.str$ -- 1
-missing$ -- 131
-newline$ -- 482
-num.names$ -- 302
-pop$ -- 1815
+missing$ -- 151
+newline$ -- 510
+num.names$ -- 330
+pop$ -- 2047
 preamble$ -- 1
-purify$ -- 739
+purify$ -- 806
 quote$ -- 0
-skip$ -- 1527
+skip$ -- 1707
 stack$ -- 0
-substring$ -- 3154
-swap$ -- 331
+substring$ -- 3512
+swap$ -- 375
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1158
-warning$ -- 62
-while$ -- 217
+type$ -- 1278
+warning$ -- 71
+while$ -- 238
 width$ -- 0
-write$ -- 934
-(There were 62 warnings)
+write$ -- 1005
+(There were 71 warnings)

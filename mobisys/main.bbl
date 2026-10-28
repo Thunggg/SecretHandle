@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{44}
+\begin{thebibliography}{48}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -154,6 +154,18 @@
 \shownote{Accessed 2026-10-03}.
 
 
+\bibitem[Andrus et~al\mbox{.}(2015)]%
+        {andrus2015rushmore}
+\bibfield{author}{\bibinfo{person}{Jeremy Andrus}, \bibinfo{person}{Alexander
+  Van't~Hof}, \bibinfo{person}{Roxana Geambasu}, {and} \bibinfo{person}{Jason
+  Nieh}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Rushmore: Securely Displaying Information on Mobile
+  Devices}. In \bibinfo{booktitle}{\emph{Proceedings of the 13th Annual
+  International Conference on Mobile Systems, Applications, and Services
+  (MobiSys)}}. \bibinfo{pages}{301--314}.
+\newblock
+
+
 \bibitem[Bagdasarian et~al\mbox{.}(2024)]%
         {bagdasarian2024airgap}
 \bibfield{author}{\bibinfo{person}{Eugene Bagdasarian}, \bibinfo{person}{Ren
@@ -224,6 +236,20 @@
   Security and Cloud Computing (CSCloud)}}. \bibinfo{pages}{122--131}.
 \newblock
 \href{https://doi.org/10.1109/CSCloud66326.2025.00027}{doi:\nolinkurl{10.1109/CSCloud66326.2025.00027}}
+
+
+\bibitem[Continella et~al\mbox{.}(2020)]%
+        {continella2020schrodintext}
+\bibfield{author}{\bibinfo{person}{Andrea Continella}, \bibinfo{person}{Yanick
+  Fratantonio}, \bibinfo{person}{Martina Lindorfer},
+  \bibinfo{person}{Alessandro Puccetti}, \bibinfo{person}{Ali Zand},
+  \bibinfo{person}{Christopher Kruegel}, {and} \bibinfo{person}{Giovanni
+  Vigna}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{{SchrodinText}: Strong Protection of Sensitive
+  Textual Content of Mobile Applications}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 29th USENIX Security
+  Symposium}}. \bibinfo{pages}{197--214}.
+\newblock
 
 
 \bibitem[Costa et~al\mbox{.}(2025)]%
@@ -343,6 +369,18 @@
 \href{https://doi.org/10.17487/RFC9449}{doi:\nolinkurl{10.17487/RFC9449}}
 
 
+\bibitem[Fratantonio et~al\mbox{.}(2017)]%
+        {fratantonio2017cloak}
+\bibfield{author}{\bibinfo{person}{Yanick Fratantonio},
+  \bibinfo{person}{Chenxiong Chen}, \bibinfo{person}{Simon~P. Chung}, {and}
+  \bibinfo{person}{Wenke Lee}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Cloak \& Dagger: From Two Harmless Android Rights
+  to Serious Privacy and Security Violations}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 38th IEEE Symposium on Security
+  and Privacy (S\&P)}}. \bibinfo{pages}{199--215}.
+\newblock
+
+
 \bibitem[Greshake et~al\mbox{.}(2023)]%
         {greshake2023indirect}
 \bibfield{author}{\bibinfo{person}{Kai Greshake}, \bibinfo{person}{Sahar
@@ -355,6 +393,18 @@
   Artificial Intelligence and Security (AISec)}}. \bibinfo{pages}{79--90}.
 \newblock
 \href{https://doi.org/10.1145/3605764.3623985}{doi:\nolinkurl{10.1145/3605764.3623985}}
+
+
+\bibitem[Jang et~al\mbox{.}(2014)]%
+        {jang2014gyrus}
+\bibfield{author}{\bibinfo{person}{Yeongjin Jang}, \bibinfo{person}{Simon~P.
+  Chung}, \bibinfo{person}{Bryan~D. Payne}, {and} \bibinfo{person}{Wenke Lee}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{{GYRUS}: Taking Over the Output of {COTS}
+  Applications for User-Intended Data Protection}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 21st Annual Network and
+  Distributed System Security Symposium (NDSS)}}.
+\newblock
 
 
 \bibitem[Krawczyk et~al\mbox{.}(1997)]%

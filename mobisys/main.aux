@@ -111,14 +111,13 @@
 \citation{debenedetti2025camel}
 \citation{costa2025fides}
 \citation{zhao2026anonymization}
-\citation{debenedetti2025camel,costa2025fides}
-\citation{bagdasarian2024airgap,wu2025isolategpt,shi2025progent}
 \@writefile{toc}{\contentsline {paragraph}{Qualitative Analysis: Anatomy of Agent Misdirection.}{10}{section*.50}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Ablation: Dissecting Security Invariants.}{10}{section*.51}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {8}Related Work}{10}{section.8}\protected@file@percent }
 \newlabel{sec:related}{{8}{10}{Related Work}{section.8}{}}
 \@writefile{toc}{\contentsline {paragraph}{Placeholder and anonymization defenses.}{10}{section*.53}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Capability and isolation approaches.}{10}{section*.54}\protected@file@percent }
+\citation{debenedetti2025camel,costa2025fides}
+\citation{bagdasarian2024airgap,wu2025isolategpt,shi2025progent}
 \citation{siyan2025papillon,zeng2025privacyrestore,chong2024casper}
 \citation{androidSmsRetriever,androidSmsConsent}
 \citation{android15privacy}
@@ -129,6 +128,10 @@
 \citation{saltzer1975protection}
 \citation{watson2010capsicum}
 \citation{felt2011permission,bugiel2013flexible,rossi2021seapp}
+\citation{continella2020schrodintext}
+\citation{andrus2015rushmore}
+\citation{jang2014gyrus}
+\citation{fratantonio2017cloak}
 \citation{enck2010taintdroid,yan2012droidscope}
 \citation{dennis1966semantics}
 \citation{rfc4226,rfc6238}
@@ -137,6 +140,7 @@
 \citation{du2025mobileattacks,liao2024eia,chen2025fineprint,greshake2023indirect,debenedetti2024agentdojo,zhan2024injecagent}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparison of mobile secret-handling and agent isolation paradigms. \textsc  {SecretHandle}{} uniquely combines OS-authoritative zero-observation minting, cryptographic unforgeability, strict destination and task confinement, and atomic single-use lifecycle enforcement for untrusted vision agents.}}{11}{table.caption.52}\protected@file@percent }
 \newlabel{tab:comparison}{{4}{11}{Comparison of mobile secret-handling and agent isolation paradigms. \SH {} uniquely combines OS-authoritative zero-observation minting, cryptographic unforgeability, strict destination and task confinement, and atomic single-use lifecycle enforcement for untrusted vision agents}{table.caption.52}{}}
+\@writefile{toc}{\contentsline {paragraph}{Capability and isolation approaches.}{11}{section*.54}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Prompt sanitizers.}{11}{section*.55}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Platform and industry mechanisms.}{11}{section*.56}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{OS mechanisms and reference monitors.}{11}{section*.57}\protected@file@percent }
@@ -145,18 +149,17 @@
 \newlabel{sec:discussion}{{9}{11}{Discussion and Limitations}{section.9}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Deployment Roadmap and Systems Considerations}{11}{subsection.9.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Path to Google AOSP Upstream.}{11}{section*.59}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Memory Hygiene, Fraud Coexistence, and Revocation.}{11}{section*.60}\protected@file@percent }
 \bibstyle{ACM-Reference-Format}
 \bibdata{../references_verified}
 \bibcite{androidCredentialManager}{{1}{2026a}{{Android Developers}}{{}}}
-\@writefile{toc}{\contentsline {paragraph}{Agent-Agnostic Generality.}{12}{section*.61}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Ethics, Reproducibility, and Transparency.}{12}{section*.62}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Memory Hygiene, Fraud Coexistence, and Model Generality.}{12}{section*.60}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ethics, Reproducibility, and Transparency.}{12}{section*.61}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Limitations and Threats to Validity}{12}{subsection.9.2}\protected@file@percent }
 \newlabel{sec:limitations}{{9.2}{12}{Limitations and Threats to Validity}{subsection.9.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{Platform Scope and Operating System Trust.}{12}{section*.63}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Web Views and Origin Binding.}{12}{section*.64}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Authorized-Destination Misuse and Availability.}{12}{section*.65}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{UI Compatibility, Segmented OTPs, and Model Drift.}{12}{section*.66}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Platform Scope and Operating System Trust.}{12}{section*.62}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Web Views and Origin Binding.}{12}{section*.63}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Authorized-Destination Misuse and Availability.}{12}{section*.64}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{UI Compatibility, Segmented OTPs, and Model Drift.}{12}{section*.65}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{12}{section.10}\protected@file@percent }
 \newlabel{sec:conclusion}{{10}{12}{Conclusion}{section.10}{}}
 \bibcite{android15privacy}{{2}{2026b}{{Android Developers}}{{}}}
@@ -166,49 +169,53 @@
 \bibcite{androidSmsConsent}{{6}{2026f}{{Android Developers}}{{}}}
 \bibcite{androidSmsRetriever}{{7}{2026g}{{Android Developers}}{{}}}
 \bibcite{androidProtectedConfirmation}{{8}{2026}{{Android Open Source Project}}{{}}}
-\bibcite{bagdasarian2024airgap}{{9}{2024}{{Bagdasarian et~al\mbox  {.}}}{{}}}
-\bibcite{bugiel2013flexible}{{10}{2013}{{Bugiel et~al\mbox  {.}}}{{}}}
-\bibcite{rfc8707}{{11}{2020}{{Campbell et~al\mbox  {.}}}{{}}}
-\bibcite{chen2025fineprint}{{12}{2025}{{Chen et~al\mbox  {.}}}{{}}}
-\bibcite{chong2024casper}{{13}{2025}{{Chong et~al\mbox  {.}}}{{}}}
-\bibcite{costa2025fides}{{14}{2025}{{Costa et~al\mbox  {.}}}{{}}}
-\bibcite{debenedetti2025camel}{{15}{2025}{{Debenedetti et~al\mbox  {.}}}{{}}}
-\bibcite{debenedetti2024agentdojo}{{16}{2024}{{Debenedetti et~al\mbox  {.}}}{{}}}
-\bibcite{dennis1966semantics}{{17}{1966}{{Dennis and Horn}}{{}}}
-\bibcite{du2025mobileattacks}{{18}{2025}{{Du et~al\mbox  {.}}}{{}}}
-\bibcite{enck2010taintdroid}{{19}{2010}{{Enck et~al\mbox  {.}}}{{}}}
-\bibcite{felt2011permission}{{20}{2011}{{Felt et~al\mbox  {.}}}{{}}}
-\bibcite{rfc9449}{{21}{2023}{{Fett et~al\mbox  {.}}}{{}}}
-\bibcite{greshake2023indirect}{{22}{2023}{{Greshake et~al\mbox  {.}}}{{}}}
-\bibcite{rfc2104}{{23}{1997}{{Krawczyk et~al\mbox  {.}}}{{}}}
-\bibcite{liao2024eia}{{24}{2024}{{Liao et~al\mbox  {.}}}{{}}}
-\bibcite{rfc9700}{{25}{2025}{{Lodderstedt et~al\mbox  {.}}}{{}}}
-\bibcite{rfc4226}{{26}{2005}{{M'Raihi et~al\mbox  {.}}}{{}}}
-\bibcite{rfc6238}{{27}{2011}{{M'Raihi et~al\mbox  {.}}}{{}}}
-\bibcite{nist80063b}{{28}{2017}{{National Institute of Standards and Technology}}{{}}}
-\bibcite{rawles2024androidworld}{{29}{2025}{{Rawles et~al\mbox  {.}}}{{}}}
-\bibcite{rossi2021seapp}{{30}{2021}{{Rossi et~al\mbox  {.}}}{{}}}
-\bibcite{saltzer1975protection}{{31}{1975}{{Saltzer and Schroeder}}{{}}}
-\@writefile{toc}{\contentsline {section}{References}{13}{section*.68}\protected@file@percent }
-\bibcite{shi2025progent}{{32}{2025}{{Shi et~al\mbox  {.}}}{{}}}
-\bibcite{siyan2025papillon}{{33}{2025}{{Siyan et~al\mbox  {.}}}{{}}}
-\bibcite{webauthn3}{{34}{2026}{{W3C Web Authentication Working Group}}{{}}}
-\bibcite{wang2024mobileagent}{{35}{2024}{{Wang et~al\mbox  {.}}}{{}}}
-\bibcite{watson2010capsicum}{{36}{2010}{{Watson et~al\mbox  {.}}}{{}}}
-\bibcite{wen2023autodroid}{{37}{2024}{{Wen et~al\mbox  {.}}}{{}}}
-\bibcite{wu2025isolategpt}{{38}{2025}{{Wu et~al\mbox  {.}}}{{}}}
-\bibcite{yan2012droidscope}{{39}{2012}{{Yan and Yin}}{{}}}
-\bibcite{ye2025mobileagentv3}{{40}{2025}{{Ye et~al\mbox  {.}}}{{}}}
-\bibcite{zeng2025privacyrestore}{{41}{2025}{{Zeng et~al\mbox  {.}}}{{}}}
-\bibcite{zhan2024injecagent}{{42}{2024}{{Zhan et~al\mbox  {.}}}{{}}}
-\bibcite{zhang2023appagent}{{43}{2025}{{Zhang et~al\mbox  {.}}}{{}}}
-\bibcite{zhao2026anonymization}{{44}{2026}{{Zhao et~al\mbox  {.}}}{{}}}
+\bibcite{andrus2015rushmore}{{9}{2015}{{Andrus et~al\mbox  {.}}}{{}}}
+\bibcite{bagdasarian2024airgap}{{10}{2024}{{Bagdasarian et~al\mbox  {.}}}{{}}}
+\bibcite{bugiel2013flexible}{{11}{2013}{{Bugiel et~al\mbox  {.}}}{{}}}
+\bibcite{rfc8707}{{12}{2020}{{Campbell et~al\mbox  {.}}}{{}}}
+\bibcite{chen2025fineprint}{{13}{2025}{{Chen et~al\mbox  {.}}}{{}}}
+\bibcite{chong2024casper}{{14}{2025}{{Chong et~al\mbox  {.}}}{{}}}
+\bibcite{continella2020schrodintext}{{15}{2020}{{Continella et~al\mbox  {.}}}{{}}}
+\bibcite{costa2025fides}{{16}{2025}{{Costa et~al\mbox  {.}}}{{}}}
+\bibcite{debenedetti2025camel}{{17}{2025}{{Debenedetti et~al\mbox  {.}}}{{}}}
+\bibcite{debenedetti2024agentdojo}{{18}{2024}{{Debenedetti et~al\mbox  {.}}}{{}}}
+\bibcite{dennis1966semantics}{{19}{1966}{{Dennis and Horn}}{{}}}
+\bibcite{du2025mobileattacks}{{20}{2025}{{Du et~al\mbox  {.}}}{{}}}
+\bibcite{enck2010taintdroid}{{21}{2010}{{Enck et~al\mbox  {.}}}{{}}}
+\bibcite{felt2011permission}{{22}{2011}{{Felt et~al\mbox  {.}}}{{}}}
+\bibcite{rfc9449}{{23}{2023}{{Fett et~al\mbox  {.}}}{{}}}
+\bibcite{fratantonio2017cloak}{{24}{2017}{{Fratantonio et~al\mbox  {.}}}{{}}}
+\bibcite{greshake2023indirect}{{25}{2023}{{Greshake et~al\mbox  {.}}}{{}}}
+\bibcite{jang2014gyrus}{{26}{2014}{{Jang et~al\mbox  {.}}}{{}}}
+\bibcite{rfc2104}{{27}{1997}{{Krawczyk et~al\mbox  {.}}}{{}}}
+\bibcite{liao2024eia}{{28}{2024}{{Liao et~al\mbox  {.}}}{{}}}
+\bibcite{rfc9700}{{29}{2025}{{Lodderstedt et~al\mbox  {.}}}{{}}}
+\bibcite{rfc4226}{{30}{2005}{{M'Raihi et~al\mbox  {.}}}{{}}}
+\bibcite{rfc6238}{{31}{2011}{{M'Raihi et~al\mbox  {.}}}{{}}}
+\@writefile{toc}{\contentsline {section}{References}{13}{section*.67}\protected@file@percent }
+\bibcite{nist80063b}{{32}{2017}{{National Institute of Standards and Technology}}{{}}}
+\bibcite{rawles2024androidworld}{{33}{2025}{{Rawles et~al\mbox  {.}}}{{}}}
+\bibcite{rossi2021seapp}{{34}{2021}{{Rossi et~al\mbox  {.}}}{{}}}
+\bibcite{saltzer1975protection}{{35}{1975}{{Saltzer and Schroeder}}{{}}}
+\bibcite{shi2025progent}{{36}{2025}{{Shi et~al\mbox  {.}}}{{}}}
+\bibcite{siyan2025papillon}{{37}{2025}{{Siyan et~al\mbox  {.}}}{{}}}
+\bibcite{webauthn3}{{38}{2026}{{W3C Web Authentication Working Group}}{{}}}
+\bibcite{wang2024mobileagent}{{39}{2024}{{Wang et~al\mbox  {.}}}{{}}}
+\bibcite{watson2010capsicum}{{40}{2010}{{Watson et~al\mbox  {.}}}{{}}}
+\bibcite{wen2023autodroid}{{41}{2024}{{Wen et~al\mbox  {.}}}{{}}}
+\bibcite{wu2025isolategpt}{{42}{2025}{{Wu et~al\mbox  {.}}}{{}}}
+\bibcite{yan2012droidscope}{{43}{2012}{{Yan and Yin}}{{}}}
+\bibcite{ye2025mobileagentv3}{{44}{2025}{{Ye et~al\mbox  {.}}}{{}}}
+\bibcite{zeng2025privacyrestore}{{45}{2025}{{Zeng et~al\mbox  {.}}}{{}}}
+\bibcite{zhan2024injecagent}{{46}{2024}{{Zhan et~al\mbox  {.}}}{{}}}
+\bibcite{zhang2023appagent}{{47}{2025}{{Zhang et~al\mbox  {.}}}{{}}}
+\bibcite{zhao2026anonymization}{{48}{2026}{{Zhao et~al\mbox  {.}}}{{}}}
 \@writefile{toc}{\contentsline {section}{\numberline {A}Artifact Appendix}{14}{appendix.A}\protected@file@percent }
 \newlabel{sec:artifact}{{A}{14}{Artifact Appendix}{appendix.A}{}}
-\@writefile{toc}{\contentsline {paragraph}{Scope.}{14}{section*.69}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Contents.}{14}{section*.70}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{One-command offline verification.}{14}{section*.71}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{On-device Android 14 experiment reproduction.}{14}{section*.72}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scope.}{14}{section*.68}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Contents.}{14}{section*.69}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{One-command offline verification.}{14}{section*.70}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{On-device Android 14 experiment reproduction.}{14}{section*.71}\protected@file@percent }
 \newlabel{tocindent-1}{0pt}
 \newlabel{tocindent0}{0pt}
 \newlabel{tocindent1}{4.65pt}
@@ -216,6 +223,6 @@
 \newlabel{tocindent3}{0pt}
 \newlabel{tocindent4}{0pt}
 \newlabel{tocindent5}{0pt}
-\@writefile{toc}{\contentsline {paragraph}{Integrity and license.}{15}{section*.73}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Integrity and license.}{15}{section*.72}\protected@file@percent }
 \newlabel{TotPages}{{15}{15}{}{page.15}{}}
 \gdef \@abspage@last{15}
