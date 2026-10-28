@@ -1,8 +1,6 @@
 \section{Discussion and Limitations}
 \label{sec:discussion}
 
-We discuss key architectural considerations for transitioning \SH{} to production Android, followed by fundamental limitations.
-
 \subsection{Deployment Roadmap and Systems Considerations}
 
 \paragraph{Path to Google AOSP Upstream.}
@@ -19,19 +17,19 @@ A core tenet of \SH{} is fail-closed ephemeral lifetime. To defend against memor
 Because \SH{} operates strictly at the OS boundary, its guarantees are completely agnostic to the agent's internal reasoning architecture. Whether a user deploys a commercial frontier VLM (e.g., Claude, GPT-4o), an open-source model (e.g., Qwen-VL), or an accessibility-tree heuristic planner, the agent interacts with handles solely through standard UI action schemas. The security boundary remains anchored in the operating system's reference monitor, insulating users from the unpredictable evolution of foundation models and prompt injection techniques.
 
 \paragraph{Ethics, Reproducibility, and Transparency.}
-All experiments exclusively utilize randomly generated synthetic canaries, isolated loopback endpoints, and open benchmark applications; no human subjects, production credentials, or real banking instruments were involved. Full runners, configuration seeds, and provenance logs are open-sourced under Apache 2.0 (detailed in Appendix~\ref{sec:artifact}). Portions of the manuscript text were drafted with LLM assistance; all technical claims, formal proofs, and empirical measurements were produced, audited, and verified by the authors.
+All experiments exclusively utilize synthetic canaries, isolated loopback endpoints, and open benchmark applications; no human subjects or production credentials were used. Complete experiment runners, configuration seeds, and provenance logs are open-sourced under Apache 2.0 (Appendix~\ref{sec:artifact}). Portions of the manuscript were drafted with LLM assistance; all technical claims, formal proofs, and measurements were produced and verified by the authors.
 
 \subsection{Limitations and Threats to Validity}
 \label{sec:limitations}
 
 \paragraph{Platform Scope and Operating System Trust.}
-The empirical results validate \SH{} on an Android~14 prototype combining an SMS broker, accessibility overlay masking, and an in-memory vault resolver. While this confirms core capability invariants against vision-driven agents on stock emulator runtimes, in-framework hardening (e.g., in-tree \texttt{system\_server} private input dispatch, hardware-keystore isolation, and full-stack AOSP patches) remains necessary for non-userdebug consumer deployments. Furthermore, our model trusts the underlying OS kernel and system server. A compromised kernel can forge target identities or bypass redaction; hardware-backed keystores protect against key exfiltration but do not guarantee correct policy enforcement by a compromised framework. Finally, uninstrumented platform channels (e.g., vendor crash dumps, GPU memory mirrors, or OEM screen readers) could invalidate non-disclosure if left unmonitored.
+Our empirical results validate \SH{} on Android~14 via an SMS broker, accessibility overlay masking, and vault resolver, confirming capability invariants on stock emulators. Production deployments require in-tree \texttt{system\_server} dispatch, hardware-keystore isolation, and AOSP integration. Our model trusts the kernel and system server: a compromised kernel can forge identities or bypass redaction. Hardware keystores prevent key exfiltration but cannot enforce policy if the framework is compromised. Unmonitored platform channels (e.g., crash dumps or OEM screen readers) remain out of scope.
 
 \paragraph{Web Views and Origin Binding.}
-Package identity is insufficient for origin-level confinement in browser and hybrid-app contexts. Enforcing reliable destination binding between a target input field, enclosing frame, and authenticated document origin requires deeper Chromium and WebView framework attestation. In the presence of complex redirects, cross-origin iframes, or custom tabs, \SH's safe fallback is fail-closed rejection or explicit user confirmation, trading convenience for confidentiality.
+Package identity is insufficient for origin-level confinement in browser contexts. Enforcing destination binding between an input field, frame, and authenticated document origin requires deeper Chromium and WebView framework attestation. Under complex redirects, cross-origin iframes, or custom tabs, \SH's safe fallback is fail-closed rejection or explicit user confirmation, trading convenience for confidentiality.
 
 \paragraph{Authorized-Destination Misuse and Availability.}
-Destination binding restricts \emph{where} a secret can be resolved, but cannot prevent an injected agent from executing an unwanted action \emph{inside} a legitimate destination (e.g., selecting an adversary's beneficiary account inside a banking app prior to resolving a bound OTP). While task tokens, transaction summaries, and Android Protected Confirmation mitigate this risk, full semantics require application cooperation. Additionally, an adversarial agent can mount denial-of-service by repeatedly requesting invalid resolutions, driving single-use handles to premature consumption.
+Destination binding restricts \emph{where} a secret can be resolved, but cannot prevent an injected agent from executing an unwanted action \emph{inside} a legitimate destination (e.g., selecting an adversary's beneficiary account inside a banking app prior to resolving an OTP). While task tokens, transaction summaries, and Android Protected Confirmation mitigate this risk, full semantics require application cooperation. Additionally, an adversarial agent can mount denial-of-service by repeatedly requesting invalid resolutions to consume single-use handles.
 
 \paragraph{External Validity and Model Drift.}
 Our empirical evaluation focused on stock Android 14 and Mobile-Agent v3.5 (Sonnet 4.6). Although \SH's guarantees are model-agnostic, commercial apps with proprietary obfuscation may require tailored source adapters. Longitudinal evaluations across diverse physical devices remain essential future work.
