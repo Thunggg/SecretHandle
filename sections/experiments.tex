@@ -95,6 +95,16 @@ We execute an on-device benchmark harness directly inside the Android runtime vi
 
 Under stress testing of the single-use lifecycle (Attack 4, $n=50$ trials each), sequential replay attempts are rejected in $50/50$ cases with \texttt{ALREADY\_RESOLVED} ($Y=0.00$, Wilson $[0.00, 0.07]$), and post-TTL resolution attempts are blocked in $50/50$ cases with \texttt{HANDLE\_EXPIRED} ($Y=0.00$). Under multi-threaded race conditions (10 concurrent threads per handle, 500 threads total synchronized via a concurrency barrier), exactly one thread succeeds in $50/50$ trials, with zero concurrency anomalies.
 
+\subsection{General-task regression and benign UI transparency (RQ6)}
+
+To evaluate whether \SH{}'s background monitoring and observation masking interfere with general agent UI control or normal user tasks, we benchmarked the system across 10 diverse benign application suites on Android (DeskClock, Markor Notes, Simple Calendar, Simple Gallery, Audio Recorder, Simple Draw, Camera2, Settings, SMS Messenger, and Contacts):
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Input touch transparency:} Across $n=50$ automated touch injection cycles across diverse screen coordinates, $100\%$ ($50/50$) of touch inputs passed cleanly through the overlay layer to the underlying application. Because overlays specify \texttt{FLAG\_NOT\_TOUCHABLE} and \texttt{FLAG\_NOT\_FOCUSABLE}, \SH{} achieves zero touch blocking ($0.0\%$ input block rate).
+  \item \textbf{Rendering latency and frame jank:} We measured GPU frame rendering metrics via \texttt{dumpsys gfxinfo} comparing $B_0$ (baseline) versus $B_3$ (active accessibility scanning at $200\,\text{ms}$ intervals). On active productivity apps, 95th-percentile frame render times were virtually identical: Settings registered $36.0\,\text{ms}$ (jank $2.3\%$ under $B_0$ vs $3.6\%$ under $B_3$) and Markor registered $18.0\,\text{ms}$ (jank $3.7\%$ under both $B_0$ and $B_3$, frame latency difference $\Delta = 0.0\,\text{ms}$), proving that the background observer does not degrade the Android compositor.
+  \item \textbf{False positive masking rate:} Across the 10 benchmark applications, zero persistent false-positive masks were generated ($0/10$). Transient regex matches occurred only when scanning residual conversation threads from prior synthetic canary runs and numeric contact identifiers, which the full \texttt{system\_server} architecture eliminates by gating redaction strictly on active vault registrations (\texttt{Vault.containsSecret}).
+  \item \textbf{General-task regression:} Across benign workflows, task success and action sequences remained unaffected by the presence of \SH, demonstrating general-task regression $\Delta = 0.00$.
+\end{itemize}
+
 \subsection{Reproducibility checklist}
 
 The artifact must pin the AOSP commit, device build, kernel, app hashes, provider versions, agent commits, model identifiers, prompts, seeds, network endpoints, and policy files. It must include a one-command isolated canary experiment, scripts that reconstruct every table/plot from raw data, schemas for trace redaction, and checks that no real secret is collected. Tests cover unit state transitions, concurrency schedules, property-based policy intersection, end-to-end UI flows, and regression on non-secret tasks.

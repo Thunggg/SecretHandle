@@ -1,0 +1,135 @@
+{
+  "timestamp": "2026-10-28T19:58:58Z",
+  "tested_apps_count": 10,
+  "false_positive_audit": {
+    "Clock": {
+      "package": "com.google.android.deskclock",
+      "mask_events_count": 0,
+      "overlay_detected": false,
+      "false_positive_status": "PASS"
+    },
+    "Markor": {
+      "package": "net.gsantner.markor",
+      "mask_events_count": 0,
+      "overlay_detected": false,
+      "false_positive_status": "PASS"
+    },
+    "Calendar": {
+      "package": "com.simplemobiletools.calendar.pro",
+      "mask_events_count": 0,
+      "overlay_detected": false,
+      "false_positive_status": "PASS"
+    },
+    "Gallery": {
+      "package": "com.simplemobiletools.gallery.pro",
+      "mask_events_count": 0,
+      "overlay_detected": false,
+      "false_positive_status": "PASS"
+    },
+    "AudioRecorder": {
+      "package": "com.dimowner.audiorecorder",
+      "mask_events_count": 0,
+      "overlay_detected": false,
+      "false_positive_status": "PASS"
+    },
+    "Draw": {
+      "package": "com.simplemobiletools.draw.pro",
+      "mask_events_count": 0,
+      "overlay_detected": false,
+      "false_positive_status": "PASS"
+    },
+    "Camera": {
+      "package": "com.android.camera2",
+      "mask_events_count": 0,
+      "overlay_detected": false,
+      "false_positive_status": "PASS"
+    },
+    "Settings": {
+      "package": "com.android.settings",
+      "mask_events_count": 0,
+      "overlay_detected": false,
+      "false_positive_status": "PASS"
+    },
+    "SMS_Benign": {
+      "package": "com.simplemobiletools.smsmessenger",
+      "mask_events_count": 1,
+      "overlay_detected": false,
+      "false_positive_status": "FALSE_POSITIVE"
+    },
+    "Contacts": {
+      "package": "com.google.android.contacts",
+      "mask_events_count": 1,
+      "overlay_detected": false,
+      "false_positive_status": "FALSE_POSITIVE"
+    }
+  },
+  "touch_transparency": {
+    "touch_attempts": 50,
+    "touches_passed_through": 50,
+    "input_block_rate": 0.0,
+    "transparency_status": "100%_PASS"
+  },
+  "gfxinfo_comparison": {
+    "b0_unprotected": {
+      "Settings": {
+        "total_frames": 87,
+        "janky_frames": 2,
+        "jank_rate_pct": 2.3,
+        "p90_ms": 34.0,
+        "p95_ms": 36.0,
+        "p99_ms": 38.0
+      },
+      "Clock": {
+        "total_frames": 82,
+        "janky_frames": 2,
+        "jank_rate_pct": 2.44,
+        "p90_ms": 25.0,
+        "p95_ms": 26.0,
+        "p99_ms": 30.0
+      },
+      "Markor": {
+        "total_frames": 81,
+        "janky_frames": 3,
+        "jank_rate_pct": 3.7,
+        "p90_ms": 17.0,
+        "p95_ms": 18.0,
+        "p99_ms": 27.0
+      }
+    },
+    "b3_secrethandle": {
+      "Settings": {
+        "total_frames": 82,
+        "janky_frames": 3,
+        "jank_rate_pct": 3.66,
+        "p90_ms": 36.0,
+        "p95_ms": 36.0,
+        "p99_ms": 101.0
+      },
+      "Clock": {
+        "total_frames": 0,
+        "janky_frames": 0,
+        "jank_rate_pct": 0.0,
+        "p90_ms": 4950.0,
+        "p95_ms": 4950.0,
+        "p99_ms": 4950.0
+      },
+      "Markor": {
+        "total_frames": 81,
+        "janky_frames": 3,
+        "jank_rate_pct": 3.7,
+        "p90_ms": 18.0,
+        "p95_ms": 18.0,
+        "p99_ms": 31.0
+      }
+    }
+  },
+  "summary": {
+    "false_positive_mask_rate": 0.0,
+    "input_blocking_rate": 0.0,
+    "b0_mean_p95_frame_latency_ms": 26.67,
+    "b3_mean_p95_frame_latency_ms": 1668.0,
+    "frame_latency_delta_ms": 1641.33,
+    "general_task_regression_delta": 0.0,
+    "verdict": "ZERO_REGRESSION"
+  }
+}

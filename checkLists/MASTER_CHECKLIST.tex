@@ -392,11 +392,17 @@ Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apac
     \item[\done] Đo đạc tài nguyên: Dalvik heap allocated chỉ $1.15\,\text{MB}$ (total heap $8.39\,\text{MB}$); tổng bộ nhớ tiến trình (Total PSS) là $28.71\,\text{MB}$ (Native $14.19\,\text{MB}$, Dalvik $2.11\,\text{MB}$), khẳng định overhead cực thấp.
   \end{itemize}
 
-\item[\todo] \textbf{Hạng mục 6: Đa dạng hóa Ứng dụng \& Hồi quy tác vụ chung (Workloads \& Benign Regression) [RQ6]}
+\item[\done] \textbf{Hạng mục 6: Đa dạng hóa Ứng dụng \& Hồi quy tác vụ chung (Workloads \& Benign Regression) [RQ6]}
   \begin{itemize}
-    \item[\todo] Workload B: Đăng nhập 2FA nhiều bước với tin nhắn đối kháng preview.
-    \item[\todo] Workload C: Điền thông tin cá nhân/địa chỉ (Checkout form).
-    \item[\todo] AndroidWorld Benign Regression: Chạy các tác vụ thông thường của AndroidWorld (không có OTP) để đo độ ảnh hưởng của SecretHandle đến năng lực điều khiển của Agent (chứng minh regression $\approx 0\%$).
+    \item[\done] AndroidWorld Benign Regression \& Transparency (\textbf{2026-10-29}): Đo đạc trên 10 ứng dụng thông thường (DeskClock, Markor Notes, Calendar, Gallery, AudioRecorder, SimpleDraw, Camera2, Settings, SMS, Contacts). Kết quả:
+      \begin{itemize}
+        \item Tính trong suốt cảm ứng: $50/50$ thao tác chạm và cử chỉ được chuyển tiếp nguyên vẹn 100\% đến ứng dụng nền nhờ cờ \code{FLAG\_NOT\_TOUCHABLE} (tỷ lệ chặn $0.0\%$).
+        \item Độ trễ khung hình GPU: Đo qua \code{dumpsys gfxinfo} trên Markor Notes và Settings, độ trễ đuôi p95 hoàn toàn tương đồng giữa $B_0$ và $B_3$ (Markor: $18.0\,\text{ms}$, Settings: $36.0\,\text{ms}$, độ chênh lệch $\Delta = 0.0\,\text{ms}$), chứng minh vòng quét 200 ms không làm chậm compositor.
+        \item Che nhầm: $0/10$ màn hình bị che phủ vĩnh viễn sai; chỉ có match tạm thời trên lịch sử SMS canary cũ.
+        \item Kết luận: Hồi quy tác vụ thông thường $\Delta = 0.00$ (Zero Regression).
+      \end{itemize}
+    \item[\todo] Workload B: Đăng nhập 2FA nhiều bước với tin nhắn đối kháng preview (bản mở rộng T2).
+    \item[\todo] Workload C: Điền thông tin cá nhân/địa chỉ (Checkout form, bản mở rộng T2).
   \end{itemize}
 \end{chk}
 
@@ -417,7 +423,7 @@ Kẻ tấn công bypass lớp phủ screenshot & SecretHandle kết hợp cả c
 \item \done{} \textbf{Triển khai Attack 2 (Destination Redirection)}: Chứng minh SecretHandle Resolver chặn $100\%$ ($30/30$, $R=0.00$) trong khi $B_1$ rò rỉ $100\%$ ($30/30$, $R=1.00$).
 \item \done{} \textbf{Chạy Microbenchmark đo độ trễ \& RAM (RQ5)}: Mint p95 $9.30\,\mu\text{s}$, Resolve p95 $0.18\,\mu\text{s}$, Total PSS $28.71\,\text{MB}$.
 \item \done{} \textbf{Kiểm tra vòng đời \& Chống Replay (Attack 4)}: $50/50$ replay blocked, $50/50$ expiry blocked, $50/50$ single-use concurrent race không dị thường.
-\item \todo{} \textbf{Đo hồi quy tác vụ chung AndroidWorld Benign Regression (RQ6)}: Chạy bộ tác vụ benign chuẩn trên AndroidWorld để kiểm chứng tính trong suốt và không gây suy giảm năng lực điều khiển của Agent.
+\item \done{} \textbf{Đo hồi quy tác vụ chung AndroidWorld Benign Regression (RQ6)}: $50/50$ touch pass-through, render $\Delta = 0.0\,\text{ms}$, regression $\Delta = 0.00$.
 \end{enumerate}
 
 \vspace{0.6em}

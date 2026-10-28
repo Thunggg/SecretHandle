@@ -1,0 +1,251 @@
+package com.secrethandle.b3;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
+
+/**
+ * Empirical Benchmark Runner for SecretHandle.
+ *
+ * Runs inside the Android runtime (via app_process) to measure:
+ * 1. RQ5 Microbenchmark (Mint, Resolve latency, heap allocation)
+ * 2. RQ3 Lifecycle Stress Tests (Single-use Replay, TTL Expiration, Concurrency Race)
+ * 3. RQ2 Destination Redirection (B3 Bound Destination vs B1 Unbound Placeholder)
+ */
+public class BenchmarkRunner {
+
+    public static void main(String[] args) {
+        String mode = args.length > 0 ? args[0] : "all";
+        System.out.println("{\"benchmark_mode\":\"" + mode + "\",");
+
+        if ("overhead".equals(mode) || "all".equals(mode)) {
+            runOverheadBenchmark();
+            if ("all".equals(mode)) System.out.println(",");
+        }
+        if ("lifecycle".equals(mode) || "all".equals(mode)) {
+            runLifecycleBenchmark();
+            if ("all".equals(mode)) System.out.println(",");
+        }
+        if ("redirection".equals(mode) || "all".equals(mode)) {
+            runRedirectionBenchmark();
+        }
+
+        System.out.println("}");
+    }
+
+    private static void runOverheadBenchmark() {
+        Vault.clear();
+
+        // Warmup (10 rounds)
+        for (int i = 0; i < 10; i++) {
+            String h = Vault.mint("SH-WARMUP" + i, "com.source", "com.target");
+            Vault.reveal(h, "com.target");
+        }
+        Vault.clear();
+
+        // 100 Mint operations
+        int N = 100;
+        List<Long> mintNanos = new ArrayList<>();
+        List<String> handles = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            String secret = String.format("SH-%06X", 0x100000 + i);
+            long t0 = System.nanoTime();
+            String h = Vault.mint(secret, "com.source.app", "com.target.app");
+            long dt = System.nanoTime() - t0;
+            mintNanos.add(dt);
+            handles.add(h);
+        }
+
+        // 100 Resolve operations
+        List<Long> resolveNanos = new ArrayList<>();
+        for (String h : handles) {
+            long t0 = System.nanoTime();
+            String s = Vault.reveal(h, "com.target.app");
+            long dt = System.nanoTime() - t0;
+            if (s != null) {
+                resolveNanos.add(dt);
+            }
+        }
+
+        Runtime rt = Runtime.getRuntime();
+        long heapUsed = rt.totalMemory() - rt.freeMemory();
+
+        System.out.println("\"overhead\": {");
+        System.out.println("  \"trials\": " + N + ",");
+        System.out.println("  \"mint_latency_us\": " + statsUs(mintNanos) + ",");
+        System.out.println("  \"resolve_latency_us\": " + statsUs(resolveNanos) + ",");
+        System.out.println("  \"heap_alloc_bytes\": " + heapUsed + ",");
+        System.out.println("  \"heap_total_bytes\": " + rt.totalMemory());
+        System.out.print("}");
+    }
+
+    private static void runLifecycleBenchmark() {
+        Vault.clear();
+        int N = 50;
+
+        // 1. Replay test (50 trials)
+        int replayBlocked = 0;
+        for (int i = 0; i < N; i++) {
+            String secret = String.format("SH-REP-%04d", i);
+            String h = Vault.mint(secret, "com.source", "com.target");
+            String s1 = Vault.reveal(h, "com.target");
+            String s2 = Vault.reveal(h, "com.target"); // Attempt 2: Must be null
+            if (s1 != null && s2 == null) {
+                replayBlocked++;
+            }
+        }
+
+        // 2. Expiry test (50 trials)
+        int expiryBlocked = 0;
+        for (int i = 0; i < N; i++) {
+            String secret = String.format("SH-EXP-%04d", i);
+            String h = Vault.mintExpiredForTest(secret, "com.source", "com.target");
+            String s = Vault.reveal(h, "com.target"); // Must be null
+            if (s == null) {
+                expiryBlocked++;
+            }
+        }
+
+        // 3. Concurrency Race test (50 handles, 10 concurrent threads each)
+        int concurrencyPassed = 0;
+        for (int i = 0; i < N; i++) {
+            final String h = Vault.mint(String.format("SH-RACE-%04d", i), "com.source", "com.target");
+            final int THREADS = 10;
+            final CountDownLatch startLatch = new CountDownLatch(1);
+            final CountDownLatch doneLatch = new CountDownLatch(THREADS);
+            final AtomicInteger successCount = new AtomicInteger(0);
+
+            for (int t = 0; t < THREADS; t++) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            startLatch.await();
+                            String s = Vault.reveal(h, "com.target");
+                            if (s != null) {
+                                successCount.incrementAndGet();
+                            }
+                        } catch (Exception ignored) {
+                        } finally {
+                            doneLatch.countDown();
+                        }
+                    }
+                }).start();
+            }
+
+            startLatch.countDown(); // Fire all 10 threads concurrently
+            try {
+                doneLatch.await();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            // Exactly 1 thread must have succeeded
+            if (successCount.get() == 1) {
+                concurrencyPassed++;
+            }
+        }
+
+        System.out.println("\"lifecycle\": {");
+        System.out.println("  \"trials\": " + N + ",");
+        System.out.println("  \"replay_blocked\": " + replayBlocked + ",");
+        System.out.println("  \"replay_accepted\": " + (N - replayBlocked) + ",");
+        System.out.println("  \"expiry_blocked\": " + expiryBlocked + ",");
+        System.out.println("  \"expiry_bypassed\": " + (N - expiryBlocked) + ",");
+        System.out.println("  \"concurrency_correct_single_use\": " + concurrencyPassed + ",");
+        System.out.println("  \"concurrency_anomalies\": " + (N - concurrencyPassed));
+        System.out.print("}");
+    }
+
+    private static void runRedirectionBenchmark() {
+        Vault.clear();
+        int N = 30;
+
+        // Condition B3: SecretHandle with Destination Binding
+        int b3AttackerLeaks = 0;
+        int b3LegitSuccess = 0;
+        for (int i = 0; i < N; i++) {
+            String secret = String.format("SH-DEST-%04d", i);
+            String h = Vault.mint(secret, "com.messages", "com.legitimate.login");
+
+            // Attacker attempts to resolve using malicious package identity
+            String leaked = Vault.reveal(h, "com.attacker.target");
+            if (leaked != null) {
+                b3AttackerLeaks++;
+            }
+
+            // Legitimate app attempts to resolve using valid package identity
+            String legit = Vault.reveal(h, "com.legitimate.login");
+            if (secret.equals(legit)) {
+                b3LegitSuccess++;
+            }
+        }
+
+        // Condition B1: Detected Placeholder (No Destination Binding)
+        int b1AttackerLeaks = 0;
+        int b1LegitSuccess = 0;
+        for (int i = 0; i < N; i++) {
+            String secret = String.format("SH-B1-%04d", i);
+            // B1 placeholder mints without destination binding (target = null)
+            String h = Vault.mint(secret, "com.messages", null);
+
+            // Attacker attempts to resolve unbound placeholder
+            String leaked = Vault.reveal(h, "com.attacker.target");
+            if (secret.equals(leaked)) {
+                b1AttackerLeaks++; // B1 placeholder leaks raw secret!
+            }
+
+            // A second resolve fails because it was already consumed by attacker
+            String legit = Vault.reveal(h, "com.legitimate.login");
+            if (secret.equals(legit)) {
+                b1LegitSuccess++;
+            }
+        }
+
+        System.out.println("\"redirection\": {");
+        System.out.println("  \"trials\": " + N + ",");
+        System.out.println("  \"b3_secrethandle\": {");
+        System.out.println("    \"redirection_leaks\": " + b3AttackerLeaks + ",");
+        System.out.println("    \"redirection_rate\": " + (b3AttackerLeaks / (double) N) + ",");
+        System.out.println("    \"legitimate_utility\": " + b3LegitSuccess + ",");
+        System.out.println("    \"utility_rate\": " + (b3LegitSuccess / (double) N));
+        System.out.println("  },");
+        System.out.println("  \"b1_placeholder\": {");
+        System.out.println("    \"redirection_leaks\": " + b1AttackerLeaks + ",");
+        System.out.println("    \"redirection_rate\": " + (b1AttackerLeaks / (double) N) + ",");
+        System.out.println("    \"legitimate_utility\": " + b1LegitSuccess + ",");
+        System.out.println("    \"utility_rate\": " + (b1LegitSuccess / (double) N));
+        System.out.println("  }");
+        System.out.print("}");
+    }
+
+    private static String statsUs(List<Long> nanos) {
+        Collections.sort(nanos);
+        int n = nanos.size();
+        double sumUs = 0;
+        List<Double> usList = new ArrayList<>();
+        for (long val : nanos) {
+            double us = val / 1000.0;
+            sumUs += us;
+            usList.add(us);
+        }
+        double meanUs = sumUs / n;
+        double medianUs = usList.get(n / 2);
+        double minUs = usList.get(0);
+        double maxUs = usList.get(n - 1);
+        double p95Us = usList.get((int) (n * 0.95));
+        double p99Us = usList.get((int) (n * 0.99));
+
+        double varSum = 0;
+        for (double v : usList) {
+            varSum += (v - meanUs) * (v - meanUs);
+        }
+        double stdUs = Math.sqrt(varSum / n);
+
+        return String.format(
+            "{\"mean\": %.2f, \"median\": %.2f, \"min\": %.2f, \"max\": %.2f, \"p95\": %.2f, \"p99\": %.2f, \"std\": %.2f}",
+            meanUs, medianUs, minUs, maxUs, p95Us, p99Us, stdUs);
+    }
+}
