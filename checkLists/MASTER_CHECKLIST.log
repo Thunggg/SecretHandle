@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  22 OCT 2026 21:56
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  28 OCT 2026 23:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -667,7 +667,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 83--83
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 115--115
-[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 ~35% (repo
+[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 ~55% (repo
  []
 
 
@@ -686,18 +686,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 115--115
  []
 
 
+Underfull \hbox (badness 5711) in paragraph at lines 115--115
+\TU/TimesNewRoman(0)/m/n/10.95 pinned; B3 proto-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--115
+\TU/TimesNewRoman(0)/m/n/10.95 type stock-Android
+ []
+
+
 Underfull \hbox (badness 1215) in paragraph at lines 115--115
 []|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 chỉ có bản tổng
  []
 
 
-Underfull \hbox (badness 4060) in paragraph at lines 115--115
-[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 có B0-rate trên
- []
-
-
-Underfull \hbox (badness 6842) in paragraph at lines 115--115
-\TU/TimesNewRoman(0)/m/n/10.95 số paper; tái xác
+Underfull \hbox (badness 2181) in paragraph at lines 115--115
+\TU/TimesNewRoman(0)/m/n/10.95 phải số paper, cần
  []
 
 
@@ -731,14 +736,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--126
 .95 ,
  []
 
-
+[2]
 Underfull \hbox (badness 1365) in paragraph at lines 126--127
 []\TU/TimesNewRoman(0)/m/n/10.95 Audit cấp mã: \TU/Consolas(0)/m/n/10 SecretHan
 dle/audits/ \TU/TimesNewRoman(0)/m/n/10.95 (paper_implementation_spec, paper_to
 _code_traceability,
  []
 
-[2]
+
 Overfull \hbox (30.15877pt too wide) in paragraph at lines 155--156
 \TU/Consolas(0)/m/n/10 github.com/Thunggg/secrethandle-integration \TU/TimesNew
 Roman(0)/m/n/10.95 (private), local \TU/Consolas(0)/m/n/10 E:\NCKH\secrethandle
@@ -761,74 +766,97 @@ spec.md
  []
 
 
-Overfull \hbox (15.84412pt too wide) in paragraph at lines 161--162
+Overfull \hbox (8.39063pt too wide) in paragraph at lines 157--158
+[]\TU/TimesNewRoman(0)/b/n/10.95 G3 — bridge $\OMS/cmsy/m/n/10.95 !$ \TU/TimesN
+ewRoman(0)/b/n/10.95 Bedrock thật \TU/TimesNewRoman(0)/m/n/10.95 (\TU/TimesNewR
+oman(0)/b/n/10.95 2026-10-28\TU/TimesNewRoman(0)/m/n/10.95 ): dùng \TU/TimesNew
+Roman(0)/m/it/10.95 Bedrock API key \TU/TimesNewRoman(0)/m/n/10.95 dạng bearer 
+(\TU/Consolas(0)/m/n/10 bedrock-api-key-...\TU/TimesNewRoman(0)/m/n/10.95 )
+ []
+
+
+Underfull \hbox (badness 2285) in paragraph at lines 157--158
+\TU/TimesNewRoman(0)/m/n/10.95 do giảng viên cấp; khóa lưu \TU/TimesNewRoman(0)
+/m/it/10.95 ngoài repo \TU/TimesNewRoman(0)/m/n/10.95 (\TU/Consolas(0)/m/n/10 e
+nv/.env.bedrock.local\TU/TimesNewRoman(0)/m/n/10.95 , đã gitignore; trên host
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 157--158
+\TU/TimesNewRoman(0)/m/n/10.95 HTTP 200 với \TU/Consolas(0)/m/n/10 us.anthropic
+.claude-sonnet-4-6 \TU/TimesNewRoman(0)/m/n/10.95 (12+4 token, 0,81 s); \TU/Con
+solas(0)/m/n/10 /healthz \TU/TimesNewRoman(0)/m/n/10.95 chỉ báo
+ []
+
+[3]
+Overfull \hbox (15.84412pt too wide) in paragraph at lines 166--167
 []\TU/TimesNewRoman(0)/m/n/10.95 Ghim phiên bản Python/OS/công cụ thống kê vào 
 provenance — \TU/TimesNewRoman(0)/b/n/10.95 2026-10-22: \TU/Consolas(0)/m/n/10 
 docs/toolchain_pins.json
  []
 
-[3]
-Underfull \hbox (badness 1308) in paragraph at lines 177--178
+[4]
+Underfull \hbox (badness 1308) in paragraph at lines 182--183
 []\TU/TimesNewRoman(0)/m/n/10.95 Soát \TU/Consolas(0)/m/n/10 core/crypto/policy
 /store/redaction/metrics/statistics \TU/TimesNewRoman(0)/m/n/10.95 đối chiếu Al
 gorithm 1–3 +
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 179--180
+Underfull \hbox (badness 1496) in paragraph at lines 184--185
 []\TU/TimesNewRoman(0)/m/n/10.95 Test dựa mô hình: lịch trình crash/đồng thời t
 ại ranh giới reserve/commit/rollback/recover —
  []
 
-[4] [5] [6] [7]
-Underfull \hbox (badness 2990) in paragraph at lines 325--326
+[5] [6] [7] [8]
+Underfull \hbox (badness 2990) in paragraph at lines 330--331
 \TU/TimesNewRoman(0)/m/n/10.95 kích hoạt thủ công. \TU/Consolas(0)/m/n/10 make 
 check\TU/TimesNewRoman(0)/m/n/10.95 /\TU/Consolas(0)/m/n/10 scripts/smoke_check
 .py \TU/TimesNewRoman(0)/m/n/10.95 (offline, 1599 canary, 0 rò rỉ);
  []
 
 
-Underfull \hbox (badness 2469) in paragraph at lines 325--326
+Underfull \hbox (badness 2469) in paragraph at lines 330--331
 \TU/Consolas(0)/m/n/10 .github/workflows/ci.yml \TU/TimesNewRoman(0)/m/n/10.95 
 (3.11/3.12) + \TU/Consolas(0)/m/n/10 device.yml \TU/TimesNewRoman(0)/m/n/10.95 
 (\TU/Consolas(0)/m/n/10 workflow_dispatch\TU/TimesNewRoman(0)/m/n/10.95 ); loca
 l verify 74
  []
 
-[8]
-Underfull \hbox (badness 1688) in paragraph at lines 356--356
+[9]
+Underfull \hbox (badness 1688) in paragraph at lines 361--361
 []|\TU/TimesNewRoman(0)/m/n/10.95 Hạn 04/12/2026 còn  7 tuần,
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 356--356
+Underfull \hbox (badness 1577) in paragraph at lines 361--361
 []|\TU/TimesNewRoman(0)/m/n/10.95 AOSP build không kịp (Win-
  []
 
 
-Underfull \hbox (badness 5359) in paragraph at lines 356--356
+Underfull \hbox (badness 5359) in paragraph at lines 361--361
 []|\TU/TimesNewRoman(0)/m/n/10.95 AOSP là Plan B; dùng emulator/custom image ho
 ặc Cuttlefish;
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 356--356
+Underfull \hbox (badness 10000) in paragraph at lines 361--361
 []|\TU/TimesNewRoman(0)/m/n/10.95 Tác nhân ADB chạy UID
  []
 
 
-Underfull \hbox (badness 2547) in paragraph at lines 356--356
+Underfull \hbox (badness 2547) in paragraph at lines 361--361
 []|\TU/TimesNewRoman(0)/m/n/10.95 Bề mặt nguồn lộ OTP trước
  []
 
-[9]
-Underfull \hbox (badness 1259) in paragraph at lines 367--368
+[10]
+Underfull \hbox (badness 1259) in paragraph at lines 372--373
 \TU/TimesNewRoman(0)/b/n/10.95 Song song (Plan B, không gấp): \TU/TimesNewRoman
 (0)/m/n/10.95 kích hoạt \TU/Consolas(0)/m/n/10 repo sync \TU/TimesNewRoman(0)/m
 /n/10.95 AOSP + ghim commit; cấp phát license
  []
 
-[10] (MASTER_CHECKLIST.aux)
+[11] (MASTER_CHECKLIST.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -839,10 +867,10 @@ Package rerunfilecheck Info: File `MASTER_CHECKLIST.out' has not changed.
 Here is how much of TeX's memory you used:
  13737 strings out of 402987
  258760 string characters out of 5448730
- 745910 words of memory out of 5000000
+ 745912 words of memory out of 5000000
  42258 multiletter control sequences out of 15000+600000
  637959 words of font info for 134 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,14n,93p,1384b,472s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,93p,1584b,474s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on MASTER_CHECKLIST.pdf (10 pages).
+Output written on MASTER_CHECKLIST.pdf (11 pages).
