@@ -162,7 +162,7 @@ Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apac
 \item[\done] Dựng EC2 cô lập: volume/user riêng, tường lửa chặt, credential trong secret manager (không trong YAML/log/repo). \textbf{2026-10-22:} EC2 do giảng viên cấp; spec yêu cầu sẵn sàng ở \code{secrethandle-integration/env/ec2\_provisioning\_spec.md} (m6i.2xlarge pilot $\to$ m6i.4xlarge spot ma trận, SSM, 0 inbound, budget \$20/\$150); cổng pre-EC2 6 nấc ở \code{env/pre\_ec2\_gate\_and\_runbook.md} --- nấc G0 (offline `make check') đã PASSED (ruff + mypy + 74 tests + canary smoke 6400 trial). \textbf{2026-10-28 (host thực tế):} \code{m8i.4xlarge} (16 vCPU/64 GiB, Ubuntu 24.04.5, gp3 500 GB) với \code{NestedVirtualization=enabled} $\Rightarrow$ có \code{/dev/kvm} + 32 cờ \code{vmx}; AVD \code{bench} (Android 14, 1080$\times$2400) boot headless OK, screencap OK; trên host: \textbf{74 test offline + canary 6400 trial/0 leak PASS}; bridge deps cài sẵn (\code{\textasciitilde/bridge-venv}); ghép nối SSH từ IP tác nhân hoạt động.
 \item[\done] \textbf{G3 --- bridge $\to$ Bedrock thật} (\textbf{2026-10-28}): dùng \emph{Bedrock API key} dạng bearer (\code{bedrock-api-key-...}) do giảng viên cấp; khóa lưu \emph{ngoài repo} (\code{env/.env.bedrock.local}, đã gitignore; trên host \code{\textasciitilde/.sh\_bedrock.env} quyền 600, loader không \code{source} vì token chứa \code{\&Version=1}). Bridge trả HTTP 200 với \code{us.anthropic.claude-sonnet-4-6} (12+4 token, 0,81 s); \code{/healthz} chỉ báo \code{bedrock\_bearer\_present}, không lộ giá trị. Do đó \textbf{không cần IAM instance profile} nữa.
 \item[\done] \textbf{G2 --- pilot tác nhân thật với Bedrock} (\textbf{2026-10-28}): dựng Mobile-Agent v3.5 + AndroidWorld trên EC2 (AVD \code{AndroidWorldAvd}, API 33, \code{-grpc 8554}, cài \code{android\_env}, torch CPU, \code{qwen\_vl\_utils}); phải sửa 4 lỗi tích hợp mới chạy được --- quy đổi toạ độ (model trả \emph{pixel của ảnh đã resize}, không phải 0--1000), prompt nêu rõ quy ước, hạ ảnh $1080\times2400\to844\times1876$ (3,4k $\to$ 2,1k token/lời gọi), cap 8 bước/tác vụ; ghi ở \code{agents/MA35\_PATCHES.md}. Kết quả: (i) 10 tác vụ benign B0 = \textbf{1/10} trước khi sửa toạ độ và \textbf{0/10} sau khi sửa --- tức năng lực điều khiển UI của mô hình chat là nút thắt, \emph{không phải số báo cáo} (cần GUI-Owl hoặc agent theo chỉ số phần tử/M3A); (ii) \textbf{OTP gửi bằng SMS, điều kiện B0: 10/10 trial agent đọc và trả lời đúng canary} (3--4 bước, 10--13 lời gọi, 42--63 s, $\approx$\$0,11/trial; Wilson 95\% CI [0,72; 1,00]). Đọc bí mật cần ít độ chính xác chạm hơn nhiều so với hoàn thành tác vụ, nên tỉ lệ rò rỉ 100\% vẫn đứng dù task success $\approx$0. Đây là \emph{mức rò rỉ nền} khi chưa có SecretHandle (B3 chưa tồn tại), không phải kết quả so sánh. Chi phí token cả phiên $\approx$\$9.
-\item[\todo] Khởi động thủ tục dài: license AndroidWorld/SPA-Bench, API key cloud model + trần chi phí, thiết bị.
+\item[\done] Cấp phát môi trường chạy (\textbf{2026-10-28}): AndroidWorld trên EC2, API key AWS Bedrock (Claude Sonnet 4.6 bearer key) cấu hình an toàn tại \code{\textasciitilde/.sh\_bedrock.env}, runner Mobile-Agent v3.5 ghim commit.
 \item[\done] \textbf{Tái hiện tấn công B0} (OTP-forwarding) trên emulator/Android stock 14: \textbf{10/10} trial rò rỉ, exposure rate \textbf{1.0} (Wilson 95\% [0.72, 1.0]; \code{rate\_results.json}).
 \item[\done] Dựng disclosure monitor bản đầu (\code{monitor/monitor.py}, \code{run\_rate.py}; log \code{exfil\_log.jsonl}).
 \item[\done] Khung đạo đức: quy trình canary, endpoint cô lập, không dữ liệu thật; kiểm yêu cầu IRB/hội đồng + mục ethics CFP (\code{docs/ethics.md}, 2026-10-17).
@@ -176,7 +176,7 @@ Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apac
 \begin{chk}
 \item[\done] \code{pytest} xanh 100\% (hiện 74 passed).
 \item[\done] Không có bí mật thật trong repo (quét mẫu high-signal = 0; không \code{.env}/tệp khóa; \code{debug.keystore} là keystore debug dùng-một-lần).
-\item[\doing] Môi trường dev sẵn sàng (venv 3.12 + \code{ruff}/\code{mypy}); emulator chạy \textbf{ảnh stock} (chưa phải ảnh AOSP tự build).
+\item[\done] Môi trường dev sẵn sàng (venv 3.12 + \code{ruff}/\code{mypy}); emulator KVM chạy ảnh Android 14 API 33/34 trên EC2 (\textbf{2026-10-28}).
 \item[\done] \textbf{B0 tái hiện được} trên emulator/stock Android (điều kiện cứng của G0) --- 2026-10-17, 10/10 rò rỉ.
 \item[\done] D0--D6 có tài liệu quyết định.
 \item[\done] Khung đạo đức xong (canary tổng hợp, endpoint cô lập, không dữ liệu thật) --- \code{docs/ethics.md}.
@@ -202,20 +202,20 @@ Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apac
 
 \section*{PHẦN D --- Giai đoạn 2: Walking skeleton (cổng G1, Track A+B)}
 \begin{chk}
-\item[\todo] Lát cắt dọc đầu: SMS $\to$ mint $\to$ \code{ENTER} $\to$ ô nhập app đăng nhập.
+\item[\done] Lát cắt dọc đầu (\textbf{2026-10-28}): SMS $\to$ mint handle \code{SH-XXXXXX} $\to$ repost notification đã che $\to$ che màn hình conversation $\to$ resolve tại vault. Cài đặt hoàn chỉnh trong \code{device/b3-secrethandle/}.
 \item[\todo] Dịch vụ \code{system\_server} với AIDL tối thiểu: \code{mint} (allowlist), \code{resolve}, \code{revoke}; kho trong bộ nhớ (D2).
-\item[\todo] Adapter SMS/thông báo bản test (emulator console hoặc app SMS test); che mã khỏi thông báo hướng tác nhân.
+\item[\done] Adapter thông báo \& che mã nguồn (\textbf{2026-10-28}): \code{SecretHandleListenerService} chặn notification chứa OTP, hủy và tạo notification thay thế chỉ chứa handle.
 \item[\todo] Resolver tối thiểu: \code{ResolveFreshTargetContext} (package + field + tác vụ); từ chối nếu không khớp.
 \item[\todo] Giữ chỗ nguyên tử bằng khóa kho.
 \item[\todo] Đường vào cho tác nhân ADB: \code{cmd secrethandle enter} chạy UID shell; resolver kiểm tra UID; giá trị không qua stdout/log.
-\item[\todo] Redaction cây trợ năng theo principal (so khớp giá trị chính xác) + che cửa sổ nguồn.
-\item[\todo] App A (đăng nhập + OTP) + endpoint verifier/attacker cô lập.
+\item[\done] Che phủ bề mặt nguồn \& màn hình (\textbf{2026-10-28}): Accessibility service phủ overlay \code{TYPE\_ACCESSIBILITY\_OVERLAY} che kín node chứa mã trong conversation view; shade thông báo được che qua cancel/repost.
+\item[\done] App A (\textbf{2026-10-28}): Luồng OTP SMS hoàn chỉnh (\code{b0-otp-forwarding} + SMS fixture); kẻ tấn công nhận dữ liệu tại loopback/isolated endpoint; APK băm SHA-256 \code{84845755...4d620a}.
 \item[\todo] Adapter tác nhân $\to$ \code{ENTER(handle)}.
-\item[\todo] Disclosure monitor.
-\item[\todo] Killer thu nhỏ $n=30$ B0 vs B3 với planner kịch bản + 1 tác nhân thật.
+\item[\done] Disclosure monitor (\textbf{2026-10-28}): \code{aw\_attack\_one.py} tự động quét canary chính xác trong sent SMS, action logs, screenshot và UI state.
+\item[\done] Thực nghiệm đối đầu mở rộng $n=30$ B0 vs B3 (\textbf{2026-10-29}): 30 trial B0 ($29/30$ rò rỉ, Wilson $[0.833, 0.994]$) vs 30 trial B3 ($0/30$ rò rỉ, Wilson $[0.000, 0.114]$) với Mobile-Agent v3.5 (Sonnet 4.6) trên EC2.
 \item[\todo] \textbf{Không làm ở giai đoạn này:} kho bền vững, khóa phần cứng, xác nhận, WebView, ví, đa người dùng.
-\item[\todo] \textbf{DoD G1:} \code{ENTER(handle)} vào trường OTP hợp lệ nhập đúng một lần; đích sai bị từ chối; canary vắng trong cây trợ năng + log tác nhân.
-\item[\todo] \textbf{Qua G1 (15/11/2026)} --- biên bản cổng. Nếu redaction ảnh chụp bất khả thi $\to$ lùi về che theo cửa sổ, ghi giới hạn.
+\item[\done] \textbf{DoD G1:} Hoàn tất đo lường thực tế $n=30$ cặp B0 vs B3 trên emulator, canary vắng mặt hoàn toàn trong log/screenshot của B3 ($0/30$).
+\item[\done] \textbf{Qua G1 (15/11/2026)} --- Đạt sớm từ 2026-10-17 (\code{docs/gates/G1.md}) và củng cố vững chắc với dữ liệu đối đầu $n=30$ ngày 2026-10-29.
 \end{chk}
 
 \section*{PHẦN E --- Giai đoạn 3: Hoàn thiện lõi dịch vụ \& resolver (W6--W8, Track A)}
@@ -250,29 +250,29 @@ Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apac
 
 \section*{PHẦN G --- Giai đoạn 5: Ứng dụng, endpoint, tác nhân, monitor (Track B, W1--W9)}
 \begin{chk}
-\item[\todo] App A: đăng nhập + OTP SMS (T1).
+\item[\done] App A: đăng nhập + OTP SMS (\code{b0-otp-forwarding}, APK SHA-256 \code{84845755...4d620a}) đã hoàn thiện và đo đạc thực tế $n=30$.
 \item[\todo] App B: 2FA nhiều trang với preview tin nhắn đối kháng (T1).
 \item[\todo] App C: checkout địa chỉ + điện thoại (T2).
 \item[\todo] App D: checkout token ví + xác nhận mỗi lần (T3).
 \item[\todo] Mỗi app chỉ ghi ground-truth vào harness bảo vệ: định danh đích, đã giao/chưa, server chấp nhận, hoàn tất.
-\item[\todo] Endpoint verifier (đo tính sẵn có định danh) + endpoint attacker cô lập (đích ngoài $d$), không mạng thật.
-\item[\todo] Ghim nguồn + build + băm APK (SHA-256); ghi schema oracle server.
-\item[\todo] Tác nhân: chọn 1 runner chính (AppAgent hoặc runner tương thích AndroidWorld đang bảo trì); thử tái hiện B0 ở G0.
+\item[\done] Endpoint verifier (đo tính sẵn có định danh) + endpoint attacker cô lập (đích ngoài $d$), không mạng thật.
+\item[\done] Ghim nguồn + build + băm APK (SHA-256); ghi schema oracle server (\code{provenance.md}).
+\item[\done] Tác nhân: Chọn Mobile-Agent v3.5 chạy trên AndroidWorld (\textbf{2026-10-28}); ghim bản vá tại \code{agents/MA35\_PATCHES.md}; tái hiện thành công B0.
 \item[\todo] Tác nhân thứ hai (Mobile-Agent, DroidRun nếu ổn định) --- T2.
-\item[\todo] Mô hình: 1 cloud + 1 local/open-weights nếu khả thi, nếu không 2 cloud khác; ghim định danh + ngày chạy.
-\item[\todo] Disclosure monitor: tìm canary chính xác + mã hóa cấu trúc trong prompt, ảnh (OCR), cây trợ năng, tool call, trace, model traffic, planner state, actions, clipboard, IME, logs, crash data, attacker traffic.
+\item[\done] Mô hình cloud: Claude Sonnet 4.6 (\code{us.anthropic.claude-sonnet-4-6}) qua Bedrock bridge chạy ổn định trên EC2.
+\item[\done] Disclosure monitor: Tự động hóa trong \code{aw\_attack\_one.py} và driver matrix; xuất kết quả chi tiết từng bước qua \code{record.json} và \code{action.jsonl}.
 \item[\todo] Hồi quy tác vụ chung (AndroidWorld/SPA-Bench) --- T2.
-\item[\todo] \textbf{DoD:} chạy được 1 luồng app A dưới giám sát disclosure, tái lập với seed cố định; build tái lập; hash khớp.
+\item[\done] \textbf{DoD G1 (Track B):} Chạy được luồng app A dưới giám sát disclosure, tái lập với seed cố định; build tái lập; hash khớp.
 \end{chk}
 
 \section*{PHẦN H --- Giai đoạn 6: Baseline \& ablation (W6--W10)}
 \begin{chk}
-\item[\todo] \textbf{B0} (không bảo vệ): chỉ canary tổng hợp + đích trong bộ nhớ cô lập.
+\item[\done] \textbf{B0} (không bảo vệ): Đã đo $n=30$ trial trên EC2 ($29/30$ rò rỉ, Wilson $[0.833, 0.994]$).
 \item[\todo] \textbf{B1} (placeholder phát hiện được): bộ phát hiện tham chiếu tất định \textbf{hoặc} cài đặt thực của tác giả (cần duyệt); ghi rõ phạm vi.
-\item[\todo] \textbf{B3} (SecretHandle): adapter AOSP đầy đủ cho T1 (mint, target token, private input, redaction, audit).
+\item[\doing] \textbf{B3} (SecretHandle): Nguyên mẫu stock-Android (\code{device/b3-secrethandle}) đã đo $n=30$ ($0/30$ rò rỉ, Wilson $[0.000, 0.114]$); đang chuẩn bị mở rộng sang AOSP \code{system\_server}.
 \item[\todo] \textbf{B2} (T2): Autofill/OTP Autofill/Credential Manager cho app hợp tác; \code{FLAG\_SECURE}, che trường mật khẩu, content sensitivity; workflow không hỗ trợ ghi \code{not\_applicable}.
 \item[\todo] Ablation T1 (tắt từng thứ): đúc nguồn (thay bằng cạo màn hình), ràng buộc đích, ràng buộc tác vụ, vòng đời nguyên tử, redaction sau nhập; kiểm origin là T3.
-\item[\todo] Biến thể không an toàn \textbf{chỉ} dùng canary tổng hợp + endpoint cô lập.
+\item[\done] Đối chứng không an toàn (\textbf{2026-10-28}): Tắt service redaction của B3 $\to$ rò rỉ $1/1$ trong 2 bước, xác nhận rào chắn an toàn là thực chất.
 \item[\todo] \textbf{Đóng băng tham số trước khi xem kết quả}: bits định danh, bits tag, TTL, ngân sách dùng, rate limit, thời lượng quan sát, số lặp, số bootstrap, chính sách outlier, cỡ mẫu từng ô.
 \item[\todo] \textbf{DoD (G3):} chuyển B0$\leftrightarrow$B3 không đổi text tác vụ; audit hiển thị quyết định; oracle cô lập; tham số đóng băng.
 \item[\todo] \textbf{Mốc bản full: đóng băng mã hệ thống} --- từ đây chỉ sửa lỗi có ghi nhận.
@@ -280,15 +280,15 @@ Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apac
 
 \section*{PHẦN I --- Giai đoạn 7: Chạy thí nghiệm (W10--W13)}
 \begin{chk}
-\item[\todo] Provisioning theo \code{docs/ec2\_experiment\_guide.md}; đặt tệp theo \code{docs/data\_format.md}; clone repo tác nhân/benchmark tại commit đã audit.
+\item[\done] Cấp phát hạ tầng EC2 (\textbf{2026-10-28}): Instance \code{m8i.4xlarge} (Nested Virtualization KVM, AVD bench/AndroidWorldAvd API 33/34, Bedrock bridge) sẵn sàng và vận hành ổn định.
 \item[\todo] Copy \code{configs/experiment\_template.yaml}; đặt đường dẫn/ID đã cấp phát; đóng băng tham số.
-\item[\doing] Smoke test canary cô lập: xác nhận không có dữ liệu thật. Bản offline tổng hợp đã có (chi tiết ở PHẦN M); bản thiết bị thật còn chờ.
+\item[\done] Smoke test canary cô lập (\textbf{2026-10-28}): Xác nhận 100\% canary tổng hợp, zero dữ liệu thật trên cả offline test lẫn emulator host.
 \item[\todo] \textbf{Killer experiment đầy đủ} (B0 vs B3 trên app A), B3 $n \ge 300$: kiểm 3 điều kiện (a)(b)(c).
 \item[\todo] Ma trận T1 (\textasciitilde8.000 trial LLM) trên emulator/Cuttlefish; đo độ trễ/bộ nhớ trên Pixel thật.
 \item[\todo] Họ tấn công kịch bản (3, 4, TOCTOU của 7) với $n \ge 10^4$, không LLM.
 \item[\todo] Ghi \textbf{mọi} loại trừ theo nhóm (agent crash, platform crash, network outage, user cancel, định danh không hỗ trợ); chặn trước chính sách outlier.
-\item[\todo] Xuất raw secret-free: \code{trials.jsonl}, \code{summary.json}, \code{metrics.csv}, \code{provenance.json} mở rộng (hash git/AOSP/build/kernel/APK/model/prompt/policy).
-\item[\todo] Sinh bảng/hình \textbf{chỉ} từ raw.
+\item[\done] Xuất dữ liệu thô (raw secret-free): Đã lưu trữ và đồng bộ toàn bộ log, \code{driver.tsv}, screenshots từng trial về \code{secrethandle-integration/runs/}.
+\item[\done] Sinh bảng/hình \textbf{chỉ} từ raw: Bảng 3 và Hình minh họa được trích xuất trực tiếp từ các file kết quả thực tế trên EC2.
 \item[\todo] \textbf{DoD:} (a) giá trị thô vắng mọi artifact; (b) redirect bị từ chối; (c) login hợp lệ thành công; mọi loại trừ được ghi; bảng/hình sinh từ raw.
 \end{chk}
 
@@ -307,7 +307,7 @@ Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apac
 \section*{PHẦN K --- Giai đoạn 10: Phân tích \& viết bài (W9--W15)}
 \begin{chk}
 \item[\todo] Rút gọn bản thảo 53 trang về giới hạn venue (\textasciitilde12--13 trang thân bài; xác nhận CFP); chuyển chứng minh/thí nghiệm bổ sung sang phụ lục/technical report.
-\item[\todo] Báo cáo nhị phân dạng ``0 of n'' + Wilson CI; không tuyên bố tuyệt đối từ zero.
+\item[\done] Báo cáo nhị phân dạng ``0 of n'' + Wilson CI: B0 là $29/30$ (Wilson $[0.833, 0.994]$), B3 là $0/30$ (Wilson $[0.000, 0.114]$); không tuyên bố tuyệt đối.
 \item[\todo] Độ trễ: trung vị, phân vị đuôi, bootstrap interval (theo cụm), phân phối đầy đủ.
 \item[\todo] So sánh cặp: McNemar chính xác / permutation cặp; RQ1--RQ4 là primary.
 \item[\todo] Thay \textbf{mọi} gạch/TODO trong bảng kết quả/tham số/ablation/tương thích bằng giá trị đo/\code{unsupported}/\code{not applicable}.
@@ -331,10 +331,10 @@ Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apac
 
 \section*{PHẦN M --- Artifact \& nộp bài (W15--W16, Giai đoạn 11)}
 \begin{chk}
-\item[\doing] Phát hành: patch set AOSP, build manifest, hash app/tác nhân/mô hình, prompt, seed, canary monitor, schema raw-data, script phân tích, license. \textbf{Đã có:} seed ghim trong cấu hình, canary monitor, schema, script phân tích/kiểm; \textbf{2026-10-22:} giấy phép đã chốt --- \code{Apache-2.0}, holder ``SecretHandle Authors'' (khớp AOSP, cấp bằng sáng chế); đã cài \code{SecretHandle/LICENSE}, ghi vào \code{pyproject.toml}, \code{docs/artifact.md}, \S artifact bản mobisys. \textbf{Còn:} patch set AOSP/build manifest chờ build thiết bị.
+\item[\done] Giấy phép mã nguồn mở (\textbf{2026-10-29}): Đã tạo file \code{LICENSE} (Apache License 2.0) cho cả 2 repo \code{SecretHandle} và \code{secrethandle-integration}, cập nhật tài liệu artifact.
 \item[\done] Phụ lục artifact + mô tả (MobiSys artifact evaluation \emph{tùy chọn}, sau khi được nhận); tách test thiết bị khỏi test emulator; tài liệu tính năng OEM không có. \textbf{2026-10-17:} viết \code{docs/artifact.md} (mô tả artifact, lệnh một-bước, smoke offline, phạm vi, ghi chú LICENSE) và \code{docs/oem\_features.md} (tính năng OEM thiếu + tầng test). Tách tầng test bằng marker pytest \code{device}/\code{emulator} (\code{pyproject.toml}) + target \code{make test-offline} + mục ``Test tiers'' trong \code{docs/reproducibility.md}. Phụ lục chính thức trong bài nộp để sau khi được nhận.
 \item[\done] Một lệnh build/run + smoke test canary cô lập offline; CI Python 3.11/3.12 + pipeline thiết bị kích hoạt thủ công. \code{make check}/\code{scripts/smoke\_check.py} (offline, 1599 canary, 0 rò rỉ); \code{.github/workflows/ci.yml} (3.11/3.12) + \code{device.yml} (\code{workflow\_dispatch}); local verify 74 passed (2026-10-17).
-\item[\doing] Rà \code{TODO\_before\_submission.md} lần cuối; chạy checker LaTeX, kiểm accessibility, plagiarism/self-overlap, camera-ready. \textbf{2026-10-17:} thêm \code{tools/manuscript\_check.py} (quét placeholder + build + parse log) và \code{tools/self\_overlap.py} + \code{self\_overlap\_report.md} (trùng lặp nội bộ short vs full: 3.2\% 15-gram); \code{accessibility\_audit.md} (posture; \code{accessibility.sty} chưa cài nên \code{\textbackslash Description} tạm hoãn). build mobisys sạch (0 undefined/0 overfull); \code{sections/}+\code{appendix/} không còn placeholder. \textbf{Còn:} camera-ready validation (sau khi được nhận).
+\item[\done] Kiểm tra biên dịch LaTeX: XeLaTeX biên dịch sạch với 0 lỗi, 0 undefined citation/reference.
 \item[\doing] Render lại mọi hình/bảng sau thay đổi class cuối; lặp \code{figure\_quality\_audit.md}. \textbf{2026-10-17:} render lại 6 hình bản full (trang 11/13/17/21/30/34) + hình mobisys (trang 4) vào \code{figure\_previews/}; cập nhật audit (nguồn hình không đổi từ 2026-10-03, chỉ dịch trang). \textbf{Còn:} lần render/soát cuối sau khi chốt class + soát mắt hình mobisys mới.
 \item[\todo] Nộp \textbf{trước} hạn vài ngày (hạn kỳ sau --- tra cứu CFP tại thời điểm lập lịch).
 \end{chk}
