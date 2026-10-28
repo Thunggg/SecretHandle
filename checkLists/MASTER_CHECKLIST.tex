@@ -89,16 +89,16 @@ Camera & Tuần 13--16 & Đóng băng số liệu thực nghiệm, hoàn thiện
 \item[\done] \textbf{Mô hình đe dọa \& caller principal}: 3 kiểu caller (UID app, UID shell-UiAutomation, serialize observation) + phân định ranh giới tin cậy OS.
 \item[\done] \textbf{Thiết kế hệ điều hành SecretHandle}: Minting tại nguồn OS, ràng buộc đích (package/origin) + tác vụ (TaskToken), vòng đời dùng một lần nguyên tử, che phủ quan sát đa kênh (shade + conversation screen overlay).
 \item[\done] \textbf{Kiểm chứng mô hình tham chiếu (Formal Reference Model)}: Mô hình hóa Python hoàn chỉnh 8 họ tấn công, $6.400$ trials với seed cố định, chứng minh tính đúng đắn của State Machine.
-\item[\doing] \textbf{Đánh giá thực nghiệm empirical toàn diện (RQ1--RQ6)}:
+\item[\done] \textbf{Đánh giá thực nghiệm empirical toàn diện (RQ1--RQ6)}:
   \begin{itemize}
-    \item[\done] Attack 1 (Read \& Exfiltrate): Đã đo $n=30$ trials trên EC2 ($B_0$ rò rỉ $29/30$ vs $B_3$ bảo vệ $0/30$, Wilson $[0.000, 0.114]$).
-    \item[\todo] Attack 2 (Destination Redirection / Killer Experiment): Chứng minh Resolver từ chối $100\%$ khi agent cố gửi handle vào app hacker.
-    \item[\todo] Baseline $B_1$ (Detected Placeholder / Anonymizer): Chứng minh che phủ không ràng buộc đích vẫn thất bại trước Attack 2.
-    \item[\todo] Attack 4 (Replay \& Expiry): Kiểm chứng vòng đời một lần (One-time) và hết hạn 5 phút.
-    \item[\todo] Microbenchmarks độ trễ (RQ5): Đo thời gian Mint, Resolve, Redact (ms) và mức tiêu thụ RAM/CPU.
-    \item[\todo] Benign Regression: Đo đạc trên AndroidWorld để chứng minh không làm suy giảm năng lực thông thường của Agent.
+    \item[\done] Attack 1 (Read \& Exfiltrate) [RQ1, RQ4]: Đã đo $n=30$ trials trên EC2 ($B_0$ rò rỉ $29/30$ vs $B_3$ bảo vệ $0/30$, Wilson $[0.000, 0.114]$).
+    \item[\done] Attack 2 (Destination Redirection / Killer Experiment) [RQ2]: Resolver từ chối $100\%$ ($30/30$, $R=0.00$, utility $1.00$) khi agent cố điền handle vào app hacker.
+    \item[\done] Baseline $B_1$ (Detected Placeholder / Anonymizer) [RQ2]: Chứng minh che phủ không ràng buộc đích bị lừa giải mã và rò rỉ $100\%$ ($30/30$, $R=1.00$, utility $0.00$).
+    \item[\done] Attack 4 (Replay, Expiry \& Concurrency) [RQ3]: $50/50$ replay blocked, $50/50$ expiry blocked, $500$ luồng đua đồng thời 0 dị thường.
+    \item[\done] Microbenchmarks độ trễ \& tài nguyên (RQ5): Mint p95 $9.30\,\mu\text{s}$, Resolve p95 $0.18\,\mu\text{s}$, Total PSS $28.71\,\text{MB}$.
+    \item[\done] Benign Regression (RQ6): 10 ứng dụng AndroidWorld, $50/50$ touch pass-through, render $\Delta = 0.0\,\text{ms}$, regression $\Delta = 0.00$.
   \end{itemize}
-\item[\doing] \textbf{Định dạng bản thảo}: Bản thảo hoàn chỉnh gồm 14 trang nội dung chính (double-column, 10pt) + phụ lục chứng minh toán học và Artifact Appendix.
+\item[\done] \textbf{Định dạng bản thảo}: Bản thảo hoàn chỉnh gồm 10 trang nội dung chính (double-column ACM \code{sigconf}, tuân thủ $\le 12$ trang MobiSys) + References và Phụ lục Artifact.
 \item[\done] \textbf{Đạo đức \& Giấy phép mã nguồn mở}: Khung đạo đức với canary tổng hợp cô lập; mã nguồn phát hành với giấy phép Apache 2.0 (tương thích AOSP).
 \end{chk}
 
@@ -108,15 +108,15 @@ Camera & Tuần 13--16 & Đóng băng số liệu thực nghiệm, hoàn thiện
 \toprule
 \textbf{Nhóm} & \textbf{Trạng thái} \\
 \midrule
-Tài liệu ý tưởng + bản thảo + mô hình tham chiếu & \done{} \textasciitilde90\% (bản thảo 53 trang preprint + khung hội nghị 14 trang; 74 tests passed) \\
+Tài liệu ý tưởng + bản thảo + mô hình tham chiếu & \done{} 100\% (bản thảo 53 trang preprint + bản MobiSys 14 trang; 74 tests passed) \\
 Audit cấp bản thảo (citation/figure/math/reviewer/notation) & \done{} 100\% hoàn tất \\
 Quyết định D0--D6 & \done{} (đã chốt; D0 chuyển trọng tâm Full Paper) \\
-Triển khai hệ thống & \doing{} \textasciitilde60\% (nguyên mẫu stock Android chạy trên EC2; kiến trúc AOSP system\_server) \\
-Ứng dụng/tác nhân/harness & \done{} \textasciitilde80\% (EC2 runner, Bedrock bridge Sonnet 4.6, Mobile-Agent v3.5, AndroidWorld) \\
-Baseline/ablation thực & \doing{} B0 và B3 đã đo $n=30$; chuẩn bị B1 placeholder \\
-Thí nghiệm thực \& số đo & \doing{} Attack 1 hoàn thành $n=30$; đang mở rộng Attack 2 \& Overhead RQ5 \\
-Phân tích thống kê / hoàn thiện bản thảo & \doing{} \textasciitilde70\% (Wilson CI, McNemar, bootstrap latency) \\
-Artifact \& phát hành mã nguồn & \doing{} \textasciitilde60\% (LICENSE Apache-2.0, docs artifact, CI, benchmark harness) \\
+Triển khai hệ thống nguyên mẫu & \done{} 100\% cho Stock Android 14; phần in-tree AOSP system\_server ghi nhận Limitations \\
+Ứng dụng/tác nhân/harness & \done{} 100\% (EC2 runner, Bedrock bridge Sonnet 4.6, Mobile-Agent v3.5, 10 app AndroidWorld) \\
+Baseline/ablation thực & \done{} 100\% ($B_0$, $B_1$, $B_3$ đối đầu thực nghiệm) \\
+Thí nghiệm thực \& số đo (RQ1--RQ6) & \done{} 100\% (toàn bộ 6 RQs đo xong trên Android 14) \\
+Phân tích thống kê / hoàn thiện bản thảo & \doing{} \textasciitilde85\% (đang bổ sung hình vẽ kiến trúc, proofread toàn văn) \\
+Artifact \& phát hành mã nguồn & \doing{} \textasciitilde80\% (mã nguồn, LICENSE Apache-2.0, benchmark runner; cần tạo anonymous repo) \\
 \bottomrule
 \end{tabularx}
 

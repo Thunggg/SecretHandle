@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 03:12
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 03:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -643,23 +643,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 ]
-Underfull \hbox (badness 1448) in paragraph at lines 121--121
-[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 ~90% (bản thảo
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 53 trang preprint
- []
-
-
-Underfull \hbox (badness 5711) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 + khung hội nghị
- []
-
-
-Underfull \hbox (badness 3668) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 14 trang; 74 tests
+Underfull \hbox (badness 4205) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 MobiSys 14 trang;
  []
 
 
@@ -673,58 +658,55 @@ Underfull \hbox (badness 10000) in paragraph at lines 121--121
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 121--121
-[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 ~60% (nguyên
+Underfull \hbox (badness 6542) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 Android 14; phần
  []
 
 
-Underfull \hbox (badness 1748) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 mẫu stock Android
+Underfull \hbox (badness 7151) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 in-tree AOSP sys-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 chạy trên EC2;
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 kiến trúc AOSP
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 121--121
-[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 ~80% (EC2
+Underfull \hbox (badness 2818) in paragraph at lines 121--121
+[]|[]$\U/msa/m/n/10.95 ^^D$[] \TU/TimesNewRoman(0)/m/n/10.95 100% ($\OML/cmm/m/
+it/10.95 B[]$\TU/TimesNewRoman(0)/m/n/10.95 , $\OML/cmm/m/it/10.95 B[]$\TU/Time
+sNewRoman(0)/m/n/10.95 ,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 runner, Bedrock
+\OML/cmm/m/it/10.95 B[]$ \TU/TimesNewRoman(0)/m/n/10.95 đối đầu thực
  []
 
 
-Underfull \hbox (badness 6063) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 bridge Sonnet 4.6,
+Underfull \hbox (badness 3536) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 RQs đo xong trên
  []
 
 
-Underfull \hbox (badness 3260) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 Mobile-Agent v3.5,
+Underfull \hbox (badness 2772) in paragraph at lines 121--121
+[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 ~85% (đang bổ
+ []
+
+
+Underfull \hbox (badness 3547) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 sung hình vẽ kiến
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 121--121
-[]|[]$\U/msa/m/n/10.95 ^^@$[] \TU/TimesNewRoman(0)/m/n/10.95 Attack 1 hoàn
+\TU/TimesNewRoman(0)/m/n/10.95 LICENSE Apache-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 Apache-2.0, docs
+\TU/TimesNewRoman(0)/m/n/10.95 2.0, benchmark
  []
 
 
-Underfull \hbox (badness 1990) in paragraph at lines 121--121
-\TU/TimesNewRoman(0)/m/n/10.95 artifact, CI, bench-
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+\TU/TimesNewRoman(0)/m/n/10.95 runner; cần tạo
  []
 
 [2]
@@ -795,14 +777,14 @@ Underfull \hbox (badness 2970) in paragraph at lines 163--164
 solas(0)/m/n/10 /healthz \TU/TimesNewRoman(0)/m/n/10.95 chỉ báo
  []
 
-
+[4]
 Overfull \hbox (15.84412pt too wide) in paragraph at lines 172--173
 []\TU/TimesNewRoman(0)/m/n/10.95 Ghim phiên bản Python/OS/công cụ thống kê vào 
 provenance — \TU/TimesNewRoman(0)/b/n/10.95 2026-10-22: \TU/Consolas(0)/m/n/10 
 docs/toolchain_pins.json
  []
 
-[4]
+
 Underfull \hbox (badness 1308) in paragraph at lines 188--189
 []\TU/TimesNewRoman(0)/m/n/10.95 Soát \TU/Consolas(0)/m/n/10 core/crypto/policy
 /store/redaction/metrics/statistics \TU/TimesNewRoman(0)/m/n/10.95 đối chiếu Al
