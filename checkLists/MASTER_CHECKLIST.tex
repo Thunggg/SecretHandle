@@ -1,4 +1,4 @@
-﻿\documentclass[11pt,a4paper]{article}
+\documentclass[11pt,a4paper]{article}
 
 % ---- Phông chữ: biên dịch bằng XeLaTeX ----
 % Dùng phông Windows (có sẵn). Nếu muốn phông TeX Gyre, bỏ dấu % ở 3 dòng cuối.
@@ -89,10 +89,10 @@ Plan B & 2027 & Full paper (T1 + số đo thiết bị thật) cho MobiSys 2028 
 \item[\done] \textbf{Vấn đề \& tác động}: OTP/bí mật lộ cho tác nhân AI di động (attack B0 \textbf{đã tái hiện} trên emulator, 10/10). \textbf{2026-10-22:} tái tái lập Gate G1 (10/10, Wilson [0.722, 1.0]) + build fixture giờ byte-deterministic.
 \item[\done] \textbf{Mô hình đe dọa \& principal}: 3 kiểu caller (D3) đã đưa vào \code{mobisys/sections/threat\_model.tex} (app UID / shell-UiAutomation / serialize; root vô hiệu hóa).
 \item[\done] \textbf{Thiết kế} \SH: đúc tại nguồn OS, ràng buộc đích + tác vụ, vòng đời một lần, redaction quan sát. \textbf{2026-10-22:} ngôn ngữ chính sách + vòng đời đã có trong \code{mobisys/sections/design.tex} (\S Policy language, \S Lifecycle and reservation); người dùng tự lo phần này.
-\item[\done] \textbf{Bằng chứng sơ bộ}: tái hiện tấn công B0 thực trên emulator (xong 2026-10-17); \emph{mô hình tham chiếu Python} mô hình hóa tường minh họ \textbf{1,3,4,7} (thêm \code{read\_exfil}, \code{ambiguous\_identity}) --- 6400 trial, seed 20261017, đã ghi rõ là mô phỏng (không phải AOSP) tại \code{docs/preliminary\_evidence.md}. \textbf{2026-10-28:} thêm cặp \textbf{B0-vs-B3} thực trên emulator (B0 10/10 rò rỉ; B3 prototype 0/10; đối chứng tắt redaction 1/1) vào \code{mobisys/sections/evidence.tex} kèm Bảng 3 + Hình 2, cập nhật abstract/introduction/limitations.
+\item[\done] \textbf{Bằng chứng sơ bộ}: tái hiện tấn công B0 thực trên emulator (xong 2026-10-17); \emph{mô hình tham chiếu Python} mô hình hóa tường minh họ \textbf{1,3,4,7} (thêm \code{read\_exfil}, \code{ambiguous\_identity}) --- 6400 trial, seed 20261017, đã ghi rõ là mô phỏng (không phải AOSP) tại \code{docs/preliminary\_evidence.md}. \textbf{2026-10-29:} mở rộng cặp \textbf{B0-vs-B3} thực trên emulator lên $n=30$ trial mỗi bên (B0 $29/30$ rò rỉ, Wilson $[0.83, 0.99]$; B3 prototype $0/30$ rò rỉ, Wilson $[0.00, 0.114]$; đối chứng tắt redaction $1/1$) vào \code{mobisys/sections/evidence.tex} kèm Bảng 3 + Hình 2, cập nhật abstract/introduction/limitations.
 \item[\done] \textbf{Kế hoạch đánh giá} đầy đủ (killer experiment, ma trận T1, cỡ mẫu, thống kê) cho bản full tại \code{docs/evaluation\_plan.md}.
 \item[\done] Nêu rõ \textbf{giới hạn} tại \code{mobisys/sections/limitations.tex}: chưa có số đo thiết bị thật; keystore mức phần mềm; WebView fail-closed; binding không bảo đảm dùng trung thực.
-\item[\done] Tuân thủ format: \textbf{tối đa} 12 trang thân bài (đây là \emph{mức tối đa}, \textbf{không} phải mục tiêu; phụ lục + tham khảo không tính), \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}} (đã có \code{mobisys/main.tex}, tiêu đề đã thêm \code{[Emerging Ideas]}), US Letter, double-column, cỡ chữ $\ge$10pt. \textbf{CFP đã đối chiếu 2026-10-17.} Hiện \textbf{14 trang} tổng (thân bài 11 trang, tham khảo bắt đầu từ tr.~12; CFP \emph{không} tính tham khảo) $\Rightarrow$ \textbf{hợp lệ}.
+\item[\done] Tuân thủ format: \textbf{tối đa} 12 trang thân bài (đây là \emph{mức tối đa}, \textbf{không} phải mục tiêu; phụ lục + tham khảo không tính), \code{\textbackslash documentclass[sigconf,10pt]\{acmart\}} (đã có \code{mobisys/main.tex}, tiêu đề đã thêm \code{[Emerging Ideas]}), US Letter, double-column, cỡ chữ $\ge$10pt. \textbf{CFP đã đối chiếu 2026-10-17.} Hiện \textbf{14 trang} tổng (thân bài 12 trang, tham khảo bắt đầu từ tr.~12, phụ lục tr.~13--14; CFP \emph{không} tính tham khảo/phụ lục) $\Rightarrow$ \textbf{hợp lệ}.
 \item[\done] Single-blind + đạo đức + LLM tại \code{mobisys/sections/ethics.tex} (canary tổng hợp $\Rightarrow$ không human subjects; gán nhãn LLM).
 \end{chk}
 
@@ -106,11 +106,11 @@ Tài liệu ý tưởng + bản thảo + mô hình tham chiếu & \done{} \texta
 Audit cấp bản thảo (citation/figure/math/reviewer/notation) & \done \\
 Quyết định D0--D6 & \done{} (đã chốt 2026-10-17) \\
 Triển khai AOSP (Track A) & \todo{} 0\% (đường Plan B) \\
-Ứng dụng/tác nhân/harness (Track B) & \doing{} \textasciitilde55\% (repo integration + deterministic build + gate G0/G1 PASS; runner Mobile-Agent pinned; B3 prototype stock-Android + đo B0-vs-B3) \\
+Ứng dụng/tác nhân/harness (Track B) & \done{} \textasciitilde75\% (repo integration + deterministic build + gate G0/G1 PASS; runner Mobile-Agent pinned; B3 prototype stock-Android + đo B0-vs-B3 $n=30$) \\
 Baseline/ablation thực & \doing{} chỉ có bản tổng hợp \\
-Thí nghiệm thực \& số đo & \doing{} có B0-rate và cặp B0-vs-B3 trên emulator (B3 prototype, 0/10 vs 10/10; chưa phải số paper, cần thêm model/AVD) \\
-Phân tích thống kê / viết lại theo venue & \doing{} \textasciitilde60\% (bản thảo mobisys theo CFP xong; thống kê bản full chưa bắt đầu) \\
-Artifact \& nộp & \doing{} \textasciitilde40\% (LICENSE Apache-2.0, docs artifact, CI, checker; còn nộp bài + patch set AOSP) \\
+Thí nghiệm thực \& số đo & \done{} B0-rate và cặp B0-vs-B3 trên emulator ($n=30$, B3 prototype 0/30 vs B0 29/30, Wilson [0, 0.114]) \\
+Phân tích thống kê / viết lại theo venue & \doing{} \textasciitilde65\% (bản thảo mobisys theo CFP xong; thống kê bản full chưa bắt đầu) \\
+Artifact \& nộp & \doing{} \textasciitilde50\% (LICENSE Apache-2.0, docs artifact, CI, checker; còn nộp bài + patch set AOSP) \\
 \bottomrule
 \end{tabularx}
 

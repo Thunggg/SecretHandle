@@ -87,13 +87,12 @@
 \newlabel{sec:evidence}{{7}{8}{Preliminary Evidence and Evaluation Plan}{section.7}{}}
 \@writefile{toc}{\contentsline {paragraph}{On-emulator attack reproduction.}{8}{section*.42}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Prototype countermeasure: B0 versus B3.}{8}{section*.43}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Agent-mediated OTP exposure on the same AVD, harness, model, and canary format. Each row is ten trials with a fresh synthetic canary and a six-step budget. B3 is the stock-Android prototype, not the \texttt  {system\_server} design.}}{9}{table.caption.44}\protected@file@percent }
-\newlabel{tab:b0b3}{{3}{9}{Agent-mediated OTP exposure on the same AVD, harness, model, and canary format. Each row is ten trials with a fresh synthetic canary and a six-step budget. B3 is the stock-Android prototype, not the \texttt {system\_server} design}{table.caption.44}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Agent-mediated OTP exposure on the same AVD, harness, model, and canary format. Each row is 30 trials with a fresh synthetic canary and a six-step budget. B3 is the stock-Android prototype, not the \texttt  {system\_server} design.}}{9}{table.caption.44}\protected@file@percent }
+\newlabel{tab:b0b3}{{3}{9}{Agent-mediated OTP exposure on the same AVD, harness, model, and canary format. Each row is 30 trials with a fresh synthetic canary and a six-step budget. B3 is the stock-Android prototype, not the \texttt {system\_server} design}{table.caption.44}{}}
 \@writefile{toc}{\contentsline {paragraph}{Reference-model study (simulation only).}{9}{section*.46}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The B3 prototype on the emulator. (a)\nonbreakingspace The original notification is cancelled and replaced by one that names the source app and the minted handle; the code is not in the shade. (b)\nonbreakingspace Each message that carried a code is covered by a non-touchable overlay, so a screenshot-reading agent sees only the marker. The handle is public by design---it is what the user (or an agent) can present to the resolver.}}{9}{figure.caption.45}\protected@file@percent }
 \newlabel{fig:b3}{{2}{9}{The B3 prototype on the emulator. (a)~The original notification is cancelled and replaced by one that names the source app and the minted handle; the code is not in the shade. (b)~Each message that carried a code is covered by a non-touchable overlay, so a screenshot-reading agent sees only the marker. The handle is public by design---it is what the user (or an agent) can present to the resolver}{figure.caption.45}{}}
 \@writefile{toc}{\contentsline {paragraph}{Killer experiment (design of record).}{9}{section*.47}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Research questions.}{9}{section*.48}\protected@file@percent }
 \citation{zhao2026anonymization}
 \citation{androidAutofillServices,androidCredentialManager}
 \citation{rawles2024androidworld}
@@ -113,6 +112,7 @@
 \citation{felt2011permission,bugiel2013flexible,rossi2021seapp}
 \citation{enck2010taintdroid,yan2012droidscope}
 \citation{dennis1966semantics}
+\@writefile{toc}{\contentsline {paragraph}{Research questions.}{10}{section*.48}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Baselines.}{10}{section*.49}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Workloads and metrics.}{10}{section*.50}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Analysis and sample planning.}{10}{section*.51}\protected@file@percent }
@@ -142,7 +142,6 @@
 \@writefile{toc}{\contentsline {section}{\numberline {10}Ethics, Reproducibility, and LLM Use}{11}{section.10}\protected@file@percent }
 \newlabel{sec:ethics}{{10}{11}{Ethics, Reproducibility, and LLM Use}{section.10}{}}
 \@writefile{toc}{\contentsline {paragraph}{Ethics.}{11}{section*.67}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Reproducibility.}{11}{section*.68}\protected@file@percent }
 \bibstyle{ACM-Reference-Format}
 \bibdata{../references_verified}
 \bibcite{androidCredentialManager}{{1}{2026a}{{Android Developers}}{{}}}
@@ -167,12 +166,13 @@
 \bibcite{enck2010taintdroid}{{20}{2010}{{Enck et~al\mbox  {.}}}{{}}}
 \bibcite{felt2011permission}{{21}{2011}{{Felt et~al\mbox  {.}}}{{}}}
 \bibcite{rfc9449}{{22}{2023}{{Fett et~al\mbox  {.}}}{{}}}
-\bibcite{greshake2023indirect}{{23}{2023}{{Greshake et~al\mbox  {.}}}{{}}}
-\bibcite{rfc2104}{{24}{1997}{{Krawczyk et~al\mbox  {.}}}{{}}}
+\@writefile{toc}{\contentsline {paragraph}{Reproducibility.}{12}{section*.68}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{LLM use.}{12}{section*.69}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion}{12}{section.11}\protected@file@percent }
 \newlabel{sec:conclusion}{{11}{12}{Conclusion}{section.11}{}}
 \@writefile{toc}{\contentsline {section}{References}{12}{section*.71}\protected@file@percent }
+\bibcite{greshake2023indirect}{{23}{2023}{{Greshake et~al\mbox  {.}}}{{}}}
+\bibcite{rfc2104}{{24}{1997}{{Krawczyk et~al\mbox  {.}}}{{}}}
 \bibcite{liao2024eia}{{25}{2024}{{Liao et~al\mbox  {.}}}{{}}}
 \bibcite{rfc9700}{{26}{2025}{{Lodderstedt et~al\mbox  {.}}}{{}}}
 \bibcite{rfc4226}{{27}{2005}{{M'Raihi et~al\mbox  {.}}}{{}}}
@@ -197,8 +197,6 @@
 \@writefile{toc}{\contentsline {section}{\numberline {A}Artifact Appendix}{13}{appendix.A}\protected@file@percent }
 \newlabel{sec:artifact}{{A}{13}{Artifact Appendix}{appendix.A}{}}
 \@writefile{toc}{\contentsline {paragraph}{Scope.}{13}{section*.72}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Contents.}{13}{section*.73}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{One-command build and run.}{13}{section*.74}\protected@file@percent }
 \newlabel{tocindent-1}{0pt}
 \newlabel{tocindent0}{0pt}
 \newlabel{tocindent1}{9.3pt}
@@ -206,6 +204,8 @@
 \newlabel{tocindent3}{0pt}
 \newlabel{tocindent4}{0pt}
 \newlabel{tocindent5}{0pt}
+\@writefile{toc}{\contentsline {paragraph}{Contents.}{14}{section*.73}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{One-command build and run.}{14}{section*.74}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Offline synthetic-canary smoke test.}{14}{section*.75}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Reproducing the reported simulation numbers.}{14}{section*.76}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Device-tier reproducibility (deferred).}{14}{section*.77}\protected@file@percent }
