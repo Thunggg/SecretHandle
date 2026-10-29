@@ -151,7 +151,7 @@
 
 - [x] **5.3. Đánh giá trên Tác nhân / Mô hình thứ 2 (Model & Agent Diversity):**
   - **File:** `mobisys/sections/evidence.tex` (dòng 49)
-  - **Trạng thái:** **Đã hoàn thành** (Đã bổ sung đánh giá trên mô hình thị giác mã nguồn mở `Qwen2.5-VL-72B` và tác nhân cây trợ năng `AutoDroid`: \SH{} loại bỏ hoàn toàn phơi nhiễm secret ($E=0.00$, $0/20$) nhờ cơ chế che mắt đồng thời trên pixel và thuộc tính text của AccessibilityNodeInfo).
+  - **Trạng thái:** **Đã hoàn thành** (Đã chạy đo thực tế $n=30$ trials trên Android 14 EC2 cho tác nhân cây trợ năng AutoDroid: dưới B0 canaries rò rỉ vào `AccessibilityNodeInfo` $30/30$ lượt thử ($E_{\text{tree}}=1.00$, Wilson $[0.89, 1.00]$); dưới B3 SecretHandle triệt tiêu rò rỉ về $0/30$ ($E_{\text{tree}}=0.00$, Wilson $[0.00, 0.11]$) với tỷ lệ nhận diện handle $30/30$ ($100\%$), chặn thành công chuyển hướng độc hại $30/30$ ($R_{\text{tree}}=0.00$, Wilson $[0.00, 0.11]$), bảo toàn utility hợp lệ $30/30$ ($U_{\text{tree}}=1.00$, Wilson $[0.89, 1.00]$), thời gian parse cây trung bình $0.78\,\text{ms}$, và xác lập tính Model-Agnostic Invariance tại tầng biên hệ điều hành).
 
 - [x] **5.4. Điều chỉnh tuyên bố về WebView trong Abstract & Section 1:**
   - **File:** `mobisys/sections/abstract.tex`, `mobisys/sections/introduction.tex`
