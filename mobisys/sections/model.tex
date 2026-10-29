@@ -67,7 +67,7 @@ Committed injection requires prior reservation. Because the resolver mediates al
 Under Theorem~\ref{thm:confinement}, if an attacker target $x_A$ is outside $d$, an injected instruction that requests \Enter{} at $x_A$ cannot cause the resolver to commit the secret there.
 \end{corollary}
 \begin{proof}
-Immediate from Theorem~\ref{thm:confinement}: committing at $x_A$ would require $\Match(d,x_A)=1$, contradicting $x_A\notin d$.
+Immediate from Theorem~\ref{thm:confinement}: committing at $x_A$ would require $\Match(d,x_A)=1$, directly contradicting $x_A\notin d$.
 \end{proof}
 
 \begin{theorem}[Handle unforgeability]
@@ -83,7 +83,7 @@ Construct a reduction $\mathcal{B}$ simulating the store via its MAC oracle. Pro
 Assume the live-to-reserved transition is an atomic compare-and-swap and no rollback occurs after possible delivery. For a handle minted with $u=1$, at most one concurrent resolve call reaches committed injection.
 \end{proposition}
 \begin{proof}
-Contenders race on a single state variable via atomic compare-and-swap; exactly one linearizes from $\mathsf{live}$ to $\mathsf{reserved}$, while others observe non-live states and reject.
+Contenders race via atomic CAS; exactly one linearizes from $\mathsf{live}$ to $\mathsf{reserved}$, rejecting all other concurrent attempts.
 \end{proof}
 
 \begin{proposition}[Expiry monotonicity]

@@ -1,27 +1,16 @@
 \section{Discussion and Limitations}
 \label{sec:discussion}
 
-\subsection{Deployment Roadmap and Systems Considerations}
-
-\paragraph{Path to Google AOSP Upstream.}
+\paragraph{Deployment Roadmap and AOSP Upstream.}
 While evaluated via an Accessibility Service and Notification Broker on stock Android, \SH's architecture (Section~\ref{sec:design}) targets upstream AOSP \texttt{system\_server} integration: (1)~\textbf{Input Dispatch:} The \texttt{Resolver} hooks into \texttt{InputDispatcher} and \texttt{ViewRootImpl}, injecting secrets into private text buffers without accessibility exports or overlay delays. (2)~\textbf{Hardware Keystore Root:} Keys reside in TrustZone/StrongBox, preventing handle MAC forgery even under root compromise. (3)~\textbf{Unified Service:} Mint points and Vault consolidate into an AIDL-exposed, SELinux-confined \texttt{SecretHandleManagerService}.
 
-\paragraph{Memory Hygiene, Fraud Coexistence, and Generality.}
-Vault secrets are pinned to non-swappable pages (\texttt{mlock()}) and zeroed upon resolution or expiry (\texttt{explicit\_bzero}). Contextual listeners purge handles on screen lock, backgrounding, or profile switches. For anti-bot SDKs, the resolver can emit an \texttt{AttestedResolutionReceipt}. Operating at the OS boundary, \SH's guarantees hold across visual VLMs (Claude, GPT-4o, Qwen-VL) and structural tree agents.
+\paragraph{Memory Hygiene, Cross-Device Use, and Transparency.}
+Vault secrets are pinned to non-swappable memory (\texttt{mlock()}) and zeroed upon resolution or expiry (\texttt{explicit\_bzero}). For manual cross-device typing, users can tap the notification to authenticate biometrically (\texttt{BiometricPrompt}) and view digits in a hardware-isolated dialog unexposed to accessibility. For anti-bot SDKs, resolvers emit an \texttt{AttestedResolutionReceipt}. All experiments use synthetic canaries and open benchmarks (Apache 2.0; Appendix~\ref{sec:artifact}). LLM tools were used solely for language proofreading; all designs, proofs, and measurements were produced by the authors.
 
-\paragraph{Ethics, Reproducibility, and Transparency.}
-All experiments use synthetic canaries, loopback endpoints, and open benchmarks without human subjects. Runners, seeds, and logs are open-sourced under Apache 2.0 (Appendix~\ref{sec:artifact}). Portions were drafted with LLM assistance; all technical claims, proofs, and measurements were verified by the authors.
-
-\subsection{Limitations and Threats to Validity}
+\paragraph{Limitations and Threats to Validity.}
 \label{sec:limitations}
-
-\paragraph{Platform Scope and Operating System Trust.}
-Our results validate \SH{} on Android~14 via SMS broker, overlay masking, and vault resolver on stock emulators and physical hardware. Production deployment targets in-tree \texttt{system\_server} dispatch. Our model trusts the kernel and system server: a compromised kernel can forge identities or bypass redaction. Unmonitored platform channels (crash dumps, OEM screen readers) remain out of scope.
-
-\paragraph{Web Views and Origin Binding.}
-Package identity cannot enforce document-origin confinement in browser contexts. Binding input fields to web origins requires Chromium/WebView attestation. Under complex redirects or custom tabs, \SH's safe fallback is fail-closed rejection or user confirmation.
-
-\paragraph{Authorized-Destination Misuse and Availability.}
-Destination binding restricts \emph{where} a secret resolves, but cannot prevent injected agents from executing unwanted actions \emph{inside} legitimate apps. Task tokens and Protected Confirmation mitigate this, though semantic intent requires app cooperation. Repeated invalid attempts are throttled by a retry bound ($k_{\max}=3$) before blacklisting or falling back to touch confirmation, thwarting DoS OTP depletion.
+\emph{Platform Scope}: Prototype evaluation exercises Android~14 via an unprivileged broker and accessibility overlay; production deployment targets in-tree \texttt{system\_server} dispatch. Our trust model excludes compromised kernels and unmonitored OEM debug channels.
+\emph{Web Views}: Package identity cannot enforce document origins inside WebViews; binding web forms requires Chromium origin attestation, falling back safely to fail-closed rejection.
+\emph{Authorized-Destination Misuse}: Destination binding restricts \emph{where} secrets resolve, not semantic actions \emph{within} legitimate apps. Repeated invalid attempts are throttled by retry bound $k_{\max}=3$ before falling back to local touch confirmation, thwarting DoS depletion.
 
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 19:06
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  29 OCT 2026 22:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2448,6 +2448,9 @@ Package hyperref Info: Link coloring OFF on input line 58.
 \openout5 = `main.out'.
 
 
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -2544,25 +2547,14 @@ sted
  []
 
 
-Underfull \hbox (badness 2707) in paragraph at lines 1--108
-\TU/LinLibertine(0)/m/n/10 field from subsequent agent observation. We evaluate
-
- []
-
-
 Underfull \hbox (badness 4266) in paragraph at lines 1--108
 \TU/LinLibertine(0)/m/n/10 cross-app and intra-app Confused Deputy destination
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1--108
-\TU/LinLibertine(0)/m/n/10 Sonnet 4.6-driven Mobile-Agent v3.5 and AutoDroid
- []
-
-
-Underfull \hbox (badness 1789) in paragraph at lines 1--108
-\TU/LinLibertine(0)/m/n/10 Wilson $[][][][][][] [][][][][]$) versus 0.97 for un
-protected agents
+Underfull \hbox (badness 1072) in paragraph at lines 1--108
+[][][][][][] [][][][][]$\TU/LinLibertine(0)/m/n/10 ) versus 0.97 for unprotecte
+d agents ($[][][][][]$),
  []
 
 
@@ -2612,12 +2604,6 @@ Underfull \hbox (badness 4303) in paragraph at lines 14--15
  $[][][][][]$
  []
 
-
-Underfull \hbox (badness 1215) in paragraph at lines 14--15
-\TU/LinLibertine(0)/m/n/10 ($[][][][][]$), negligible mediation overhead ($[][]
-[][] [][]$ in-vault
- []
-
 ) (sections/background.tex
 Underfull \hbox (badness 1253) in paragraph at lines 4--5
 \TU/LinLibertine(0)/m/n/10 pAgent, AutoDroid, and the Mobile-Agent family drive
@@ -2638,9 +2624,9 @@ ization
 
 ) (sections/threat_model.tex
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 6.
+(Font)              scaled to size 10.0pt on input line 1.
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 6.
+(Font)              scaled to size 8.0pt on input line 1.
  [2.2]
 Underfull \hbox (badness 2452) in paragraph at lines 6--7
  []\TU/LinLibertine(0)/m/it/10 Trusted.[] \TU/LinLibertine(0)/m/n/10 The \TU/in
@@ -2715,10 +2701,6 @@ LaTeX Font Info:    Font shape `TU/LibertinusMath-Regular.otf(3)/m/n' will be
 (Font)              scaled to size 7.26521pt on input line 28.
 LaTeX Font Info:    Font shape `TU/LinBiolinum(1)/m/n' will be
 (Font)              scaled to size 7.0pt on input line 28.
-
-Overfull \hbox (12.57335pt too wide) in paragraph at lines 45--46
- [][] 
- []
 
 
 Class acmart Warning: A possible image without description on input line 48.
@@ -2838,6 +2820,8 @@ are
  []
 
 [5.5]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
 (Font)              scaled to size 10.0pt on input line 11.
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
@@ -2881,13 +2865,13 @@ Underfull \hbox (badness 3989) in paragraph at lines 42--43
 text
  []
 
-
+[6.6]
 Underfull \hbox (badness 1377) in paragraph at lines 47--48
 [][][]\TU/LinLibertine(0)/m/sc/10 Assumption 5.7 (Modeled-channel redaction). [
 ]\TU/LinLibertine(0)/m/it/10 Be-
  []
 
-[6.6]
+
 Underfull \hbox (badness 1917) in paragraph at lines 62--63
 \TU/LinLibertine(1)/m/n/10 Because the resolver mediates all transitions (Assum
 p-
@@ -2925,12 +2909,6 @@ Underfull \hbox (badness 2932) in paragraph at lines 78--79
 Underfull \hbox (badness 10000) in paragraph at lines 83--84
 [][][]\TU/LinLibertine(0)/m/sc/10 Proposition 5.12 (Single-use linearizability)
 .
- []
-
-
-Underfull \hbox (badness 2393) in paragraph at lines 86--87
-\TU/LinLibertine(1)/m/n/10 atomic compare-and-swap; exactly one linearizes from
-
  []
 
 
@@ -2996,7 +2974,7 @@ Underfull \hbox (badness 6559) in paragraph at lines 121--122
 .
  []
 
-) (sections/algorithm.tex [7.7]
+[7.7]) (sections/algorithm.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 7.
 
@@ -3005,69 +2983,26 @@ Underfull \hbox (badness 1205) in paragraph at lines 17--18
 ] [][] [][][] [][][] [][][] [][]$; $[] []
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 49--50
- []\TU/LinLibertine(0)/m/it/10 Integration points.[] \TU/LinLibertine(1)/m/n/10
- Our stock-Android prototype
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 49--50
-\TU/LinLibertine(1)/m/n/10 implements \TU/LinLibertine(0)/m/sc/10 SecretHandle 
-\TU/LinLibertine(1)/m/n/10 via a privileged Binder
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 49--50
-\TU/LinLibertine(1)/m/n/10 service (\TU/inconsolata(0)/m/n/10 SecretHandleVault
-Service\TU/LinLibertine(1)/m/n/10 ) paired with a
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 49--50
-\TU/inconsolata(0)/m/n/10 NotificationListenerService \TU/LinLibertine(1)/m/n/1
-0 broker and a \TU/inconsolata(0)/m/n/10 TYPE_
- []
-
-
-Underfull \hbox (badness 4416) in paragraph at lines 49--50
-\TU/inconsolata(0)/m/n/10 ACCESSIBILITY_OVERLAY \TU/LinLibertine(1)/m/n/10 reda
-ctor. In this deployment,
- []
-
-
-Underfull \hbox (badness 1502) in paragraph at lines 49--50
-\TU/LinLibertine(1)/m/n/10 the Agent SDK bridge coordinates screenshot captures
-
- []
-
 ) (sections/evidence.tex
-Underfull \hbox (badness 7522) in paragraph at lines 4--5
-\TU/LinLibertine(1)/m/n/10 EC2 bare-metal-equivalent instance (\TU/inconsolata(
-0)/m/n/10 m8i.4xlarge\TU/LinLibertine(1)/m/n/10 , 16
+Underfull \hbox (badness 3758) in paragraph at lines 4--5
+\TU/LinLibertine(1)/m/n/10 environment (Android 14, API 33/34) running on an
  []
 
 
-Underfull \hbox (badness 2119) in paragraph at lines 4--5
-\TU/LinLibertine(1)/m/n/10 vCPUs, 64 GiB RAM, KVM nested virtualization). We
+Underfull \hbox (badness 1275) in paragraph at lines 4--5
+\TU/LinLibertine(1)/m/n/10 AWS EC2 bare-metal-equivalent instance (\TU/inconsol
+ata(0)/m/n/10 m8i.4xlarge\TU/LinLibertine(1)/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 3769) in paragraph at lines 4--5
-\TU/LinLibertine(1)/m/n/10 API snapshot \TU/inconsolata(0)/m/n/10 claude-3-5-so
-nnet-20241022\TU/LinLibertine(1)/m/n/10 , sampling
+Underfull \hbox (badness 3884) in paragraph at lines 4--5
+\TU/LinLibertine(1)/m/n/10 16 vCPUs, 64 GiB RAM, KVM nested virtualization).
  []
 
 
-Underfull \hbox (badness 1939) in paragraph at lines 4--5
-\TU/LinLibertine(1)/m/n/10 steps per task) through an isolated local bridge, wi
-th
- []
-
-
-Underfull \hbox (badness 6188) in paragraph at lines 4--5
-\TU/LinLibertine(1)/m/n/10 prompt-level ground-truth cheats. For structural GUI
-
+Underfull \hbox (badness 1102) in paragraph at lines 4--5
+\TU/LinLibertine(1)/m/n/10 We evaluate against an off-the-shelf mobile GUI agen
+t:
  []
 
 
@@ -3076,27 +3011,9 @@ Underfull \hbox (badness 3623) in paragraph at lines 4--5
  []
 
 [8.8]
-Underfull \hbox (badness 4132) in paragraph at lines 6--11
-\TU/LinLibertine(1)/m/n/10 an unbound local placeholder, approximating existing
-
- []
-
-
-Underfull \hbox (badness 1681) in paragraph at lines 6--11
-\TU/LinLibertine(1)/m/n/10 mobile anonymizers [[]]. (B2) \TU/LinLibertine(0)/m/
-it/10 Platform Flow\TU/LinLibertine(1)/m/n/10 : standard
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 6--11
-\TU/LinLibertine(1)/m/n/10 confinement. (B3) \TU/LinLibertine(0)/m/scit/10 Secr
-etHandle\TU/LinLibertine(1)/m/n/10 : OS-source minting,
- []
-
-
-Underfull \hbox (badness 4940) in paragraph at lines 6--11
-\TU/LinLibertine(1)/m/n/10 destination binding, atomic lifecycle, and observati
-on
+Underfull \hbox (badness 1354) in paragraph at lines 6--11
+\TU/LinLibertine(1)/m/n/10 binding. Crucially, none of these platform mechanism
+s
  []
 
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
@@ -3173,9 +3090,6 @@ Underfull \hbox (badness 5756) in paragraph at lines 56--58
  []
 
 
-Underfull \vbox (badness 2913) has occurred while \output is active []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 60--65
  []\TU/LinLibertine(0)/m/it/10 Killer Experiment: Destination Redirection (RQ2)
 .[] \TU/LinLibertine(1)/m/n/10 In
@@ -3194,388 +3108,423 @@ Underfull \hbox (badness 3758) in paragraph at lines 60--65
  []
 
 
-Underfull \hbox (badness 1067) in paragraph at lines 60--65
-\TU/LinLibertine(1)/m/n/10 the same banking app; \TU/LinLibertine(0)/m/sc/10 Se
-cretHandle\TU/LinLibertine(1)/m/n/10 ’s field predicate
+Underfull \hbox (badness 1107) in paragraph at lines 60--65
+\TU/LinLibertine(1)/m/n/10 and completely breaking legitimate utility ($[] [] [
+][][][]$,
  []
 
 
-Underfull \hbox (badness 1132) in paragraph at lines 60--65
-\TU/LinLibertine(1)/m/n/10 6 single-digit \TU/inconsolata(0)/m/n/10 EditText \T
-U/LinLibertine(1)/m/n/10 fields via sibling container tra-
+Underfull \hbox (badness 1009) in paragraph at lines 60--65
+\TU/LinLibertine(1)/m/n/10 an injected agent clicking the platform prompt on to
+p
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 60--65
-\TU/LinLibertine(1)/m/n/10 ($[] [] [][][][]$, $[][][][]$ exposure). (3) \TU/Lin
-Libertine(0)/m/it/10 Clipboard sources\TU/LinLibertine(1)/m/n/10 : \TU/LinLiber
-tine(0)/m/sc/10 Se-
+Underfull \hbox (badness 2818) in paragraph at lines 60--65
+\TU/LinLibertine(1)/m/n/10 of \TU/inconsolata(0)/m/n/10 com.attacker.rewards \T
+U/LinLibertine(1)/m/n/10 triggers unconfined release,
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 6510) in paragraph at lines 60--65
+\TU/LinLibertine(1)/m/n/10 We additionally evaluated fine-grained intra-app and
+
+ []
+
+
+Underfull \hbox (badness 1092) in paragraph at lines 60--65
+\TU/LinLibertine(1)/m/n/10 ($[] [] [][][][]$, Wilson $[][][][][][] [][][][][]$)
+ while preserving OTP
+ []
+
+
+Underfull \vbox (badness 1199) has occurred while \output is active []
 
  [9.9]
-Underfull \hbox (badness 1342) in paragraph at lines 67--68
-\TU/LinLibertine(1)/m/n/10 bypassed). (3) \TU/LinLibertine(0)/m/it/10 Multi-thr
-eaded race\TU/LinLibertine(1)/m/n/10 : For each handle, 10
+Underfull \hbox (badness 4899) in paragraph at lines 88--89
+\TU/inconsolata(0)/m/n/10 HANDLE_EXPIRED \TU/LinLibertine(1)/m/n/10 ($[][][][]$
+ bypassed). In both cases, the
  []
 
 
-Underfull \hbox (badness 2042) in paragraph at lines 67--68
-\TU/LinLibertine(1)/m/n/10 concurrent threads simultaneously contested resoluti
-on
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
  []\TU/LinLibertine(0)/m/it/10 Microbenchmark Overhead (RQ5).[] \TU/LinLibertin
 e(1)/m/n/10 We benchmarked
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 70--71
+Underfull \hbox (badness 1097) in paragraph at lines 91--92
 \TU/LinLibertine(0)/m/sc/10 SecretHandle \TU/LinLibertine(1)/m/n/10 across both
  isolated in-vault transitions
  []
 
 
-Underfull \hbox (badness 2753) in paragraph at lines 70--71
-\TU/LinLibertine(1)/m/n/10 and injection sync $[][][][] [][]$, totaling $[][][]
-[] [][]$ ($[][][][][][] []$,
+Underfull \hbox (badness 1708) in paragraph at lines 91--92
+\TU/LinLibertine(1)/m/n/10 parcel/lock $[][][][] [][]$, and injection sync $[][
+][][] [][]$, totaling
  []
 
 
-Underfull \vbox (badness 2698) has occurred while \output is active []
+Underfull \hbox (badness 1389) in paragraph at lines 91--92
+\TU/LinLibertine(1)/m/n/10 remains $[]$ orders of magnitude faster than full OS
+ UI
+ []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--74
+Underfull \hbox (badness 1297) in paragraph at lines 91--92
+\TU/LinLibertine(1)/m/n/10 Dalvik, with the remaining $[][][][] []$ comprising 
+shared
+ []
+
+
+Underfull \vbox (badness 2582) has occurred while \output is active []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
 \TU/LinLibertine(1)/m/n/10 10 benign application suites in AndroidWorld [[]]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--74
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
 \TU/LinLibertine(1)/m/n/10 (DeskClock, Markor Notes, Simple Calendar, Simple
  []
 
 
-Underfull \hbox (badness 1142) in paragraph at lines 73--74
+Underfull \hbox (badness 1142) in paragraph at lines 94--95
 [][][][]$ \TU/LinLibertine(1)/m/n/10 block rate). GPU profiling via \TU/inconso
 lata(0)/m/n/10 dumpsys gfxinfo
  []
 
 
-Underfull \hbox (badness 1270) in paragraph at lines 73--74
-\TU/LinLibertine(1)/m/n/10 confirming zero background polling drain. Benign tas
-k
+Underfull \hbox (badness 3271) in paragraph at lines 94--95
+\TU/LinLibertine(1)/m/n/10 simulated battery unplug confirming zero background
  []
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 78--79
+Underfull \hbox (badness 1009) in paragraph at lines 99--100
 []\TU/LinLibertine(1)/m/n/10 Under \TU/LinLibertine(0)/b/n/10 B0 (Unprotected)\
 TU/LinLibertine(1)/m/n/10 , the vision-language model
  []
 
 
-Underfull \hbox (badness 1436) in paragraph at lines 78--79
+Underfull \hbox (badness 1436) in paragraph at lines 99--100
 \TU/LinLibertine(1)/m/n/10 cannot distinguish between the primary user objectiv
 e
  []
 
 
-Underfull \hbox (badness 2359) in paragraph at lines 78--79
+Underfull \hbox (badness 2359) in paragraph at lines 99--100
 \TU/LinLibertine(1)/m/n/10 and the adversarial instruction embedded in the noti
 -
  []
 
 
-Underfull \hbox (badness 2512) in paragraph at lines 78--79
+Underfull \hbox (badness 2512) in paragraph at lines 99--100
 \TU/LinLibertine(1)/m/n/10 fication. In $[][][][][]$ trials, the agent deviated
  from the
  []
 
 
-Underfull \hbox (badness 2990) in paragraph at lines 78--79
+Underfull \hbox (badness 2990) in paragraph at lines 99--100
 \TU/LinLibertine(1)/m/n/10 legitimate workflow, opened the attacker’s applicati
 on
  []
 
-
-Underfull \hbox (badness 1205) in paragraph at lines 80--81
+[10.10]
+Underfull \hbox (badness 1205) in paragraph at lines 101--102
 \TU/LinLibertine(1)/m/n/10 contains no raw digits, the model’s planner obeys th
 e
  []
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 80--81
+Underfull \hbox (badness 1281) in paragraph at lines 101--102
 \TU/LinLibertine(1)/m/n/10 Because B1 lacks destination confinement, the resolv
 er
  []
 
 
-Underfull \hbox (badness 1845) in paragraph at lines 82--84
+Underfull \hbox (badness 10000) in paragraph at lines 103--105
 []\TU/LinLibertine(1)/m/n/10 Under \TU/LinLibertine(0)/b/n/10 B3 (\TU/LinLibert
 ine(0)/b/sc/10 SecretHandle\TU/LinLibertine(0)/b/n/10 )\TU/LinLibertine(1)/m/n/
-10 , the OS intercepts the
+10 , the OS intercepts
  []
 
 
-Underfull \hbox (badness 4205) in paragraph at lines 82--84
-\TU/LinLibertine(1)/m/n/10 SMS at the telephony boundary before rendering. It
+Underfull \hbox (badness 7685) in paragraph at lines 103--105
+\TU/LinLibertine(1)/m/n/10 the SMS at the telephony boundary before render-
  []
 
 
-Underfull \hbox (badness 3579) in paragraph at lines 82--84
+Underfull \hbox (badness 1590) in paragraph at lines 103--105
+\TU/LinLibertine(1)/m/n/10 ing. It mints an unforgeable handle \TU/inconsolata(
+0)/m/n/10 SH-A8F29C \TU/LinLibertine(1)/m/n/10 bound
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--105
+\TU/LinLibertine(1)/m/n/10 strictly to \TU/inconsolata(0)/m/n/10 pkg:com.legiti
+mate.bank\TU/LinLibertine(1)/m/n/10 . Even though
+ []
+
+
+Underfull \hbox (badness 6316) in paragraph at lines 103--105
+\TU/LinLibertine(1)/m/n/10 the agent still experiences cognitive confusion from
+
+ []
+
+
+Underfull \hbox (badness 4156) in paragraph at lines 103--105
+\TU/LinLibertine(1)/m/n/10 notifications or conversational prompts) and attempt
+s
+ []
+
+
+Underfull \hbox (badness 1546) in paragraph at lines 103--105
+\TU/LinLibertine(1)/m/n/10 to enter \TU/inconsolata(0)/m/n/10 SH-A8F29C \TU/Lin
+Libertine(1)/m/n/10 into the attacker app, the OS Re-
+ []
+
+
+Underfull \hbox (badness 3579) in paragraph at lines 103--105
 \TU/LinLibertine(1)/m/n/10 window and node context via $[][][][]$,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--84
+Underfull \hbox (badness 10000) in paragraph at lines 103--105
 \TU/LinLibertine(1)/m/n/10 and confirms: $[][][][] []
  []
 
 
-Underfull \hbox (badness 1308) in paragraph at lines 82--84
-\TU/LinLibertine(0)/m/sc/10 SecretHandle \TU/LinLibertine(1)/m/n/10 establishes
- security that is invariant to
- []
-
-[10.10]
-Underfull \hbox (badness 3229) in paragraph at lines 86--92
-\TU/LinLibertine(1)/m/n/10 Replacing OS-source minting with screen-scraping de-
-
- []
-
-
-Underfull \hbox (badness 1365) in paragraph at lines 86--92
-\TU/LinLibertine(0)/m/it/10 Destination Binding\TU/LinLibertine(1)/m/n/10 : Omi
-tting the caller package check
- []
-
-
-Underfull \hbox (badness 2409) in paragraph at lines 86--92
-\TU/LinLibertine(0)/m/it/10 Atomic CAS Lifecycle\TU/LinLibertine(1)/m/n/10 : Di
-sabling hardware/mutex locks
- []
-
-
-Underfull \hbox (badness 1484) in paragraph at lines 86--92
-\TU/LinLibertine(1)/m/n/10 ($[][][][][]$ race vulnerability). (4) \TU/LinLibert
-ine(0)/m/it/10 No Observation Redactor\TU/LinLibertine(1)/m/n/10 :
- []
-
-) (sections/related_work.tex
-Underfull \hbox (badness 7595) in paragraph at lines 25--26
-\TU/LinLibertine(1)/m/n/10 While existing defenses tackle individual aspects of
-
- []
-
-
-Underfull \hbox (badness 1430) in paragraph at lines 25--26
-\TU/LinLibertine(1)/m/n/10 the problem—such as post-hoc taint tracking, heurist
-ic
- []
-
-
-Underfull \hbox (badness 1337) in paragraph at lines 27--28
- []\TU/LinLibertine(0)/m/it/10 Placeholder and anonymization defenses.[] \TU/Li
-nLibertine(1)/m/n/10 Mobile place-
- []
-
-
-Underfull \hbox (badness 1838) in paragraph at lines 27--28
-\TU/LinLibertine(1)/m/n/10 tokens and reverse the mapping at entry [[]]; recent
-
- []
-
-
-Underfull \hbox (badness 1603) in paragraph at lines 27--28
-\TU/LinLibertine(1)/m/n/10 session-scoped, and validates index ranges rather th
-an
- []
-
-
-Underfull \hbox (badness 4303) in paragraph at lines 27--28
-\TU/LinLibertine(1)/m/n/10 target destinations. We differ fundamentally on mint
-
- []
-
-
-Underfull \hbox (badness 1112) in paragraph at lines 27--28
-\TU/LinLibertine(1)/m/n/10 and a threat model that includes redirection. Unboun
-d
- []
-
-
-Underfull \hbox (badness 1910) in paragraph at lines 31--32
- []\TU/LinLibertine(0)/m/it/10 Prompt sanitizers.[] \TU/LinLibertine(1)/m/n/10 
-Detection-and-rewrite schemes sup-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 33--34
- []\TU/LinLibertine(0)/m/it/10 Platform and industry mechanisms.[] \TU/LinLiber
-tine(1)/m/n/10 Android’s SMS
- []
-
-
-Underfull \hbox (badness 1325) in paragraph at lines 35--36
-\TU/LinLibertine(1)/m/n/10 SchrodinText [[]] isolate display text, while Rushmo
-re
- []
-
-
-Underfull \hbox (badness 4120) in paragraph at lines 35--36
-\TU/LinLibertine(1)/m/n/10 Dennis and Van Horn founded capabilities [[]]; our
- []
-
-
-Underfull \hbox (badness 2573) in paragraph at lines 35--36
-\TU/LinLibertine(1)/m/n/10 contribution is the destination-and-task predicate o
-ver
- []
-
-
-Underfull \hbox (badness 2012) in paragraph at lines 35--36
-\TU/LinLibertine(1)/m/n/10 package, origin, and field class with an authenticat
-ed,
- []
-
-) (sections/discussion.tex
-Underfull \hbox (badness 4569) in paragraph at lines 37--1
-\TU/LinLibertine(1)/m/n/10 secret; \TU/LinLibertine(0)/m/sc/10 SecretHandle \TU
-/LinLibertine(1)/m/n/10 complements them by binding
- []
-
-
-Underfull \hbox (badness 1442) in paragraph at lines 37--1
-\TU/LinLibertine(1)/m/n/10 exfiltration and indirect prompt injection motivate 
-our
- []
-
-[11.11]
-Underfull \hbox (badness 2181) in paragraph at lines 7--8
- []\TU/LinLibertine(0)/m/it/10 Path to Google AOSP Upstream.[] \TU/LinLibertine
-(1)/m/n/10 While evaluated via
- []
-
-
-Underfull \hbox (badness 2409) in paragraph at lines 7--8
-\TU/LinLibertine(1)/m/n/10 upstream AOSP \TU/inconsolata(0)/m/n/10 system_serve
-r \TU/LinLibertine(1)/m/n/10 integration: (1) \TU/LinLibertine(0)/b/n/10 Input
- []
-
-
-Underfull \hbox (badness 1377) in paragraph at lines 7--8
-\TU/LinLibertine(1)/m/n/10 preventing handle MAC forgery even under root com-
- []
-
-
-Underfull \hbox (badness 3158) in paragraph at lines 7--8
-\TU/LinLibertine(1)/m/n/10 promise. (3) \TU/LinLibertine(0)/b/n/10 Unified Serv
-ice: \TU/LinLibertine(1)/m/n/10 Mint points and Vault
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 7--8
-\TU/LinLibertine(1)/m/n/10 consolidate into an AIDL-exposed, SELinux-confined
- []
-
-
-Underfull \hbox (badness 4120) in paragraph at lines 10--11
- []\TU/LinLibertine(0)/m/it/10 Memory Hygiene, Fraud Coexistence, and Generalit
-y.[]
- []
-
-
-Underfull \hbox (badness 1748) in paragraph at lines 10--11
-\TU/LinLibertine(1)/m/n/10 grounding, or profile switches. For anti-bot SDKs, t
-he
- []
-
-
-Underfull \hbox (badness 6592) in paragraph at lines 13--14
- []\TU/LinLibertine(0)/m/it/10 Ethics, Reproducibility, and Transparency.[] \TU
-/LinLibertine(1)/m/n/10 All experi-
- []
-
-
-Underfull \hbox (badness 1776) in paragraph at lines 13--14
-\TU/LinLibertine(1)/m/n/10 ments use synthetic canaries, loopback endpoints, an
-d
- []
-
-
-Underfull \hbox (badness 1028) in paragraph at lines 13--14
-\TU/LinLibertine(1)/m/n/10 claims, proofs, and measurements were verified by th
-e
+Underfull \hbox (badness 1082) in paragraph at lines 103--105
+\TU/LinLibertine(1)/m/n/10 a value-oblivious \TU/inconsolata(0)/m/n/10 destinat
+ion denied \TU/LinLibertine(1)/m/n/10 status, causing
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 1205) in paragraph at lines 22--23
- []\TU/LinLibertine(0)/m/it/10 Web Views and Origin Binding.[] \TU/LinLibertine
-(1)/m/n/10 Package identity can-
+Underfull \hbox (badness 2318) in paragraph at lines 106--107
+\TU/LinLibertine(1)/m/n/10 a fallback policy: when field-class metadata is abse
+nt,
  []
 
 
-Underfull \hbox (badness 5446) in paragraph at lines 22--23
-\TU/LinLibertine(1)/m/n/10 not enforce document-origin confinement in browser
+Underfull \hbox (badness 3229) in paragraph at lines 109--115
+\TU/LinLibertine(1)/m/n/10 Replacing OS-source minting with screen-scraping de-
+
  []
 
 
-Underfull \hbox (badness 2261) in paragraph at lines 22--23
-\TU/LinLibertine(1)/m/n/10 contexts. Binding input fields to web origins requir
-es
+Underfull \hbox (badness 1365) in paragraph at lines 109--115
+\TU/LinLibertine(0)/m/it/10 Destination Binding\TU/LinLibertine(1)/m/n/10 : Omi
+tting the caller package check
+ []
+
+
+Underfull \hbox (badness 2409) in paragraph at lines 109--115
+\TU/LinLibertine(0)/m/it/10 Atomic CAS Lifecycle\TU/LinLibertine(1)/m/n/10 : Di
+sabling hardware/mutex locks
+ []
+
+
+Underfull \hbox (badness 1484) in paragraph at lines 109--115
+\TU/LinLibertine(1)/m/n/10 ($[][][][][]$ race vulnerability). (4) \TU/LinLibert
+ine(0)/m/it/10 No Observation Redactor\TU/LinLibertine(1)/m/n/10 :
+ []
+
+) (sections/related_work.tex
+Underfull \hbox (badness 7595) in paragraph at lines 4--5
+\TU/LinLibertine(1)/m/n/10 While existing defenses tackle individual aspects of
+
+ []
+
+
+Underfull \hbox (badness 1430) in paragraph at lines 4--5
+\TU/LinLibertine(1)/m/n/10 the problem—such as post-hoc taint tracking, heurist
+ic
+ []
+
+[11.11]
+Underfull \hbox (badness 1337) in paragraph at lines 6--7
+ []\TU/LinLibertine(0)/m/it/10 Placeholder and anonymization defenses.[] \TU/Li
+nLibertine(1)/m/n/10 Mobile place-
+ []
+
+
+Underfull \hbox (badness 1838) in paragraph at lines 6--7
+\TU/LinLibertine(1)/m/n/10 tokens and reverse the mapping at entry [[]]; recent
+
+ []
+
+
+Underfull \hbox (badness 1603) in paragraph at lines 6--7
+\TU/LinLibertine(1)/m/n/10 session-scoped, and validates index ranges rather th
+an
+ []
+
+
+Underfull \hbox (badness 4303) in paragraph at lines 6--7
+\TU/LinLibertine(1)/m/n/10 target destinations. We differ fundamentally on mint
+
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 6--7
+\TU/LinLibertine(1)/m/n/10 and a threat model that includes redirection. Unboun
+d
+ []
+
+
+Underfull \hbox (badness 1910) in paragraph at lines 10--11
+ []\TU/LinLibertine(0)/m/it/10 Prompt sanitizers.[] \TU/LinLibertine(1)/m/n/10 
+Detection-and-rewrite schemes sup-
+ []
+
+) (sections/discussion.tex
+Underfull \hbox (badness 10000) in paragraph at lines 12--1
+\TU/LinLibertine(1)/m/n/10 pipeline [[]], Credential Manager [[]], and Protecte
+d
+ []
+
+
+Underfull \hbox (badness 2073) in paragraph at lines 12--1
+\TU/LinLibertine(1)/m/n/10 ing apps without intra-app or post-entry confinement
+.
+ []
+
+
+Underfull \hbox (badness 6094) in paragraph at lines 12--1
+\TU/LinLibertine(0)/m/sc/10 SecretHandle \TU/LinLibertine(1)/m/n/10 applies com
+plete mediation and least
+ []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 12--1
+\TU/LinLibertine(1)/m/n/10 on capability systems (Capsicum [[]], Dennis and Van
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+ []\TU/LinLibertine(0)/m/it/10 Deployment Roadmap and AOSP Upstream.[] \TU/LinL
+ibertine(1)/m/n/10 While
+ []
+
+
+Underfull \hbox (badness 1796) in paragraph at lines 5--6
+\TU/LinLibertine(1)/m/n/10 evaluated via an Accessibility Service and Notificat
+ion
+ []
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 5--6
+\TU/LinLibertine(1)/m/n/10 Broker on stock Android, \TU/LinLibertine(0)/m/sc/10
+ SecretHandle\TU/LinLibertine(1)/m/n/10 ’s architecture
+ []
+
+
+Underfull \hbox (badness 2717) in paragraph at lines 5--6
+\TU/inconsolata(0)/m/n/10 InputDispatcher \TU/LinLibertine(1)/m/n/10 and \TU/in
+consolata(0)/m/n/10 ViewRootImpl\TU/LinLibertine(1)/m/n/10 , injecting secrets
+ []
+
+
+Underfull \hbox (badness 3803) in paragraph at lines 5--6
+\TU/LinLibertine(1)/m/n/10 into private text buffers without accessibility expo
+rts
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 1178) in paragraph at lines 8--9
+ []\TU/LinLibertine(0)/m/it/10 Memory Hygiene, Cross-Device Use, and Transparen
+cy.[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+\TU/LinLibertine(1)/m/n/10 Vault secrets are pinned to non-swappable mem-
+ []
+
+
+Underfull \hbox (badness 3803) in paragraph at lines 8--9
+\TU/LinLibertine(1)/m/n/10 ory (\TU/inconsolata(0)/m/n/10 mlock()\TU/LinLiberti
+ne(1)/m/n/10 ) and zeroed upon resolution or expiry
+ []
+
+
+Underfull \hbox (badness 4316) in paragraph at lines 8--9
+\TU/LinLibertine(1)/m/n/10 can tap the notification to authenticate biometrical
+ly
+ []
+
+
+Underfull \hbox (badness 5696) in paragraph at lines 8--9
+\TU/LinLibertine(1)/m/n/10 dialog unexposed to accessibility. For anti-bot SDKs
+,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+\TU/LinLibertine(1)/m/n/10 resolvers emit an \TU/inconsolata(0)/m/n/10 Attested
+ResolutionReceipt\TU/LinLibertine(1)/m/n/10 . All
+ []
+
+
+Underfull \hbox (badness 6001) in paragraph at lines 8--9
+\TU/LinLibertine(1)/m/n/10 experiments use synthetic canaries and open bench-
+ []
+
+
+Underfull \hbox (badness 7963) in paragraph at lines 12--15
+\TU/LinLibertine(1)/m/n/10 to fail-closed rejection. \TU/LinLibertine(0)/m/it/1
+0 Authorized-Destination Misuse\TU/LinLibertine(1)/m/n/10 :
+ []
+
+
+Underfull \hbox (badness 1348) in paragraph at lines 12--15
+\TU/LinLibertine(1)/m/n/10 Destination binding restricts \TU/LinLibertine(0)/m/
+it/10 where \TU/LinLibertine(1)/m/n/10 secrets resolve, not
  []
 
 ) (sections/conclusion.tex)
-Underfull \hbox (badness 1281) in paragraph at lines 4--121
-\TU/LinLibertine(0)/m/sc/10 SecretHandle \TU/LinLibertine(1)/m/n/10 reframes ho
-w mobile AI agents handle
- []
-
-
-Underfull \hbox (badness 1838) in paragraph at lines 4--121
+Underfull \hbox (badness 1960) in paragraph at lines 4--121
 \TU/LinLibertine(1)/m/n/10 atomic zero-exposure resolution into verified UI fie
-lds,
+lds.
  []
 
-(main.bbl
-Underfull \vbox (badness 3049) has occurred while \output is active []
-
- [12.12]
+(main.bbl [12.12]
 LaTeX Info: Redefining \tempurl on input line 64.
 LaTeX Info: Redefining \tempurl on input line 78.
 LaTeX Info: Redefining \tempurl on input line 92.
 LaTeX Info: Redefining \tempurl on input line 107.
-LaTeX Info: Redefining \tempurl on input line 122.
 
-Underfull \hbox (badness 1057) in paragraph at lines 116--127
+Underfull \hbox (badness 1057) in paragraph at lines 101--112
 []\TU/LinLibertine(1)/m/n/8 Android Developers. 2026.  One-Tap SMS Verification
  with the
  []
 
-LaTeX Info: Redefining \tempurl on input line 136.
-LaTeX Info: Redefining \tempurl on input line 150.
-LaTeX Info: Redefining \tempurl on input line 195.
+LaTeX Info: Redefining \tempurl on input line 121.
+LaTeX Info: Redefining \tempurl on input line 135.
+LaTeX Info: Redefining \tempurl on input line 180.
 
-Underfull \hbox (badness 3989) in paragraph at lines 187--198
+Underfull \hbox (badness 3989) in paragraph at lines 172--183
 []\TU/LinLibertine(1)/m/n/8 Sven Bugiel, Stephan Heuser, and Ahmad-Reza Sadeghi
 . 2013.
  []
 
 
-Underfull \hbox (badness 2173) in paragraph at lines 187--198
+Underfull \hbox (badness 2173) in paragraph at lines 172--183
 \TU/LinLibertine(0)/m/it/8 rity Symposium\TU/LinLibertine(1)/m/n/8 . 131–146.  
  []$[][][][][] [] [] [] [][][] [] [][][][][][] [] [][][] [] [][][][][][][][][][
 ] []
  []
 
 
-Underfull \hbox (badness 2762) in paragraph at lines 276--282
+Underfull \hbox (badness 2762) in paragraph at lines 261--267
 []\TU/LinLibertine(1)/m/n/8 Edoardo Debenedetti, Ilia Shumailov, Tianqi Fan, Ja
 mie Hayes,
  []
@@ -3583,52 +3532,52 @@ mie Hayes,
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \tempurl on input line 296.
+LaTeX Info: Redefining \tempurl on input line 281.
 
-Underfull \hbox (badness 1062) in paragraph at lines 289--299
+Underfull \hbox (badness 1062) in paragraph at lines 274--284
 []\TU/LinLibertine(1)/m/n/8 Edoardo Debenedetti, Jie Zhang, Mislav Balunović, L
 uca Beurer-
  []
 
-LaTeX Info: Redefining \tempurl on input line 338.
+LaTeX Info: Redefining \tempurl on input line 323.
 
-Underfull \hbox (badness 1540) in paragraph at lines 331--341
+Underfull \hbox (badness 1540) in paragraph at lines 316--326
 []\TU/LinLibertine(1)/m/n/8 William Enck, Peter Gilbert, Byung-Gon Chun, Landon
  P. Cox,
  []
 
 
-Underfull \hbox (badness 6016) in paragraph at lines 331--341
+Underfull \hbox (badness 6016) in paragraph at lines 316--326
 \TU/LinLibertine(1)/m/n/8 Jaeyeon Jung, Patrick McDaniel, and Anmol N. Sheth. 2
 010.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 331--341
+Underfull \hbox (badness 10000) in paragraph at lines 316--326
 \TU/LinLibertine(1)/m/n/8 TaintDroid: An Information-Flow Tracking System for R
 e-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 331--341
+Underfull \hbox (badness 10000) in paragraph at lines 316--326
 \TU/LinLibertine(1)/m/n/8 altime Privacy Monitoring on Smartphones. In \TU/LinL
 ibertine(0)/m/it/8 9th USENIX
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 331--341
+Underfull \hbox (badness 10000) in paragraph at lines 316--326
 \TU/LinLibertine(0)/m/it/8 Symposium on Operating Systems Design and Implementa
 tion\TU/LinLibertine(1)/m/n/8 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 331--341
+Underfull \hbox (badness 10000) in paragraph at lines 316--326
 []$[][][][][] [] [] [] [][][] [] [][][][][][] [] [][][] [] [][][][][][][][][][]
  [] [][][][][][] [] [][][][][][][][][][] [][] [][][][][][][][][][][] [][]
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 361--368
+Underfull \hbox (badness 1558) in paragraph at lines 346--353
 []\TU/LinLibertine(1)/m/n/8 Daniel Fett, Brian Campbell, John Bradley, Torsten 
 Lodderstedt,
  []
@@ -3637,38 +3586,38 @@ Lodderstedt,
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [13.13]
+LaTeX Info: Redefining \tempurl on input line 486.
 LaTeX Info: Redefining \tempurl on input line 501.
-LaTeX Info: Redefining \tempurl on input line 516.
-LaTeX Info: Redefining \tempurl on input line 569.
-LaTeX Info: Redefining \tempurl on input line 586.
-LaTeX Info: Redefining \tempurl on input line 600.
-LaTeX Info: Redefining \tempurl on input line 630.
+LaTeX Info: Redefining \tempurl on input line 554.
+LaTeX Info: Redefining \tempurl on input line 571.
+LaTeX Info: Redefining \tempurl on input line 585.
+LaTeX Info: Redefining \tempurl on input line 615.
 
-Underfull \hbox (badness 6001) in paragraph at lines 624--633
+Underfull \hbox (badness 6001) in paragraph at lines 609--618
 \TU/LinLibertine(0)/m/it/8 Security Symposium\TU/LinLibertine(1)/m/n/8 .   []$[
 ][][][][] [] [] [] [][][] [] [][][][] [][] [][][][][][][][][] [] [][][] [] [][]
 [][] [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 624--633
+Underfull \hbox (badness 10000) in paragraph at lines 609--618
 [][][][][] [] [][][][][][][][][][] [][] [][] [][] [][][][][][][][][] [][] [][][
 ][][][][][][] [][] [][][][][][][][][][][][] [][] [][][] [][] [][][] [][] [][][]
 [][] [][]
  []
 
-LaTeX Info: Redefining \tempurl on input line 645.
+LaTeX Info: Redefining \tempurl on input line 630.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 5050) in paragraph at lines 685--693
+Underfull \hbox (badness 5050) in paragraph at lines 670--678
 \TU/LinLibertine(1)/m/n/8 InjecAgent: Benchmarking Indirect Prompt Injections i
 n Tool-
  []
 
 
-Underfull \hbox (badness 2799) in paragraph at lines 712--720
+Underfull \hbox (badness 2799) in paragraph at lines 697--705
 []\TU/LinLibertine(1)/m/n/8 Lepeng Zhao, Zhenhua Zou, Shuo Li, and Zhuotao Liu.
  2026.
  []
@@ -3691,7 +3640,7 @@ Underfull \hbox (badness 1158) in paragraph at lines 11--12
 tine(1)/m/n/10 From the repository
  []
 
-[14.14]
+
 Overfull \hbox (3.8526pt too wide) in paragraph at lines 31--31
 []\TU/inconsolata(0)/m/n/10 # 1. Build and install device services and test APK
 s[] 
@@ -3704,6 +3653,14 @@ Overfull \hbox (10.5192pt too wide) in paragraph at lines 31--31
  []
 
 
+(C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-pdfdoc.de
+f
+File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
+)
+(C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-utf32be.d
+ef
+File: se-utf32be.def 2019/11/29 v1.12 stringenc: UTF-32BE
+) [14.14]
 Overfull \hbox (10.5192pt too wide) in paragraph at lines 31--31
 []\TU/inconsolata(0)/m/n/10 adb install evaluation/apks/com.legitimate.bank.apk
 [] 
@@ -3743,32 +3700,30 @@ Class acmart Warning: ACM reference format is mandatory
 (acmart)              Please add printacmref=true to the 
 (acmart)              \settopmatter command..
 
+[15.15]
 
-Overfull \vbox (1.73999pt too high) has occurred while \output is active []
+LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (14 not 15).
+               Rerun to correct this.
 
-
-(C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-pdfdoc.de
-f
-File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
-)
-(C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-utf32be.d
-ef
-File: se-utf32be.def 2019/11/29 v1.12 stringenc: UTF-32BE
-) [15.15] (main.aux)
+(main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F32C7C2A34F112782F0F1E416DC4624D;2618.
+(rerunfilecheck)             Checksum: 6FFD96E0BE6266E1FCF9C0F83DEE0650;2032.
  ) 
 Here is how much of TeX's memory you used:
- 55578 strings out of 402987
- 1247342 string characters out of 5448730
- 1911629 words of memory out of 5000000
- 83328 multiletter control sequences out of 15000+600000
- 635726 words of font info for 163 fonts, out of 8000000 for 9000
+ 55582 strings out of 402987
+ 1247557 string characters out of 5448730
+ 1918255 words of memory out of 5000000
+ 83330 multiletter control sequences out of 15000+600000
+ 635742 words of font info for 165 fonts, out of 8000000 for 9000
  1509 hyphenation exceptions out of 8191
- 105i,14n,131p,2009b,32884s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 105i,14n,131p,2076b,33124s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on main.pdf (15 pages).

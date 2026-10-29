@@ -1,27 +1,6 @@
 \section{Related Work}
 \label{sec:related}
 
-\begin{table*}[t]
-\centering
-\footnotesize
-\caption{Comparison of mobile secret-handling and agent isolation paradigms across security guarantees and vision GUI support.}
-\label{tab:comparison}
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.8cm}ccccc@{}}
-\toprule
-Paradigm / Representative Systems & Enforcement Layer & \shortstack{Zero\\Obs.} & \shortstack{Dest.-\\Bound} & \shortstack{Task-\\Bound} & \shortstack{Single-Use\\Lifecycle} & \shortstack{Vision GUI\\Support} \\
-\midrule
-Dynamic Taint Tracking (TaintDroid \cite{enck2010taintdroid}, DroidScope \cite{yan2012droidscope}) & OS / VM Runtime & \xmark & \xmark & \xmark & \xmark & \xmark \\
-Platform Autofill \& Credential Mgr \cite{androidAutofill,androidCredentialManager} & OS / Application & \xmark & \pmark & \xmark & \xmark & \xmark \\
-Prompt Sanitizers \& Guardrails (Casper \cite{chong2024casper}, PrivacyRestore \cite{zeng2025privacyrestore}) & Model / Proxy & \pmark & \xmark & \xmark & \xmark & \pmark \\
-Detected Placeholders (Zhao et al. \cite{zhao2026anonymization}) & Application / User & \cmark & \xmark & \xmark & \pmark & \cmark \\
-Planner Capability Schemes (CAMEL \cite{debenedetti2025camel}, FIDES \cite{costa2025fides}) & Planner / Tool API & \cmark & \pmark & \pmark & \pmark & \xmark \\
-\midrule
-\textbf{\SH{} (This Work)} & \textbf{OS Reference Monitor} & \textbf{\cmark} & \textbf{\cmark} & \textbf{\cmark} & \textbf{\cmark} & \textbf{\cmark} \\
-\bottomrule
-\multicolumn{7}{@{}p{\textwidth}@{}}{\scriptsize \cmark{} = Fully enforced / guaranteed; \pmark{} = Partial, heuristic, or bypassable under injection; \xmark{} = Unsupported / vulnerable.}
-\end{tabularx}
-\end{table*}
-
 Table~\ref{tab:comparison} summarizes the structural differences across contemporary secret-handling and agent-isolation paradigms. While existing defenses tackle individual aspects of the problem---such as post-hoc taint tracking, heuristic prompt rewriting, or planner-level tool mediation---none simultaneously guarantee zero plaintext observation and destination-bound resolution for vision-driven GUI agents.
 
 \paragraph{Placeholder and anonymization defenses.} Mobile placeholder schemes replace sensitive text with type-preserving tokens and reverse the mapping at entry \cite{zhao2026anonymization}; recent work resolves placeholders locally but is detector-based, session-scoped, and validates index ranges rather than target destinations. We differ fundamentally on mint source (authoritative OS source, not screen scraping), unforgeability, destination-and-task binding, typed lifecycle, and a threat model that includes redirection. Unbound placeholders remain completely vulnerable to Confused Deputy redirection ($30/30$ leakage under Attack~2), whereas \SH{} prevents redirection at the OS boundary.
@@ -30,8 +9,4 @@ Table~\ref{tab:comparison} summarizes the structural differences across contempo
 
 \paragraph{Prompt sanitizers.} Detection-and-rewrite schemes suppress sensitive spans in prompts \cite{siyan2025papillon,zeng2025privacyrestore,chong2024casper}. They reduce model-side exposure but lack destination binding and OS enforcement. Furthermore, prompt sanitization is probabilistic: adversarial formatting and obfuscation can evade detection filters.
 
-\paragraph{Platform and industry mechanisms.} Android's SMS Retriever/Consent APIs \cite{androidSmsRetriever,androidSmsConsent}, sensitive-notification OTP pipeline \cite{android15privacy}, Credential Manager \cite{androidCredentialManager}, autofill \cite{androidAutofill,androidAutofillServices}, clipboard sensitivity flag \cite{androidClipboard}, and Protected Confirmation \cite{androidProtectedConfirmation} are valuable building blocks, but autofill and Credential Manager trust the requesting app. \SH{} composes them with OS-level destination binding and lifecycle enforcement.
-
-\paragraph{OS mechanisms and reference monitors.} \SH{} applies complete mediation and least privilege \cite{saltzer1975protection} to UI text injection by untrusted processes. Capability systems like Capsicum confine authority to scoped handles \cite{watson2010capsicum}, while Android mediates app isolation through install and runtime models \cite{felt2011permission,bugiel2013flexible,rossi2021seapp}. UI confidentiality systems like SchrodinText \cite{continella2020schrodintext} isolate display text, while Rushmore \cite{andrus2015rushmore} and GYRUS \cite{jang2014gyrus} enforce trusted paths. Where Cloak \& Dagger \cite{fratantonio2017cloak} revealed accessibility overlay abuses, \SH{} leverages non-touchable overlays in reverse to shield secrets from vision agents. Taint systems track sensitive data post-hoc \cite{enck2010taintdroid,yan2012droidscope}, whereas \SH{} prevents values from entering agent perception entirely. Dennis and Van Horn founded capabilities \cite{dennis1966semantics}; our contribution is the destination-and-task predicate over package, origin, and field class with an authenticated, lifecycle-bounded handle.
-
-\paragraph{Credential and token standards.} OTP formats are standardized by HOTP and TOTP \cite{rfc4226,rfc6238}, while token binding schemes constrain OAuth token replay \cite{rfc8707,rfc9449,rfc9700}. WebAuthn and passkeys remove shared secrets entirely \cite{webauthn3,nist80063b}. These authenticate credentials, users, or endpoints, but do not constrain which on-device UI field receives a captured secret; \SH{} complements them by binding resolution inside the OS. Finally, documented agent OTP exfiltration and indirect prompt injection motivate our threat model \cite{du2025mobileattacks,liao2024eia,chen2025fineprint,greshake2023indirect,debenedetti2024agentdojo,zhan2024injecagent}.
+\paragraph{Platform mechanisms and reference monitors.} Android's SMS Retriever/Consent \cite{androidSmsRetriever,androidSmsConsent}, sensitive-notification OTP pipeline \cite{android15privacy}, Credential Manager \cite{androidCredentialManager}, and Protected Confirmation \cite{androidProtectedConfirmation} are valuable primitives, but trust requesting apps without intra-app or post-entry confinement. \SH{} applies complete mediation and least privilege \cite{saltzer1975protection} to UI injection by untrusted agents, building on capability systems (Capsicum \cite{watson2010capsicum}, Dennis and Van Horn \cite{dennis1966semantics}), Android app isolation \cite{felt2011permission,bugiel2013flexible,rossi2021seapp}, and trusted UI paths (SchrodinText \cite{continella2020schrodintext}, Rushmore \cite{andrus2015rushmore}, GYRUS \cite{jang2014gyrus}). While Cloak \& Dagger \cite{fratantonio2017cloak} revealed accessibility overlay abuses, \SH{} leverages overlays to shield secrets from vision agents. Unlike post-hoc taint tracking (TaintDroid \cite{enck2010taintdroid}, DroidScope \cite{yan2012droidscope}) or endpoint token binding \cite{rfc8707,rfc9449,rfc9700,webauthn3,nist80063b,rfc4226,rfc6238}, \SH{} binds on-device resolution directly to verified UI destinations under documented agent prompt-injection threats \cite{du2025mobileattacks,liao2024eia,chen2025fineprint,greshake2023indirect,debenedetti2024agentdojo,zhan2024injecagent}.

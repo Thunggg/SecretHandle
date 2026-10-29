@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{48}
+\begin{thebibliography}{47}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -97,24 +97,9 @@
 
 
 \bibitem[{Android Developers}(2026e)]%
-        {androidClipboard}
-\bibfield{author}{\bibinfo{person}{{Android Developers}}.}
-  \bibinfo{year}{2026}\natexlab{e}.
-\newblock \bibinfo{title}{{ClipDescription.EXTRA\_IS\_SENSITIVE} API
-  Reference}.
-\newblock
-\urldef\tempurl%
-\url{https://developer.android.com/reference/android/content/ClipDescription#EXTRA_IS_SENSITIVE}
-\showURL{%
-\tempurl}
-\newblock
-\shownote{Accessed 2026-10-03}.
-
-
-\bibitem[{Android Developers}(2026f)]%
         {androidSmsConsent}
 \bibfield{author}{\bibinfo{person}{{Android Developers}}.}
-  \bibinfo{year}{2026}\natexlab{f}.
+  \bibinfo{year}{2026}\natexlab{e}.
 \newblock \bibinfo{title}{One-Tap {SMS} Verification with the {SMS} User
   Consent {API}}.
 \newblock
@@ -126,10 +111,10 @@
 \shownote{Accessed 2026-10-03}.
 
 
-\bibitem[{Android Developers}(2026g)]%
+\bibitem[{Android Developers}(2026f)]%
         {androidSmsRetriever}
 \bibfield{author}{\bibinfo{person}{{Android Developers}}.}
-  \bibinfo{year}{2026}\natexlab{g}.
+  \bibinfo{year}{2026}\natexlab{f}.
 \newblock \bibinfo{title}{Request {SMS} Verification in an Android App}.
 \newblock
 \urldef\tempurl%
