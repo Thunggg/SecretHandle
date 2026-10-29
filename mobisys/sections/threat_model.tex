@@ -23,11 +23,11 @@ Table~\ref{tab:goals} maps each attacker goal to the security goal that counters
 \toprule
 Goal & Security goal & Enforced by \\
 \midrule
-G1 read & S1 non-disclosure & mint before observation; principal-specific redaction \\
-G2 redirect & S2 destination confinement & destination predicate $d$ + task $\tau$ checked at resolve \\
-G3 replay & S4 lifecycle safety & atomic reservation, use budget, TTL, revocation \\
-G4 forge & S2 unforgeability & authenticated metadata $a=F_K(\enc(H))$ against the OS store \\
-(G1, reread) & S3 observation closure & redaction obligation active during and after injection \\
+G1 read & \textbf{S1} non-disclosure & mint before observation; principal-specific redaction \\
+G2 redirect & \textbf{S2} destination confinement & destination predicate $d$ + task $\tau$ checked at resolve \\
+G3 replay & \textbf{S4} lifecycle safety & atomic reservation, use budget, TTL, revocation \\
+G4 forge & \textbf{S2} unforgeability & authenticated metadata $a=F_K(\enc(H))$ against the OS store \\
+(G1, reread) & \textbf{S3} observation closure & redaction obligation active during and after injection \\
 \bottomrule
 \end{tabularx}
 \end{table}

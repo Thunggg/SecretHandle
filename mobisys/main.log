@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  30 OCT 2026 00:46
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  30 OCT 2026 01:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2558,6 +2558,10 @@ d agents ($[][][][][]$),
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 108.
+
 (sections/introduction.tex
 Underfull \hbox (badness 5388) in paragraph at lines 4--5
 \TU/LinLibertine(0)/m/n/10 Mobile graphical-user-interface (GUI) agents complet
@@ -2974,12 +2978,6 @@ Underfull \hbox (badness 6559) in paragraph at lines 121--122
 [7.7]) (sections/algorithm.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 7.
-
-Underfull \hbox (badness 1205) in paragraph at lines 17--18
-[]$[] [] [][][] [][][]$\TU/LinLibertine(1)/m/n/10 ; $[] [] [][][] [][] [][] [][
-] [][] [][][] [][][] [][][] [][]$; $[] []
- []
-
 ) (sections/evidence.tex
 Underfull \hbox (badness 3758) in paragraph at lines 4--5
 \TU/LinLibertine(1)/m/n/10 environment (Android 14, API 33/34) running on an
@@ -3017,8 +3015,6 @@ LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
 (Font)              scaled to size 5.0pt on input line 18.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
 (Font)              scaled to size 5.0pt on input line 20.
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 8.0pt on input line 25.
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
 (Font)              scaled to size 7.0pt on input line 31.
 File: ../figures/b3_redacted_shade.png Graphic file (type bmp)
@@ -3159,9 +3155,6 @@ shared
  []
 
 
-Underfull \vbox (badness 2582) has occurred while \output is active []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 94--95
 \TU/LinLibertine(1)/m/n/10 10 benign application suites in AndroidWorld [[]]
  []
@@ -3212,7 +3205,7 @@ Underfull \hbox (badness 2990) in paragraph at lines 99--100
 on
  []
 
-[10.10]
+
 Underfull \hbox (badness 1205) in paragraph at lines 101--102
 \TU/LinLibertine(1)/m/n/10 contains no raw digits, the model’s planner obeys th
 e
@@ -3225,6 +3218,9 @@ er
  []
 
 
+Underfull \vbox (badness 2698) has occurred while \output is active []
+
+ [10.10]
 Underfull \hbox (badness 10000) in paragraph at lines 103--105
 []\TU/LinLibertine(1)/m/n/10 Under \TU/LinLibertine(0)/b/n/10 B3 (\TU/LinLibert
 ine(0)/b/sc/10 SecretHandle\TU/LinLibertine(0)/b/n/10 )\TU/LinLibertine(1)/m/n/
@@ -3283,9 +3279,6 @@ ion denied \TU/LinLibertine(1)/m/n/10 status, causing
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 Underfull \hbox (badness 6032) in paragraph at lines 106--107
 \TU/LinLibertine(1)/m/n/10 containers are securely handled via \TU/LinLibertine
 (0)/m/sc/10 SecretHandle\TU/LinLibertine(1)/m/n/10 ’s
@@ -3302,6 +3295,9 @@ Underfull \hbox (badness 2865) in paragraph at lines 106--107
 \TU/LinLibertine(1)/m/n/10 (median latency $[][][][][] [][]$). In web flows (Te
 mplate 3),
  []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \hbox (badness 3229) in paragraph at lines 109--115
@@ -3339,7 +3335,7 @@ Underfull \hbox (badness 1430) in paragraph at lines 4--5
 ic
  []
 
-[11.11]
+
 Underfull \hbox (badness 1337) in paragraph at lines 6--7
  []\TU/LinLibertine(0)/m/it/10 Placeholder and anonymization defenses.[] \TU/Li
 nLibertine(1)/m/n/10 Mobile place-
@@ -3369,7 +3365,7 @@ Underfull \hbox (badness 1112) in paragraph at lines 6--7
 d
  []
 
-
+[11.11]
 Underfull \hbox (badness 1910) in paragraph at lines 10--11
  []\TU/LinLibertine(0)/m/it/10 Prompt sanitizers.[] \TU/LinLibertine(1)/m/n/10 
 Detection-and-rewrite schemes sup-
@@ -3696,12 +3692,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 6FFD96E0BE6266E1FCF9C0F83DEE0650;2032.
  ) 
 Here is how much of TeX's memory you used:
- 55574 strings out of 402987
- 1247259 string characters out of 5448730
- 1911197 words of memory out of 5000000
- 83324 multiletter control sequences out of 15000+600000
+ 55579 strings out of 402987
+ 1247372 string characters out of 5448730
+ 1912433 words of memory out of 5000000
+ 83329 multiletter control sequences out of 15000+600000
  635726 words of font info for 163 fonts, out of 8000000 for 9000
  1509 hyphenation exceptions out of 8191
- 105i,14n,131p,2076b,32884s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 105i,13n,131p,2076b,32884s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on main.pdf (15 pages).

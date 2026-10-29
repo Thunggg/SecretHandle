@@ -14,7 +14,7 @@ Algorithms~\ref{alg:mint} and~\ref{alg:resolve} give the two transitions the gua
 \State $D_S\gets\mathsf{SourceDestinations}(\sigma,E)$
 \State $d\gets D_T\cap D_S\cap\mathsf{TypePolicy}(q,P)$; \Return $\Reject$ if $d=\emptyset$
 \State $(t_i,t_e,u_0,c)\gets\mathsf{Lifecycle}(q,P)$
-\State $n\sample\bits^\lambda$; $H\gets(n,q,\sigma,d,\tau,t_i,t_e,u_0,c)$; $a\gets F_K(\enc(H))$
+\State $n\leftarrow_{\$}\{0,1\}^\lambda$; $H\gets(n,q,\sigma,d,\tau,t_i,t_e,u_0,c)$; $a\gets F_K(\enc(H))$
 \State atomically insert $\Omega[n]\gets(s,H,a,\mathsf{live},\bot,u_0,0)$
 \State suppress $s$ for the agent principal; wipe buffers
 \State \Return $h=(n,q,a)$
@@ -31,20 +31,20 @@ Algorithms~\ref{alg:mint} and~\ref{alg:resolve} give the two transitions the gua
 \State load $\Omega[n]=(s,H,a_H,z,r,u,k)$
 \State \Return $\Reject$ unless $a=a_H=F_K(\enc(H))$ (constant-time)
 \State $x\gets\mathsf{FreshTargetContext}(V)$
-\If{$z\ne\mathsf{live}$ or $t\notin[t_i,t_e)$ or $u=0$ or $\tau'\ne\tau$} \Return $\Reject$ \EndIf
-\If{$\Match(d,x)=0$} $k\gets k+1$; \textbf{if} $k\ge k_{\max}$ \textbf{then} $z\gets\mathsf{revoked}$; \Return $\Reject$ \EndIf
-\State atomically reserve: $(z,r,u)\gets(\mathsf{reserved},\mathsf{nonce},u-1)$
+\State \label{line:resolve:guard}\textbf{if} $z\ne\mathsf{live} \lor t\notin[t_i,t_e) \lor u=0 \lor \tau'\ne\tau$ \textbf{then} \Return $\Reject$
+\State \label{line:resolve:mismatch}\textbf{if} $\Match(d,x)=0$ \textbf{then} $k\gets k+1$; \textbf{if} $k\ge k_{\max}$ \textbf{then} $z\gets\mathsf{revoked}$; \Return $\Reject$
+\State \label{line:resolve:reserve}atomically reserve: $(z,r,u)\gets(\mathsf{reserved},\mathsf{nonce},u-1)$
 \State $\gamma\gets\mathsf{ObtainConfirmation}(c)$
-\If{$\mathsf{ConfirmOK}(c,\gamma)=0$} \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$ \EndIf
+\State \label{line:resolve:confirm}\textbf{if} $\mathsf{ConfirmOK}(c,\gamma)=0$ \textbf{then} \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$
 \State $x'\gets\mathsf{FreshTargetContext}(V)$
-\If{$x'\ne x$ or $\Match(d,x')=0$} \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$ \EndIf
+\State \label{line:resolve:revalidate}\textbf{if} $x'\ne x \lor \Match(d,x')=0$ \textbf{then} \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$
 \State register redaction obligation for $(V,n,q)$ before delivery; $ok\gets\mathsf{InjectInternal}(V,s)$
-\State \textbf{if} $ok \wedge u>0$ \textbf{then} $z\gets\mathsf{live}$ \textbf{else if} $\neg ok \wedge u_0>1$ \textbf{then} $(z,u)\gets(\mathsf{live},u+1)$ \textbf{else} $z\gets\mathsf{consumed}$; wipe $s$
+\State \label{line:resolve:finalize}\textbf{if} $ok \land u>0$ \textbf{then} $z\gets\mathsf{live}$ \textbf{else if} $\neg ok \land u_0>1$ \textbf{then} $(z,u)\gets(\mathsf{live},u+1)$ \textbf{else} $z\gets\mathsf{consumed}$; wipe $s$
 \State wipe local buffers; \Return $ok$ with value-oblivious status
 \end{algorithmic}
 \end{algorithm}
 
-\paragraph{Lifecycle and mutable budget.} As formalized in Section~\ref{sec:model}, the store tracks remaining uses $u$ and retry counter $k$ as mutable record state in $\Omega[n]$ outside immutable $H$, keeping $a = F_K(\enc(H))$ invariant across multi-use lifecycles ($u_0 > 1$). Decrementing the budget at reservation prevents concurrent double-spending; if delivery is rejected or cancelled before commit (verified before target buffer mutation), the reservation is refunded for multi-use handles ($u \gets u + 1$). An uncertain injection outcome on a single-use handle conservatively commits terminal state $\mathsf{consumed}$, triggering an immediate secure memory wipe (\texttt{explicit\_bzero}) of $s$. A retry counter bound $k_{\max}=3$ on destination mismatches (Line~6) throttles brute-force attempts before revoking the handle.
+\paragraph{Lifecycle and mutable budget.} As formalized in Section~\ref{sec:model}, the store tracks remaining uses $u$ and retry counter $k$ as mutable record state in $\Omega[n]$ outside immutable $H$, keeping $a = F_K(\enc(H))$ invariant across multi-use lifecycles ($u_0 > 1$). Decrementing the budget at reservation prevents concurrent double-spending; if delivery is rejected or cancelled before commit (verified before target buffer mutation), the reservation is refunded for multi-use handles ($u \gets u + 1$). An uncertain injection outcome on a single-use handle conservatively commits terminal state $\mathsf{consumed}$, triggering an immediate secure memory wipe (\texttt{explicit\_bzero}) of $s$. A retry counter bound $k_{\max}=3$ on destination mismatches (Line~\ref{line:resolve:mismatch}) throttles brute-force attempts before revoking the handle.
 
 \paragraph{Integration points.} Prototype mediation uses a privileged Binder service (\texttt{SecretHandleVaultService}) with a \texttt{NotificationListener} broker and non-touchable accessibility overlay, where the Agent SDK bridge synchronizes frame captures with \texttt{SurfaceFlinger} overlay composition before image serialization. Upstream AOSP targets in-tree mediation directly in \texttt{system\_server} via \texttt{InputDispatcher} and \texttt{ViewRootImpl} (\S\ref{sec:design}).
 
