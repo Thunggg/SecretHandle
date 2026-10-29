@@ -219,10 +219,9 @@
   \bibinfo{person}{Toby Jia-Jun Li}.} \bibinfo{year}{2025}\natexlab{}.
 \newblock \showarticletitle{The Obvious Invisible Threat: {LLM}-Powered {GUI}
   Agents' Vulnerability to Fine-Print Injections}.
-\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2504.11281}}
+\newblock \bibinfo{journal}{\emph{ACM Transactions on Privacy and Security}}
   (\bibinfo{year}{2025}).
 \newblock
-\href{https://doi.org/10.48550/arXiv.2504.11281}{doi:\nolinkurl{10.48550/arXiv.2504.11281}}
 
 
 \bibitem[Chong et~al\mbox{.}(2025)]%
@@ -276,11 +275,10 @@
   \bibinfo{person}{Christoph Kern}, \bibinfo{person}{Chongyang Shi},
   \bibinfo{person}{Andreas Terzis}, {and} \bibinfo{person}{Florian Tram\`er}.}
   \bibinfo{year}{2025}\natexlab{}.
-\newblock \showarticletitle{Defeating Prompt Injections by Design}.
-\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2503.18813}}
-  (\bibinfo{year}{2025}).
+\newblock \showarticletitle{Defeating Prompt Injections by Design}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the IEEE Conference on Secure and
+  Trustworthy Machine Learning (SaTML)}}. \bibinfo{publisher}{IEEE}.
 \newblock
-\href{https://doi.org/10.48550/arXiv.2503.18813}{doi:\nolinkurl{10.48550/arXiv.2503.18813}}
 
 
 \bibitem[Debenedetti et~al\mbox{.}(2024)]%
@@ -420,19 +418,17 @@
 \href{https://doi.org/10.17487/RFC2104}{doi:\nolinkurl{10.17487/RFC2104}}
 
 
-\bibitem[Liao et~al\mbox{.}(2024)]%
+\bibitem[Liao et~al\mbox{.}(2025)]%
         {liao2024eia}
 \bibfield{author}{\bibinfo{person}{Zeyi Liao}, \bibinfo{person}{Lingbo Mo},
   \bibinfo{person}{Chejian Xu}, \bibinfo{person}{Mintong Kang},
   \bibinfo{person}{Jiawei Zhang}, \bibinfo{person}{Chaowei Xiao},
   \bibinfo{person}{Yuan Tian}, \bibinfo{person}{Bo Li}, {and}
-  \bibinfo{person}{Huan Sun}.} \bibinfo{year}{2024}\natexlab{}.
+  \bibinfo{person}{Huan Sun}.} \bibinfo{year}{2025}\natexlab{}.
 \newblock \showarticletitle{{EIA}: Environmental Injection Attack on Generalist
-  Web Agents for Privacy Leakage}.
-\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2409.11295}}
-  (\bibinfo{year}{2024}).
+  Web Agents for Privacy Leakage}. In \bibinfo{booktitle}{\emph{Proceedings of
+  the International Conference on Learning Representations (ICLR)}}.
 \newblock
-\href{https://doi.org/10.48550/arXiv.2409.11295}{doi:\nolinkurl{10.48550/arXiv.2409.11295}}
 
 
 \bibitem[Lodderstedt et~al\mbox{.}(2025)]%
