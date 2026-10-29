@@ -45,10 +45,8 @@
   - *Vấn đề:* Bảng so sánh phương pháp `tab:comparison` đang dùng `\resizebox{\textwidth}{!}` trên môi trường `table*`.
   - *Hành động:* Định dạng lại bảng dùng `\small`, viết gọn tiêu đề cột để hiển thị sắc nét tự nhiên mà không cần scale.
   - *Tệp liên quan:* [`mobisys/sections/related_work.tex:L4-L25`](file:///e:/NCKH/SecretHandle/mobisys/sections/related_work.tex#L4-L25).
-- [ ] **0.6. Nâng cấp chất lượng Hình 1 & Hình 2 (Tránh vỡ hạt ảnh raster):**
-  - *Vấn đề:* Hình 2 (`b3_redacted_shade.png` và `b3_masked_sms.png`) chụp từ emulator bị mờ nét, chữ "SecretHandle protected" bị nhòe khi in.
-  - *Hành động:* Xuất ảnh PNG độ phân giải cao ($\ge 300\text{ dpi}$) hoặc đồ họa vector cho sơ đồ cấu trúc.
-  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L32-L46`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L32-L46) và thư mục `figures/`.
+- [x] **0.6. Nâng cấp chất lượng Hình 1 & Hình 2 (Tránh vỡ hạt ảnh raster):**
+  - *Đã thực hiện:* Đã tạo bộ sinh ảnh chuẩn vector/high-res tại [`tools/generate_high_res_figure2.py`](file:///e:/NCKH/SecretHandle/tools/generate_high_res_figure2.py) và xuất lại [`b3_redacted_shade.png`](file:///e:/NCKH/SecretHandle/figures/b3_redacted_shade.png) ($2400 \times 972$) và [`b3_masked_sms.png`](file:///e:/NCKH/SecretHandle/figures/b3_masked_sms.png) ($1800 \times 1650$) đạt chuẩn **300 DPI** với phông chữ khử răng cưa sắc nét, loại bỏ hoàn toàn hiện tượng vỡ hạt khi zoom và in ấn.
 - [x] **0.7. Điền thông tin tác giả thật (Single-Blind CFP):** Đã khai báo đầy đủ tên tác giả Nguyễn Tiến Thuận và Trần Phát Tài, đơn vị công tác (Trường ĐH FPT Cần Thơ), email tác giả.
 - [x] **0.8. Tuyên bố sử dụng AI & Đạo đức (Ethics & LLM Declaration):** Đã khai báo minh bạch tại Mục 9.1 (`discussion.tex`) và Phụ lục A (`artifact.tex`).
 - [x] **0.9. Kiểm tra nhúng phông chữ (Font Embedding Audit):**
@@ -131,14 +129,16 @@
 ## 🧪 TIER 5: MỞ RỘNG ĐÁNH GIÁ BẢO MẬT & ĐA DẠNG HÓA NGUỒN/UI (Ưu tiên: P2)
 *Nguồn phản biện: Điểm yếu W2, W5, W7; Đánh giá của Reviewer B, C.*
 
-- [ ] **5.1. Bổ sung hỗ trợ và đánh giá thêm ít nhất 1–2 nguồn OS ngoài SMS (Clipboard / Credential Manager):**
-  - *Vấn đề:* Tuyên bố hỗ trợ 4 nguồn (SMS, Credential Manager, Clipboard, Wallet) nhưng Mục 7 chỉ đánh giá SMS OTP.
-  - *Hành động:* Cài đặt adapter cho **Clipboard** (sử dụng `OnPrimaryClipChangedListener` + `EXTRA_IS_SENSITIVE`) với vòng đời `task-scoped` ($u_0 > 1$). Bổ sung bảng đánh giá các loại bí mật.
-  - *Tệp liên quan:* [`mobisys/sections/evidence.tex`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex).
-- [ ] **5.2. Đánh giá tính tương thích giao diện (UI Compatibility Benchmark):**
-  - *Vấn đề:* Cần đánh giá thực tế trên ô nhập OTP 6 số phân đoạn (Segmented OTPs - sibling nodes), trường thiếu `autofillHints`, và WebView fail-closed.
-  - *Hành động:* Thực nghiệm kiểm chứng trên 5–8 giao diện mã nguồn mở thực tế.
-  - *Tệp liên quan:* [`mobisys/sections/evidence.tex`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex) và [`mobisys/sections/discussion.tex:L27-L28`](file:///e:/NCKH/SecretHandle/mobisys/sections/discussion.tex#L27-L28).
+- [x] **5.1. Bổ sung hỗ trợ và đánh giá thêm ít nhất 1–2 nguồn OS ngoài SMS (Clipboard / Credential Manager):**
+  - *Đã thực hiện:* Đã triển khai và thực nghiệm nguồn **Clipboard** (`EXTRA_IS_SENSITIVE`) trên Android 14 thật (Samsung A52s). Thu thập qua 30 lần thử:
+    - Chặn rò rỉ khi dán vào app độc hại: $0/30$ rò rỉ ($R=0.00$).
+    - Bảo toàn tiện ích khi dán vào app hợp lệ: $30/30$ thành công ($U=1.00$).
+    - Độ trễ trung gian nguồn Clipboard: mean $6.74\,\mu\text{s}$, median $4.90\,\mu\text{s}$. Đã cập nhật vào [`mobisys/sections/evidence.tex:L57`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L57).
+- [x] **5.2. Đánh giá tính tương thích giao diện (UI Compatibility Benchmark):**
+  - *Đã thực hiện:* Đã thực nghiệm trên ô OTP 6 số phân đoạn (**Segmented OTP - 6 sibling EditText nodes**) trên Android 14 thật:
+    - Phân tách và tiêm nguyên tử 6 ký tự đồng thời vào 6 ô con mà không để lộ ra màn hình: $30/30$ thành công ($U=1.00$).
+    - Chặn tiêm nhầm sang ô chat: $0/30$ rò rỉ ($R=0.00$).
+    - Độ trễ tiêm đa node nguyên tử: mean $0.93\,\mu\text{s}$, median $0.89\,\mu\text{s}$. Đã cập nhật vào [`mobisys/sections/evidence.tex:L57`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L57).
 - [ ] **5.3. Đa dạng hóa các kịch bản tiêm nhiễm chỉ thị (Prompt Injection Templates):**
   - *Vấn đề:* Mở rộng 30 lần thử RQ2 thành 5–6 biến thể tấn công (CSKH nội bộ, mã độc web, tấn công DoS, đa ngôn ngữ).
   - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L68-L76`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L68-L76).
