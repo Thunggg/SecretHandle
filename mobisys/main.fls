@@ -779,6 +779,8 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\Lin
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTB-tlf-sc-t1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-sc-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_tlukpt.enc
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT .\sections\related_work.tex
 INPUT .\sections\related_work.tex
 INPUT .\sections\related_work.tex
