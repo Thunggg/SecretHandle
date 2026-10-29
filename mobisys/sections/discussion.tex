@@ -22,6 +22,6 @@ Our results validate \SH{} on Android~14 via SMS broker, overlay masking, and va
 Package identity cannot enforce document-origin confinement in browser contexts. Binding input fields to web origins requires Chromium/WebView attestation. Under complex redirects or custom tabs, \SH's safe fallback is fail-closed rejection or user confirmation.
 
 \paragraph{Authorized-Destination Misuse and Availability.}
-Destination binding restricts \emph{where} a secret resolves, but cannot prevent injected agents from executing unwanted actions \emph{inside} legitimate apps. Task tokens and Protected Confirmation mitigate this, though semantic intent requires app cooperation. While mismatches reject without decrementing budgets, repeated invalid attempts are throttled by a retry bound ($k_{\max}=3$) before blacklisting or falling back to touch confirmation, thwarting DoS OTP depletion.
+Destination binding restricts \emph{where} a secret resolves, but cannot prevent injected agents from executing unwanted actions \emph{inside} legitimate apps. Task tokens and Protected Confirmation mitigate this, though semantic intent requires app cooperation. Repeated invalid attempts are throttled by a retry bound ($k_{\max}=3$) before blacklisting or falling back to touch confirmation, thwarting DoS OTP depletion.
 
 
