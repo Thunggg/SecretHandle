@@ -15,7 +15,7 @@ Algorithms~\ref{alg:mint} and~\ref{alg:resolve} give the two transitions the gua
 \State $d\gets D_T\cap D_S\cap\mathsf{TypePolicy}(q,P)$; \Return $\Reject$ if $d=\emptyset$
 \State $(t_i,t_e,u_0,c)\gets\mathsf{Lifecycle}(q,P)$
 \State $n\sample\bits^\lambda$; $H\gets(n,q,\sigma,d,\tau,t_i,t_e,u_0,c)$; $a\gets F_K(\enc(H))$
-\State atomically insert $\Omega[n]\gets(s,H,a,\mathsf{live},\bot,u_0)$
+\State atomically insert $\Omega[n]\gets(s,H,a,\mathsf{live},\bot,u_0,0)$
 \State suppress $s$ for the agent principal; wipe buffers
 \State \Return $h=(n,q,a)$
 \end{algorithmic}
@@ -28,26 +28,35 @@ Algorithms~\ref{alg:mint} and~\ref{alg:resolve} give the two transitions the gua
 \Require handle $h=(n,q,a)$, task token $T'$, target node token $V$, time $t$
 \Ensure internal injection or value-oblivious $\Reject$
 \State $(\tau',\_)\gets\mathsf{VerifyTask}(T')$; \Return $\Reject$ on failure
-\State load $\Omega[n]=(s,H,a_H,z,r,u)$
+\State load $\Omega[n]=(s,H,a_H,z,r,u,k)$
 \State \Return $\Reject$ unless $a=a_H=F_K(\enc(H))$ (constant-time)
 \State $x\gets\mathsf{FreshTargetContext}(V)$
-\If{$z\ne\mathsf{live}$ or $t\notin[t_i,t_e)$ or $u=0$ or $\tau'\ne\tau$ or $\Match(d,x)=0$}
-  \State \Return $\Reject$
+\If{$z\ne\mathsf{live}$ or $t\notin[t_i,t_e)$ or $u=0$ or $\tau'\ne\tau$} \Return $\Reject$ \EndIf
+\If{$\Match(d,x)=0$}
+  \State $k\gets k+1$; \textbf{if} $k\ge k_{\max}$ \textbf{then} $z\gets\mathsf{revoked}$; \Return $\Reject$
 \EndIf
 \State atomically reserve: $(z,r,u)\gets(\mathsf{reserved},\mathsf{nonce},u-1)$
 \State $\gamma\gets\mathsf{ObtainConfirmation}(c)$
-\If{$\mathsf{ConfirmOK}(c,\gamma)=0$} finalize by type policy; \Return $\Reject$ \EndIf
+\If{$\mathsf{ConfirmOK}(c,\gamma)=0$}
+  \State \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$
+\EndIf
 \State $x'\gets\mathsf{FreshTargetContext}(V)$
-\If{$x'\ne x$ or $\Match(d,x')=0$} finalize conservatively; \Return $\Reject$ \EndIf
+\If{$x'\ne x$ or $\Match(d,x')=0$}
+  \State \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$
+\EndIf
 \State register redaction obligation for $(V,n,q)$ before delivery
 \State $ok\gets\mathsf{InjectInternal}(V,s)$
-\State \textbf{if} $u>0$ \textbf{then} $z\gets\mathsf{live}$ \textbf{else} $z\gets\mathsf{consumed}$; wipe $s$ from $\Omega[n]$ \textbf{end if}; wipe local buffers
-\State \Return $ok$ with value-oblivious status
+\If{$ok$}
+  \State \textbf{if} $u>0$ \textbf{then} $z\gets\mathsf{live}$ \textbf{else} $z\gets\mathsf{consumed}$; wipe $s$ from $\Omega[n]$ \textbf{end if}
+\Else
+  \State \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; wipe $s$ from $\Omega[n]$ \textbf{end if}
+\EndIf
+\State wipe local buffers; \Return $ok$ with value-oblivious status
 \end{algorithmic}
 \end{algorithm}
 
-\paragraph{Lifecycle and mutable budget.} As formalized in Section~\ref{sec:model}, the store tracks remaining uses $u$ as mutable record state in $\Omega[n]$ outside immutable $H$, keeping $a = F_K(\enc(H))$ invariant across multi-use lifecycles ($u_0 > 1$). Decrementing the budget at reservation prevents concurrent double-spending; if delivery is rejected or cancelled, the reservation is refunded. Terminal state $\mathsf{consumed}$ is committed only when $u=0$, triggering an immediate secure memory wipe (\texttt{explicit\_bzero}) of $s$.
+\paragraph{Lifecycle and mutable budget.} As formalized in Section~\ref{sec:model}, the store tracks remaining uses $u$ and retry counter $k$ as mutable record state in $\Omega[n]$ outside immutable $H$, keeping $a = F_K(\enc(H))$ invariant across multi-use lifecycles ($u_0 > 1$). Decrementing the budget at reservation prevents concurrent double-spending; if delivery is rejected or cancelled before commit, the reservation is refunded for multi-use handles ($u \gets u + 1$). Terminal state $\mathsf{consumed}$ is committed only when $u=0$, triggering an immediate secure memory wipe (\texttt{explicit\_bzero}) of $s$.
 
-\paragraph{Integration points.} Our stock-Android prototype implements \SH{} via a privileged Binder service (\texttt{SecretHandleVaultService}) paired with a \texttt{NotificationListenerService} broker and a \texttt{TYPE\_ACCESSIBILITY\_OVERLAY} redactor. In this deployment, the Agent SDK bridge coordinates screenshot captures with the redactor so that \texttt{SurfaceFlinger} composites the overlay before the frame buffer is returned to the agent process. Upstream AOSP integration embeds this mediation directly in \texttt{system\_server}, where \texttt{InputDispatcher} and \texttt{ViewRootImpl} inject secrets into the target field's private buffer without touching public IME pipelines, backed by Android Keystore / StrongBox hardware roots.
+\paragraph{Integration points.} Our stock-Android prototype implements \SH{} via a privileged Binder service (\texttt{SecretHandleVaultService}) paired with a \texttt{NotificationListenerService} broker and a \texttt{TYPE\_}\allowbreak\texttt{ACCESSIBILITY\_}\allowbreak\texttt{OVERLAY} redactor. In this deployment, the Agent SDK bridge coordinates screenshot captures with the redactor so that \texttt{SurfaceFlinger} composites the overlay before the frame buffer is returned to the agent process. Upstream AOSP integration embeds this mediation directly in \texttt{system\_server}, where \texttt{InputDispatcher} and \texttt{ViewRootImpl} inject secrets into the target field's private buffer without touching public IME pipelines, backed by Android Keystore / StrongBox hardware roots.
 
 \paragraph{Complexity.} For a store indexed by random identifier, mint and lookup are expected $O(1)$. Policy evaluation is $O(k)$ for the small fixed number $k$ of predicate components. Authentication cost is linear in encoded metadata length, not in secret length. Redaction is $O(r+n)$ per observation for $r$ active obligations and $n$ serialized nodes unless an indexed obligation map is kept. Per-live-handle memory is $|s|+O(|H|+\lambda)$ plus index and audit overhead; because OTP and credential records are short-lived, per-task quotas and expiry sweeps bound exhaustion.
