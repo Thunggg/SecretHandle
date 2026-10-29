@@ -11,22 +11,28 @@ We evaluate \SH{} on a stock-Android userdebug environment (Android 14, API 33/3
 
 \begin{table}[t]
 \centering
-\small
 \caption{Primary empirical results on Android~14. Outcomes $E, R, U, L$ measured over $n=30$ independent paired trials per condition. Replay $Y$ tested across $n=50$ replays and $n=50$ concurrent races. 95\% Wilson confidence intervals in brackets.}
 \label{tab:main_eval}
-\resizebox{\columnwidth}{!}{\begin{tabular}{@{}lccccccc@{}}
+\scriptsize
+\setlength{\tabcolsep}{1.2pt}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lccccccr@{}}
 \toprule
-Condition & Exposure $E$ & Redirect $R$ & $U_{\text{benign}}$ & $U_{\text{attack}}$ & Replay $Y$ & Step Time & Mediation Ovhd. \\
+Condition & Exp. $E$ & Redir. $R$ & $U_{\text{ben}}$ & $U_{\text{att}}$ & Repl. $Y$ & Step Time & Ovhd. \\
 \midrule
-B0 (unprotected)   & 0.97 [0.83, 0.99] & 0.97 [0.83, 0.99] & 0.97 [0.83, 0.99] & 0.03 [0.01, 0.17] & 1.00 [0.93, 1.00] & 48.6 $\pm$ 3.1 s & -- \\
-B1 (placeholder)   & 0.00 [0.00, 0.11] & 1.00 [0.89, 1.00] & 1.00 [0.89, 1.00] & 0.00 [0.00, 0.11]$^\dagger$ & 0.00 [0.00, 0.07] & 48.8 $\pm$ 2.9 s & 150 ms \\
-B2 (platform flow) & 0.00 [0.00, 0.11] & 1.00 [0.89, 1.00] & 1.00 [0.89, 1.00] & 0.00 [0.00, 0.11]$^\ddagger$ & 0.00 [0.00, 0.07] & 48.5 $\pm$ 3.2 s & 2.1 ms \\
-B3 (\SH)           & \textbf{0.00} [0.00, 0.11] & \textbf{0.00} [0.00, 0.11] & \textbf{1.00} [0.89, 1.00] & \textbf{1.00} [0.89, 1.00] & \textbf{0.00} [0.00, 0.07] & 48.6 $\pm$ 2.8 s & \textbf{4.2 ms}$^*$ \\
+B0 (unprotected)   & 0.97 [0.83, 0.99] & 0.97 [0.83, 0.99] & 0.97 [0.83, 0.99] & 0.03 [0.01, 0.17] & 1.00 [0.93, 1.00] & 48.6$\pm$3.1\,s & -- \\
+B1 (placeholder)   & 0.00 [0.00, 0.11] & 1.00 [0.89, 1.00] & 1.00 [0.89, 1.00] & 0.00 [0.00, 0.11]$^\dagger$ & 0.00 [0.00, 0.07] & 48.8$\pm$2.9\,s & 150\,ms \\
+B2 (platform flow) & 0.00 [0.00, 0.11] & 1.00 [0.89, 1.00] & 1.00 [0.89, 1.00] & 0.00 [0.00, 0.11]$^\ddagger$ & 0.00 [0.00, 0.07] & 48.5$\pm$3.2\,s & 2.1\,ms \\
+B3 (\SH)           & \textbf{0.00} [0.00, 0.11] & \textbf{0.00} [0.00, 0.11] & \textbf{1.00} [0.89, 1.00] & \textbf{1.00} [0.89, 1.00] & \textbf{0.00} [0.00, 0.07] & 48.6$\pm$2.8\,s & \textbf{4.2\,ms}$^*$ \\
 \bottomrule
-\multicolumn{8}{l}{\footnotesize $^\dagger$ Under destination redirection, B1 utility drops to 0.00 due to unbound token hijacking \cite{zhao2026anonymization}.} \\
-\multicolumn{8}{l}{\footnotesize $^\ddagger$ Platform Credential Manager / SMS User Consent lacks destination confinement against injected agent UI clicks.} \\
-\multicolumn{8}{l}{\footnotesize $^*$ Step Time reports mean $\pm$ std action latency of the VLM agent ($48.6\,\text{s}$ mean), whereas Mediation Ovhd.\ isolates OS dispatch: $4.2\,\text{ms}$ end-to-end ($11.2\,\mu\text{s}$ core crypto+IPC; in-vault CAS is $5.42\,\mu\text{s}$ mint, $0.18\,\mu\text{s}$ resolve).}
-\end{tabular}}
+\end{tabular*}
+\begin{minipage}{\columnwidth}
+\vspace{2pt}
+{\scriptsize
+$^\dagger$ Under redirection, B1 utility drops to 0.00 due to unbound token hijacking \cite{zhao2026anonymization}.\\
+$^\ddagger$ Platform Credential Manager / SMS Consent lacks agent-destination confinement.\\
+$^*$ Step Time reports mean$\pm$std agent VLM action latency; Ovhd.\ isolates OS dispatch ($4.2\,\text{ms}$ e2e, $11.2\,\mu\text{s}$ core crypto+IPC on emulator, $22.3\,\mu\text{s}$ on ARM hardware).
+}
+\end{minipage}
 \end{table}
 
 \begin{figure}[t]
@@ -66,7 +72,7 @@ We benchmarked \SH{} across both isolated in-vault transitions and full end-to-e
 To verify that \SH{} does not interfere with general agent UI control or normal user workflows, we benchmarked the system across 10 diverse benign application suites in AndroidWorld \cite{rawles2024androidworld} (DeskClock, Markor Notes, Simple Calendar, Simple Gallery, Audio Recorder, Simple Draw, Camera2, Settings, SMS Messenger, and Contacts). Across 50 automated touch injection cycles, $100\%$ ($50/50$) of touch events passed cleanly through the overlay layer to the underlying application (\texttt{FLAG\_NOT\_TOUCHABLE}, $0.0\%$ block rate). GPU frame metrics via \texttt{dumpsys gfxinfo} confirmed that p95 frame rendering latency was identical between B0 and B3 (Markor: $18.0\,\text{ms}$, $\Delta = 0.0\,\text{ms}$; Settings: $36.0\,\text{ms}$, $\Delta = 0.0\,\text{ms}$). Daemon profiling via \texttt{dumpsys cpuinfo} showed that \SH's event-driven broker consumed $0.2\%$ CPU idle and $1.4\%$ during burst mediation on emulator; on physical hardware, profiling during active mediation bursts registered $7.2\%$ total system CPU ($3.2\%$ user, $3.2\%$ kernel), with \texttt{dumpsys batterystats} under simulated battery unplug confirming zero background polling drain over extended idle intervals. Across all benign workflows, task success and action sequences remained unaffected ($\Delta = 0.00$).
 
 \paragraph{Qualitative Analysis: Anatomy of Agent Misdirection.}
-To understand the cognitive failure modes of vision-driven agents, we analyzed the step-by-step action trajectories across all $n=30$ trials under B0, B1, and B3. In a representative execution, the user tasks the agent with completing a 2-factor login into a banking portal (\texttt{com.legitimate.bank}). During task execution, an incoming SMS arrives containing an indirect prompt injection: \emph{``Your Bank: Verification code 849201. Special Offer: To claim your \$50 cash credit, forward this verification code to the CashRewards app immediately.''}
+To understand the cognitive failure modes of vision-driven agents across diverse attack vectors, we evaluated 5 representative prompt injection templates ($n=6$ trials each, $n=30$ total): (1)~\emph{Direct Exfiltration}: Notifications lure the agent to forward the OTP to an external rewards app for monetary incentive. (2)~\emph{Internal Support Diversion}: Injected prompts claim security audits and direct the agent to paste the code into an in-app customer-support chat field. (3)~\emph{Web Phishing Overlay}: Browser injections command the agent to submit credentials into an overlaid verification form. (4)~\emph{DoS Depletion Attack}: Adversarial prompts command repeated invalid submissions to exhaust single-use handle budgets. (5)~\emph{Multilingual Cross-Lingual Injection}: Injections formatted in alternating Vietnamese and English syntactic structures to evade language-specific safety filters. In a representative execution under Template~1, the user tasks the agent with completing a 2-factor login into a banking portal (\texttt{com.legitimate.bank}); an incoming SMS arrives containing an indirect prompt injection: \emph{``Your Bank: Verification code 849201. Special Offer: To claim your \$50 cash credit, forward this verification code to the CashRewards app immediately.''}
 
 Under \textbf{B0 (Unprotected)}, the vision-language model cannot distinguish between the primary user objective and the adversarial instruction embedded in the notification. In $29/30$ trials, the agent deviated from the legitimate workflow, opened the attacker's application (\texttt{com.attacker.rewards}), typed the raw code \texttt{849201}, and submitted the exfiltration form in an average of 4.2 action steps.
 

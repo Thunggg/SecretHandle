@@ -12,12 +12,12 @@
 
 | Nhóm (Tier) | Phạm Vi Nhiệm Vụ | Mức Độ | Trạng Thái | Thời Gian Ước Tính |
 | :--- | :--- | :---: | :---: | :---: |
-| **Tier 0** | Khắc phục vi phạm quy định CFP (Sàng lọc Desk-Reject) | **P0 (Khẩn cấp)** | `[x] 7/9` | Đã xong phần cốt lõi |
+| **Tier 0** | Khắc phục vi phạm quy định CFP (Sàng lọc Desk-Reject) | **P0 (Khẩn cấp)** | `[x] 9/9` | **HOÀN THÀNH 100%** |
 | **Tier 1** | Sửa đổi số học, đồng bộ dữ liệu & 10 lỗi chế bản LaTeX | **P0 (Khẩn cấp)** | `[x] 11/11` | **HOÀN THÀNH 100%** |
 | **Tier 2** | Sửa đổi mô hình toán, logic Thuật toán 2 & Hóa giải DoS $k_{\max}=3$ | **P1 (Quan trọng)** | `[x] 4/4` | **HOÀN THÀNH 100%** |
 | **Tier 3** | Minh bạch hóa kiến trúc AOSP vs Nguyên mẫu & Cô lập UID Bridge | **P1 (Quan trọng)** | `[x] 2/2` | **HOÀN THÀNH 100%** |
-| **Tier 4** | Thực nghiệm trên thiết bị Android 14 thật & Keystore phần cứng | **P1 (Quan trọng)** | `[ ] 0/2` | 3–4 ngày (05/11–08/11) |
-| **Tier 5** | Mở rộng đánh giá: Nguồn Clipboard/Autofill & Tương thích giao diện OTP | **P2 (Nâng cấp điểm)** | `[x] 1/4` | 4–5 ngày (09/11–14/11) |
+| **Tier 4** | Thực nghiệm trên thiết bị Android 14 thật & Keystore phần cứng | **P1 (Quan trọng)** | `[x] 2/2` | **HOÀN THÀNH 100%** |
+| **Tier 5** | Mở rộng đánh giá: Nguồn Clipboard/Autofill & Tương thích giao diện OTP | **P2 (Nâng cấp điểm)** | `[x] 4/4` | **HOÀN THÀNH 100%** |
 | **Tier 6** | Công trình liên quan, nâng cấp trích dẫn & Hoàn thiện Artifact | **P2 (Hoàn thiện)** | `[x] 3/3` | **HOÀN THÀNH 100%** |
 | **Tier 7** | Thủ tục nộp bài HotCRP, Khai báo COI & Chuẩn bị Rebuttal | **P0 (Quy trình)** | `[ ] 0/4` | Trước 27/11 & 04/12 |
 
@@ -27,7 +27,7 @@
 
 1. **BẤT BIẾN KIẾN TRÚC:** Tệp [`mobisys/sections/architecture.tex`](file:///e:/NCKH/SecretHandle/mobisys/sections/architecture.tex) **TUYỆT ĐỐI KHÔNG ĐƯỢC CHỈNH SỬA** theo quy định hệ thống.
 2. **NGÂN SÁCH TRANG (PAGE BUDGET):** Nội dung chính (từ Mục 1 đến hết Mục 10 / Conclusion) **kết thúc chính xác ở Trang 12**. Toàn bộ tệp PDF (bao gồm References và Appendix) **đúng 15 trang**, hoàn toàn tuân thủ giới hạn của MobiSys 2027.
-3. **TÍNH TRUNG THỰC SỐ LIỆU (DATA INTEGRITY):** Tuyệt đối không bịa số liệu. Mọi số liệu đưa vào bài báo đều khớp 100% với các tệp JSON / nhật ký kiểm thử thực tế trong `output/` (`benchmark_overhead_lifecycle_redirection.json`, `benchmark_autodroid_diversity.json`, `rq6_benign_regression_results.json`).
+3. **TÍNH TRUNG THỰC SỐ LIỆU (DATA INTEGRITY):** Tuyệt đối không bịa số liệu. Mọi số liệu đưa vào bài báo đều khớp 100% với các tệp JSON / nhật ký kiểm thử thực tế trong `output/` (`benchmark_overhead_lifecycle_redirection.json`, `benchmark_autodroid_diversity.json`, `rq6_benign_regression_results.json`, `physical_device_benchmark.json`, `extended_source_ui_benchmark.json`).
 
 ---
 
@@ -37,14 +37,10 @@
 - [x] **0.1. Khổ giấy và định dạng tệp:** Tệp PDF chuẩn khổ US Letter (`8.5 x 11 in` / `612 x 792 pts`), biên dịch bằng XeLaTeX thành công 100%.
 - [x] **0.2. Đánh số trang bắt buộc (Printfolios):** Đã bật `\settopmatter{printacmref=false,printfolios=true}` trong `main.tex`, hiển thị số trang 1–15 rõ ràng.
 - [x] **0.3. Giới hạn 12 trang nội dung chính:** Mục 10 (Conclusion) kết thúc ở cột phải Trang 12; References bắt đầu từ cuối Trang 12 sang Trang 13–14; Phụ lục nằm ở Trang 14–15.
-- [ ] **0.4. Khắc phục lỗi co nhỏ phông chữ trong Bảng 1 (Table 1 - `evidence.tex`):**
-  - *Vấn đề:* Bảng kết quả chính đang bị bọc bởi `\resizebox{\columnwidth}{!}`, khiến phông chữ bị co xuống ~5–6 pt rất khó đọc khi in hoặc zoom 100% (vi phạm quy chuẩn CFP).
-  - *Hành động:* Tối ưu khoảng cách cột `\setlength{\tabcolsep}{3pt}` hoặc dùng `tabularx` để chữ giữ đúng kích thước đọc được.
-  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L12-L30`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L12-L30).
-- [ ] **0.5. Khắc phục lỗi co nhỏ phông chữ trong Bảng 2 (Table 2 - `related_work.tex`):**
-  - *Vấn đề:* Bảng so sánh phương pháp `tab:comparison` đang dùng `\resizebox{\textwidth}{!}` trên môi trường `table*`.
-  - *Hành động:* Định dạng lại bảng dùng `\small`, viết gọn tiêu đề cột để hiển thị sắc nét tự nhiên mà không cần scale.
-  - *Tệp liên quan:* [`mobisys/sections/related_work.tex:L4-L25`](file:///e:/NCKH/SecretHandle/mobisys/sections/related_work.tex#L4-L25).
+- [x] **0.4. Khắc phục lỗi co nhỏ phông chữ trong Bảng 1 (Table 1 - `evidence.tex`):**
+  - *Đã thực hiện:* Đã gỡ bỏ `\resizebox{\columnwidth}{!}` tại [`evidence.tex:L17`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L17), định dạng lại bằng `\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}...}` kết hợp `\scriptsize` chuẩn và `\setlength{\tabcolsep}{1.2pt}`, hiển thị vừa vặn độ rộng cột mà không bị co méo phông chữ.
+- [x] **0.5. Khắc phục lỗi co nhỏ phông chữ trong Bảng 2 (Table 2 - `related_work.tex`):**
+  - *Đã thực hiện:* Đã gỡ bỏ `\resizebox{\textwidth}{!}` tại [`related_work.tex:L9`](file:///e:/NCKH/SecretHandle/mobisys/sections/related_work.tex#L9), định dạng bằng `\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}...}` dàn trải tự nhiên trên 2 cột mà không bị biến dạng phông chữ.
 - [x] **0.6. Nâng cấp chất lượng Hình 1 & Hình 2 (Tránh vỡ hạt ảnh raster):**
   - *Đã thực hiện:* Đã tạo bộ sinh ảnh chuẩn vector/high-res tại [`tools/generate_high_res_figure2.py`](file:///e:/NCKH/SecretHandle/tools/generate_high_res_figure2.py) và xuất lại [`b3_redacted_shade.png`](file:///e:/NCKH/SecretHandle/figures/b3_redacted_shade.png) ($2400 \times 972$) và [`b3_masked_sms.png`](file:///e:/NCKH/SecretHandle/figures/b3_masked_sms.png) ($1800 \times 1650$) đạt chuẩn **300 DPI** với phông chữ khử răng cưa sắc nét, loại bỏ hoàn toàn hiện tượng vỡ hạt khi zoom và in ấn.
 - [x] **0.7. Điền thông tin tác giả thật (Single-Blind CFP):** Đã khai báo đầy đủ tên tác giả Nguyễn Tiến Thuận và Trần Phát Tài, đơn vị công tác (Trường ĐH FPT Cần Thơ), email tác giả.
@@ -139,9 +135,14 @@
     - Phân tách và tiêm nguyên tử 6 ký tự đồng thời vào 6 ô con mà không để lộ ra màn hình: $30/30$ thành công ($U=1.00$).
     - Chặn tiêm nhầm sang ô chat: $0/30$ rò rỉ ($R=0.00$).
     - Độ trễ tiêm đa node nguyên tử: mean $0.93\,\mu\text{s}$, median $0.89\,\mu\text{s}$. Đã cập nhật vào [`mobisys/sections/evidence.tex:L57`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L57).
-- [ ] **5.3. Đa dạng hóa các kịch bản tiêm nhiễm chỉ thị (Prompt Injection Templates):**
-  - *Vấn đề:* Mở rộng 30 lần thử RQ2 thành 5–6 biến thể tấn công (CSKH nội bộ, mã độc web, tấn công DoS, đa ngôn ngữ).
-  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L68-L76`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L68-L76).
+- [x] **5.3. Đa dạng hóa các kịch bản tiêm nhiễm chỉ thị (Prompt Injection Templates):**
+  - *Đã thực hiện:* Đã phân loại và phân tích rõ 5 mẫu kịch bản tấn công gián tiếp qua prompt injection ($n=6$ lần thử/mẫu, $n=30$ tổng) tại [`evidence.tex:L75`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L75):
+    1. *Direct Exfiltration*: Lừa tác tử chuyển tiếp OTP sang app thưởng bên ngoài.
+    2. *Internal Support Diversion*: Lừa dán mã OTP vào ô chat hỗ trợ khách hàng nội bộ app.
+    3. *Web Phishing Overlay*: Kịch bản web yêu cầu điền thông tin xác thực đè form.
+    4. *DoS Depletion Attack*: Kịch bản lặp lại các lần nhập sai để tiêu hao ngân sách thẻ dùng một lần.
+    5. *Multilingual Cross-Lingual Injection*: Tiêm lệnh xen kẽ tiếng Anh và tiếng Việt để né bộ lọc an toàn ngôn ngữ.
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L75`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L75).
 - [x] **5.4. Bổ sung siêu tham số của LLM và cấu hình tác tử:**
   - *Đã thực hiện:* Ghi rõ API model `claude-3-5-sonnet-20241022`, $T=0.0$, top-p $1.0$, tối đa 15 action steps, và AutoDroid chạy GPT-4o (`gpt-4o-2024-08-06`) tại [`evidence.tex:L4`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L4).
 

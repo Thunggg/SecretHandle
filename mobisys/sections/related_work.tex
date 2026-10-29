@@ -6,8 +6,7 @@
 \small
 \caption{Comparison of mobile secret-handling and agent isolation paradigms. \SH{} uniquely combines OS-authoritative zero-observation minting, cryptographic unforgeability, strict destination and task confinement, and atomic single-use lifecycle enforcement for untrusted vision agents.}
 \label{tab:comparison}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}llccccc@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llccccc@{}}
 \toprule
 Paradigm / Representative Systems & Enforcement Layer & Zero Observation & Destination-Bound & Task-Bound & Single-Use Lifecycle & Vision GUI Support \\
 \midrule
@@ -20,8 +19,7 @@ Planner Capability Schemes (CAMEL \cite{debenedetti2025camel}, FIDES \cite{costa
 \textbf{\SH{} (This Work)} & \textbf{OS Reference Monitor} & \textbf{\cmark} & \textbf{\cmark} & \textbf{\cmark} & \textbf{\cmark} & \textbf{\cmark} \\
 \bottomrule
 \multicolumn{7}{l}{\footnotesize \cmark{} = Fully enforced / guaranteed; \pmark{} = Partial, heuristic, or bypassable under injection; \xmark{} = Unsupported / vulnerable.}
-\end{tabular}%
-}
+\end{tabular*}
 \end{table*}
 
 Table~\ref{tab:comparison} summarizes the structural differences across contemporary secret-handling and agent-isolation paradigms. While existing defenses tackle individual aspects of the problem---such as post-hoc taint tracking, heuristic prompt rewriting, or planner-level tool mediation---none simultaneously guarantee zero plaintext observation and destination-bound resolution for vision-driven GUI agents.
