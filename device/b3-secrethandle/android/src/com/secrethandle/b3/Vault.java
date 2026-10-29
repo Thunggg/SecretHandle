@@ -27,9 +27,11 @@ public final class Vault {
         public final String targetField;
         public final long createdAt;
         public final long expiresAt;
+        public int budget;
+        public int remainingUses;
         public boolean used;
 
-        Entry(String handle, String secret, String source, String target, String targetField, long expiresAt) {
+        Entry(String handle, String secret, String source, String target, String targetField, long expiresAt, int budget) {
             this.handle = handle;
             this.secret = secret;
             this.source = source;
@@ -37,11 +39,17 @@ public final class Vault {
             this.targetField = targetField;
             this.createdAt = System.currentTimeMillis();
             this.expiresAt = expiresAt;
+            this.budget = budget;
+            this.remainingUses = budget;
             this.used = false;
         }
 
+        Entry(String handle, String secret, String source, String target, String targetField, long expiresAt) {
+            this(handle, secret, source, target, targetField, expiresAt, 1);
+        }
+
         Entry(String handle, String secret, String source, String target, long expiresAt) {
-            this(handle, secret, source, target, null, expiresAt);
+            this(handle, secret, source, target, null, expiresAt, 1);
         }
 
         public boolean expired() {
@@ -94,8 +102,8 @@ public final class Vault {
             ENTRIES.remove(handle);
             return null; // Expired
         }
-        if (e.used) {
-            return null; // Replay attack prevented
+        if (e.used || e.remainingUses <= 0) {
+            return null; // Replay attack prevented or budget exhausted
         }
         // Destination package binding verification:
         if (e.target != null && callerPackage != null && !e.target.equals(callerPackage)) {
@@ -105,7 +113,10 @@ public final class Vault {
         if (e.targetField != null && callerField != null && !e.targetField.equals(callerField)) {
             return null; // Intra-app field redirection attempt rejected!
         }
-        e.used = true;
+        e.remainingUses--;
+        if (e.remainingUses <= 0) {
+            e.used = true;
+        }
         return e.secret;
     }
 
@@ -115,6 +126,16 @@ public final class Vault {
 
     public static synchronized String reveal(String handle) {
         return reveal(handle, null, null);
+    }
+
+    public static synchronized String mintWithBudget(String secret, String source, String target, int budget) {
+        StringBuilder sb = new StringBuilder("SH-CLIP-");
+        for (int i = 0; i < 4; i++) {
+            sb.append("0123456789ABCDEF".charAt(RNG.nextInt(16)));
+        }
+        String handle = sb.toString();
+        ENTRIES.put(handle, new Entry(handle, secret, source, target, null, System.currentTimeMillis() + TTL_MS, budget));
+        return handle;
     }
 
     /** Explicitly mint an expired entry for testing expiry lifecycle */

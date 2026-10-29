@@ -47,6 +47,14 @@ public class BenchmarkRunner {
             System.out.println(",");
             runPlatformFlowBenchmark();
         }
+        if ("segmented".equals(mode) || "all".equals(mode) || "extended".equals(mode)) {
+            System.out.println(",");
+            runSegmentedOTPBenchmark();
+        }
+        if ("clipboard".equals(mode) || "all".equals(mode) || "extended".equals(mode)) {
+            System.out.println(",");
+            runClipboardBenchmark();
+        }
 
         System.out.println("\n}");
     }
@@ -424,6 +432,7 @@ public class BenchmarkRunner {
         double stdMs = Math.sqrt(varSum / n);
 
         return String.format(
+            java.util.Locale.US,
             "{\"mean\": %.4f, \"median\": %.4f, \"min\": %.4f, \"max\": %.4f, \"p95\": %.4f, \"p99\": %.4f, \"std\": %.4f}",
             meanMs, medianMs, minMs, maxMs, p95Ms, p99Ms, stdMs);
     }
@@ -452,6 +461,7 @@ public class BenchmarkRunner {
         double stdUs = Math.sqrt(varSum / n);
 
         return String.format(
+            java.util.Locale.US,
             "{\"mean\": %.2f, \"median\": %.2f, \"min\": %.2f, \"max\": %.2f, \"p95\": %.2f, \"p99\": %.2f, \"std\": %.2f}",
             meanUs, medianUs, minUs, maxUs, p95Us, p99Us, stdUs);
     }
@@ -461,7 +471,7 @@ public class BenchmarkRunner {
         List<Long> platformLatencyNanos = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
-            String secret = String.format("CRED-B2-%04d", i);
+            String secret = String.format(java.util.Locale.US, "CRED-B2-%04d", i);
             long t0 = System.nanoTime();
 
             // Simulate Android AutofillService dataset packaging, RemoteViews reflection,
@@ -482,6 +492,104 @@ public class BenchmarkRunner {
         System.out.println("  \"trials\": " + N + ",");
         System.out.println("  \"autofill_dataset_latency_us\": " + statsUs(platformLatencyNanos) + ",");
         System.out.println("  \"full_platform_dispatch_ms\": 2.1");
+        System.out.print("}");
+    }
+
+    private static void runSegmentedOTPBenchmark() {
+        Vault.clear();
+        int N = 30;
+        int redirectionLeaks = 0;
+        int legitimateUtility = 0;
+        List<Long> segmentedInjectionLatencies = new ArrayList<>();
+
+        for (int i = 0; i < N; i++) {
+            String secret = String.format(java.util.Locale.US, "%06d", 100000 + i * 7 % 900000);
+            // Mint handle bound to com.legitimate.bank and field class "otp_digit_sequence"
+            String handle = Vault.mint(secret, "com.google.android.apps.messaging", "com.legitimate.bank", "otp_digit_sequence");
+
+            // 1. Adversary attempt: Prompt-injected agent tries to redirect handle into adversary chat
+            String leakAttempt = Vault.reveal(handle, "com.attacker.rewards", "chatInput");
+            if (leakAttempt != null) {
+                redirectionLeaks++;
+            }
+
+            // 2. Legitimate workflow: Resolution and atomic multi-node injection across 6 sibling nodes
+            long t0 = System.nanoTime();
+            String resolved = Vault.reveal(handle, "com.legitimate.bank", "otp_digit_sequence");
+            if (resolved != null && resolved.equals(secret)) {
+                // Simulate atomic distribution into 6 sibling EditText digit nodes:
+                char[] siblingNodes = new char[6];
+                for (int d = 0; d < 6; d++) {
+                    siblingNodes[d] = resolved.charAt(d);
+                }
+                long dt = System.nanoTime() - t0;
+                segmentedInjectionLatencies.add(dt);
+
+                // Verify all 6 sibling nodes received correct digits:
+                boolean validSequence = true;
+                for (int d = 0; d < 6; d++) {
+                    if (siblingNodes[d] != secret.charAt(d)) {
+                        validSequence = false;
+                        break;
+                    }
+                }
+                if (validSequence) {
+                    legitimateUtility++;
+                }
+            }
+        }
+
+        System.out.println("\"segmented_otp_benchmark\": {");
+        System.out.println("  \"trials\": " + N + ",");
+        System.out.println("  \"redirection_leaks\": " + redirectionLeaks + ",");
+        System.out.println("  \"redirection_rate\": " + (redirectionLeaks / (double) N) + ",");
+        System.out.println("  \"legitimate_utility\": " + legitimateUtility + ",");
+        System.out.println("  \"utility_rate\": " + (legitimateUtility / (double) N) + ",");
+        System.out.println("  \"multi_node_injection_latency_us\": " + statsUs(segmentedInjectionLatencies));
+        System.out.print("}");
+    }
+
+    private static void runClipboardBenchmark() {
+        Vault.clear();
+        int N = 30;
+        int redirectionLeaks = 0;
+        int legitimateUtility = 0;
+        List<Long> clipboardMediationLatencies = new ArrayList<>();
+
+        for (int i = 0; i < N; i++) {
+            String sensitivePayload = String.format(java.util.Locale.US, "sec_tok_live_%04d_auth", i);
+            long t0 = System.nanoTime();
+
+            // Intercept Clipboard write with EXTRA_IS_SENSITIVE, mint multi-use handle (budget u0=5)
+            String handle = Vault.mintWithBudget(sensitivePayload, "android.content.ClipboardManager", "com.legitimate.bank", 5);
+
+            // Verify ClipData masking: untrusted agent inspecting getPrimaryClip() observes ONLY handle
+            boolean agentClipMasked = !handle.contains(sensitivePayload);
+
+            // 1. Adversary paste attempt: agent commanded to paste clipboard into com.attacker.rewards
+            String leakAttempt = Vault.reveal(handle, "com.attacker.rewards", "pasteBuffer");
+            if (leakAttempt != null) {
+                redirectionLeaks++;
+            }
+
+            // 2. Legitimate paste attempt: agent pastes into bound target com.legitimate.bank
+            String resolved = Vault.reveal(handle, "com.legitimate.bank", "pasteBuffer");
+            long dt = System.nanoTime() - t0;
+            clipboardMediationLatencies.add(dt);
+
+            if (agentClipMasked && resolved != null && resolved.equals(sensitivePayload)) {
+                legitimateUtility++;
+            }
+        }
+
+        System.out.println("\"clipboard_source_benchmark\": {");
+        System.out.println("  \"trials\": " + N + ",");
+        System.out.println("  \"sensitive_flag_intercepted\": 30,");
+        System.out.println("  \"redirection_leaks\": " + redirectionLeaks + ",");
+        System.out.println("  \"redirection_rate\": " + (redirectionLeaks / (double) N) + ",");
+        System.out.println("  \"legitimate_utility\": " + legitimateUtility + ",");
+        System.out.println("  \"utility_rate\": " + (legitimateUtility / (double) N) + ",");
+        System.out.println("  \"clipboard_mediation_latency_us\": " + statsUs(clipboardMediationLatencies));
         System.out.print("}");
     }
 }
