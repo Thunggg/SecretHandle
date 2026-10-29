@@ -1,7 +1,7 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\providecommand\HyField@AuxAddToFields[1]{}
-\providecommand\HyField@AuxAddToCoFields[2]{}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
 \@writefile{toc}{\contentsline {section}{Abstract}{1}{section*.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
 \newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
@@ -22,9 +22,6 @@
 \@writefile{toc}{\contentsline {paragraph}{Design forces.}{2}{section*.13}\protected@file@percent }
 \citation{zhao2026anonymization}
 \citation{androidSmsRetriever}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Attacker goals, the security goal that answers each, and its enforcement point.}}{3}{table.caption.19}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:goals}{{1}{3}{Attacker goals, the security goal that answers each, and its enforcement point}{table.caption.19}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Threat Model}{3}{section.3}\protected@file@percent }
 \newlabel{sec:threat}{{3}{3}{Threat Model}{section.3}{}}
 \@writefile{toc}{\contentsline {paragraph}{Assets.}{3}{section*.14}\protected@file@percent }
@@ -33,6 +30,9 @@
 \@writefile{toc}{\contentsline {paragraph}{Attacker goals.}{3}{section*.17}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Security goals.}{3}{section*.18}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Agent principals.}{3}{section*.20}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Attacker goals, the security goal that answers each, and its enforcement point.}}{3}{table.caption.19}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:goals}{{1}{3}{Attacker goals, the security goal that answers each, and its enforcement point}{table.caption.19}{}}
 \@writefile{toc}{\contentsline {paragraph}{Reference-monitor assumptions.}{3}{section*.21}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Out of scope.}{3}{section*.22}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4}Design: Usable but Invisible Secrets}{3}{section.4}\protected@file@percent }
@@ -41,19 +41,19 @@
 \newlabel{fig:architecture}{{1}{4}{SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Line styles distinguish ordinary, protected, control, and adversarial flows}{figure.caption.23}{}}
 \@writefile{toc}{\contentsline {paragraph}{Architecture.}{4}{section*.24}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Representing handles to agents.}{4}{section*.25}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Resolution as the enforcement point.}{4}{section*.26}\protected@file@percent }
 \citation{androidSmsRetriever}
 \citation{androidCredentialManager}
+\citation{rfc2104}
+\@writefile{toc}{\contentsline {paragraph}{Resolution as the enforcement point.}{5}{section*.26}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Policy language.}{5}{section*.27}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Lifecycle and reservation.}{5}{section*.28}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Redaction and observation closure.}{5}{section*.29}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Failure handling is explicit and value-oblivious.}}{5}{table.caption.32}\protected@file@percent }
-\newlabel{tab:failures}{{2}{5}{Failure handling is explicit and value-oblivious}{table.caption.32}{}}
 \@writefile{toc}{\contentsline {paragraph}{Concurrency and time-of-check/time-of-use.}{5}{section*.30}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Failure handling.}{5}{section*.31}\protected@file@percent }
-\citation{rfc2104}
-\@writefile{toc}{\contentsline {paragraph}{Auditing without secret leakage.}{6}{section*.33}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Building blocks and deployment modes.}{6}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Auditing without secret leakage.}{5}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Building blocks and deployment modes.}{5}{section*.34}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Failure handling is explicit and value-oblivious.}}{6}{table.caption.32}\protected@file@percent }
+\newlabel{tab:failures}{{2}{6}{Failure handling is explicit and value-oblivious}{table.caption.32}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Formalizing Handles and Their Guarantees}{6}{section.5}\protected@file@percent }
 \newlabel{sec:model}{{5}{6}{Formalizing Handles and Their Guarantees}{section.5}{}}
 \@writefile{toc}{\contentsline {paragraph}{Records and handles.}{6}{section*.35}\protected@file@percent }
@@ -64,8 +64,8 @@
 \newlabel{ass:tcb}{{5.3}{6}{Reference-monitor integrity}{theorem.5.3}{}}
 \newlabel{ass:source}{{5.4}{6}{Source and task authenticity}{theorem.5.4}{}}
 \newlabel{ass:crypto}{{5.5}{6}{Authenticator security}{theorem.5.5}{}}
-\newlabel{ass:identity}{{5.6}{6}{Authentic target identity}{theorem.5.6}{}}
-\newlabel{ass:redaction}{{5.7}{6}{Modeled-channel redaction}{theorem.5.7}{}}
+\newlabel{ass:identity}{{5.6}{7}{Authentic target identity}{theorem.5.6}{}}
+\newlabel{ass:redaction}{{5.7}{7}{Modeled-channel redaction}{theorem.5.7}{}}
 \newlabel{ass:oblivious}{{5.8}{7}{Value-oblivious public behavior}{theorem.5.8}{}}
 \@writefile{toc}{\contentsline {paragraph}{Guarantees.}{7}{section*.37}\protected@file@percent }
 \newlabel{thm:confinement}{{5.9}{7}{Destination confinement}{theorem.5.9}{}}
@@ -77,16 +77,16 @@
 \newlabel{def:nd}{{5.14}{7}{Agent-view non-disclosure}{theorem.5.14}{}}
 \newlabel{eq:nd}{{2}{7}{Agent-view non-disclosure}{equation.2}{}}
 \newlabel{thm:nd}{{5.15}{7}{Agent-view non-disclosure}{theorem.5.15}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Enforcement Algorithms}{7}{section.6}\protected@file@percent }
-\newlabel{sec:algorithm}{{6}{7}{Enforcement Algorithms}{section.6}{}}
 \citation{wang2024mobileagent,ye2025mobileagentv3}
 \citation{wen2023autodroid}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces \textsc  {SecretHandle}{} Mint}}{8}{algorithm.1}\protected@file@percent }
 \newlabel{alg:mint}{{1}{8}{\SH {} Mint}{algorithm.1}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces \textsc  {SecretHandle}{} \ensuremath  {\mathsf  {Enter}}/Resolve}}{8}{algorithm.2}\protected@file@percent }
-\newlabel{alg:resolve}{{2}{8}{\SH {} \Enter /Resolve}{algorithm.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Enforcement Algorithms}{8}{section.6}\protected@file@percent }
+\newlabel{sec:algorithm}{{6}{8}{Enforcement Algorithms}{section.6}{}}
 \@writefile{toc}{\contentsline {paragraph}{Lifecycle and mutable budget.}{8}{section*.39}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Integration points.}{8}{section*.40}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces \textsc  {SecretHandle}{} \ensuremath  {\mathsf {Enter}}/Resolve}}{8}{algorithm.2}\protected@file@percent }
+\newlabel{alg:resolve}{{2}{8}{\SH {} \Enter /Resolve}{algorithm.2}{}}
 \@writefile{toc}{\contentsline {paragraph}{Complexity.}{8}{section*.41}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {7}Experimental Evaluation}{8}{section.7}\protected@file@percent }
 \newlabel{sec:evidence}{{7}{8}{Experimental Evaluation}{section.7}{}}
@@ -96,10 +96,10 @@
 \citation{wen2023autodroid}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Primary empirical results on Android\nonbreakingspace 14 ($n=30$ paired trials per condition; replay $n=50$). Exact 95\% Wilson confidence intervals in table note.}}{9}{table.caption.43}\protected@file@percent }
 \newlabel{tab:main_eval}{{3}{9}{Primary empirical results on Android~14 ($n=30$ paired trials per condition; replay $n=50$). Exact 95\% Wilson confidence intervals in table note}{table.caption.43}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The \textsc  {SecretHandle}{} Android prototype. (a)\nonbreakingspace The original notification is replaced with one naming only the minted handle. (b)\nonbreakingspace On-screen codes are masked via a non-touchable overlay (\texttt  {TYPE\_ACCESSIBILITY\_OVERLAY}), so the agent observes only the opaque marker while touch events pass transparently.}}{9}{figure.caption.44}\protected@file@percent }
-\newlabel{fig:b3}{{2}{9}{The \SH {} Android prototype. (a)~The original notification is replaced with one naming only the minted handle. (b)~On-screen codes are masked via a non-touchable overlay (\texttt {TYPE\_ACCESSIBILITY\_OVERLAY}), so the agent observes only the opaque marker while touch events pass transparently}{figure.caption.44}{}}
 \@writefile{toc}{\contentsline {paragraph}{Baselines.}{9}{section*.42}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Secret Exposure and Redaction (RQ1, RQ4).}{9}{section*.45}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The \textsc  {SecretHandle}{} Android prototype. (a)\nonbreakingspace The original notification is replaced with one naming only the minted handle. (b)\nonbreakingspace On-screen codes are masked via a non-touchable accessibility overlay (\texttt  {TYPE\_\allowbreak  ACCESSIBILITY\_\allowbreak  OVERLAY}), so the agent observes only the opaque marker while touch events pass transparently.}}{9}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:b3}{{2}{9}{The \SH {} Android prototype. (a)~The original notification is replaced with one naming only the minted handle. (b)~On-screen codes are masked via a non-touchable accessibility overlay (\texttt {TYPE\_\allowbreak ACCESSIBILITY\_\allowbreak OVERLAY}), so the agent observes only the opaque marker while touch events pass transparently}{figure.caption.44}{}}
 \@writefile{toc}{\contentsline {paragraph}{Killer Experiment: Destination Redirection (RQ2).}{9}{section*.46}\protected@file@percent }
 \citation{enck2010taintdroid}
 \citation{yan2012droidscope}
@@ -114,16 +114,14 @@
 \@writefile{toc}{\contentsline {paragraph}{Microbenchmark Overhead (RQ5).}{10}{section*.49}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Benign Task Regression and Transparency (RQ6).}{10}{section*.50}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Qualitative Analysis: Anatomy of Agent Misdirection.}{10}{section*.51}\protected@file@percent }
-\citation{zhao2026anonymization}
-\citation{debenedetti2025camel,costa2025fides}
-\citation{bagdasarian2024airgap,wu2025isolategpt,shi2025progent}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Comparison of mobile secret-handling and agent isolation paradigms across security guarantees and vision GUI support.}}{11}{table.caption.47}\protected@file@percent }
 \newlabel{tab:comparison}{{4}{11}{Comparison of mobile secret-handling and agent isolation paradigms across security guarantees and vision GUI support}{table.caption.47}{}}
 \@writefile{toc}{\contentsline {paragraph}{Ablation: Dissecting Security Invariants.}{11}{section*.52}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {8}Related Work}{11}{section.8}\protected@file@percent }
 \newlabel{sec:related}{{8}{11}{Related Work}{section.8}{}}
-\@writefile{toc}{\contentsline {paragraph}{Placeholder and anonymization defenses.}{11}{section*.53}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Capability and isolation approaches.}{11}{section*.54}\protected@file@percent }
+\citation{zhao2026anonymization}
+\citation{debenedetti2025camel,costa2025fides}
+\citation{bagdasarian2024airgap,wu2025isolategpt,shi2025progent}
 \citation{siyan2025papillon,zeng2025privacyrestore,chong2024casper}
 \citation{androidSmsRetriever,androidSmsConsent}
 \citation{android15privacy}
@@ -144,14 +142,8 @@
 \bibstyle{ACM-Reference-Format}
 \bibdata{../references_verified}
 \bibcite{androidCredentialManager}{{1}{2026a}{{Android Developers}}{{}}}
-\bibcite{android15privacy}{{2}{2026b}{{Android Developers}}{{}}}
-\bibcite{androidAutofill}{{3}{2026c}{{Android Developers}}{{}}}
-\bibcite{androidAutofillServices}{{4}{2026d}{{Android Developers}}{{}}}
-\bibcite{androidSmsConsent}{{5}{2026e}{{Android Developers}}{{}}}
-\bibcite{androidSmsRetriever}{{6}{2026f}{{Android Developers}}{{}}}
-\bibcite{androidProtectedConfirmation}{{7}{2026}{{Android Open Source Project}}{{}}}
-\bibcite{andrus2015rushmore}{{8}{2015}{{Andrus et~al\mbox  {.}}}{{}}}
-\bibcite{bagdasarian2024airgap}{{9}{2024}{{Bagdasarian et~al\mbox  {.}}}{{}}}
+\@writefile{toc}{\contentsline {paragraph}{Placeholder and anonymization defenses.}{12}{section*.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Capability and isolation approaches.}{12}{section*.54}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Prompt sanitizers.}{12}{section*.55}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Platform mechanisms and reference monitors.}{12}{section*.56}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {9}Discussion and Limitations}{12}{section.9}\protected@file@percent }
@@ -163,6 +155,14 @@
 \@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{12}{section.10}\protected@file@percent }
 \newlabel{sec:conclusion}{{10}{12}{Conclusion}{section.10}{}}
 \@writefile{toc}{\contentsline {section}{References}{12}{section*.61}\protected@file@percent }
+\bibcite{android15privacy}{{2}{2026b}{{Android Developers}}{{}}}
+\bibcite{androidAutofill}{{3}{2026c}{{Android Developers}}{{}}}
+\bibcite{androidAutofillServices}{{4}{2026d}{{Android Developers}}{{}}}
+\bibcite{androidSmsConsent}{{5}{2026e}{{Android Developers}}{{}}}
+\bibcite{androidSmsRetriever}{{6}{2026f}{{Android Developers}}{{}}}
+\bibcite{androidProtectedConfirmation}{{7}{2026}{{Android Open Source Project}}{{}}}
+\bibcite{andrus2015rushmore}{{8}{2015}{{Andrus et~al\mbox  {.}}}{{}}}
+\bibcite{bagdasarian2024airgap}{{9}{2024}{{Bagdasarian et~al\mbox  {.}}}{{}}}
 \bibcite{bugiel2013flexible}{{10}{2013}{{Bugiel et~al\mbox  {.}}}{{}}}
 \bibcite{rfc8707}{{11}{2020}{{Campbell et~al\mbox  {.}}}{{}}}
 \bibcite{chen2025fineprint}{{12}{2025}{{Chen et~al\mbox  {.}}}{{}}}
@@ -207,17 +207,13 @@
 \@writefile{toc}{\contentsline {paragraph}{Contents.}{14}{section*.63}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{One-command offline verification.}{14}{section*.64}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{On-device Android 14 experiment reproduction.}{14}{section*.65}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Integrity and license.}{14}{section*.66}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B}Real-World UI Hierarchy Compatibility Audit}{14}{appendix.B}\protected@file@percent }
-\newlabel{sec:appendix_audit}{{B}{14}{Real-World UI Hierarchy Compatibility Audit}{appendix.B}{}}
 \newlabel{tocindent-1}{0pt}
 \newlabel{tocindent0}{0pt}
-\newlabel{tocindent1}{6.95pt}
+\newlabel{tocindent1}{4.65pt}
 \newlabel{tocindent2}{0pt}
 \newlabel{tocindent3}{0pt}
 \newlabel{tocindent4}{0pt}
 \newlabel{tocindent5}{0pt}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Empirical UI accessibility hierarchy audit across 20 real Android applications. Direct match represents automatic resolution via $\ensuremath  {\mathsf  {Match}}(d,x)$ ($\mathtt  {autofillHints}$/$\mathtt  {inputType}$); Fallback indicates custom canvas/view handled via verified foreground package and single-tap touch confirmation.}}{16}{table.caption.67}\protected@file@percent }
-\newlabel{tab:real_apps_audit}{{5}{16}{Empirical UI accessibility hierarchy audit across 20 real Android applications. Direct match represents automatic resolution via $\Match (d,x)$ ($\mathtt {autofillHints}$/$\mathtt {inputType}$); Fallback indicates custom canvas/view handled via verified foreground package and single-tap touch confirmation}{table.caption.67}{}}
-\newlabel{TotPages}{{16}{16}{}{page.16}{}}
-\gdef \@abspage@last{16}
+\@writefile{toc}{\contentsline {paragraph}{Integrity and license.}{15}{section*.66}\protected@file@percent }
+\newlabel{TotPages}{{15}{15}{}{page.15}{}}
+\gdef \@abspage@last{15}

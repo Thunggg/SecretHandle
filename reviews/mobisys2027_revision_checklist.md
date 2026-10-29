@@ -100,10 +100,10 @@ _Mục tiêu: Đảm bảo tính công bằng và chính xác tuyệt đối v�
 
 _Mục tiêu: Bẻ gãy lập luận "chỉ chạy trên toy app tự tạo" của Reviewer A & C (W3)_
 
-- [x] **[ĐÃ CHẠY THỰC TẾ TRÊN ANDROID 14] Khảo sát tương thích (Empirical Compatibility Study) trên 20 ứng dụng thực tế qua ADB:**
-  - [x] Chạy tự động 100% khảo sát cây giao diện (`uiautomator dump`) trên 20 ứng dụng thực tế cài đặt trên Android 14 (API 34) bằng công cụ `tools/audit_20_apps_automated.py`.
-  - [x] Phân tích cấu trúc accessibility tree: đối chiếu khả năng tương thích của vị từ đích $\Match(d,x)$ và Chính sách Dự phòng (Fallback Policy) khi ứng dụng sử dụng Custom View / Bàn phím số riêng.
-  - [x] Xuất dữ liệu bằng chứng vào `output/real_apps_compatibility_audit.json` và bảng LaTeX hoàn chỉnh tại `output/real_apps_compatibility_table.tex`.
+- [ ] **[CHƯA CHẠY THỰC TẾ — KẾ HOẠCH TUẦN 3 & 4] Khảo sát tương thích (Empirical Compatibility Study) trên 15–20 ứng dụng Google Play:**
+  - [ ] Thu thập/cài đặt 15–20 app tài chính/ngân hàng/TMĐT/xác thực thực tế trên Google Play.
+  - [ ] Mở đến đúng màn hình đăng nhập/nhập mã OTP của từng app và quét cây trợ năng (`uiautomator dump`) để thống kê chính xác tỷ lệ trường có `autofillHints`, `inputType`, hoặc `CustomView/Canvas`.
+  - [ ] Xuất dữ liệu bằng chứng vào `output/real_apps_compatibility_audit.json` trước khi đưa số liệu vào bài báo.
 - [x] **[ĐÃ CHẠY THỰC TẾ TRÊN ANDROID 14]: Kiểm chứng thực nghiệm Chính sách Dự phòng (Fallback Policy) trên Custom Canvas/Numpad:**
   - [x] Đo đạc tỷ lệ thành công và độ trễ khi áp dụng Fallback Policy (ràng buộc `packageName` tiền cảnh + xác nhận người dùng 1 chạm) trên UI Custom Canvas/Numpad: 30/30 thành công ($U=1.00$), 0/30 rò rỉ khi ứng dụng đối kháng tiền cảnh gọi ($R=0.00$), độ trễ trung vị $47.60\,\mu\text{s}$ (trung bình $69.39\,\mu\text{s}$).
   - [x] Xuất log chứng thực tại: `output/fallback_policy_benchmark.json` (thiết bị Android 14 API 34).

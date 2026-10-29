@@ -5,7 +5,7 @@
 
 \paragraph{Contents.} The repository ships:
 (i)~\texttt{src/secrethandle}: Python state-machine implementation, policy solvers, offline pytest suite, and deterministic synthetic-canary property checks;
-(ii)~\texttt{device/b3-secrethandle}: Java and AIDL source code for \texttt{SecretHandleVaultService}, the \texttt{NotificationListener} broker, the \texttt{TYPE\_ACCESSIBILITY\_OVERLAY} compositor, and the in-framework \texttt{BenchmarkRunner.java} harness;
+(ii)~\texttt{device/b3-secrethandle}: Java and AIDL source code for \texttt{SecretHandleVaultService}, the \texttt{NotificationListener} broker, the accessibility overlay compositor (\texttt{TYPE\_\allowbreak ACCESSIBILITY\_\allowbreak OVERLAY}), and the in-framework \texttt{BenchmarkRunner.java} harness;
 (iii)~\texttt{evaluation/}: Experiment drivers, Mobile-Agent v3.5 bridge configuration, attack harness, synthetic bank and attacker APKs, and log parsers for reproducing Table~\ref{tab:main_eval}.
 
 \paragraph{One-command offline verification.} From the repository root, with Python 3.10+ (3.11+ recommended):
@@ -18,23 +18,17 @@ make check
 
 \paragraph{On-device Android 14 experiment reproduction.} To reproduce the empirical measurements in Section~\ref{sec:evidence}:
 \begin{verbatim}
-# 1. Build and install device services and test APKs
-adb install device/b3-secrethandle/secrethandle.apk
-adb install evaluation/apks/com.legitimate.bank.apk
-adb install evaluation/apks/com.attacker.rewards.apk
-# 2. Run latency microbenchmarks via app_process
+# 1. Install prototype services and test APKs
+adb install device/b3-secrethandle/b3.apk
+adb install apks/legitimate_bank.apk
+adb install apks/attacker_rewards.apk
+# 2. Run microbenchmarks via app_process
 adb shell CLASSPATH=/data/local/tmp/bench.jar \
   app_process /data/local/tmp BenchmarkRunner
-# 3. Execute n=30 agent attack evaluation trials
+# 3. Execute n=30 agent evaluation trials
 python evaluation/run_agent_matrix.py \
-  --config evaluation/configs/android14_eval.yaml
+  --config configs/android14_eval.yaml
 \end{verbatim}
 Per-trial logs, latency dumps, and step trajectories are recorded in \texttt{results/trials.jsonl}. The evaluation uses random synthetic canaries per trial; no human subjects, production accounts, or real credentials are used.
 
 \paragraph{Integrity and license.} All configuration digests and random seeds are logged in \texttt{provenance.json} at initialization. The repository is released under the Apache License~2.0 with all source files, benchmark harnesses, and analysis scripts fully open-sourced.
-
-\section{Real-World UI Hierarchy Compatibility Audit}
-\label{sec:appendix_audit}
-Table~\ref{tab:real_apps_audit} presents the empirical accessibility hierarchy audit across 20 applications evaluated on Android~14 (API 34). Applications exposing standard input classes are resolved directly via predicate $\Match(d,x)$, whereas custom canvases, custom numpads, and unannotated containers are securely mediated via the verified foreground package and single-tap user touch-confirmation fallback policy.
-
-\input{../output/real_apps_compatibility_table.tex}
