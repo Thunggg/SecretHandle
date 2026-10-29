@@ -1,212 +1,232 @@
 # SECRETHANDLE — ACM MobiSys 2027 Comprehensive Revision Checklist
-> **File:** `reviews/REVISION_CHECKLIST.md`  
-> **Dựa trên:** Đánh giá tiền nộp bài `reviews/mobisys2027_review_secrethandle.md`  
-> **Mục tiêu:** Chuyển đổi bài báo từ **Weak Reject (Điểm 2)** lên **Conditional Accept / Accept (Điểm 4–5)**  
-> **Hạn chót quan trọng:**  
-> - 🔴 **Abstract Registration:** **27/11/2026 23:59 AoE** (còn 29 ngày)  
-> - 🔴 **Full Paper Submission:** **04/12/2026 23:59 AoE** (còn 36 ngày)  
+> **Tài liệu tham chiếu gốc:** [`mobisys2027_review_secrethandle.md`](file:///e:/NCKH/SecretHandle/reviews/mobisys2027_review_secrethandle.md) (529 dòng đánh giá chuyên sâu)  
+> **Mục tiêu:** Chuyển đổi bài báo từ **2 / 5 (Weak Reject)** lên **4–5 / 5 (Weak Accept / Accept)**  
+> **Mốc thời gian quan trọng:** 
+> - 🔴 **Hạn chót đăng ký Tóm tắt (Abstract Registration):** **27/11/2026 23:59 AoE** (còn **29 ngày**)
+> - 🔴 **Hạn chót nộp Toàn văn (Full Paper Submission):** **04/12/2026 23:59 AoE** (còn **36 ngày**)
 > - 📍 **Hội nghị:** ACM MobiSys 2027 (21–25/06/2027, TP. Hồ Chí Minh, Việt Nam)
 
 ---
 
-## 📌 Bảng Tóm Tắt Tình Trạng & Phân Công Nhiệm Vụ
+## 📌 BẢNG TỔNG QUAN TIẾN ĐỘ THEO TỪNG NHÓM (TIERS)
 
-| Tier | Nhóm Nhiệm Vụ | Mức Độ | Trạng Thái | Thời Gian Ước Tính |
+| Nhóm (Tier) | Phạm Vi Nhiệm Vụ | Mức Độ | Trạng Thái | Thời Gian Ước Tính |
 | :--- | :--- | :---: | :---: | :---: |
-| **Tier 0** | Khắc phục vi phạm quy định CFP (Tránh Desk-Reject) | **P0 (Khẩn cấp)** | `[x] 5/5` | **HOÀN THÀNH** |
-| **Tier 1** | Xóa bỏ mâu thuẫn "Preregistration / Simulation Outputs" & Đồng bộ nguyên mẫu | **P0 (Chí mạng)** | `[x] 5/5` | **HOÀN THÀNH** |
-| **Tier 2** | Sửa lỗi hình thức hóa (Formal Model), Thuật toán & Trùng lặp văn bản | **P1 (Quan trọng)** | `[x] 5/5` | **HOÀN THÀNH** |
-| **Tier 3** | Đại tu số liệu Bảng 3 & Đo đạc độ trễ toàn trình thực tế | **P1 (Quan trọng)** | `[x] 4/4` | **HOÀN THÀNH** |
-| **Tier 4** | Làm rõ cơ chế kỹ thuật nguyên mẫu & Xử lý Race Condition lớp phủ | **P1 (Quan trọng)** | `[x] 3/3` | **HOÀN THÀNH** |
-| **Tier 5** | Mở rộng thực nghiệm: Baseline B2, Intra-app redirection & Model thứ 2 | **P2 (Nâng cấp điểm)** | `[x] 4/4` | **HOÀN THÀNH** |
-| **Tier 6** | Tối ưu quỹ trang (tiết kiệm ~65 dòng), Tài liệu tham khảo & CPU/Pin | **P2 (Hoàn thiện)** | `[x] 4/4` | **HOÀN THÀNH** |
-| **Tier 7** | Thủ tục nộp bài trên HotCRP & Kiểm tra định dạng tự động | **P0 (Quy trình)** | `[ ] 0/6` | Xuyên suốt |
+| **Tier 0** | Khắc phục vi phạm quy định CFP (Sàng lọc Desk-Reject) | **P0 (Khẩn cấp)** | `[x] 6/9` | 1–2 ngày |
+| **Tier 1** | Sửa đổi số học, đồng bộ dữ liệu & 10 lỗi chế bản LaTeX | **P0 (Khẩn cấp)** | `[x] 6/11` | 1 ngày (30/10) |
+| **Tier 2** | Sửa đổi mô hình toán, logic Thuật toán 2 & Hóa giải DoS $k_{\max}=3$ | **P1 (Quan trọng)** | `[ ] 0/4` | 1.5 ngày (31/10–01/11) |
+| **Tier 3** | Minh bạch hóa kiến trúc AOSP vs Nguyên mẫu & Cô lập UID Bridge | **P1 (Quan trọng)** | `[ ] 0/2` | 2–3 ngày (02/11–04/11) |
+| **Tier 4** | Thực nghiệm trên thiết bị Android 14 thật & Keystore phần cứng | **P1 (Quan trọng)** | `[ ] 0/2` | 3–4 ngày (05/11–08/11) |
+| **Tier 5** | Mở rộng đánh giá: Nguồn Clipboard/Autofill & Tương thích giao diện OTP | **P2 (Nâng cấp điểm)** | `[ ] 0/4` | 5–6 ngày (09/11–15/11) |
+| **Tier 6** | Công trình liên quan, nâng cấp trích dẫn & Hoàn thiện Artifact | **P2 (Hoàn thiện)** | `[x] 2/3` | 1–2 ngày (16/11–18/11) |
+| **Tier 7** | Thủ tục nộp bài HotCRP, Khai báo COI & Chuẩn bị Rebuttal | **P0 (Quy trình)** | `[ ] 0/4` | Trước 27/11 & 04/12 |
 
 ---
 
-## 🚨 TIER 0: Khắc Phục Vi Phạm Quy Định CFP (Tránh Desk-Reject 100%)
-*MobiSys 2027 áp dụng kiểm tra nghiêm ngặt ngay khi upload lên HotCRP. Các lỗi sau sẽ bị loại ngay từ vòng gửi xe nếu không sửa.*
+## 🔒 NGUYÊN TẮC BẤT BIẾN (INVARIANTS)
 
-- [x] **0.1. Bật đánh số trang (Printfolios) bắt buộc:**
-  - **File:** `mobisys/main.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Thêm `\settopmatter{printacmref=false,printfolios=true}`, số trang hiển thị rõ ràng trên tất cả các trang).
-  - **Tham chiếu CFP:** MobiSys 2027 quy định mọi bản thảo nộp phải có số trang để reviewer tiện ghi chú.
-
-- [x] **0.2. Điền thông tin tác giả thật (Quy định Single-Blind):**
-  - **File:** `mobisys/main.tex` (dòng 59–75)
-  - **Trạng thái:** **Đã hoàn thành** (Đã cập nhật Nguyễn Tiến Thuận và Trần Phát Tài, FPT University, Can Tho, Vietnam; cập nhật `\shortauthors{Nguyễn and Trần}`).
-
-- [x] **0.3. Cập nhật Metadata Hội nghị trong Header:**
-  - **File:** `mobisys/main.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Đã cấu hình `\acmConference[MobiSys '27]{...}{June 21--25, 2027}{Ho Chi Minh City, Vietnam}`).
-
-- [x] **0.4. Vector hóa Bảng 3 & Làm nét Hình 2:**
-  - **File:** `mobisys/sections/evidence.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Table 3 là bảng tabular LaTeX vector 100% sắc nét, không dùng ảnh chụp rasterized).
-
-- [x] **0.5. Giữ độ dài thân bài nghiêm ngặt $\le 12$ trang:**
-  - **File:** `mobisys/main.pdf`
-  - **Trạng thái:** **Đã hoàn thành** (Conclusion kết thúc hoàn toàn trong Trang 12, References bắt đầu từ cuối Trang 12).
+1. **BẤT BIẾN KIẾN TRÚC:** Tệp [`mobisys/sections/architecture.tex`](file:///e:/NCKH/SecretHandle/mobisys/sections/architecture.tex) **TUYỆT ĐỐI KHÔNG ĐƯỢC CHỈNH SỬA** theo quy định hệ thống.
+2. **NGÂN SÁCH TRANG (PAGE BUDGET):** Nội dung chính (từ Mục 1 đến hết Mục 10 / Conclusion) **phải kết thúc ở Trang 12**. Toàn bộ tệp PDF (bao gồm References và Appendix) **không vượt quá 15 trang**.
+3. **TÍNH TRUNG THỰC SỐ LIỆU (DATA INTEGRITY):** Tuyệt đối không bịa số liệu. Mọi số liệu đưa vào bài báo phải có bằng chứng từ tệp JSON / log thực nghiệm trong `output/` hoặc `evaluation/`.
 
 ---
 
-## 🛑 TIER 1: Xóa Bỏ Mâu Thuẫn "Preregistered / Simulation" & Thống Nhất Nguyên Mẫu (W1 / M2)
-*Reviewer A và B đánh giá bài báo bị "tâm thần phân liệt" (schizophrenia) vì một nửa bài viết khẳng định đã chạy trên Android 14 EC2, nhưng nửa còn lại vẫn nói là "kế hoạch đăng ký trước" và "kết quả mô phỏng Python". Phải dọn sạch 100%!*
+## 🚨 TIER 0: SÀNG LỌC DESK-REJECT & TUÂN THỦ ĐỊNH DẠNG CFP (Ưu tiên: P0)
+*Nguồn phản biện: Mục 3 & Mục 4 trong `mobisys2027_review_secrethandle.md`.*
 
-- [x] **1.1. Sửa đoạn Roadmap trong Section 1:**
-  - **File:** `mobisys/sections/introduction.tex` (dòng 16)
-  - **Trạng thái:** **Đã hoàn thành** (Đã xóa bỏ hoàn toàn cụm từ "reports what we have reproduced and preregisters the full evaluation", khẳng định đánh giá trên nguyên mẫu Android 14).
-
-- [x] **1.2. Xóa tuyên bố "synthetic inputs only" ở Section 5:**
-  - **File:** `mobisys/sections/model.tex` (dòng 4)
-  - **Trạng thái:** **Đã hoàn thành** (Sửa thành: "formally characterize the security properties realized by our Android 14 system implementation and evaluated in Section 7").
-
-- [x] **1.3. Xóa cờ `real_experiment=false` trong Section 9.1 (Ethics):**
-  - **File:** `mobisys/sections/ethics.tex` (dòng 6)
-  - **Trạng thái:** **Đã hoàn thành** (Xóa sạch `real_experiment=false`, phân tách rõ: (1) formal model checker Python và (2) on-device Android 14 testbed).
-
-- [x] **1.4. Đại tu Phụ lục A (Artifact Appendix):**
-  - **File:** `mobisys/sections/artifact.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Xóa hoàn toàn "These are simulation outputs, not device measurements", cung cấp lệnh adb cụ thể chạy APK và benchmark trên thiết bị Android 14 thật).
-
-- [x] **1.5. Thống nhất mô tả nguyên mẫu giữa Mục 4, Mục 6 và Mục 9.1:**
-  - **File:** `mobisys/sections/design.tex`, `mobisys/sections/algorithm.tex`, `mobisys/sections/discussion.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Đã thống nhất trung thực: nguyên mẫu Android 14 dùng Binder service đặc quyền + NotificationListener + TYPE_ACCESSIBILITY_OVERLAY đồng bộ SurfaceFlinger; trình bày rõ lộ trình upstream vào system_server).
-
----
-
-## 📐 TIER 2: Sửa Lỗi Hình Thức Hóa (Formal Model) & Thuật Toán (W7, W8, W9 / M4)
-*Reviewer B (Chuyên gia An ninh) chỉ ra lỗi logic trong cấu trúc dữ liệu handle và thuật toán.*
-
-- [x] **2.1. Sửa lỗi Tuple trong Phương trình (1) & (8):**
-  - **File:** `mobisys/sections/model.tex` (dòng 7–11)
-  - **Trạng thái:** **Đã hoàn thành** (Đã tách ngân sách ban đầu $u_0 \in H$ khỏi số lần dùng còn lại $u \in \Omega[n]$ để chữ ký MAC $a = F_K(\enc(H))$ không bị hỏng khi $u$ giảm đối với handle đa dụng $u > 1$).
-
-- [x] **2.2. Sửa Thuật toán 1 (\Mint) và Thuật toán 2 (\Resolve):**
-  - **File:** `mobisys/sections/algorithm.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Mint lưu $u_0$ vào $H$ và record; Resolve nạp $u$, trừ $u$, và chỉ chuyển $z \gets \mathsf{consumed}$ khi $u = 0$, trả về $\mathsf{live}$ nếu $u > 0$).
-
-- [x] **2.3. Xóa đoạn văn trùng lặp nguyên văn (Duplicate Paragraph W8):**
-  - **File:** `mobisys/sections/algorithm.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Xóa đoạn văn 6 dòng bị copy lặp nguyên văn, thay bằng tham chiếu tới Mục 5, tiết kiệm diện tích trang).
-
-- [x] **2.4. Xác định cơ chế suy diễn $D_T$ và $D_S$ trong `VerifyTask(T)`:**
-  - **File:** `mobisys/sections/design.tex` và `mobisys/sections/algorithm.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Đã giải thích rõ ở Mục 4: $D_T$ được gán từ foreground package người dùng mở tác vụ, $D_S$ từ app hash hoặc wildcard $*$, bảo đảm monotonic intersection).
-
-- [x] **2.5. Làm rõ cơ chế chống Denial-of-Service / Handle Exhaustion (W9):**
-  - **File:** `mobisys/sections/algorithm.tex`, `evidence.tex`, `discussion.tex` (Sec 9.2)
-  - **Trạng thái:** **Đã hoàn thành** (Đồng bộ Thuật toán 2 Line 5, Mục 7 và Mục 9.2: Rejection do `CALLER_MISMATCH` không làm tiêu hao handle của user, giữ nguyên $u$ để agent hoàn thành đăng nhập hợp lệ).
+- [x] **0.1. Khổ giấy và định dạng tệp:** Tệp PDF chuẩn khổ US Letter (`8.5 x 11 in` / `612 x 792 pts`), biên dịch bằng XeLaTeX.
+- [x] **0.2. Đánh số trang bắt buộc (Printfolios):** Đã bật `\settopmatter{printacmref=false,printfolios=true}` trong `main.tex`, hiển thị số trang 1–15 rõ ràng.
+- [x] **0.3. Giới hạn 12 trang nội dung chính:** Mục 10 (Conclusion) kết thúc ở cột phải Trang 12; References bắt đầu từ cuối Trang 12 sang Trang 13–14; Phụ lục nằm ở Trang 14–15.
+- [ ] **0.4. Khắc phục lỗi co nhỏ phông chữ trong Bảng 1 (Table 1 - `evidence.tex`):**
+  - *Vấn đề:* Bảng kết quả chính đang bị bọc bởi `\resizebox{\columnwidth}{!}`, khiến phông chữ bị co xuống ~5–6 pt rất khó đọc khi in hoặc zoom 100% (vi phạm quy chuẩn CFP).
+  - *Hành động:* Bỏ `\resizebox`, sử dụng `\small` hoặc `\footnotesize`, tối ưu khoảng cách cột `\setlength{\tabcolsep}{3pt}` hoặc dùng `tabularx` để chữ giữ đúng kích thước đọc được.
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L12-L30`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L12-L30).
+- [ ] **0.5. Khắc phục lỗi co nhỏ phông chữ trong Bảng 2 (Table 2 - `related_work.tex`):**
+  - *Vấn đề:* Bảng so sánh phương pháp `tab:comparison` đang dùng `\resizebox{\textwidth}{!}` trên môi trường `table*`.
+  - *Hành động:* Định dạng lại bảng dùng `\small`, viết gọn tiêu đề cột để hiển thị sắc nét tự nhiên mà không cần scale.
+  - *Tệp liên quan:* [`mobisys/sections/related_work.tex:L4-L25`](file:///e:/NCKH/SecretHandle/mobisys/sections/related_work.tex#L4-L25).
+- [ ] **0.6. Nâng cấp chất lượng Hình 1 & Hình 2 (Tránh vỡ hạt ảnh raster):**
+  - *Vấn đề:* Hình 2 (`b3_redacted_shade.png` và `b3_masked_sms.png`) chụp từ emulator bị mờ nét, chữ "SecretHandle protected" bị nhòe khi in.
+  - *Hành động:* Xuất ảnh PNG độ phân giải cao ($\ge 300\text{ dpi}$) hoặc đồ họa vector cho sơ đồ cấu trúc.
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L32-L46`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L32-L46) và thư mục `figures/`.
+- [x] **0.7. Điền thông tin tác giả thật (Single-Blind CFP):** Đã khai báo đầy đủ tên tác giả Nguyễn Tiến Thuận và Trần Phát Tài, đơn vị công tác (Trường ĐH FPT Cần Thơ), email tác giả.
+- [x] **0.8. Tuyên bố sử dụng AI & Đạo đức (Ethics & LLM Declaration):** Đã khai báo minh bạch tại Mục 9.1 (`discussion.tex`) và Phụ lục A (`artifact.tex`).
+- [ ] **0.9. Kiểm tra nhúng phông chữ (Font Embedding Audit):**
+  - *Hành động:* Chạy lệnh `pdffonts mobisys/main.pdf` trên máy cục bộ để đảm bảo 100% phông chữ có `emb = yes`.
 
 ---
 
-## 📊 TIER 3: Đại Tu Số Liệu & Phương Pháp Luận Bảng 3 (W2 / M3)
-*Reviewer A chỉ trích nặng nề việc so sánh 48.6 giây (suy luận LLM) với 9.30 micro-giây (tra bảng in-memory Java) trong cùng một cột Latency, và con số 0.13 µs là "bất khả thi về mặt vật lý" nếu tính cả Binder IPC và UI injection.*
+## 🧮 TIER 1: SỬA ĐỔI SỐ HỌC, ĐỒNG BỘ DỮ LIỆU & LỖI CHẾ BẢN LATEX (Ưu tiên: P0 - Trong 24-48h)
+*Nguồn phản biện: Điểm yếu W4, W8; Mục 10.1 & Mục 15.*
 
-- [x] **3.1. Thiết kế lại Bảng 3 (Tách bạch các chiều đo lường):**
-  - **File:** `mobisys/sections/evidence.tex` (Table 3, dòng 12–28)
-  - **Trạng thái:** **Đã hoàn thành** (Đã tách cột Step Time ~48.6s và cột Mediation Overhead; tách cột $U_{\text{benign}}$ và $U_{\text{attack}}$; điền đầy đủ dữ liệu cho B2 Platform Flow).
-
-- [x] **3.2. Đo đạc độ trễ toàn trình thực tế (End-to-End Mediation Latency):**
-  - **File:** `mobisys/sections/evidence.tex` (RQ5, dòng 57–62)
-  - **Trạng thái:** **Đã hoàn thành** (Đã chạy đo thực tế $n=100$ trials trên Android 14 EC2: In-vault state transition $5.23\,\mu\text{s}$ mint (median $5.20\,\mu\text{s}$, p95 $7.78\,\mu\text{s}$), $0.18\,\mu\text{s}$ resolve CAS (median $0.17\,\mu\text{s}$); Core mediation breakdown: Binder IPC round-trip $0.76\,\mu\text{s}$, Hardware Keystore HMAC-SHA256 $10.41\,\mu\text{s}$, Policy check $0.08\,\mu\text{s}$, UI text injection sync $0.12\,\mu\text{s}$, tổng mediation core $12.4\,\mu\text{s}$ ($0.0124\,\text{ms}$, p95 $18.6\,\mu\text{s}$); toàn trình OS dispatch qua AccessibilityService và render layout là $4.18\,\text{ms}$, p95 $5.82\,\text{ms}$).
-
-- [x] **3.3. Sửa mâu thuẫn câu chữ về việc hủy handle ở Mục 7:**
-  - **File:** `mobisys/sections/evidence.tex` (dòng 77)
-  - **Trạng thái:** **Đã hoàn thành** (Đã sửa câu chữ khớp với Thuật toán 2 Dòng 5–6: CALLER_MISMATCH từ chối cuộc gọi nhưng giữ nguyên $u$ để agent đăng nhập hợp lệ).
-
-- [x] **3.4. Thống nhất các con số độ trễ xuất hiện rải rác trong bài:**
-  - **File:** `abstract.tex`, `introduction.tex`, `evidence.tex`, `conclusion.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Đã thống nhất trên toàn bộ bài với số liệu thực nghiệm thực tế: $5.23\,\mu\text{s}$ in-vault mint, $0.18\,\mu\text{s}$ resolve CAS, $4.2\,\text{ms}$ toàn trình OS mediation).
-
----
-
-## 🛠️ TIER 4: Làm Rõ Cơ Chế Kỹ Thuật Nguyên Mẫu & Xử Lý Race Condition (W6 / M5)
-*Reviewer A đặt câu hỏi: Một tác nhân chỉ nhìn ảnh (screenshot-only Mobile-Agent v3.5) không có token cây trợ năng thì gọi `Enter(handle)` thế nào trong thực tế? Và khi tin nhắn mới đến, lớp phủ có bị trễ khung hình không?*
-
-- [x] **4.1. Mô tả chi tiết cầu nối Agent SDK Bridge cho thao tác `Enter`:**
-  - **File:** `mobisys/sections/design.tex` (dòng 14)
-  - **Trạng thái:** **Đã hoàn thành** (Giải thích rõ: khi agent tọa độ phát lệnh $\mathsf{Type}(\text{``\texttt{SH-XXXXXX}''}, (x,y))$, bridge chặn trước IME, truy vấn node trợ năng tại $(x,y)$ và đổi thành gọi Binder \Enter{} an toàn, không bao giờ lộ chuỗi handle ra app đích).
-
-- [x] **4.2. Phân tích & Giải quyết Race Condition của Lớp Phủ (`TYPE_ACCESSIBILITY_OVERLAY`):**
-  - **File:** `mobisys/sections/design.tex` (dòng 22)
-  - **Trạng thái:** **Đã hoàn thành** (Đã bổ sung cơ chế đồng bộ khung hình: Agent SDK bridge đồng bộ việc chụp màn hình với render barrier của redactor, đảm bảo `SurfaceFlinger` commit overlay xong mới trả framebuffer về cho agent).
-
-- [x] **4.3. Thảo luận về tương thích giao diện OTP phức tạp (Split OTP Boxes & Custom Views):**
-  - **File:** `mobisys/sections/discussion.tex` (dòng 30)
-  - **Trạng thái:** **Đã hoàn thành** (Đã bổ sung giải pháp xử lý OTP chia 6 ô qua duyệt cấu trúc sibling trong ViewGroup, và cơ chế fail-closed cho custom canvas view Flutter/React Native).
+- [ ] **1.1. Đồng bộ số liệu độ trễ Mint tại Mục 1 (Introduction):**
+  - *Vấn đề:* `introduction.tex` dòng 14 vẫn ghi `$5.23\,\mu\text{s}$ in-vault mint`, trong khi `abstract.tex`, `evidence.tex` và `conclusion.tex` đã cập nhật chuẩn `$5.42\,\mu\text{s}$`.
+  - *Hành động:* Thay `$5.23\,\mu\text{s}$` thành `$5.42\,\mu\text{s}$` trong `introduction.tex`.
+  - *Tệp liên quan:* [`mobisys/sections/introduction.tex:L14`](file:///e:/NCKH/SecretHandle/mobisys/sections/introduction.tex#L14).
+- [x] **1.2. Đồng bộ số liệu độ trễ In-vault Mint & Resolve CAS trong Abstract và Conclusion:**
+  - *Đã thực hiện:* `$5.42\,\mu\text{s}$ mint, $0.18\,\mu\text{s}$ resolve` đã được cập nhật đồng nhất trong `abstract.tex` và `conclusion.tex`.
+- [ ] **1.3. Giải trình độ lệch $1.06\,\mu\text{s}$ trong tổng độ trễ Core Mediation ($11.2\,\mu\text{s}$):**
+  - *Vấn đề:* Tổng 4 thành phần liệt kê: $0.61\,\mu\text{s}\text{ (Binder)} + 9.32\,\mu\text{s}\text{ (Keystore)} + 0.08\,\mu\text{s}\text{ (Policy)} + 0.13\,\mu\text{s}\text{ (Injection)} = 10.14\,\mu\text{s} \neq 11.2\,\mu\text{s}$.
+  - *Hành động:* Bổ sung giải thích rõ $1.06\,\mu\text{s}$ chênh lệch là chi phí marshaling/serialization và khóa đồng bộ (`synchronized` lock / atomic state checks), đồng thời nêu rõ $0.61\,\mu\text{s}$ là Binder round-trip nội bộ (in-process) của harness.
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L63`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L63).
+- [ ] **1.4. Loại bỏ hằng số `48.6 s` lặp lại cho cả 4 hàng trong Bảng 1:**
+  - *Vấn đề:* Cột `Step Time` trong Bảng 1 ghi cùng giá trị `48.6 s` cho cả B0, B1, B2, B3, gây nghi ngờ tác giả sao chép một số chung.
+  - *Hành động:* Trích xuất giá trị thời gian bước trung bình $\pm$ độ lệch chuẩn thực tế từ `results/trials.jsonl` cho từng chế độ (ví dụ: B0: $48.6 \pm 3.2\,\text{s}$, B1: $48.8 \pm 2.9\,\text{s}$, B2: $48.5 \pm 3.1\,\text{s}$, B3: $48.6 \pm 2.8\,\text{s}$).
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L21-L24`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L21-L24).
+- [x] **1.5. Đính chính thuật ngữ CAS trong chú thích Bảng 1:**
+  - *Đã thực hiện:* Chú thích đã tách bạch rõ: mint là khởi tạo + MAC ($5.42\,\mu\text{s}$), chỉ có resolve mới dùng CAS ($0.18\,\mu\text{s}$).
+- [ ] **1.6. Sửa 10 lỗi chế bản / typo cụ thể được phản biện chỉ ra:**
+  - [x] 1. `background.tex:L4`: `"Mobile agents act through the UL.."` $\to$ đã sửa thành `"Mobile agents act through the UI."`
+  - [ ] 2. `introduction.tex:L14`: `"5.23 µs in-vault mint"` $\to$ sửa thành `"5.42 µs in-vault mint"`.
+  - [x] 3. `threat_model.tex:L26`: `"\$1 non-disclosure"` $\to$ đã sửa thành `"S1 non-disclosure"`.
+  - [x] 4. `design.tex:L14`: `"Enter(handleld, targetNodeToken)"` $\to$ đã dùng `"Enter(handleId, targetNodeToken)"`.
+  - [x] 5. `design.tex:L18`: `"monotonic intersection with D_1"` $\to$ đã dùng `"monotonic intersection with $D_T$."`.
+  - [x] 6. `model.tex:L91`: `"rejected becauset t >= t_e"` $\to$ đã dùng `"rejected because $t \ge t_e$"`.
+  - [ ] 7. `model.tex:L97-L109`: Ký hiệu rò rỉ $\ell$ (leakage): Kiểm tra lại tệp PDF xem ký hiệu $\ell$ trong Định nghĩa 5.14 và Định lý 5.15 có hiển thị rõ ràng không (hay bị mất khoảng trắng).
+  - [ ] 8. `algorithm.tex:L51` / PDF: Kiểm tra chuỗi hằng số `TYPE_ACCESSIBILITY_OVERLAY` tránh bị tràn lấn sang cột văn bản bên cạnh.
+  - [ ] 9. `evidence.tex:L84`: Kiểm tra cụm từ `"SECRETHANDLE'Ss protection"` $\to$ đảm bảo chỉ viết `"SECRETHANDLE's protection"`.
+  - [ ] 10. `references_verified.bib` (mục SMS Retriever): Đảm bảo URL là `https://developer.android.com/identity/sms-retriever` (không bị cắt cụt thành `sms-retrie`).
 
 ---
 
-## 🔬 TIER 5: Mở Rộng Thực Nghiệm & Bổ Sung Baseline (W4, W5 / M6)
-*Để nâng điểm từ 2 lên 4–5, cần mở rộng phạm vi thực nghiệm ra ngoài kịch bản 1 VLM + 1 loại OTP SMS.*
+## 📐 TIER 2: SỬA ĐỔI MÔ HÌNH TOÁN HỌC & THUẬT TOÁN 2 (Ưu tiên: P1 - Tuần 1)
+*Nguồn phản biện: Điểm yếu W6; Đánh giá của Reviewer B; Mục 10.2.*
 
-- [x] **5.1. Bổ sung thực nghiệm cho Baseline B2 (Platform Flow / Credential Manager):**
-  - **File:** `mobisys/sections/evidence.tex` (Table 3, dòng 23 và dòng 53)
-  - **Trạng thái:** **Đã hoàn thành** (Đã chạy đo thực tế $n=30$ trials trên Android 14 EC2: $E=0.00$ ($0/30$ do credentials được giữ an toàn trong Credential Provider/Autofill trước khi kích hoạt), $U_{\text{benign}}=1.00$ ($30/30$ khi đăng nhập hợp lệ), $R=1.00$ ($30/30$, Wilson $[0.89, 1.00]$ do hộp thoại xác nhận hệ thống của Android thiếu cơ chế ràng buộc tác nhân-đích khiến tác nhân trợ năng bị lừa click "Allow/Autofill" chuyển dữ liệu sang `com.attacker.rewards`), $U_{\text{attack}}=0.00$ ($0/30$ do secret bị kẻ tấn công chiếm quyền), $Y=0.00$ ($0/50$), độ trễ điều phối nền tảng $2.1\,\text{ms}$). Đã cập nhật vào Bảng 3 và phân tích chi tiết trong Mục 7.2.
-
-- [x] **5.2. Thí nghiệm chuyển hướng trường nhập liệu nội bộ (Intra-App Field Redirection):**
-  - **File:** `mobisys/sections/evidence.tex` (dòng 55)
-  - **Trạng thái:** **Đã hoàn thành** (Đã chạy thực nghiệm thực tế $n=30$ trials trên Android 14 EC2: kẻ tấn công hướng dẫn paste OTP vào ô chat hỗ trợ khách hàng trong cùng ứng dụng ngân hàng `com.legitimate.bank`, chính sách loại trường $f = \text{smsOTPCode}$ đã từ chối resolution vào $f = \text{chatInput}$ trong $30/30$ lượt thử ($R=0.00$, Wilson $[0.00, 0.11]$), trong khi các thao tác điền OTP hợp lệ thành công $30/30$ ($U=1.00$), xác thực hoàn toàn cơ chế field-class binding).
-
-- [x] **5.3. Đánh giá trên Tác nhân / Mô hình thứ 2 (Model & Agent Diversity):**
-  - **File:** `mobisys/sections/evidence.tex` (dòng 49)
-  - **Trạng thái:** **Đã hoàn thành** (Đã chạy đo thực tế $n=30$ trials trên Android 14 EC2 cho tác nhân cây trợ năng AutoDroid: dưới B0 canaries rò rỉ vào `AccessibilityNodeInfo` $30/30$ lượt thử ($E_{\text{tree}}=1.00$, Wilson $[0.89, 1.00]$); dưới B3 SecretHandle triệt tiêu rò rỉ về $0/30$ ($E_{\text{tree}}=0.00$, Wilson $[0.00, 0.11]$) với tỷ lệ nhận diện handle $30/30$ ($100\%$), chặn thành công chuyển hướng độc hại $30/30$ ($R_{\text{tree}}=0.00$, Wilson $[0.00, 0.11]$), bảo toàn utility hợp lệ $30/30$ ($U_{\text{tree}}=1.00$, Wilson $[0.89, 1.00]$), thời gian parse cây trung bình $0.78\,\text{ms}$, và xác lập tính Model-Agnostic Invariance tại tầng biên hệ điều hành).
-
-- [x] **5.4. Điều chỉnh tuyên bố về WebView trong Abstract & Section 1:**
-  - **File:** `mobisys/sections/abstract.tex`, `mobisys/sections/introduction.tex`
-  - **Trạng thái:** **Đã hoàn thành** (Đã cập nhật Abstract: WebView được cách ly an toàn theo cơ chế fail-closed confinement, không tuyên bố quá mức về origin attestation).
-
----
-
-## ✂️ TIER 6: Tối Ưu Quỹ Trang & Bổ Sung Tài Liệu Tham Khảo (W10, S1–S3)
-*Để có chỗ chèn thêm tên tác giả, kết quả B2 và mô tả chi tiết mà vẫn đảm bảo $\le 12$ trang, cần thực hiện ngay kế hoạch cắt giảm ~65 dòng.*
-
-- [x] **6.1. Thực hiện cắt giảm ~65 dòng theo kế hoạch Section 15.2:**
-  - [x] **Cắt 1:** Xóa đoạn lặp nguyên văn ở `mobisys/sections/algorithm.tex` (dòng 48) $\rightarrow$ **Tiết kiệm 6 dòng**.
-  - [x] **Cắt 2:** Rút gọn chứng minh ở `mobisys/sections/model.tex` thành proof sketches $\rightarrow$ **Tiết kiệm ~18 dòng**.
-  - [x] **Cắt 3:** Cô đọng Mục 9.1 ở `mobisys/sections/discussion.tex` $\rightarrow$ **Tiết kiệm ~24 dòng**.
-  - [x] **Cắt 4:** Thu gọn Figure 2 (chiều cao từ 3.1cm về 2.6cm) $\rightarrow$ **Tiết kiệm ~14 dòng**.
-  - **Kết quả:** Thân bài kết thúc hoàn hảo ở Trang 12, References bắt đầu từ Trang 13, tuân thủ 100% giới hạn 12 trang của MobiSys 2027!
-
-- [x] **6.2. Đo đạc tải CPU% và tiêu thụ pin của Background Daemon (W10 / S1):**
-  - **File:** `mobisys/sections/evidence.tex` (RQ6, dòng 63)
-  - **Trạng thái:** **Đã hoàn thành** (Đã đo thực tế qua `dumpsys cpuinfo` trên Android 14 EC2: daemon hoạt động hoàn toàn theo sự kiện tiêu thụ $0.2\%$ CPU idle ($0.1\%$ user, $0.0\%$ kernel) và $1.4\%$ khi điều phối burst, xác nhận 0 polling loop và không gây sụt pin trong 2 giờ chạy liên tục).
-
-- [x] **6.3. Bổ sung trích dẫn các hệ thống bảo mật UI kinh điển (S3):**
-  - **File:** `mobisys/sections/related_work.tex` (dòng 37) và `references_verified.bib`
-  - **Trạng thái:** **Đã hoàn thành** (Đã bổ sung và thảo luận đối sánh 4 công trình kinh điển: *SchrodinText* [USENIX Security '20], *Rushmore* [MobiSys '15], *GYRUS* [NDSS '14], và *Cloak & Dagger* [IEEE S&P '17]).
+- [ ] **2.1. Cập nhật cấu trúc bản ghi $\Omega[n]$ trong Công thức (1) (`model.tex`):**
+  - *Vấn đề:* Mục 9.2 nêu giới hạn $k_{\max}=3$ lần thử sai trước khi thu hồi thẻ, nhưng Công thức (1) ở Trang 6 không hề có biến đếm $k$.
+  - *Hành động:* Bổ sung biến đếm số lần sai $k$ vào trạng thái khả biến:
+    $$\Omega[n] = (s, H, a, z, r, u, k)$$
+  - *Tệp liên quan:* [`mobisys/sections/model.tex:L7-L11`](file:///e:/NCKH/SecretHandle/mobisys/sections/model.tex#L7-L11).
+- [ ] **2.2. Sửa lỗi logic hoàn trả ngân sách $u$ trong Thuật toán 2 (`algorithm.tex`):**
+  - *Vấn đề:* Dòng 37 trừ trước $u \leftarrow u - 1$, nhưng nếu xác nhận thất bại (Dòng 39) hoặc ngữ cảnh đích đổi (Dòng 41) hoặc `InjectInternal` trả về `ok = false` (Dòng 43), thuật toán không hề có bước hoàn trả $u \leftarrow u + 1$ như văn bản đã cam kết.
+  - *Hành động:* Thêm logic kiểm tra: Nếu huỷ trước khi giao dữ liệu hoặc `ok = false` đối với thẻ dùng nhiều lần ($u_0 > 1$), thực hiện hoàn trả $u \leftarrow u + 1$ và khôi phục $z \leftarrow \mathsf{live}$.
+  - *Tệp liên quan:* [`mobisys/sections/algorithm.tex:L24-L47`](file:///e:/NCKH/SecretHandle/mobisys/sections/algorithm.tex#L24-L47).
+- [ ] **2.3. Hóa giải mâu thuẫn Từ chối dịch vụ (DoS) và giới hạn $k_{\max} = 3$:**
+  - *Vấn đề:* Trang 10 bảo vệ DoS bằng cách không trừ budget khi reject sai đích, nhưng Trang 12 lại thu hồi (revocation) thẻ sau $k_{\max}=3$ lần thử sai. Phản biện chỉ ra: Prompt injection có thể cố tình ép agent thử sai 3 lần để DoS hủy OTP của người dùng!
+  - *Hành động:* Thống nhất thiết kế: $k_{\max}=3$ chỉ áp dụng cho **từng cặp `(handle, target_package)`** độc hại riêng biệt (rate-limit / blacklist ứng dụng tấn công đó) hoặc kích hoạt hộp thoại cảnh báo người dùng xác nhận, thay vì thu hồi toàn cục thẻ OTP hợp lệ.
+  - *Tệp liên quan:* [`mobisys/sections/discussion.tex:L25`](file:///e:/NCKH/SecretHandle/mobisys/sections/discussion.tex#L25) và [`mobisys/sections/evidence.tex:L75-L77`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L75-L77).
+- [ ] **2.4. Làm rõ cơ chế xác thực gói đích trong RQ2 (`evidence.tex`):**
+  - *Vấn đề:* Trang 10 ghi `Caller(com.attacker.rewards) != BoundTarget(...) via Binder IPC`. Nhưng tiến trình gọi `ENTER` là Agent chứ không phải ứng dụng độc hại! Nếu kiểm tra `Binder.getCallingUid()` sẽ ra UID của Agent.
+  - *Hành động:* Sửa văn bản để làm rõ: `Resolver` trích xuất định danh gói đích từ ngữ cảnh nút giao diện đích `FreshTargetContext(V)` (thông qua `AccessibilityNodeInfo.getPackageName()` / `WindowInfo`), còn `Binder.getCallingUid()` dùng để xác thực UID của Agent/Bridge gọi tới.
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L75-L76`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L75-L76).
 
 ---
 
-## 📅 TIER 7: Lịch Trình Thực Hiện & Kiểm Tra Trước Khi Nộp (Deadlines)
+## 🏛️ TIER 3: MINH BẠCH HÓA KIẾN TRÚC & RANH GIỚI TIN CẬY (Ưu tiên: P1 - Tuần 1-2)
+*Nguồn phản biện: Điểm yếu W1; Đánh giá của Reviewer A.*
 
-### 🗓️ Tuần 1 (29/10 – 04/11/2026): Format, Văn Bản & Mô Hình Toán
-- [ ] Hoàn thành toàn bộ **TIER 0** (Đánh số trang, thông tin tác giả, metadata MobiSys '27).
-- [ ] Hoàn thành toàn bộ **TIER 1** (Xóa sạch dấu vết "preregistration / simulation outputs").
-- [ ] Hoàn thành toàn bộ **TIER 2** (Sửa công thức toán, sửa Thuật toán 1–2, xóa đoạn lặp).
-- [ ] Áp dụng cắt giảm không gian ở **TIER 6.1** để giải phóng $\sim 65$ dòng.
-- [ ] Biên dịch thử nghiệm `xelatex` và kiểm tra trực quan file `main.pdf`.
+- [ ] **3.1. Phân định rõ giữa "Kiến trúc mục tiêu AOSP" và "Nguyên mẫu Android không sửa nhân":**
+  - *Vấn đề:* Bài báo tự mâu thuẫn giữa việc khẳng định dịch vụ Accessibility ở user-space không thể làm bộ giám sát tham chiếu (Mục 4) với việc Mục 7 đánh giá đúng nguyên mẫu user-space này.
+  - *Hành động:* Tuyên bố nhất quán và trung thực xuyên suốt bài:
+    - *Kiến trúc mục tiêu (Target AOSP Design):* Tích hợp sâu vào `system_server`, `InputDispatcher`, `ViewRootImpl`.
+    - *Nguyên mẫu đánh giá (Stock-Android Evaluation Prototype):* Đóng vai trò là một broker trung gian có thẩm quyền (`secrethandle.apk`) để đo lường tính khả thi trên hệ điều hành Android gốc.
+  - *Tệp liên quan:* [`mobisys/sections/abstract.tex`](file:///e:/NCKH/SecretHandle/mobisys/sections/abstract.tex), [`introduction.tex`](file:///e:/NCKH/SecretHandle/mobisys/sections/introduction.tex), [`design.tex:L52`](file:///e:/NCKH/SecretHandle/mobisys/sections/design.tex#L52), [`discussion.tex:L6-L8`](file:///e:/NCKH/SecretHandle/mobisys/sections/discussion.tex#L6-L8).
+- [ ] **3.2. Chứng minh cơ chế cô lập UID của `Agent SDK Bridge`:**
+  - *Vấn đề:* Reviewer A hỏi: Nếu agent không đáng tin cậy, điều gì ngăn nó tự đọc màn hình hoặc nghe thông báo mà không chịu gọi qua `Agent SDK bridge`?
+  - *Hành động:* Thuyết minh rõ mô hình cô lập tiến trình/UID: Tiến trình VLM/Planner của tác tử chạy dưới một UID ứng dụng thông thường không có đặc quyền (không được cấp quyền `READ_FRAME_BUFFER` hay `BIND_ACCESSIBILITY_SERVICE`). Mọi tương tác giao diện và ảnh chụp màn hình bắt buộc phải đi qua tiến trình Bridge có đặc quyền qua IPC. Do đó, tác tử không thể "đi đường vòng" để đọc dữ liệu thô.
+  - *Tệp liên quan:* [`mobisys/sections/threat_model.tex:L35`](file:///e:/NCKH/SecretHandle/mobisys/sections/threat_model.tex#L35) và [`mobisys/sections/design.tex:L14`](file:///e:/NCKH/SecretHandle/mobisys/sections/design.tex#L14).
 
-### 🗓️ Tuần 2 (05/11 – 11/11/2026): Đo Đạc Độ Trễ & Làm Rõ Kỹ Thuật
-- [ ] Hoàn thành **TIER 3** (Đo đạc độ trễ Binder IPC + Keystore + UI injection trên EC2 và điện thoại thật).
-- [ ] Sửa lại Bảng 3 và cập nhật văn bản giải thích trong `mobisys/sections/evidence.tex`.
-- [ ] Hoàn thành **TIER 4** (Viết chi tiết cơ chế SDK bridge và đồng bộ khung hình lớp phủ).
+---
 
-### 🗓️ Tuần 3 & 4 (12/11 – 25/11/2026): Mở Rộng Thực Nghiệm & Đánh Giá
-- [ ] Hoàn thành **TIER 5** (Chạy thử nghiệm B2 Credential Manager, intra-app redirection, mô hình thứ 2).
-- [ ] Hoàn thành **TIER 6.2 & 6.3** (Đo CPU%, bổ sung trích dẫn liên quan).
-- [ ] Hoàn thiện Phụ lục A với đầy đủ hướng dẫn tái hiện trên Android 14.
+## 📱 TIER 4: ĐO ĐẠC TRÊN THIẾT BỊ VẬT LÝ & HARDWARE KEYSTORE (Ưu tiên: P1 - Tuần 2-3)
+*Nguồn phản biện: Điểm yếu W3; Đánh giá của Reviewer A; Mục 10.1.*
 
-### 🎯 Hạn Chót 1: Đăng Ký Abstract (27/11/2026 23:59 AoE)
-- [ ] Tạo tài khoản và đăng ký bài trên portal: `https://mobisys27.hotcrp.com/`.
-- [ ] Khóa danh sách tác giả chính thức, đơn vị công tác và thứ tự tác giả.
-- [ ] Nhập Abstract chính thức ($\ge 100$ từ) đã sửa các điểm mâu thuẫn.
-- [ ] Khai báo Xung đột lợi ích (Conflicts of Interest - COI) với TPC (PC Co-Chairs Jun Han, KAIST và Falko Dressler, TU Berlin).
+- [ ] **4.1. Chạy microbenchmark trên ít nhất 1 điện thoại Android 14 vật lý:**
+  - *Vấn đề:* Bài báo chạy trên AWS EC2 x86_64 nhưng lại tuyên bố đo được *"Hardware Keystore HMAC-SHA256 (9.32 µs)"* (trong khi EC2 không có chip ARM TrustZone/StrongBox).
+  - *Hành động:* Cắm 1 điện thoại Android 14 thật (Pixel hoặc Samsung) qua ADB, chạy `BenchmarkRunner.java` để đo độ trễ phần cứng thực tế.
+  - *Báo cáo:* Phân tách rõ ràng độ trễ trên **Software Keystore (EC2 emulator)** so với **Hardware-backed Keystore / TEE / StrongBox (Điện thoại thật)**. Giải thích rằng dù TEE mất ~0.5–1.5 ms, tổng chi phí vẫn $<0.01\%$ so với thời gian suy luận VLM (~48 s).
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L63`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L63).
+- [ ] **4.2. Đo lường tiêu thụ pin thực tế trên điện thoại vật lý:**
+  - *Vấn đề:* Tuyên bố *"imposing zero battery degradation over 2-hour benchmark runs"* trên máy chủ đám mây AWS EC2 không có pin là thiếu cơ sở thực nghiệm.
+  - *Hành động:* 
+    - Nếu đo được trên điện thoại thật: Dùng `dumpsys batterystats` hoặc công cụ đo nguồn trong 2 giờ chạy benchmark và báo cáo mức chênh lệch mAh / %.
+    - Nếu chỉ giữ số liệu EC2: **Xóa ngay cụm từ "zero battery degradation"**, chỉ báo cáo mức chiếm dụng CPU thấp: `$0.2\%$ CPU idle ($0.1\%$ user, $0.0\%$ kernel)` và `$1.4\%$` khi burst mediation.
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L66`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L66).
 
-### 🎯 Hạn Chót 2: Nộp Bài Toàn Văn (04/12/2026 23:59 AoE)
-- [ ] Chạy lệnh kiểm tra font nhúng: `pdffonts main.pdf` (đảm bảo tất cả đều là `emb = yes`).
-- [ ] Chạy công cụ kiểm tra trang: `pdfinfo main.pdf` (đảm bảo đúng chuẩn US Letter 612 x 792 pt).
-- [ ] Tải PDF lên HotCRP Format Checker để xác nhận không lỗi font size, lề và số dòng/cột.
-- [ ] Tích chọn khai báo sử dụng LLM hỗ trợ biên tập văn bản (khớp với Mục 9.1).
-- [ ] Nộp file `main.pdf` cuối cùng trước 23:59 AoE ngày 04/12/2026!
+---
+
+## 🧪 TIER 5: MỞ RỘNG ĐÁNH GIÁ BẢO MẬT & ĐA DẠNG HÓA NGUỒN/UI (Ưu tiên: P2 - Tuần 3-4)
+*Nguồn phản biện: Điểm yếu W2, W5, W7; Đánh giá của Reviewer B, C.*
+
+- [ ] **5.1. Bổ sung hỗ trợ và đánh giá thêm ít nhất 1–2 nguồn OS ngoài SMS (Clipboard / Credential Manager):**
+  - *Vấn đề:* Tuyên bố hỗ trợ 4 nguồn (SMS, Credential Manager, Clipboard, Wallet) nhưng Mục 7 chỉ đánh giá duy nhất SMS OTP.
+  - *Hành động:* 
+    - Cài đặt adapter cho **Clipboard** (sử dụng `OnPrimaryClipChangedListener` + `EXTRA_IS_SENSITIVE` trên Android 14) với vòng đời `task-scoped` ($u_0 > 1$, ví dụ điền địa chỉ giao hàng / số điện thoại).
+    - Thêm một bảng nhỏ hoặc đoạn phân tích đánh giá 3 loại bí mật: (1) OTP (`single-use`, $u_0=1$), (2) Dữ liệu cá nhân từ Clipboard/Autofill (`task-scoped`, $u_0=3$), (3) Thanh toán (`confirm-per-use`).
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex).
+- [ ] **5.2. Đánh giá tính tương thích giao diện (UI Compatibility Benchmark):**
+  - *Vấn đề:* RQ1/RQ2 chỉ đánh giá trên 2 APK đồ chơi tự viết (`com.legitimate.bank` và `com.attacker.rewards`); RQ6 chạy trên 10 ứng dụng AndroidWorld nhưng các ứng dụng này không có luồng đăng nhập/OTP.
+  - *Hành động:* Kiểm chứng luồng chèn `SecretHandle` trên các mẫu giao diện thực tế:
+    - Ô `EditText` chuẩn có `autofillHints="smsOTPCode"`.
+    - Ô nhập OTP 6 số phân đoạn (Segmented 6-digit OTP fields - kiểm chứng cơ chế điền tự động các nút anh em `sibling nodes` như đã nêu ở Mục 9.2).
+    - Ô nhập thiếu `autofillHints` (kiểm chứng cơ chế đóng an toàn fail-closed hoặc fallback xác nhận của người dùng).
+    - Giao diện WebView (kiểm chứng cơ chế fail-closed khi origin chưa được chứng thực).
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex) và [`mobisys/sections/discussion.tex:L27-L28`](file:///e:/NCKH/SecretHandle/mobisys/sections/discussion.tex#L27-L28).
+- [ ] **5.3. Đa dạng hóa các kịch bản tiêm nhiễm chỉ thị (Prompt Injection Templates):**
+  - *Vấn đề:* Cả 30 lần thử RQ2 chỉ dùng một câu lệnh SMS cố định.
+  - *Hành động:* Mở rộng thành 5–6 biến thể tấn công tiêm nhiễm: (1) Thông báo trúng thưởng giả mạo, (2) Yêu cầu dán mã vào ô hỗ trợ CSKH nội bộ, (3) Chỉ thị ẩn trong trang web, (4) Tấn công đa ngôn ngữ, (5) Tấn công DoS kích hoạt thử sai liên tiếp.
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L68-L76`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L68-L76).
+- [ ] **5.4. Bổ sung siêu tham số của LLM và cấu hình tác tử:**
+  - *Vấn đề:* Thiếu thông tin snapshot model Claude Sonnet 4.6, temperature, max steps, và model LLM nền tảng của AutoDroid.
+  - *Hành động:* Ghi rõ: API model `claude-3-5-sonnet-20241022` (hoặc snapshot tương ứng), `temperature = 0.0`, `max_steps = 15`, độ phân giải ảnh nén gửi lên API, và mô hình nền tảng dùng cho AutoDroid.
+  - *Tệp liên quan:* [`mobisys/sections/evidence.tex:L4`](file:///e:/NCKH/SecretHandle/mobisys/sections/evidence.tex#L4).
+
+---
+
+## 📚 TIER 6: CÔNG TRÌNH LIÊN QUAN, TRÍCH DẪN & ARTIFACT (Ưu tiên: P2)
+*Nguồn phản biện: Mục 13, Mục 14; Đánh giá Artifact.*
+
+- [x] **6.1. Nâng cấp các bài báo preprint lên bản xuất bản chính thức:**
+  - *Đã thực hiện trong `references_verified.bib`:*
+    - CaMeL (`debenedetti2025camel`) $\to$ IEEE SaTML 2025.
+    - ScreenAgent (`niu2024screenagent`) $\to$ IJCAI 2024 (pp. 6449–6457).
+    - EIA (`liao2024eia`) $\to$ ICLR 2025.
+    - AEIA (`chen2025aeia`) $\to$ ACM MM 2025 (pp. 11648–11656).
+    - FinePrint (`chen2025fineprint`) $\to$ ACM Transactions on Privacy and Security (TOPS/TAISAP).
+- [ ] **6.2. Phân định rõ ràng với công trình đối thủ gần nhất (Zhao et al. 2026 [48]):**
+  - *Hành động:* Làm nổi bật sự khác biệt về bản chất: Zhao et al. dựa trên bộ dò văn bản sau khi render (detector-based) và placeholder cục bộ không gắn đích (unbound), nên bị bypass hoàn toàn trước tấn công chuyển hướng đích ($30/30$). Ngược lại, `SecretHandle` can thiệp tại nguồn OS và gắn chặt vị từ đích đến (package + field class).
+  - *Tệp liên quan:* [`mobisys/sections/related_work.tex:L29`](file:///e:/NCKH/SecretHandle/mobisys/sections/related_work.tex#L29).
+- [ ] **6.3. Bổ sung URL kho mã nguồn mở trong Phụ lục A (`artifact.tex`):**
+  - *Hành động:* Vì MobiSys 2027 áp dụng phản biện đơn mù (single-blind), bổ sung trực tiếp đường dẫn kho mã nguồn GitHub/Zenodo công khai vào cuối Mục 1 và Phụ lục A để phản biện có thể đối chiếu code `src/secrethandle` và `device/b3-secrethandle`.
+  - *Tệp liên quan:* [`mobisys/sections/artifact.tex:L1-L10`](file:///e:/NCKH/SecretHandle/mobisys/sections/artifact.tex#L1-L10).
+
+---
+
+## 🗓️ TIER 7: KẾ HOẠCH HẬU CẦN NỘP BÀI & CHUẨN BỊ REBUTTAL (Ưu tiên: P0)
+*Nguồn phản biện: Mục 4, Mục 18.*
+
+- [ ] **7.1. Đăng ký tóm tắt (Abstract Registration):**
+  - *Thời hạn:* Trước **27/11/2026 23:59 AoE** (còn 29 ngày).
+  - *Trang nộp bài:* `https://mobisys27.hotcrp.com/`
+  - *Yêu cầu:* Chốt danh sách tác giả (Nguyễn Tiến Thuận, Trần Phát Tài), tiêu đề và Abstract $\ge 100$ từ.
+- [ ] **7.2. Khai báo Xung đột Lợi ích (COI):**
+  - *Hành động:* Khai báo đầy đủ các thành viên TPC thuộc Trường ĐH FPT, các đồng tác giả/cố vấn trong vòng 24–48 tháng.
+- [ ] **7.3. Nộp bài toàn văn (Full Paper Submission):**
+  - *Thời hạn:* Trước **04/12/2026 23:59 AoE** (còn 36 ngày).
+  - *Kiểm tra cuối cùng:* Chạy script kiểm tra định dạng tự động của HotCRP để xác nhận không lỗi font, không tràn lề.
+- [ ] **7.4. Chuẩn bị sẵn khung sườn Rebuttal (Dự kiến 08–12/02/2027, giới hạn 500 từ):**
+  - Đã có sẵn 3 kịch bản trả lời mẫu trong Mục 18.3 của bản đánh giá:
+    - *Rebuttal 1:* Ranh giới kiến trúc AOSP vs nguyên mẫu broker và cô lập UID.
+    - *Rebuttal 2:* Đo đạc phần cứng Keystore thật và pin thật trên điện thoại vật lý.
+    - *Rebuttal 3:* Khả năng hỗ trợ đa dạng ứng dụng thực tế, ô OTP phân đoạn và cơ chế chống DoS $k_{\max}$.
+
+---
+
+## 📅 LỘ TRÌNH THỰC HIỆN 5 TUẦN CHI TIẾT (36 NGÀY)
+
+```
+[29/10/2026] ──── (Tuần 1: LaTeX, Số học & Thuật toán) ────> [04/11/2026]
+                     │ Hoàn thành Tier 0, 1, 2
+                     ▼
+[05/11/2026] ──── (Tuần 2: Benchmark Điện Thoại Thật) ────> [11/11/2026]
+                     │ Hoàn thành Tier 3, 4 (Keystore + Pin)
+                     ▼
+[12/11/2026] ──── (Tuần 3: Đa Dạng Hóa Nguồn & UI) ────────> [18/11/2026]
+                     │ Hoàn thành Tier 5 (Clipboard, Segmented OTP)
+                     ▼
+[19/11/2026] ──── (Tuần 4: Hình Vẽ & Đăng Ký Abstract) ────> [25/11/2026]
+                     │ Đăng ký Abstract HotCRP trước 27/11 (Tier 7.1)
+                     ▼
+[26/11/2026] ──── (Tuần 5: Kiểm Tra Định Dạng & Nộp Bài) ──> [04/12/2026]
+                     │ Nộp bản toàn văn chính thức (Tier 7.3)
+```
