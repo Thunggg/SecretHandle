@@ -32,25 +32,14 @@ Algorithms~\ref{alg:mint} and~\ref{alg:resolve} give the two transitions the gua
 \State \Return $\Reject$ unless $a=a_H=F_K(\enc(H))$ (constant-time)
 \State $x\gets\mathsf{FreshTargetContext}(V)$
 \If{$z\ne\mathsf{live}$ or $t\notin[t_i,t_e)$ or $u=0$ or $\tau'\ne\tau$} \Return $\Reject$ \EndIf
-\If{$\Match(d,x)=0$}
-  \State $k\gets k+1$; \textbf{if} $k\ge k_{\max}$ \textbf{then} $z\gets\mathsf{revoked}$; \Return $\Reject$
-\EndIf
+\If{$\Match(d,x)=0$} $k\gets k+1$; \textbf{if} $k\ge k_{\max}$ \textbf{then} $z\gets\mathsf{revoked}$; \Return $\Reject$ \EndIf
 \State atomically reserve: $(z,r,u)\gets(\mathsf{reserved},\mathsf{nonce},u-1)$
 \State $\gamma\gets\mathsf{ObtainConfirmation}(c)$
-\If{$\mathsf{ConfirmOK}(c,\gamma)=0$}
-  \State \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$
-\EndIf
+\If{$\mathsf{ConfirmOK}(c,\gamma)=0$} \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$ \EndIf
 \State $x'\gets\mathsf{FreshTargetContext}(V)$
-\If{$x'\ne x$ or $\Match(d,x')=0$}
-  \State \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$
-\EndIf
-\State register redaction obligation for $(V,n,q)$ before delivery
-\State $ok\gets\mathsf{InjectInternal}(V,s)$
-\If{$ok$}
-  \State \textbf{if} $u>0$ \textbf{then} $z\gets\mathsf{live}$ \textbf{else} $z\gets\mathsf{consumed}$; wipe $s$ from $\Omega[n]$ \textbf{end if}
-\Else
-  \State \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; wipe $s$ from $\Omega[n]$ \textbf{end if}
-\EndIf
+\If{$x'\ne x$ or $\Match(d,x')=0$} \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$ \EndIf
+\State register redaction obligation for $(V,n,q)$ before delivery; $ok\gets\mathsf{InjectInternal}(V,s)$
+\State \textbf{if} $ok \wedge u>0$ \textbf{then} $z\gets\mathsf{live}$ \textbf{else if} $\neg ok \wedge u_0>1$ \textbf{then} $(z,u)\gets(\mathsf{live},u+1)$ \textbf{else} $z\gets\mathsf{consumed}$; wipe $s$
 \State wipe local buffers; \Return $ok$ with value-oblivious status
 \end{algorithmic}
 \end{algorithm}

@@ -4,25 +4,24 @@
 \subsection{Deployment Roadmap and Systems Considerations}
 
 \paragraph{Path to Google AOSP Upstream.}
-While evaluated via an Accessibility Service and Notification Broker on stock Android images, \SH's architecture (Section~\ref{sec:design}) targets upstream AOSP integration into \texttt{system\_server}: (1)~\textbf{Input Dispatch Integration:} The \texttt{Resolver} hooks into \texttt{InputDispatcher} and \texttt{ViewRootImpl}, injecting secrets directly into private text buffers without accessibility exports or overlay delays. (2)~\textbf{Hardware Keystore Root of Trust:} Authenticator keys live in TrustZone or StrongBox, preventing handle MAC forgery even under root compromise. (3)~\textbf{Unified Service:} Mint points and the Vault consolidate into an AIDL-exposed, SELinux-confined \texttt{SecretHandleManagerService}.
+While evaluated via an Accessibility Service and Notification Broker on stock Android, \SH's architecture (Section~\ref{sec:design}) targets upstream AOSP \texttt{system\_server} integration: (1)~\textbf{Input Dispatch:} The \texttt{Resolver} hooks into \texttt{InputDispatcher} and \texttt{ViewRootImpl}, injecting secrets into private text buffers without accessibility exports or overlay delays. (2)~\textbf{Hardware Keystore Root:} Keys reside in TrustZone/StrongBox, preventing handle MAC forgery even under root compromise. (3)~\textbf{Unified Service:} Mint points and Vault consolidate into an AIDL-exposed, SELinux-confined \texttt{SecretHandleManagerService}.
 
 \paragraph{Memory Hygiene, Fraud Coexistence, and Generality.}
-Vault secrets are pinned to non-swappable pages (\texttt{mlock()}) and zeroed upon resolution or expiry (\texttt{explicit\_bzero}). Contextual listeners purge handles on screen lock (\texttt{ACTION\_SCREEN\_OFF}), backgrounding, or profile switches. For anti-bot SDKs, the resolver can emit an \texttt{AttestedResolutionReceipt}. Operating at the OS boundary, \SH's guarantees hold across visual VLMs (Claude, GPT-4o, Qwen-VL) and structural tree agents.
+Vault secrets are pinned to non-swappable pages (\texttt{mlock()}) and zeroed upon resolution or expiry (\texttt{explicit\_bzero}). Contextual listeners purge handles on screen lock, backgrounding, or profile switches. For anti-bot SDKs, the resolver can emit an \texttt{AttestedResolutionReceipt}. Operating at the OS boundary, \SH's guarantees hold across visual VLMs (Claude, GPT-4o, Qwen-VL) and structural tree agents.
 
 \paragraph{Ethics, Reproducibility, and Transparency.}
-All experiments use synthetic canaries, loopback endpoints, and open benchmarks without human subjects or production credentials. Experiment runners, seeds, and logs are open-sourced under Apache 2.0 (Appendix~\ref{sec:artifact}). Portions were drafted with LLM assistance; all technical claims, proofs, and measurements were produced and verified by the authors.
+All experiments use synthetic canaries, loopback endpoints, and open benchmarks without human subjects. Runners, seeds, and logs are open-sourced under Apache 2.0 (Appendix~\ref{sec:artifact}). Portions were drafted with LLM assistance; all technical claims, proofs, and measurements were verified by the authors.
 
 \subsection{Limitations and Threats to Validity}
 \label{sec:limitations}
 
 \paragraph{Platform Scope and Operating System Trust.}
-Our results validate \SH{} on Android~14 via an SMS broker, accessibility overlay masking, and vault resolver on stock emulators. Production deployment targets in-tree \texttt{system\_server} dispatch and Keystore isolation. Our model trusts the kernel and system server: a compromised kernel can forge identities or bypass redaction. Keystores prevent key exfiltration but cannot enforce policy if framework trust is broken. Unmonitored platform channels (crash dumps, OEM screen readers) remain out of scope.
+Our results validate \SH{} on Android~14 via SMS broker, overlay masking, and vault resolver on stock emulators and physical hardware. Production deployment targets in-tree \texttt{system\_server} dispatch. Our model trusts the kernel and system server: a compromised kernel can forge identities or bypass redaction. Unmonitored platform channels (crash dumps, OEM screen readers) remain out of scope.
 
 \paragraph{Web Views and Origin Binding.}
-Package identity cannot enforce document-origin confinement in browser contexts. Binding input fields to authenticated web origins requires Chromium/WebView attestation. Under complex redirects, cross-origin iframes, or custom tabs, \SH's safe fallback is fail-closed rejection or user confirmation, prioritizing confidentiality.
+Package identity cannot enforce document-origin confinement in browser contexts. Binding input fields to web origins requires Chromium/WebView attestation. Under complex redirects or custom tabs, \SH's safe fallback is fail-closed rejection or user confirmation.
 
 \paragraph{Authorized-Destination Misuse and Availability.}
-Destination binding restricts \emph{where} a secret is resolved, but cannot prevent injected agents from executing unwanted actions \emph{inside} legitimate apps (e.g., altering a beneficiary account before entering an OTP). Task tokens and Android Protected Confirmation mitigate this, though semantic intent requires app cooperation. While mismatches reject without decrementing single-use budgets (preserving benign availability), repeated invalid attempts are throttled by a per-target retry bound ($k_{\max}=3$) before blacklisting the offending destination or falling back to user touch confirmation, preventing injected prompts from mounting a denial-of-service attack against the user's OTP.
+Destination binding restricts \emph{where} a secret resolves, but cannot prevent injected agents from executing unwanted actions \emph{inside} legitimate apps. Task tokens and Protected Confirmation mitigate this, though semantic intent requires app cooperation. While mismatches reject without decrementing budgets, repeated invalid attempts are throttled by a retry bound ($k_{\max}=3$) before blacklisting or falling back to touch confirmation, thwarting DoS OTP depletion.
 
-\paragraph{UI Compatibility, Segmented OTPs, and Drift.}
-Fintech apps often divide codes across six single-digit \texttt{EditText} fields or custom canvas views (Flutter/React Native). \SH{} resolves segmented inputs by inspecting container sibling hierarchies, auto-populating sibling nodes to prevent fragmented typing. For custom canvas views lacking accessibility semantics, \SH{} safely fails closed to user touch confirmation.
+
