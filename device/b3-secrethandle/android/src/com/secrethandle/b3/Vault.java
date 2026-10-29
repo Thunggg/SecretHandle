@@ -24,18 +24,24 @@ public final class Vault {
         public final String secret;
         public final String source;
         public final String target;
+        public final String targetField;
         public final long createdAt;
         public final long expiresAt;
         public boolean used;
 
-        Entry(String handle, String secret, String source, String target, long expiresAt) {
+        Entry(String handle, String secret, String source, String target, String targetField, long expiresAt) {
             this.handle = handle;
             this.secret = secret;
             this.source = source;
             this.target = target;
+            this.targetField = targetField;
             this.createdAt = System.currentTimeMillis();
             this.expiresAt = expiresAt;
             this.used = false;
+        }
+
+        Entry(String handle, String secret, String source, String target, long expiresAt) {
+            this(handle, secret, source, target, null, expiresAt);
         }
 
         public boolean expired() {
@@ -49,7 +55,7 @@ public final class Vault {
     private Vault() {
     }
 
-    public static synchronized String mint(String secret, String source, String target) {
+    public static synchronized String mint(String secret, String source, String target, String targetField) {
         StringBuilder sb = new StringBuilder("SH-");
         for (int i = 0; i < 6; i++) {
             sb.append("0123456789ABCDEF".charAt(RNG.nextInt(16)));
@@ -61,19 +67,25 @@ public final class Vault {
                 return e.handle;
             }
         }
-        ENTRIES.put(handle, new Entry(handle, secret, source, target, System.currentTimeMillis() + TTL_MS));
+        ENTRIES.put(handle, new Entry(handle, secret, source, target, targetField, System.currentTimeMillis() + TTL_MS));
         return handle;
     }
 
+    public static synchronized String mint(String secret, String source, String target) {
+        return mint(secret, source, target, null);
+    }
+
     public static synchronized String mint(String secret, String source) {
-        return mint(secret, source, null);
+        return mint(secret, source, null, null);
     }
 
     /**
      * Resolves a handle with destination binding check (Algorithm 2).
+     * Enforces both Package binding and Field-Class binding (intra-app redirection defense).
      * Returns null if handle is unknown, expired, already used, or destination mismatches.
+     * Leaves handle live (used remains false) on mismatch to prevent DoS.
      */
-    public static synchronized String reveal(String handle, String callerPackage) {
+    public static synchronized String reveal(String handle, String callerPackage, String callerField) {
         Entry e = ENTRIES.get(handle);
         if (e == null) {
             return null; // Unknown handle
@@ -85,17 +97,24 @@ public final class Vault {
         if (e.used) {
             return null; // Replay attack prevented
         }
-        // Destination binding verification:
-        // If a target package was bound, caller must match target exactly
+        // Destination package binding verification:
         if (e.target != null && callerPackage != null && !e.target.equals(callerPackage)) {
-            return null; // Redirection attempt rejected!
+            return null; // Cross-app redirection attempt rejected!
+        }
+        // Destination field-class binding verification (intra-app redirection defense):
+        if (e.targetField != null && callerField != null && !e.targetField.equals(callerField)) {
+            return null; // Intra-app field redirection attempt rejected!
         }
         e.used = true;
         return e.secret;
     }
 
+    public static synchronized String reveal(String handle, String callerPackage) {
+        return reveal(handle, callerPackage, null);
+    }
+
     public static synchronized String reveal(String handle) {
-        return reveal(handle, null);
+        return reveal(handle, null, null);
     }
 
     /** Explicitly mint an expired entry for testing expiry lifecycle */

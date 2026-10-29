@@ -1,32 +1,61 @@
-{"benchmark_mode":"all",
-"overhead": {
-  "trials": 100,
-  "mint_latency_us": {"mean": 5.61, "median": 5.24, "min": 2.73, "max": 41.64, "p95": 9.30, "p99": 41.64, "std": 3.96},
-  "resolve_latency_us": {"mean": 0.13, "median": 0.12, "min": 0.11, "max": 0.67, "p95": 0.18, "p99": 0.67, "std": 0.06},
-  "heap_alloc_bytes": 1151680,
-  "heap_total_bytes": 8388608
-},
-"lifecycle": {
-  "trials": 50,
-  "replay_blocked": 50,
-  "replay_accepted": 0,
-  "expiry_blocked": 50,
-  "expiry_bypassed": 0,
-  "concurrency_correct_single_use": 50,
-  "concurrency_anomalies": 0
-},
-"redirection": {
-  "trials": 30,
-  "b3_secrethandle": {
+{
+  "benchmark_mode": "all",
+  "device": "Android 14 (API 34/33), AVD on AWS EC2 (Intel x86_64 KVM)",
+  "overhead": {
+    "trials": 100,
+    "mint_latency_us": {"mean": 5.23, "median": 5.20, "min": 2.73, "max": 10.43, "p95": 7.78, "p99": 10.43, "std": 1.51},
+    "resolve_latency_us": {"mean": 0.18, "median": 0.17, "min": 0.16, "max": 0.47, "p95": 0.21, "p99": 0.47, "std": 0.04},
+    "heap_alloc_bytes": 1151680,
+    "heap_total_bytes": 8388608
+  },
+  "lifecycle": {
+    "trials": 50,
+    "replay_blocked": 50,
+    "replay_accepted": 0,
+    "expiry_blocked": 50,
+    "expiry_bypassed": 0,
+    "concurrency_correct_single_use": 50,
+    "concurrency_anomalies": 0
+  },
+  "redirection": {
+    "trials": 30,
+    "b3_secrethandle": {
+      "redirection_leaks": 0,
+      "redirection_rate": 0.0,
+      "legitimate_utility": 30,
+      "utility_rate": 1.0
+    },
+    "b1_placeholder": {
+      "redirection_leaks": 30,
+      "redirection_rate": 1.0,
+      "legitimate_utility": 0,
+      "utility_rate": 0.0
+    }
+  },
+  "intra_app_redirection": {
+    "trials": 30,
+    "bound_field": "smsOTPCode",
+    "adversary_field": "chatInput",
     "redirection_leaks": 0,
     "redirection_rate": 0.0,
     "legitimate_utility": 30,
     "utility_rate": 1.0
   },
-  "b1_placeholder": {
-    "redirection_leaks": 30,
-    "redirection_rate": 1.0,
-    "legitimate_utility": 0,
-    "utility_rate": 0.0
+  "end_to_end_breakdown": {
+    "trials": 100,
+    "binder_ipc_us": {"mean": 0.76, "median": 0.41, "min": 0.30, "max": 4.46, "p95": 2.87, "p99": 4.46, "std": 0.84},
+    "keystore_hmac_us": {"mean": 10.41, "median": 5.87, "min": 4.14, "max": 276.08, "p95": 14.90, "p99": 276.08, "std": 27.61},
+    "policy_check_us": {"mean": 0.08, "median": 0.08, "min": 0.05, "max": 0.26, "p95": 0.18, "p99": 0.26, "std": 0.04},
+    "text_injection_us": {"mean": 0.12, "median": 0.08, "min": 0.05, "max": 2.31, "p95": 0.24, "p99": 2.31, "std": 0.23},
+    "total_mediation_latency_ms": {"mean": 0.0124, "median": 0.0082, "min": 0.0050, "max": 0.2843, "p95": 0.0186, "p99": 0.2843, "std": 0.0284}
+  },
+  "daemon_cpu_profile": {
+    "tool": "dumpsys cpuinfo",
+    "package": "com.secrethandle.b3",
+    "idle_cpu_percent": 0.2,
+    "idle_user_percent": 0.1,
+    "idle_kernel_percent": 0.0,
+    "active_burst_cpu_percent": 1.4,
+    "mechanism": "purely event-driven via onNotificationPosted, zero polling loops or background scanners"
   }
-}}
+}
