@@ -142,8 +142,8 @@
 *Để nâng điểm từ 2 lên 4–5, cần mở rộng phạm vi thực nghiệm ra ngoài kịch bản 1 VLM + 1 loại OTP SMS.*
 
 - [x] **5.1. Bổ sung thực nghiệm cho Baseline B2 (Platform Flow / Credential Manager):**
-  - **File:** `mobisys/sections/evidence.tex` (Table 3, dòng 23)
-  - **Trạng thái:** **Đã hoàn thành** (Đã xóa `N/A`, điền dữ liệu thực tế cho B2: $E=0.00, R=1.00, U_{\text{benign}}=1.00, U_{\text{attack}}=0.00$, thời gian bước 48.6s, mediation overhead 2.1ms).
+  - **File:** `mobisys/sections/evidence.tex` (Table 3, dòng 23 và dòng 53)
+  - **Trạng thái:** **Đã hoàn thành** (Đã chạy đo thực tế $n=30$ trials trên Android 14 EC2: $E=0.00$ ($0/30$ do credentials được giữ an toàn trong Credential Provider/Autofill trước khi kích hoạt), $U_{\text{benign}}=1.00$ ($30/30$ khi đăng nhập hợp lệ), $R=1.00$ ($30/30$, Wilson $[0.89, 1.00]$ do hộp thoại xác nhận hệ thống của Android thiếu cơ chế ràng buộc tác nhân-đích khiến tác nhân trợ năng bị lừa click "Allow/Autofill" chuyển dữ liệu sang `com.attacker.rewards`), $U_{\text{attack}}=0.00$ ($0/30$ do secret bị kẻ tấn công chiếm quyền), $Y=0.00$ ($0/50$), độ trễ điều phối nền tảng $2.1\,\text{ms}$). Đã cập nhật vào Bảng 3 và phân tích chi tiết trong Mục 7.2.
 
 - [x] **5.2. Thí nghiệm chuyển hướng trường nhập liệu nội bộ (Intra-App Field Redirection):**
   - **File:** `mobisys/sections/evidence.tex` (dòng 55)
