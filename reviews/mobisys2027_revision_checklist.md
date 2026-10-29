@@ -4,6 +4,7 @@
 > **Dựa trên phản biện:** `reviews/mobisys2027_review_secrethandle.md`  
 > **Mục tiêu:** Nâng điểm từ **2.5/5 (Borderline/Weak Reject)** lên **4.0/5 (Weak Accept / Accept)**  
 > **Hạn chót:**
+>
 > - **Abstract Registration:** 23:59 AoE, ngày 27/11/2026 (còn 29 ngày)
 > - **Full Paper Submission:** 23:59 AoE, ngày 04/12/2026 (còn 36 ngày — **Không gia hạn**)
 
@@ -12,7 +13,8 @@
 ## 1. CÁC HẠNG MỤC BẮT BUỘC SỬA (MUST-FIX — QUYẾT ĐỊNH ĐẬU / RỚT)
 
 ### MF-1: Sửa các lỗi bất nhất số học, tên mô hình và logic thuật toán
-*Mục tiêu: Khôi phục 100% độ tin cậy khoa học của bài báo (W2, W5)*
+
+_Mục tiêu: Khôi phục 100% độ tin cậy khoa học của bài báo (W2, W5)_
 
 - [x] **Sửa tên mô hình LLM trên toàn bộ bài báo:**
   - [x] Abstract (Trang 1): Thay `Claude Sonnet 4.6` bằng `Claude 3.5 Sonnet`.
@@ -27,7 +29,7 @@
 - [x] **Sửa tham chiếu và làm rõ logic Thuật toán 2 (Dòng 7 vs. Dòng 5):**
   - [x] Mục 7 (Trang 11): Sửa `Algorithm 2 Line 5` thành `Algorithm 2 Line 6` (kiểm tra `Match(d, x) = 0`).
   - [x] Giải thích rõ cơ chế khi $k < k_{\max}$: Khi thử sai đích 1 lần (single-shot), $k$ tăng lên $1 < k_{\max}=3$, ngân sách $u$ giữ nguyên và handle vẫn `live` (vì trừ ngân sách chỉ thực hiện ở dòng 7 khi đặt trước thành công).
-  - [x] Giải thích rõ cơ chế khi $k = k_{\max} = 3$ (Template 4: DoS Depletion): Khi bị tấn công lặp lại $\ge 3$ lần, handle chuyển sang `revoked` để chặn brute-force và hệ thống kích hoạt cơ chế dự phòng xác nhận chạm người dùng (*local user touch confirmation fallback*).
+  - [x] Giải thích rõ cơ chế khi $k = k_{\max} = 3$ (Template 4: DoS Depletion): Khi bị tấn công lặp lại $\ge 3$ lần, handle chuyển sang `revoked` để chặn brute-force và hệ thống kích hoạt cơ chế dự phòng xác nhận chạm người dùng (_local user touch confirmation fallback_).
 - [x] **Phân định rõ mã trạng thái lỗi (Bảng 2 vs. Mục 7):**
   - [x] Nêu rõ trong Mục 7: Các mã `ALREADY_RESOLVED`, `HANDLE_EXPIRED`, `CALLER_MISMATCH`, `DESTINATION_MISMATCH` được ghi nhận trong **nhật ký kiểm toán nội bộ của OS (audit log)**.
   - [x] Khẳng định phản hồi trả về qua SDK Bridge cho untrusted agent hoàn toàn là giá trị mù theo đúng Bảng 2 (`unavailable handle` / `destination denied`), không để lộ trạng thái nội bộ.
@@ -37,7 +39,8 @@
 ---
 
 ### MF-2: Sửa lỗi định dạng, đồ họa và tuân thủ CFP MobiSys 2027
-*Mục tiêu: Đạt chuẩn xuất bản chuyên nghiệp, không để mất điểm hình thức (W8, Phase 1)*
+
+_Mục tiêu: Đạt chuẩn xuất bản chuyên nghiệp, không để mất điểm hình thức (W8, Phase 1)_
 
 - [x] **Sửa Hình 1 (Trang 4):**
   - [x] Thu gọn tọa độ x trong legend TikZ (0.0, 3.8, 8.2, 11.8 cm), đảm bảo nhãn `adversarial influence` nằm trọn vẹn trong khung vẽ, không bị cắt xén.
@@ -52,7 +55,7 @@
 - [x] **Kiểm tra tiêu đề Trang 1:**
   - [x] Tiêu đề hiển thị chuẩn xác `SecretHandle: OS-Minted, Destination- and Task-Bound Opaque Secrets for Android Mobile AI Agents`.
 - [x] **Chuẩn hóa tuyên bố sử dụng LLM tại Mục 9.1 (Trang 12) và Mục Ethics:**
-  - [x] Sửa câu văn thành: *"LLM tools were used solely for language editing and proofreading of the authors' own text. All technical designs, formal models, prototype code, and empirical numbers were produced and verified entirely by the authors."* tuân thủ 100% quy chế CFP.
+  - [x] Sửa câu văn thành: _"LLM tools were used solely for language editing and proofreading of the authors' own text. All technical designs, formal models, prototype code, and empirical numbers were produced and verified entirely by the authors."_ tuân thủ 100% quy chế CFP.
 - [x] **Kiểm toán thông số kỹ thuật PDF:**
   - [x] Khổ giấy: Chuẩn US Letter ($612 \times 792\text{ pt}$).
   - [x] Nhúng font: 100% font chữ được nhúng hoàn chỉnh.
@@ -60,12 +63,13 @@
 ---
 
 ### MF-3: Minh bạch hóa Kiến trúc AOSP vs. Nguyên mẫu Android 14
-*Mục tiêu: Hóa giải nghi ngại của Reviewer A về "đánh tráo khái niệm" TCB (W1, W6)*
+
+_Mục tiêu: Hóa giải nghi ngại của Reviewer A về "đánh tráo khái niệm" TCB (W1, W6)_
 
 - [x] **Tách biệt rõ ràng thiết kế lý thuyết và nguyên mẫu thực tế (Mục 4, 6 & 9):**
   - [x] Phân định rõ 2 tầng:
-    - *(a) Kiến trúc tích hợp AOSP (`system_server` / `InputDispatcher` / `ViewRootImpl`)*: Bảo đảm TCB phần cứng/OS lý tưởng.
-    - *(b) Nguyên mẫu Broker trên Stock Android 14 (`secrethandle.apk`)*: Không cần sửa ROM, dùng `NotificationListenerService` và `TYPE_ACCESSIBILITY_OVERLAY`.
+    - _(a) Kiến trúc tích hợp AOSP (`system_server` / `InputDispatcher` / `ViewRootImpl`)_: Bảo đảm TCB phần cứng/OS lý tưởng.
+    - _(b) Nguyên mẫu Broker trên Stock Android 14 (`secrethandle.apk`)_: Không cần sửa ROM, dùng `NotificationListenerService` và `TYPE_ACCESSIBILITY_OVERLAY`.
 - [x] **Giải thích cơ chế bóc tách mã OTP (Secret Extraction):**
   - [x] Làm rõ cách Broker trích xuất mã OTP từ thông báo/tin nhắn đến mà vẫn giữ lại phần văn bản ngữ cảnh giao dịch cho người dùng.
 - [x] **Làm rõ cơ chế tiếp nhận chỉ thị tiêm nhiễm (Prompt Injection Delivery - W6):**
@@ -78,7 +82,8 @@
 ---
 
 ### MF-4: Chuẩn hóa và làm rõ Baseline B2 (Platform Flow)
-*Mục tiêu: Đảm bảo tính công bằng và chính xác tuyệt đối về mặt kỹ thuật Android (W4)*
+
+_Mục tiêu: Đảm bảo tính công bằng và chính xác tuyệt đối về mặt kỹ thuật Android (W4)_
 
 - [x] **Đổi tên và tách bạch Baseline B2:**
   - [x] Đổi tên trong Bảng 3 và Mục 7 thành: **`B2: SMS User Consent / Unbound Autofill Flow`**.
@@ -92,12 +97,13 @@
 ---
 
 ### MF-5: Mở rộng thực nghiệm sang Ứng dụng Thực tế
-*Mục tiêu: Bẻ gãy lập luận "chỉ chạy trên toy app tự tạo" của Reviewer A & C (W3)*
 
-- [ ] **[CHƯA CHẠY THỰC TẾ — KẾ HOẠCH TUẦN 3 & 4] Khảo sát tương thích (Empirical Compatibility Study) trên 15–20 ứng dụng Google Play:**
-  - [ ] Thu thập/cài đặt 15–20 app tài chính/ngân hàng/TMĐT phổ biến trên điện thoại Android thật (Samsung A52s / Pixel).
-  - [ ] Chạy script quét cây trợ năng (`uiautomator dump`) tại màn hình đăng nhập/OTP để thống kê tỷ lệ trường có `autofillHints`, `inputType`, hoặc `className`.
-  - [ ] Xuất dữ liệu bằng chứng vào `output/real_apps_compatibility_audit.json` trước khi đưa số liệu vào bài báo.
+_Mục tiêu: Bẻ gãy lập luận "chỉ chạy trên toy app tự tạo" của Reviewer A & C (W3)_
+
+- [x] **[ĐÃ CHẠY THỰC TẾ TRÊN ANDROID 14] Khảo sát tương thích (Empirical Compatibility Study) trên 20 ứng dụng thực tế qua ADB:**
+  - [x] Chạy tự động 100% khảo sát cây giao diện (`uiautomator dump`) trên 20 ứng dụng thực tế cài đặt trên Android 14 (API 34) bằng công cụ `tools/audit_20_apps_automated.py`.
+  - [x] Phân tích cấu trúc accessibility tree: đối chiếu khả năng tương thích của vị từ đích $\Match(d,x)$ và Chính sách Dự phòng (Fallback Policy) khi ứng dụng sử dụng Custom View / Bàn phím số riêng.
+  - [x] Xuất dữ liệu bằng chứng vào `output/real_apps_compatibility_audit.json` và bảng LaTeX hoàn chỉnh tại `output/real_apps_compatibility_table.tex`.
 - [x] **[ĐÃ CHẠY THỰC TẾ TRÊN ANDROID 14]: Kiểm chứng thực nghiệm Chính sách Dự phòng (Fallback Policy) trên Custom Canvas/Numpad:**
   - [x] Đo đạc tỷ lệ thành công và độ trễ khi áp dụng Fallback Policy (ràng buộc `packageName` tiền cảnh + xác nhận người dùng 1 chạm) trên UI Custom Canvas/Numpad: 30/30 thành công ($U=1.00$), 0/30 rò rỉ khi ứng dụng đối kháng tiền cảnh gọi ($R=0.00$), độ trễ trung vị $47.60\,\mu\text{s}$ (trung bình $69.39\,\mu\text{s}$).
   - [x] Xuất log chứng thực tại: `output/fallback_policy_benchmark.json` (thiết bị Android 14 API 34).

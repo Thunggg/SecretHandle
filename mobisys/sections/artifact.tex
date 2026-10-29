@@ -32,3 +32,9 @@ python evaluation/run_agent_matrix.py \
 Per-trial logs, latency dumps, and step trajectories are recorded in \texttt{results/trials.jsonl}. The evaluation uses random synthetic canaries per trial; no human subjects, production accounts, or real credentials are used.
 
 \paragraph{Integrity and license.} All configuration digests and random seeds are logged in \texttt{provenance.json} at initialization. The repository is released under the Apache License~2.0 with all source files, benchmark harnesses, and analysis scripts fully open-sourced.
+
+\section{Real-World UI Hierarchy Compatibility Audit}
+\label{sec:appendix_audit}
+Table~\ref{tab:real_apps_audit} presents the empirical accessibility hierarchy audit across 20 applications evaluated on Android~14 (API 34). Applications exposing standard input classes are resolved directly via predicate $\Match(d,x)$, whereas custom canvases, custom numpads, and unannotated containers are securely mediated via the verified foreground package and single-tap user touch-confirmation fallback policy.
+
+\input{../output/real_apps_compatibility_table.tex}

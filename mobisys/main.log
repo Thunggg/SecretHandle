@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.28)  29 OCT 2026 22:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.28)  30 OCT 2026 00:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2218,27 +2218,21 @@ You may provide a definition with
 \DeclareUnicodeCharacter 
 
 [10.10]
+
+LaTeX Warning: Reference `tab:real_apps_audit' on page 11 undefined on input line 106.
+
+
 Underfull \hbox (badness 1584) in paragraph at lines 106--107
 []\T1/LinuxLibertineT-TLF/m/it/10 (+20) Real-World Com-pat-i-bil-ity & Web Views\T1/LinuxLibertineT-TLF/m/n/10 (+20) : To eval-u-ate
  []
 
 
-Underfull \hbox (badness 1394) in paragraph at lines 106--107
-\T1/LinuxLibertineT-TLF/m/n/10 (+20) gen-er-al-ity be-yond syn-thetic APKs, we au-dited 20 top
+Underfull \hbox (badness 1824) in paragraph at lines 106--107
+\T1/LinuxLibertineT-TLF/m/n/10 (+20) in-puts with rec-og-nized se-man-tic hints di-rectly match
  []
 
 
-Underfull \hbox (badness 2865) in paragraph at lines 106--107
-\T1/LinuxLibertineT-TLF/m/n/10 (+20) fi-nance and com-mer-cial ap-pli-ca-tions on Google Play.
- []
-
-
-Underfull \hbox (badness 2617) in paragraph at lines 106--107
-\T1/LinuxLibertineT-TLF/m/n/10 (+20) or \T1/zi4/m/n/10 password\T1/LinuxLibertineT-TLF/m/n/10 (+20) ) and \T1/zi4/m/n/10 TYPE_CLASS_NUMBER \T1/LinuxLibertineT-TLF/m/n/10 (+20) in-puts di-rectly
- []
-
-
-Underfull \vbox (badness 2635) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ) (sections/related_work.tex
 
@@ -2601,7 +2595,48 @@ Overfull \hbox (15.51236pt too wide) in paragraph at lines 31--31
 []\T1/zi4/m/n/10 adb install evaluation/apks/com.attacker.rewards.apk[] 
  []
 
-)
+
+LaTeX Warning: Reference `tab:real_apps_audit' on page 14 undefined on input line 38.
+
+
+sections/artifact.tex:39: LaTeX Error: Unicode character ễ (U+1EC5)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+sections/artifact.tex:39: LaTeX Error: Unicode character ầ (U+1EA7)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[14.14{C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-ts1.enc}] (../output/real_apps_compatibility_table.tex
+LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
+(Font)              scaled to size 9.0pt on input line 6.
+LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
+(Font)              scaled to size 6.6pt on input line 6.
+LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
+(Font)              scaled to size 9.0pt on input line 10.
+
+Overfull \hbox (141.12648pt too wide) in paragraph at lines 6--32
+ [][] 
+ []
+
+))
 
 Package natbib Warning: There were undefined citations.
 
@@ -2610,10 +2645,7 @@ Class acmart Warning: Some images may lack descriptions.
 (acmart)              ACM is committed to complying with the upcoming US ADA https://accessiblyapp.com/accessibility-compliance/ada/ and European Accessibility Act (EAA) https://accessiblyapp.com/accessibility-compliance/eaa/ regulations by actively working to ensure our publications and application services are accessible to individuals with disabilities, adhering to the WCAG guidelines to provide a seamless experience for all users, and regularly reviewing our accessibility practices to maintain compliance with evolving standards. 
 (acmart)              To this end, we strongly encourage our authors to provide alternative text and captions for images and multimedia content. It is also important to optimize color contrast for the visually impaired. Taking these important steps when creating your papers will ensure that the widest possible audience can ingest your work..
 
-
-Package balance Warning: You have called \balance in second column
-(balance)                Columns might not be balanced.
-
+[15.15]
 
 e:/NCKH/SecretHandle/mobisys/main.tex:128: LaTeX Error: Unicode character ễ (U+1EC5)
                not set up for use with LaTeX.
@@ -2640,9 +2672,9 @@ l.128 \end{document}
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
-[14.14{C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-ts1.enc}]
+[16.16]
 
-LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (1 not 14).
+LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (1 not 16).
                Rerun to correct this.
 
 (main.aux
@@ -2669,20 +2701,20 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `main.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  6FFD96E0BE6266E1FCF9C0F83DEE0650;2032.
+(rerunfilecheck)             After:  30D5298982498FB75AB61C000EB3C1FE;2317.
  ) 
 Here is how much of TeX's memory you used:
- 45107 strings out of 467871
- 997622 string characters out of 5418860
- 1546354 words of memory out of 5000000
- 71871 multiletter control sequences out of 15000+600000
- 923599 words of font info for 760 fonts, out of 8000000 for 9000
+ 45141 strings out of 467871
+ 998492 string characters out of 5418860
+ 1547352 words of memory out of 5000000
+ 71884 multiletter control sequences out of 15000+600000
+ 930040 words of font info for 768 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  90i,14n,131p,2103b,984s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI5.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathRM.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumT.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumTB.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsym.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
-Output written on main.pdf (14 pages, 755474 bytes).
+Output written on main.pdf (16 pages, 760256 bytes).
 PDF statistics:
- 430 PDF objects out of 1000 (max. 8388607)
- 159 named destinations out of 1000 (max. 500000)
- 162859 words of extra memory for PDF output out of 184870 (max. 10000000)
+ 441 PDF objects out of 1000 (max. 8388607)
+ 163 named destinations out of 1000 (max. 500000)
+ 167979 words of extra memory for PDF output out of 184870 (max. 10000000)
 

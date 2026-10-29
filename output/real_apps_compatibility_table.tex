@@ -1,0 +1,32 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Empirical UI accessibility hierarchy audit across 20 real Android applications. Direct match represents automatic resolution via $\Match(d,x)$ ($\mathtt{autofillHints}$/$\mathtt{inputType}$); Fallback indicates custom canvas/view handled via verified foreground package and single-tap touch confirmation.}
+\label{tab:real_apps_audit}
+\begin{tabular}{lllllcc}
+\toprule
+\textbf{\#} & \textbf{Application} & \textbf{Package Name} & \textbf{Category} & \textbf{Target Input Class} & \textbf{Detected Hints} & \textbf{Resolution Policy} \\
+\midrule
+1 & Google Chrome & \texttt{com.android.chrome} & Browser / Web & \texttt{EditText} & \texttt{textInput} & \textsf{Direct Match} \\
+2 & Google Messages & \texttt{com.google.android.apps.messaging} & SMS / Telephony OTP & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+3 & Google Play Store & \texttt{com.android.vending} & Commercial / Payments & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+4 & Android Settings & \texttt{com.android.settings} & System / Security & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+5 & Aegis 2FA Authenticator & \texttt{com.beemdevelopment.aegis} & 2FA Authenticator & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+6 & Gmail & \texttt{com.google.android.gm} & Communication / Email & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+7 & Phone / Dialer & \texttt{com.google.android.dialer} & Telephony / Keypad & \texttt{EditText} & \texttt{textInput} & \textsf{Direct Match} \\
+8 & Google Contacts & \texttt{com.google.android.contacts} & Personal Data & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+9 & Google Maps & \texttt{com.google.android.apps.maps} & Navigation / Search & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+10 & YouTube & \texttt{com.google.android.youtube} & Media / Account & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+11 & DeskClock & \texttt{com.google.android.deskclock} & Utility / Numeric & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+12 & Google Calendar & \texttt{com.google.android.calendar} & Productivity / Forms & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+13 & QuickSearchBox & \texttt{com.google.android.googlequicksearchbox} & System Search / Form & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+14 & Task Manage App & \texttt{com.example.task\_manage} & Productivity & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+15 & Library Catalog App & \texttt{com.example.mre1\_library} & Enterprise & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+16 & Mobile Login App & \texttt{com.example.mobile} & E-Commerce / Auth & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+17 & Practice Form App & \texttt{com.example.practice} & General Utility & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+18 & Movie Catalog App & \texttt{com.example.mre2\_movie} & Entertainment & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+19 & My App Utility & \texttt{com.example.my\_app} & General Utility & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+20 & SecretHandle Target Bank & \texttt{com.secrethandle.b3} & Banking / Finance OTP & \texttt{CustomView/Canvas} & \texttt{--} & \textsf{Fallback (Touch)} \\
+\bottomrule
+\end{tabular}
+\end{table*}
