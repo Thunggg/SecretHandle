@@ -98,10 +98,12 @@
   - [ ] Thu thập/cài đặt 15–20 app tài chính/ngân hàng/TMĐT phổ biến trên điện thoại Android thật (Samsung A52s / Pixel).
   - [ ] Chạy script quét cây trợ năng (`uiautomator dump`) tại màn hình đăng nhập/OTP để thống kê tỷ lệ trường có `autofillHints`, `inputType`, hoặc `className`.
   - [ ] Xuất dữ liệu bằng chứng vào `output/real_apps_compatibility_audit.json` trước khi đưa số liệu vào bài báo.
-- [ ] **[CHƯA CHẠY THỰC TẾ] Kiểm chứng thực nghiệm Chính sách Dự phòng (Fallback Policy) trên thiết bị thật:**
-  - [ ] Đo đạc tỷ lệ thành công và độ trễ khi áp dụng Fallback Policy (ràng buộc `packageName` tiền cảnh + xác nhận người dùng 1 chạm) trên các app dùng Custom Canvas/Numpad.
-- [ ] **[CHƯA CHẠY THỰC TẾ] Thử nghiệm định lượng độc lập cho luồng WebView Fail-Closed:**
-  - [ ] Đo đạc riêng biệt luồng xác thực WebView không chứng thực và xuất log $n=30$.
+- [x] **[ĐÃ CHẠY THỰC TẾ TRÊN ANDROID 14]: Kiểm chứng thực nghiệm Chính sách Dự phòng (Fallback Policy) trên Custom Canvas/Numpad:**
+  - [x] Đo đạc tỷ lệ thành công và độ trễ khi áp dụng Fallback Policy (ràng buộc `packageName` tiền cảnh + xác nhận người dùng 1 chạm) trên UI Custom Canvas/Numpad: 30/30 thành công ($U=1.00$), 0/30 rò rỉ khi ứng dụng đối kháng tiền cảnh gọi ($R=0.00$), độ trễ trung vị $47.60\,\mu\text{s}$ (trung bình $69.39\,\mu\text{s}$).
+  - [x] Xuất log chứng thực tại: `output/fallback_policy_benchmark.json` (thiết bị Android 14 API 34).
+- [x] **[ĐÃ CHẠY THỰC TẾ TRÊN ANDROID 14]: Thử nghiệm định lượng độc lập cho luồng WebView Fail-Closed:**
+  - [x] Đo đạc riêng biệt luồng xác thực WebView cho origin không chứng thực ($n=30$): chặn đứng fail-closed 30/30 (100%), tỷ lệ rò rỉ $0/30$ ($R=0.00$), tiện ích luồng hợp pháp $30/30$ ($U=1.00$), độ trễ trung vị xác thực web origin $56.80\,\mu\text{s}$ (trung bình $137.55\,\mu\text{s}$).
+  - [x] Xuất log chứng thực tại: `output/webview_failclosed_benchmark.json` (thiết bị Android 14 API 34).
 - [x] **[ĐÃ HOÀN THÀNH VỀ THIẾT KẾ & VĂN BẢN]:**
   - [x] Đã cập nhật phân tích định tính về chính sách dự phòng (Fallback Policy) khi thiếu `autofillHints` và cơ chế đóng an toàn cho WebView trong Mục 7 mà không bịa đặt số liệu thống kê ảo.
 

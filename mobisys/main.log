@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.28)  29 OCT 2026 22:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.28)  29 OCT 2026 22:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2238,12 +2238,7 @@ Underfull \hbox (badness 2617) in paragraph at lines 106--107
  []
 
 
-Underfull \hbox (badness 4995) in paragraph at lines 106--107
-\T1/LinuxLibertineT-TLF/m/n/10 (+20) con-fir-ma-tion) suc-cess-fully re-solved han-dles in $\OT1/LinuxLibertineT-TLF/m/n/10 (+20) 30\LMS/ntxsy/m/n/10 �\OT1/LinuxLibertineT-TLF/m/n/10 (+20) 30$
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 2635) has occurred while \output is active []
 
 ) (sections/related_work.tex
 
@@ -2453,12 +2448,109 @@ Underfull \hbox (badness 3657) in paragraph at lines 8--9
 \T1/LinuxLibertineT-TLF/m/n/10 (+20) di-a-log un-ex-posed to ac-ces-si-bil-ity. For anti-bot SDKs,
  []
 
-) (sections/conclusion.tex) (main.bbl) (sections/artifact.tex
+) (sections/conclusion.tex) (main.bbl
+LaTeX Info: Redefining \tempurl on input line 64.
+LaTeX Info: Redefining \tempurl on input line 78.
+LaTeX Info: Redefining \tempurl on input line 92.
+LaTeX Info: Redefining \tempurl on input line 107.
+LaTeX Info: Redefining \tempurl on input line 121.
+LaTeX Info: Redefining \tempurl on input line 135.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 8.0pt on input line 150.
 
-LaTeX Warning: Reference `sec:evidence' on page 12 undefined on input line 4.
+Underfull \vbox (badness 2698) has occurred while \output is active []
 
 
-LaTeX Warning: Reference `tab:main_eval' on page 12 undefined on input line 9.
+
+main.bbl:170: LaTeX Error: Unicode character ễ (U+1EC5)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.170         {bugiel2013flexible}
+                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+main.bbl:170: LaTeX Error: Unicode character ầ (U+1EA7)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.170         {bugiel2013flexible}
+                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[12.12]
+LaTeX Info: Redefining \tempurl on input line 180.
+
+Underfull \hbox (badness 1490) in paragraph at lines 261--267
+[]\T1/LinuxLibertineT-TLF/m/n/8 (+20) Edoardo Debenedetti, Ilia Shu-mailov, Tianqi Fan, Jamie Hayes,
+ []
+
+LaTeX Info: Redefining \tempurl on input line 281.
+LaTeX Info: Redefining \tempurl on input line 323.
+
+Underfull \hbox (badness 4193) in paragraph at lines 316--326
+\T1/LinuxLibertineT-TLF/m/n/8 (+20) Jaeyeon Jung, Patrick Mc-Daniel, and An-mol N. Sheth. 2010.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 316--326
+\T1/LinuxLibertineT-TLF/m/n/8 (+20) Taint-Droid: An Information-Flow Track-ing Sys-tem for Re-
+ []
+
+
+Underfull \hbox (badness 6944) in paragraph at lines 316--326
+\T1/LinuxLibertineT-TLF/m/n/8 (+20) al-time Pri-vacy Mon-i-tor-ing on Smart-phones. In \T1/LinuxLibertineT-TLF/m/it/8 (+20) 9th USENIX
+ []
+
+
+Underfull \hbox (badness 5189) in paragraph at lines 316--326
+\T1/LinuxLibertineT-TLF/m/it/8 (+20) Sym-po-sium on Op-er-at-ing Sys-tems De-sign and Im-ple-men-ta-tion\T1/LinuxLibertineT-TLF/m/n/8 (+20) .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 316--326
+[]$\T1/LinuxLibertineT-TLF/m/n/8 (+20) https : / / www . usenix . org / conference / osdi10 / taintdroid -[] information -[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \tempurl on input line 486.
+LaTeX Info: Redefining \tempurl on input line 501.
+LaTeX Info: Redefining \tempurl on input line 554.
+LaTeX Info: Redefining \tempurl on input line 571.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13.13]
+LaTeX Info: Redefining \tempurl on input line 585.
+LaTeX Info: Redefining \tempurl on input line 615.
+
+Underfull \hbox (badness 3439) in paragraph at lines 609--618
+\T1/LinuxLibertineT-TLF/m/it/8 (+20) Se-cu-rity Sym-po-sium\T1/LinuxLibertineT-TLF/m/n/8 (+20) .   []$https : / / www . ndss -[] symposium . org / ndss -[]
+ []
+
+LaTeX Info: Redefining \tempurl on input line 630.
+
+Underfull \hbox (badness 1838) in paragraph at lines 697--705
+[]\T1/LinuxLibertineT-TLF/m/n/8 (+20) Lepeng Zhao, Zhen-hua Zou, Shuo Li, and Zhuo-tao Liu. 2026.
+ []
+
+) (sections/artifact.tex
+
+LaTeX Warning: Reference `sec:evidence' on page 14 undefined on input line 4.
+
+
+LaTeX Warning: Reference `tab:main_eval' on page 14 undefined on input line 9.
 
 
 Underfull \hbox (badness 4913) in paragraph at lines 6--10
@@ -2475,39 +2567,8 @@ Overfull \hbox (34.30002pt too wide) in paragraph at lines 6--10
 \T1/zi4/m/n/10 NotificationListener \T1/LinuxLibertineT-TLF/m/n/10 (-20) bro-ker, the \T1/zi4/m/n/10 TYPE_ACCESSIBILITY_OVERLAY
  []
 
-
-Underfull \vbox (badness 1558) has occurred while \output is active []
-
-
-
-sections/artifact.tex:12: LaTeX Error: Unicode character ễ (U+1EC5)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.12 \begin{verbatim}
-                     
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-sections/artifact.tex:12: LaTeX Error: Unicode character ầ (U+1EA7)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.12 \begin{verbatim}
-                     
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[12.12]
 LaTeX Font Info:    Trying to load font information for TS1+zi4 on input line 16.
- (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/latex/inconsolata\ts1zi4.fd
+(C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/latex/inconsolata\ts1zi4.fd
 File: ts1zi4.fd 2018/01/14 TS1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `TS1/zi4/m/n' will be
@@ -2518,7 +2579,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-LaTeX Warning: Reference `sec:evidence' on page 13 undefined on input line 19.
+LaTeX Warning: Reference `sec:evidence' on page 14 undefined on input line 19.
 
 
 Overfull \hbox (3.82184pt too wide) in paragraph at lines 31--31
@@ -2549,12 +2610,47 @@ Class acmart Warning: Some images may lack descriptions.
 (acmart)              ACM is committed to complying with the upcoming US ADA https://accessiblyapp.com/accessibility-compliance/ada/ and European Accessibility Act (EAA) https://accessiblyapp.com/accessibility-compliance/eaa/ regulations by actively working to ensure our publications and application services are accessible to individuals with disabilities, adhering to the WCAG guidelines to provide a seamless experience for all users, and regularly reviewing our accessibility practices to maintain compliance with evolving standards. 
 (acmart)              To this end, we strongly encourage our authors to provide alternative text and captions for images and multimedia content. It is also important to optimize color contrast for the visually impaired. Taking these important steps when creating your papers will ensure that the widest possible audience can ingest your work..
 
-[13.13{C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-ts1.enc}]
 
-LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (1 not 13).
+Package balance Warning: You have called \balance in second column
+(balance)                Columns might not be balanced.
+
+
+e:/NCKH/SecretHandle/mobisys/main.tex:128: LaTeX Error: Unicode character ễ (U+1EC5)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.128 \end{document}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+e:/NCKH/SecretHandle/mobisys/main.tex:128: LaTeX Error: Unicode character ầ (U+1EA7)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.128 \end{document}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[14.14{C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-ts1.enc}]
+
+LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (1 not 14).
                Rerun to correct this.
 
-(main.aux)
+(main.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -2573,20 +2669,20 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `main.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  517133A1396FEDA30DA998C2989D0D90;1936.
+(rerunfilecheck)             After:  6FFD96E0BE6266E1FCF9C0F83DEE0650;2032.
  ) 
 Here is how much of TeX's memory you used:
- 44742 strings out of 467871
- 988961 string characters out of 5418860
- 1544354 words of memory out of 5000000
- 71702 multiletter control sequences out of 15000+600000
- 902914 words of font info for 662 fonts, out of 8000000 for 9000
+ 45107 strings out of 467871
+ 997622 string characters out of 5418860
+ 1546354 words of memory out of 5000000
+ 71871 multiletter control sequences out of 15000+600000
+ 923599 words of font info for 760 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  90i,14n,131p,2103b,984s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI5.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathRM.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumT.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumTB.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsym.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
-Output written on main.pdf (13 pages, 720702 bytes).
+Output written on main.pdf (14 pages, 755474 bytes).
 PDF statistics:
- 307 PDF objects out of 1000 (max. 8388607)
- 109 named destinations out of 1000 (max. 500000)
- 158763 words of extra memory for PDF output out of 184870 (max. 10000000)
+ 430 PDF objects out of 1000 (max. 8388607)
+ 159 named destinations out of 1000 (max. 500000)
+ 162859 words of extra memory for PDF output out of 184870 (max. 10000000)
 

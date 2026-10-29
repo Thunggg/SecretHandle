@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-29T22:51:13.924445",
+  "audited_apps": [
+    {
+      "app_name": "Android_System",
+      "category": "System",
+      "package_name": "com.google.android.apps.nexuslauncher",
+      "audited_at": "2026-10-29T22:51:13.924445",
+      "input_field_count": 0,
+      "primary_status": "CUSTOM_VIEW_FALLBACK",
+      "fields": []
+    }
+  ]
+}

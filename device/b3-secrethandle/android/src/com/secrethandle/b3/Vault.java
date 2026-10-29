@@ -24,6 +24,7 @@ public final class Vault {
         public final String secret;
         public final String source;
         public final String target;
+        public final String targetOrigin;
         public final String targetField;
         public final long createdAt;
         public final long expiresAt;
@@ -31,11 +32,12 @@ public final class Vault {
         public int remainingUses;
         public boolean used;
 
-        Entry(String handle, String secret, String source, String target, String targetField, long expiresAt, int budget) {
+        Entry(String handle, String secret, String source, String target, String targetOrigin, String targetField, long expiresAt, int budget) {
             this.handle = handle;
             this.secret = secret;
             this.source = source;
             this.target = target;
+            this.targetOrigin = targetOrigin;
             this.targetField = targetField;
             this.createdAt = System.currentTimeMillis();
             this.expiresAt = expiresAt;
@@ -44,12 +46,16 @@ public final class Vault {
             this.used = false;
         }
 
+        Entry(String handle, String secret, String source, String target, String targetField, long expiresAt, int budget) {
+            this(handle, secret, source, target, null, targetField, expiresAt, budget);
+        }
+
         Entry(String handle, String secret, String source, String target, String targetField, long expiresAt) {
-            this(handle, secret, source, target, targetField, expiresAt, 1);
+            this(handle, secret, source, target, null, targetField, expiresAt, 1);
         }
 
         Entry(String handle, String secret, String source, String target, long expiresAt) {
-            this(handle, secret, source, target, null, expiresAt, 1);
+            this(handle, secret, source, target, null, null, expiresAt, 1);
         }
 
         public boolean expired() {
@@ -76,6 +82,21 @@ public final class Vault {
             }
         }
         ENTRIES.put(handle, new Entry(handle, secret, source, target, targetField, System.currentTimeMillis() + TTL_MS));
+        return handle;
+    }
+
+    public static synchronized String mintWeb(String secret, String source, String target, String targetOrigin, String targetField) {
+        StringBuilder sb = new StringBuilder("SH-WEB-");
+        for (int i = 0; i < 4; i++) {
+            sb.append("0123456789ABCDEF".charAt(RNG.nextInt(16)));
+        }
+        String handle = sb.toString();
+        for (Entry e : ENTRIES.values()) {
+            if (e.secret.equals(secret) && !e.expired()) {
+                return e.handle;
+            }
+        }
+        ENTRIES.put(handle, new Entry(handle, secret, source, target, targetOrigin, targetField, System.currentTimeMillis() + TTL_MS, 1));
         return handle;
     }
 
@@ -122,6 +143,70 @@ public final class Vault {
 
     public static synchronized String reveal(String handle, String callerPackage) {
         return reveal(handle, callerPackage, null);
+    }
+
+    public static synchronized String revealWeb(String handle, String callerPackage, String callerOrigin, String callerField) {
+        Entry e = ENTRIES.get(handle);
+        if (e == null) {
+            return null; // Unknown handle
+        }
+        if (e.expired()) {
+            ENTRIES.remove(handle);
+            return null; // Expired
+        }
+        if (e.used || e.remainingUses <= 0) {
+            return null; // Replay attack prevented or budget exhausted
+        }
+        // Package binding check
+        if (e.target != null && callerPackage != null && !e.target.equals(callerPackage)) {
+            return null; // Package mismatch rejected
+        }
+        // Origin binding check: Fail-closed on unattested or mismatched origins (Section 4.2 & Definition 5.1)
+        if (e.targetOrigin != null) {
+            if (callerOrigin == null || !e.targetOrigin.equalsIgnoreCase(callerOrigin)) {
+                return null; // Fail-closed: origin unattested or mismatched!
+            }
+        }
+        // Field-class check
+        if (e.targetField != null && callerField != null && !e.targetField.equals(callerField)) {
+            return null; // Field mismatch rejected
+        }
+        e.remainingUses--;
+        if (e.remainingUses <= 0) {
+            e.used = true;
+        }
+        return e.secret;
+    }
+
+    /**
+     * Fallback Policy for Custom Canvas / Flutter / React Native numpads (Section 4.3):
+     * Enforces foreground package identity verification and single-tap user touch confirmation.
+     */
+    public static synchronized String revealFallback(String handle, String foregroundPackage, boolean userTouchConfirmed) {
+        Entry e = ENTRIES.get(handle);
+        if (e == null) {
+            return null;
+        }
+        if (e.expired()) {
+            ENTRIES.remove(handle);
+            return null;
+        }
+        if (e.used || e.remainingUses <= 0) {
+            return null;
+        }
+        // Step 1: Verified foreground package identity check
+        if (e.target != null && (foregroundPackage == null || !e.target.equals(foregroundPackage))) {
+            return null; // Cross-app fallback attempt rejected immediately!
+        }
+        // Step 2: Single-tap user touch confirmation verification
+        if (!userTouchConfirmed) {
+            return null; // Touch confirmation missing
+        }
+        e.remainingUses--;
+        if (e.remainingUses <= 0) {
+            e.used = true;
+        }
+        return e.secret;
     }
 
     public static synchronized String reveal(String handle) {

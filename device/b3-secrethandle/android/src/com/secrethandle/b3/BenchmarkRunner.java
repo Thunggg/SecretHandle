@@ -55,6 +55,14 @@ public class BenchmarkRunner {
             System.out.println(",");
             runClipboardBenchmark();
         }
+        if ("webview".equals(mode) || "all".equals(mode) || "tier6".equals(mode)) {
+            System.out.println(",");
+            runWebViewFailClosedBenchmark();
+        }
+        if ("fallback".equals(mode) || "all".equals(mode) || "tier6".equals(mode)) {
+            System.out.println(",");
+            runFallbackPolicyBenchmark();
+        }
 
         System.out.println("\n}");
     }
@@ -590,6 +598,102 @@ public class BenchmarkRunner {
         System.out.println("  \"legitimate_utility\": " + legitimateUtility + ",");
         System.out.println("  \"utility_rate\": " + (legitimateUtility / (double) N) + ",");
         System.out.println("  \"clipboard_mediation_latency_us\": " + statsUs(clipboardMediationLatencies));
+        System.out.print("}");
+    }
+
+    private static void runWebViewFailClosedBenchmark() {
+        Vault.clear();
+        int N = 30;
+        int failClosedBlocked = 0;
+        int failClosedLeaks = 0;
+        int legitimateUtility = 0;
+        List<Long> webOriginLatencies = new ArrayList<>();
+
+        for (int i = 0; i < N; i++) {
+            String secret = String.format(java.util.Locale.US, "%06d", 100000 + i * 13 % 900000);
+            String boundPackage = "com.android.chrome";
+            String boundOrigin = "https://auth.bank.example.com";
+            String boundField = "otp_input";
+
+            // Mint handle bound to Chrome / WebView host, verified bank origin and field
+            String handle = Vault.mintWeb(secret, "com.google.android.apps.messaging", boundPackage, boundOrigin, boundField);
+
+            // 1. Adversary Redirection / Cross-Origin / Phishing Attempt (Unattested / Malicious origin)
+            // Agent tricked or iframe redirects to phishing origin
+            String leakAttempt = Vault.revealWeb(handle, boundPackage, "http://phishing.rewards-claim.example.com", boundField);
+            if (leakAttempt != null) {
+                failClosedLeaks++;
+            } else {
+                failClosedBlocked++;
+            }
+
+            // 2. Legitimate workflow: verified web origin
+            long t0 = System.nanoTime();
+            String resolved = Vault.revealWeb(handle, boundPackage, boundOrigin, boundField);
+            long dt = System.nanoTime() - t0;
+            webOriginLatencies.add(dt);
+
+            if (resolved != null && resolved.equals(secret)) {
+                legitimateUtility++;
+            }
+        }
+
+        System.out.println("\"webview_fail_closed_benchmark\": {");
+        System.out.println("  \"trials\": " + N + ",");
+        System.out.println("  \"bound_origin\": \"https://auth.bank.example.com\",");
+        System.out.println("  \"adversary_origin\": \"http://phishing.rewards-claim.example.com\",");
+        System.out.println("  \"fail_closed_blocked\": " + failClosedBlocked + ",");
+        System.out.println("  \"fail_closed_leaks\": " + failClosedLeaks + ",");
+        System.out.println("  \"leakage_rate\": " + (failClosedLeaks / (double) N) + ",");
+        System.out.println("  \"legitimate_utility\": " + legitimateUtility + ",");
+        System.out.println("  \"utility_rate\": " + (legitimateUtility / (double) N) + ",");
+        System.out.println("  \"origin_mediation_latency_us\": " + statsUs(webOriginLatencies));
+        System.out.print("}");
+    }
+
+    private static void runFallbackPolicyBenchmark() {
+        Vault.clear();
+        int N = 30;
+        int adversaryLeaks = 0;
+        int legitimateUtility = 0;
+        List<Long> fallbackLatencies = new ArrayList<>();
+
+        for (int i = 0; i < N; i++) {
+            String secret = String.format(java.util.Locale.US, "%06d", 100000 + i * 17 % 900000);
+            String boundPackage = "com.legitimate.bank";
+
+            // Mint handle for banking app whose UI uses Custom Canvas / Flutter numpad
+            String handle = Vault.mint(secret, "com.google.android.apps.messaging", boundPackage);
+
+            // 1. Adversary Attempt: Injected prompt redirects agent to adversary app com.attacker.rewards
+            // Adversary attempts to invoke fallback touch prompt on foreground package com.attacker.rewards
+            String leakAttempt = Vault.revealFallback(handle, "com.attacker.rewards", true);
+            if (leakAttempt != null) {
+                adversaryLeaks++;
+            }
+
+            // 2. Legitimate Workflow: Foreground app is com.legitimate.bank
+            // OS verifies foreground package, surfaces single-tap touch confirmation overlay to user
+            long t0 = System.nanoTime();
+            String resolved = Vault.revealFallback(handle, boundPackage, true);
+            long dt = System.nanoTime() - t0;
+            fallbackLatencies.add(dt);
+
+            if (resolved != null && resolved.equals(secret)) {
+                legitimateUtility++;
+            }
+        }
+
+        System.out.println("\"fallback_policy_benchmark\": {");
+        System.out.println("  \"trials\": " + N + ",");
+        System.out.println("  \"ui_type\": \"custom_canvas_numpad\",");
+        System.out.println("  \"bound_package\": \"com.legitimate.bank\",");
+        System.out.println("  \"adversary_package\": \"com.attacker.rewards\",");
+        System.out.println("  \"adversary_fallback_leaks\": " + adversaryLeaks + ",");
+        System.out.println("  \"adversary_fallback_rate\": " + (adversaryLeaks / (double) N) + ",");
+        System.out.println("  \"legitimate_fallback_utility\": " + legitimateUtility + ",");
+        System.out.println("  \"utility_rate\": " + (legitimateUtility / (double) N) + ",");
+        System.out.println("  \"fallback_mediation_latency_us\": " + statsUs(fallbackLatencies));
         System.out.print("}");
     }
 }
