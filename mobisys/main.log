@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  30 OCT 2026 17:53
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.10.10)  30 OCT 2026 18:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -3654,6 +3654,29 @@ Underfull \hbox (badness 1460) in paragraph at lines 32--33
  []
 
 )
+Underfull \hbox (badness 1057) in paragraph at lines 60--128
+ []\TU/LinLibertine(0)/m/it/10 Adversarial delivery channels.[] \TU/LinLibertin
+e(1)/m/n/10 Injection payloads were
+ []
+
+
+Underfull \hbox (badness 2205) in paragraph at lines 60--128
+\TU/LinLibertine(1)/m/n/10 banking notifications (e.g., promotional messages fr
+om
+ []
+
+
+Underfull \hbox (badness 3019) in paragraph at lines 60--128
+\TU/LinLibertine(1)/m/n/10 ($[][][][][]$). Under \TU/LinLibertine(0)/m/sc/10 Se
+cretHandle \TU/LinLibertine(1)/m/n/10 (B3), the OS reference
+ []
+
+
+Underfull \hbox (badness 3601) in paragraph at lines 60--128
+\TU/LinLibertine(1)/m/n/10 monitor enforced destination verification, blocking 
+all
+ []
+
 
 Class acmart Warning: Some images may lack descriptions.
 (acmart)              ACM is committed to complying with the upcoming US ADA ht
@@ -3676,6 +3699,10 @@ Class acmart Warning: ACM reference format is mandatory
 (acmart)              \settopmatter command..
 
 
+Package balance Warning: You have called \balance in second column
+(balance)                Columns might not be balanced.
+
+
 (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-pdfdoc.de
 f
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
@@ -3689,15 +3716,15 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 6FFD96E0BE6266E1FCF9C0F83DEE0650;2032.
+(rerunfilecheck)             Checksum: 3252DE755A7C2636AE5DCC7A1C63F6E0;2259.
  ) 
 Here is how much of TeX's memory you used:
- 55579 strings out of 402987
- 1247372 string characters out of 5448730
- 1912431 words of memory out of 5000000
- 83329 multiletter control sequences out of 15000+600000
+ 55581 strings out of 402987
+ 1247418 string characters out of 5448730
+ 1913011 words of memory out of 5000000
+ 83331 multiletter control sequences out of 15000+600000
  635726 words of font info for 163 fonts, out of 8000000 for 9000
  1509 hyphenation exceptions out of 8191
- 105i,13n,131p,2076b,32884s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 105i,13n,131p,2076b,32876s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on main.pdf (15 pages).

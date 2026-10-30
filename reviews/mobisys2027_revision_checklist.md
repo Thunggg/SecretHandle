@@ -146,8 +146,8 @@
   - [x] Nêu rõ giải pháp: Người dùng có thể chạm vào thông báo của SecretHandle để kích hoạt hộp thoại xác thực sinh trắc học (`BiometricPrompt`) và xem trực tiếp mã OTP trong cửa sổ bảo vệ phần cứng.
 - [x] **Làm rõ điều kiện hoàn trả ngân sách ở Thuật toán 2 (Dòng 17, Trang 8):**
   - [x] Khẳng định ngân sách chỉ được hoàn trả $(u \leftarrow u + 1)$ khi việc hủy xảy ra trước khi bất kỳ byte nhạy cảm nào bị ghi vào bộ đệm của trường đích.
-- [ ] **Công bố văn bản 5 mẫu chỉ thị tiêm nhiễm (Template 1–5):**
-  - [ ] Tóm tắt nội dung 5 prompt injection template (Direct Exfiltration, Support Diversion, Web Phishing, DoS Depletion, Multilingual) vào Phụ lục A để người đọc tiện tra cứu.
+- [x] **Công bố văn bản 5 mẫu chỉ thị tiêm nhiễm (Template 1–5):**
+  - [x] Tóm tắt nội dung 5 prompt injection template (Direct Exfiltration, Support Diversion, Web Phishing, DoS Depletion, Multilingual) vào Bảng 4 tại Phụ lục B (`mobisys/sections/artifact.tex`) để người đọc và phản biện tiện tra cứu trực tiếp.
 
 ---
 
@@ -200,3 +200,4 @@ flowchart TD
     style W4 fill:#cce5ff,stroke:#004085,color:#004085
     style W5 fill:#f8d7da,stroke:#721c24,color:#721c24
 ```
+
