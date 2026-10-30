@@ -1,7 +1,7 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\providecommand*\HyPL@Entry[1]{}
-\HyPL@Entry{0<</S/D>>}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
 \@writefile{toc}{\contentsline {section}{Abstract}{1}{section*.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
 \newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
@@ -35,15 +35,14 @@
 \newlabel{tab:goals}{{1}{3}{Attacker goals, the security goal that answers each, and its enforcement point}{table.caption.19}{}}
 \@writefile{toc}{\contentsline {paragraph}{Reference-monitor assumptions.}{3}{section*.21}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Out of scope.}{3}{section*.22}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Design: Usable but Invisible Secrets}{3}{section.4}\protected@file@percent }
-\newlabel{sec:design}{{4}{3}{Design: Usable but Invisible Secrets}{section.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Line styles distinguish ordinary, protected, control, and adversarial flows.}}{4}{figure.caption.23}\protected@file@percent }
 \newlabel{fig:architecture}{{1}{4}{SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Line styles distinguish ordinary, protected, control, and adversarial flows}{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Design: Usable but Invisible Secrets}{4}{section.4}\protected@file@percent }
+\newlabel{sec:design}{{4}{4}{Design: Usable but Invisible Secrets}{section.4}{}}
 \@writefile{toc}{\contentsline {paragraph}{Architecture.}{4}{section*.24}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Representing handles to agents.}{4}{section*.25}\protected@file@percent }
 \citation{androidSmsRetriever}
 \citation{androidCredentialManager}
-\citation{rfc2104}
 \@writefile{toc}{\contentsline {paragraph}{Resolution as the enforcement point.}{5}{section*.26}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Policy language.}{5}{section*.27}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Lifecycle and reservation.}{5}{section*.28}\protected@file@percent }
@@ -51,9 +50,10 @@
 \@writefile{toc}{\contentsline {paragraph}{Concurrency and time-of-check/time-of-use.}{5}{section*.30}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Failure handling.}{5}{section*.31}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Auditing without secret leakage.}{5}{section*.33}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Building blocks and deployment modes.}{5}{section*.34}\protected@file@percent }
+\citation{rfc2104}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Failure handling is explicit and value-oblivious.}}{6}{table.caption.32}\protected@file@percent }
 \newlabel{tab:failures}{{2}{6}{Failure handling is explicit and value-oblivious}{table.caption.32}{}}
+\@writefile{toc}{\contentsline {paragraph}{Building blocks and deployment modes.}{6}{section*.34}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Formalizing Handles and Their Guarantees}{6}{section.5}\protected@file@percent }
 \newlabel{sec:model}{{5}{6}{Formalizing Handles and Their Guarantees}{section.5}{}}
 \@writefile{toc}{\contentsline {paragraph}{Records and handles.}{6}{section*.35}\protected@file@percent }
@@ -85,7 +85,7 @@
 \newlabel{sec:algorithm}{{6}{8}{Enforcement Algorithms}{section.6}{}}
 \@writefile{toc}{\contentsline {paragraph}{Lifecycle and mutable budget.}{8}{section*.39}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Integration points.}{8}{section*.40}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces \textsc  {SecretHandle}{} \ensuremath  {\mathsf {Enter}}/Resolve}}{8}{algorithm.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces \textsc  {SecretHandle}{} \ensuremath  {\mathsf  {Enter}}/Resolve}}{8}{algorithm.2}\protected@file@percent }
 \newlabel{alg:resolve}{{2}{8}{\SH {} \Enter /Resolve}{algorithm.2}{}}
 \newlabel{line:resolve:guard}{{5}{8}{\SH {} \Enter /Resolve}{algorithm.2}{}}
 \newlabel{line:resolve:mismatch}{{6}{8}{\SH {} \Enter /Resolve}{algorithm.2}{}}
@@ -215,7 +215,7 @@
 \@writefile{toc}{\contentsline {paragraph}{On-device Android 14 experiment reproduction.}{14}{section*.65}\protected@file@percent }
 \newlabel{tocindent-1}{0pt}
 \newlabel{tocindent0}{0pt}
-\newlabel{tocindent1}{4.99878pt}
+\newlabel{tocindent1}{4.65pt}
 \newlabel{tocindent2}{0pt}
 \newlabel{tocindent3}{0pt}
 \newlabel{tocindent4}{0pt}

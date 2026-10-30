@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 0 -1
+["bibtex main"] 1793355940.78897 "main.aux" "main.bbl" "main" 1793355957.02216 0
   "../references_verified.bib" 1793240516 23033 80f0299752ed9b8d9bb404915ad23454 ""
   "C:/Program Files/MiKTeX/bibtex/bst/acmart/ACM-Reference-Format.bst" 1787996669 94292 6c9c536013d461258ea4a4813fe90aa8 ""
-  "main.aux" 1793296264 18862 d514f4d619088e88f66830570b523df3 "pdflatex"
+  "main.aux" 1793355955 19341 541441431b22b80011c5a9fe69e6293a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1793296261.92848 "e:/NCKH/SecretHandle/mobisys/main.tex" "main.pdf" "main" 1793296266.4338 2
+["pdflatex"] 1793355950.20092 "e:/NCKH/SecretHandle/mobisys/main.tex" "main.pdf" "main" 1793355957.02373 2
   "../figures/b3_masked_sms.png" 1793278530 43137 99f41d573f342919223c5250322a8c30 ""
   "../figures/b3_redacted_shade.png" 1793278530 56882 429a8965a96cc4754a88f5cda9735905 ""
   "../figures/tikz_styles.tex" 1790962894 1817 27e72d62bd376bab40eb879f0893b8ec ""
@@ -360,24 +360,24 @@
   "C:/Users/ASUS/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/ASUS/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/ASUS/AppData/Local/Programs/MiKTeX/tex/latex/xstring/xstring.sty" 1693735632 123 a302f2c651a95033260db60e51527ae8 ""
-  "e:/NCKH/SecretHandle/mobisys/main.tex" 1793295635 4385 ff411063774efa316a30c97ee72ff4d6 ""
-  "main.aux" 1793296264 18862 d514f4d619088e88f66830570b523df3 "pdflatex"
-  "main.bbl" 1793296257 30681 768e6e49ef6142473be7be1df50faef4 "bibtex main"
-  "main.out" 1793296264 2032 6ffd96e0be6266e1fcf9c0f83dee0650 "pdflatex"
-  "main.tex" 1793295635 4385 ff411063774efa316a30c97ee72ff4d6 ""
+  "e:/NCKH/SecretHandle/mobisys/main.tex" 1793355938 4379 51b10881e672dc01a124404ac210268a ""
+  "main.aux" 1793355955 19341 541441431b22b80011c5a9fe69e6293a "pdflatex"
+  "main.bbl" 1793355941 30681 768e6e49ef6142473be7be1df50faef4 "bibtex main"
+  "main.out" 1793355955 2032 6ffd96e0be6266e1fcf9c0f83dee0650 "pdflatex"
+  "main.tex" 1793355938 4379 51b10881e672dc01a124404ac210268a ""
   "sections/abstract.tex" 1793287392 1961 8204ab484187b20ef49aa99eaf18bec7 ""
-  "sections/algorithm.tex" 1793287392 4835 0457ef4fc077d22d26f2feff91dfc655 ""
+  "sections/algorithm.tex" 1793355938 5124 21985cf9fe46273ef0d27487326b2232 ""
   "sections/architecture.tex" 1793287392 3472 e990880bc91f918169462f9739ec985c ""
   "sections/artifact.tex" 1793295512 2993 ed6175dedc77ae6997957542ee3b763a ""
   "sections/background.tex" 1793220941 2482 75c82b48cc419a8b90b4cd41d4e11e24 ""
   "sections/conclusion.tex" 1793287392 561 d9ee314e8fc656df7a0b7569b7fbc530 ""
   "sections/design.tex" 1793242738 11158 2b059b865cdd3ff4696a4a3d2743ff1a ""
   "sections/discussion.tex" 1793287392 2296 bd6b7ee5fd6fc98ef56225ac0953b14b ""
-  "sections/evidence.tex" 1793295512 19049 35ab857c70f08131405002c49b9c79bd ""
+  "sections/evidence.tex" 1793355939 19100 4ab309b58e5ab54904ec4739acbf60c2 ""
   "sections/introduction.tex" 1793287392 5539 658ea54f62a056dcb79650a7a91038f6 ""
   "sections/model.tex" 1793287392 9645 1cea08e28a2385fd3abd18545a26fd46 ""
   "sections/related_work.tex" 1793287392 3519 d921f85aa5f853cd690442851a98e25b ""
-  "sections/threat_model.tex" 1793242647 5023 62da844206fbd94f6d4dc6f261e76fe6 ""
+  "sections/threat_model.tex" 1793355938 5538 7697ca0678dac7be9f4c144505e9c37d ""
   (generated)
   "main.aux"
   "main.log"

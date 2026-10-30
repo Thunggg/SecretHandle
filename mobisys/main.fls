@@ -220,8 +220,6 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\tools\array.sty
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\tools\array.sty
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\enumitem\enumitem.sty
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\enumitem\enumitem.sty
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\amssymb.sty
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\amssymb.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\algorithms\algorithm.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\algorithms\algorithm.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\algorithmicx\algpseudocode.sty
@@ -416,9 +414,6 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\preprint\balance.sty
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\preprint\balance.sty
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
-INPUT .\main.aux
-INPUT .\main.aux
-INPUT main.aux
 OUTPUT main.aux
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\newtx\omlnxlmi.fd
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\newtx\omlnxlmi.fd
@@ -562,12 +557,6 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\libertine\ot1linuxbi
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ot1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ot1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ot1.tfm
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-utf8.def
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-utf8.def
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-utf8.def
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumTB-tlf-t1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
@@ -629,6 +618,7 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinB
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ot1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ot1.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1.tfm
 INPUT .\sections\architecture.tex
 INPUT .\sections\architecture.tex
 INPUT .\sections\architecture.tex
@@ -683,6 +673,8 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txsys.t
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txex-bar.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumT-tlf-ot1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ot1--base.tfm
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTB-tlf-t1.vf
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\t1-zi4r-4.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\t1-zi4r-4.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
@@ -724,11 +716,6 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\Lin
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-sc-t1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-sc-t1.tfm
-INPUT .\sections\algorithm.tex
-INPUT .\sections\algorithm.tex
-INPUT .\sections\algorithm.tex
-INPUT .\sections\algorithm.tex
-INPUT sections\algorithm.tex
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumT-tlf-ot1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ot1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-sc-t1.vf
@@ -737,6 +724,11 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\ntxexx.v
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txexs.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTI-tlf-sc-t1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-sc-t1--base.tfm
+INPUT .\sections\algorithm.tex
+INPUT .\sections\algorithm.tex
+INPUT .\sections\algorithm.tex
+INPUT .\sections\algorithm.tex
+INPUT sections\algorithm.tex
 INPUT .\sections\evidence.tex
 INPUT .\sections\evidence.tex
 INPUT .\sections\evidence.tex
@@ -744,7 +736,6 @@ INPUT .\sections\evidence.tex
 INPUT sections\evidence.tex
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1.tfm
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1.tfm
 INPUT ..\figures\b3_redacted_shade.png
 INPUT ..\figures\b3_redacted_shade.png
 INPUT ..\figures\b3_redacted_shade.png
@@ -768,8 +759,6 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txsys.t
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txex-bar.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-sc-t1.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1--base.tfm
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTB-tlf-t1.vf
-INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1--base.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\nxlmia.vf
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\LibertineMathRM.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txmiaSTbb.tfm
@@ -818,6 +807,12 @@ INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\inconsolata\ts1zi4.f
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\latex\inconsolata\ts1zi4.fd
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\ts1-zi4r.tfm
 INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\inconsolata\i4-ts1.enc
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-utf8.def
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-utf8.def
+INPUT C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-utf8.def
 INPUT main.aux
 INPUT .\main.out
 INPUT .\main.out
