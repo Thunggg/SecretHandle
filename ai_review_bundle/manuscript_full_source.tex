@@ -14,8 +14,7 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds,shapes.geometric,shapes.symbols,decorations.pathreplacing,patterns,matrix}
-
-% === BEGIN figures/tikz_styles.tex ===
+% === BEGIN ../figures/tikz_styles ===
 \definecolor{shblue}{HTML}{2F6B9A}
 \definecolor{shbluefill}{HTML}{DCECF7}
 \definecolor{shorange}{HTML}{C65D20}
@@ -40,9 +39,7 @@
   sh/label/.style={midway,fill=white,inner sep=1.5pt,font=\scriptsize,align=center},
   sh/group/.style={draw=shgray,dashed,rounded corners=4pt,inner sep=5pt}
 }
-
-% === END figures/tikz_styles.tex ===
-
+% === END ../figures/tikz_styles ===
 
 \newcommand{\SH}{\textsc{SecretHandle}}
 \newcommand{\Enter}{\ensuremath{\mathsf{Enter}}}
@@ -98,12 +95,9 @@
 \renewcommand{\shortauthors}{Nguyễn and Trần}
 
 \begin{abstract}
-
-% === BEGIN mobisys\sections/abstract.tex ===
+% === BEGIN sections/abstract ===
 Mobile GUI agents must often use a one-time password, credential, address, phone number, or payment identifier to finish a task. Today the value is placed in a screenshot, accessibility tree, prompt, or action argument, so an injected instruction can convert task authority into disclosure or redirection. We present \SH, an Android architecture for \emph{usable but invisible} secrets: a trusted OS service mints an opaque, authenticated handle at the authoritative OS source---such as the SMS/notification OTP pipeline, Credential Manager, clipboard, or wallet---before the raw value can reach the agent. The handle binds a secret type, a task identifier, a destination predicate over package and field class (with fail-closed confinement for unattested WebViews), and a type-specific lifecycle (single-use and TTL for OTPs, task-scoped for identifiers, confirm-per-use for payment). The agent observes only the handle and issues \texttt{ENTER(handle)} toward a UI node; the OS resolves the value only after authenticating the handle, validating task and target, enforcing expiry/use/confirmation, and reserving the handle against races, then redacts the resolved field from subsequent agent observation. We build a stock Android~14 broker prototype covering SMS/notification OTPs and sensitive clipboard handles, and evaluate it across OTP forwarding, cross-app and intra-app Confused Deputy destination redirection, replay, and concurrency attacks against Claude~3.5 Sonnet-driven Mobile-Agent~v3.5 and GPT-4o-driven AutoDroid under KVM emulation, alongside hardware microbenchmarks on a physical Samsung Galaxy~A52s. \SH{} eliminates secret exposure ($0/30$, Wilson $[0.00, 0.11]$) versus $0.97$ for unprotected agents ($29/30$), completely mitigates destination redirection ($0/30$ vs.\ $30/30$ for unbound placeholders and unattested consent flows), guarantees atomic single-use serialization ($50/50$ races), incurs microsecond vault transitions ($5.42\,\mu\text{s}$ mint, $0.18\,\mu\text{s}$ resolve; $22.30\,\mu\text{s}$ ARM core mediation), and introduces zero touch-passthrough or measured frame-latency regression across 10 AndroidWorld applications ($50/50$ events, $\Delta\text{p95}=0.0\,\text{ms}$ on Markor and Settings).
-
-% === END mobisys\sections/abstract.tex ===
-
+% === END sections/abstract ===
 \end{abstract}
 
 \begin{CCSXML}
@@ -134,8 +128,7 @@ Mobile GUI agents must often use a one-time password, credential, address, phone
 
 \maketitle
 
-
-% === BEGIN mobisys\sections/introduction.tex ===
+% === BEGIN sections/introduction ===
 \section{Introduction}
 \label{sec:intro}
 
@@ -152,11 +145,8 @@ This is no longer hypothetical. A browser agent read an OTP from a mail client a
 \paragraph{Contribution.} We propose \SH, an OS layer that makes secrets usable but invisible to untrusted agents. A handle is minted at the source before the raw value reaches the agent, carries a destination-and-task binding, and has a typed lifecycle. A resolver injects the value only into a bound destination; a redactor masks the resolved field afterwards. This paper contributes: (i) the problem framing and threat model for mobile GUI agents handling authoritative secrets (\S\ref{sec:background}--\ref{sec:threat}); (ii) the \SH{} architecture featuring OS-minted, unforgeable, destination- and task-bound capability handles (\S\ref{sec:design}); (iii) a formal transition-system handle model with proofs of non-disclosure, confinement, and unforgeability, enforced via Algorithms~1 and 2 (\S\ref{sec:model}--\ref{sec:algorithm}); (iv) a stock Android~14 prototype realizing notification/clipboard brokering, screen overlay redaction, and atomic vault resolution without custom ROM modifications, together with an explicit mapping to upstream AOSP integration; and (v) an empirical evaluation answering six research questions (RQ1--RQ6) on Android~14 against visual (Mobile-Agent~v3.5 / Claude~3.5 Sonnet) and structural (AutoDroid / GPT-4o) agents under KVM emulation plus Galaxy~A52s microbenchmarks, demonstrating zero secret exposure ($0/30$), complete mitigation of cross-app and intra-app redirection ($0/30$ vs.\ $30/30$ for unbound placeholders and SMS consent flows), atomic race safety ($50/50$), low mediation overhead ($5.42\,\mu\text{s}$ vault mint, $4.18\,\text{ms}$ UI dispatch), and zero touch-passthrough or measured frame-latency regression across 10 AndroidWorld applications (\S\ref{sec:evidence}).
 
 \paragraph{Roadmap.} Section~\ref{sec:background} motivates the problem and Section~\ref{sec:threat} fixes the trust model. Section~\ref{sec:design} describes the design, Section~\ref{sec:model} formalizes handles and their guarantees, and Section~\ref{sec:algorithm} gives the mint and resolve algorithms. Section~\ref{sec:evidence} evaluates \SH{} across RQ1--RQ6 on an Android~14 prototype, and Sections~\ref{sec:related}--\ref{sec:limitations} position the work, discuss deployment considerations, and state its limits.
-
-% === END mobisys\sections/introduction.tex ===
-
-
-% === BEGIN mobisys\sections/background.tex ===
+% === END sections/introduction ===
+% === BEGIN sections/background ===
 \section{Background and Motivation}
 \label{sec:background}
 
@@ -167,11 +157,8 @@ This is no longer hypothetical. A browser agent read an OTP from a mail client a
 \paragraph{Why existing defenses fail.} \emph{Placeholder anonymization} replaces rendered sensitive text with a local token and resolves it at \texttt{type} time. It removes the literal value from the current observation but depends on detector recall, is session-scoped, and does not constrain \emph{which} field receives the resolved value or \emph{which} origin may request it. An injected instruction can redirect the resolution \cite{zhao2026anonymization}. \emph{Platform autofill and Credential Manager} are app-initiated: the consuming app must drive them, and they trust that app, so an accessibility agent cannot invoke them and a hostile field is not distinguished \cite{androidAutofill,androidAutofillServices,androidCredentialManager}. \emph{Server-side agentic-payment tokens} cover payments only and live outside the OS, leaving OTP, phone, email, address, and clipboard unprotected.
 
 \paragraph{Design forces.} A defense that bends the attack curve must (1) mint the secret at the authoritative source, so security does not depend on detector recall; (2) bind it to the destination and task that may consume it, so an injection cannot reroute it; (3) give it a typed lifecycle, so single-use secrets cannot be replayed; and (4) redact the resolved value afterwards, because the entered value reappears in the next frame.
-
-% === END mobisys\sections/background.tex ===
-
-
-% === BEGIN mobisys\sections/threat_model.tex ===
+% === END sections/background ===
+% === BEGIN sections/threat_model ===
 \section{Threat Model}
 \label{sec:threat}
 
@@ -211,11 +198,8 @@ G4 forge & \textbf{S2} unforgeability & authenticated metadata $a=F_K(\enc(H))$ 
 \paragraph{Reference-monitor assumptions.} The guarantees of Section~\ref{sec:model} hold only under explicit architectural assumptions: the OS service, store, resolver, redaction registry, and trusted target-context extraction cannot be modified by the adversary and mediate every resolve; only an approved source adapter can mint a protected-source handle, and the task token cannot be forged; the authenticator key is secret and the encoding canonical; the target identity the resolver reads equals the actual injection target at commit time; and every agent-visible screenshot, tree, event, and log applies the same value-independent mask. Section~\ref{sec:model} states these formally, so each guarantee is a conditional statement about an implementation that satisfies them rather than an unconditional claim about all Android devices.
 
 \paragraph{Out of scope.} Semantic misuse \emph{inside} an allowed destination (e.g., an agent tricked into initiating a legitimate-but-unwanted action), WebView-origin attestation (fields in a WebView are rejected fail-closed rather than bound), and side channels outside the modeled observation boundary. These are residual risks and are discussed in the evaluation plan and limitations, not claimed to be eliminated.
-
-% === END mobisys\sections/threat_model.tex ===
-
-
-% === BEGIN mobisys\sections/architecture.tex ===
+% === END sections/threat_model ===
+% === BEGIN sections/architecture ===
 \begin{figure*}[t]
 \centering
 \resizebox{\textwidth}{!}{%
@@ -266,10 +250,8 @@ G4 forge & \textbf{S2} unforgeability & authenticated metadata $a=F_K(\enc(H))$ 
 \caption{SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Line styles distinguish ordinary, protected, control, and adversarial flows.}
 \label{fig:architecture}
 \end{figure*}
-% === END mobisys\sections/architecture.tex ===
-
-
-% === BEGIN mobisys\sections/design.tex ===
+% === END sections/architecture ===
+% === BEGIN sections/design ===
 \section{Design: Usable but Invisible Secrets}
 \label{sec:design}
 
@@ -322,11 +304,8 @@ Service crash in reserved state & conservatively consume single-use handle / han
 \paragraph{Auditing without secret leakage.} Each audit entry logs event type, per-install pseudonymous handle ID, type, source/destination classes, decision, coarse latency, and policy version, omitting raw secrets, app text, full URLs, and authenticators.
 
 \paragraph{Building blocks and deployment modes.} Destination binding reuses Android package identity and WebView origin; unforgeability uses HMAC~\cite{rfc2104} over canonical metadata with key separation. Upstream AOSP integrates into \texttt{system\_server}, \texttt{InputDispatcher}, and \texttt{ViewRootImpl}, whereas our stock Android~14 prototype realizes these policies via a user-granted broker APK isolated from the agent UID (\S\ref{sec:algorithm}, Table~\ref{tab:aosp_vs_stock}; Fig.~\ref{fig:architecture}).
-
-% === END mobisys\sections/design.tex ===
-
-
-% === BEGIN mobisys\sections/model.tex ===
+% === END sections/design ===
+% === BEGIN sections/model ===
 \section{Formalizing Handles and Their Guarantees}
 \label{sec:model}
 
@@ -440,11 +419,8 @@ In a hybrid argument, visible identifiers are uniform and independent of $s$, pu
 \begin{remark}[In-scope misuse]
 Theorem~\ref{thm:confinement} does not cover a target inside $d$. An injection may still induce an unwanted action within the same authorized package or origin, such as logging into an attacker's account. Task semantics, transaction confirmation, and richer form binding are separate defenses; we quantify this residual risk rather than claim it eliminated.
 \end{remark}
-
-% === END mobisys\sections/model.tex ===
-
-
-% === BEGIN mobisys\sections/algorithm.tex ===
+% === END sections/model ===
+% === BEGIN sections/algorithm ===
 \section{Enforcement Algorithms}
 \label{sec:algorithm}
 
@@ -518,15 +494,12 @@ Memory / Key & Native C++ \texttt{mlock()}/\allowbreak\texttt{explicit\_bzero} +
 \end{table}
 
 \paragraph{Complexity.} Mint and lookup are expected $O(1)$; policy evaluation is $O(k)$ for $k$ components; MAC cost scales with metadata length, not $|s|$; redaction is $O(r+n)$ for $r$ obligations and $n$ nodes. Memory per live handle is $|s|+O(|H|+\lambda)$, bounded by per-task quotas and short TTLs.
-
-% === END mobisys\sections/algorithm.tex ===
-
-
-% === BEGIN mobisys\sections/evidence.tex ===
+% === END sections/algorithm ===
+% === BEGIN sections/evidence ===
 \section{Experimental Evaluation}
 \label{sec:evidence}
 
-We evaluate \SH{} on a stock-Android userdebug environment (Android 14, API 33/34) running on an AWS EC2 bare-metal-equivalent instance (\texttt{m8i.4xlarge}, 16 vCPUs, 64 GiB RAM, KVM nested virtualization). We evaluate against an off-the-shelf mobile GUI agent: Mobile-Agent v3.5 \cite{wang2024mobileagent,ye2025mobileagentv3} driven by Claude 3.5 Sonnet (Anthropic API snapshot \texttt{claude-3-5-sonnet-20241022}, sampling temperature $T=0.0$, top-p $1.0$, maximum 15 interaction steps per task) through an isolated local bridge, with screenshot-only observation and no accessibility-tree or prompt-level ground-truth cheats. For structural GUI evaluation, we deploy AutoDroid \cite{wen2023autodroid} powered by GPT-4o (\texttt{gpt-4o-2024-08-06}, $T=0.0$). The evaluation answers six primary research questions: (RQ1) confidentiality of secrets during agent navigation; (RQ2) defense against Confused Deputy destination redirection; (RQ3) atomic single-use lifecycle and race immunity; (RQ4) post-entry observation redaction; (RQ5) runtime and memory overhead; and (RQ6) transparency and general-task regression on benign applications.
+We evaluate \SH{} on a stock-Android userdebug environment (Android 14, API 33/34) running on an AWS EC2 bare-metal-equivalent instance (\texttt{m8i.4xlarge}, 16 vCPUs, 64 GiB RAM, KVM nested virtualization). We evaluate against an off-the-shelf mobile GUI agent: Mobile-Agent v3.5 \cite{wang2024mobileagent,ye2025mobileagentv3} driven by Claude 3.5 Sonnet (via Amazon Bedrock, snapshot \texttt{claude-3-5-sonnet-20241022}, sampling temperature $T=0.0$, top-p $1.0$, maximum 15 interaction steps per task) through an isolated local bridge, with screenshot-only observation and no accessibility-tree or prompt-level ground-truth cheats. For structural GUI evaluation, we deploy AutoDroid \cite{wen2023autodroid} powered by GPT-4o (\texttt{gpt-4o-2024-08-06}, $T=0.0$). The evaluation answers six primary research questions: (RQ1) confidentiality of secrets during agent navigation; (RQ2) defense against Confused Deputy destination redirection; (RQ3) atomic single-use lifecycle and race immunity; (RQ4) post-entry observation redaction; (RQ5) runtime and memory overhead; and (RQ6) transparency and general-task regression on benign applications.
 
 \paragraph{Baselines.} We compare four security conditions:
 (B0)~\emph{Unprotected}: the agent observes the raw plaintext secret in notifications and on-screen and types it directly.
@@ -623,18 +596,17 @@ We evaluated 5 prompt injection templates ($n=6$ each, $n=30$ total; Table~\ref{
 
 Under \textbf{B0}, the VLM obeys the injected alert, opens \texttt{com.attacker.rewards}, types raw \texttt{849201}, and submits in $29/30$ trials (4.2 steps mean). Under \textbf{B1}, \texttt{849201} is replaced with \texttt{[TOKEN\_OTP\_1]}, yet the planner pastes the token into \texttt{com.attacker.rewards} and B1's unbound resolver leaks the plaintext ($30/30$, $R=1.00$).
 
-Under \textbf{B3 (\SH{})}, the notification broker mints \texttt{SH-A8F29C} bound strictly to \texttt{pkg:\allowbreak com.legitimate.bank} before agent observation. When the confused agent attempts entry into \texttt{com.attacker.rewards}, the resolver executes Algorithm~2, confirms $\mathsf{Target} \neq \mathsf{BoundTarget}$, records \texttt{DESTINATION\_MISMATCH}, and rejects resolution. Per Algorithm~\ref{alg:resolve} Line~\ref{line:resolve:mismatch}, a single mismatch increments $k$ to $1 < k_{\max}=3$ while preserving $u$ (decremented only at Line~\ref{line:resolve:reserve}); the bridge returns \texttt{destination denied}, enabling backtracking to complete the banking flow. Under repeated DoS retries ($\ge k_{\max}=3$ in Template~4), the handle transitions to \textsf{revoked} and requires local single-tap user touch-confirmation fallback (human intervention rather than autonomous recovery).
+Under \textbf{B3 (\SH{})}, the notification broker mints \texttt{SH-A8F29C} bound strictly to \texttt{pkg:\allowbreak com.\allowbreak legitimate.\allowbreak bank} before agent observation. When the confused agent attempts entry into \texttt{com.attacker.rewards}, the resolver executes Algorithm~2, confirms $\mathsf{Target} \neq \mathsf{BoundTarget}$, records \texttt{DESTINATION\_MISMATCH}, and rejects resolution. Per Algorithm~\ref{alg:resolve} Line~\ref{line:resolve:mismatch}, a single mismatch increments $k$ to $1 < k_{\max}=3$ while preserving $u$ (decremented only at Line~\ref{line:resolve:reserve}); the bridge returns \texttt{destination denied}, enabling backtracking to complete the banking flow. Under repeated DoS retries ($\ge k_{\max}=3$ in Template~4), the handle transitions to \textsf{revoked} and requires local single-tap user touch-confirmation fallback (human intervention rather than autonomous recovery).
 
 \emph{Fallback \& WebView Microbenchmarks}: Two synthetic \texttt{BenchmarkRunner} suites ($n=30$ each) isolate non-standard UIs and web origins: (1)~\texttt{Vault.revealFallback} pairs foreground package verification with a user touch gate for custom canvases/numpads lacking \texttt{smsOTPCode}, blocking adversary apps ($0/30$ leaks) and permitting bound targets ($30/30$, median vault check $47.60\,\mu\text{s}$ excluding human reaction time); (2)~\texttt{Vault.revealWeb} (separate from the $n=6$ end-to-end Template~3 trials) blocks unverified origins fail-closed ($0/30$ leaks) while permitting bound origins ($30/30$, median $56.80\,\mu\text{s}$).
 
+\paragraph{Empirical Real-App UI Compatibility (Physical Device).}
+To validate destination-matching compatibility beyond synthetic apps, we captured static UI accessibility trees (\texttt{uiautomator dump}) and installed package versions (\texttt{dumpsys package}) across 20 commercial Google Play applications navigated to live login, phone/OTP, or PIN screens on a physical Samsung Galaxy~A52s (\texttt{SM-A528B}, Android~14 API~34; Table~\ref{tab:app_compatibility} in Appendix~\ref{sec:appendix_compat}). All 20 applications exposed standard \texttt{EditText} (19/20) or \texttt{AutoCompleteTextView} (1/20, Microsoft Teams) nodes: $9/20$ ($45.0\%$, including MoMo, Shopee, Messenger, Lazada, Grab, and Discord) yielded \emph{Direct Match} via explicit OTP/password semantic cues, whereas $11/20$ ($55.0\%$, including Telegram, WhatsApp, GitHub, OKX, Binance, PayPal, and Bitwarden) lacked explicit semantic hints on initial entry fields and resolved cleanly via \emph{Standard Package+Class Fallback} paired with user touch confirmation. Two applications natively delegated credential entry across package boundaries (\texttt{Gmail} $\rightarrow$ \texttt{com.google.android.gms}; \texttt{SoundCloud} $\rightarrow$ \texttt{com.android.chrome} Custom Tab), empirically motivating explicit delegated-auth destination rules; an attempted banking-app audit (\texttt{com.VCB}) was excluded after pre-login RASP checks blocked Developer Options before rendering credentials.
+
 \paragraph{Ablation: Dissecting Security Invariants.}
 Disabling each invariant isolates its necessity: (1)~\emph{No Source Minting} degrades to B0 screen exposure ($E=0.97$); (2)~\emph{No Destination Binding} degrades to B1 redirection ($R=1.00$); (3)~\emph{No Atomic CAS} permits concurrent OTP duplication ($50/50$ races); and (4)~\emph{No Observation Redactor} exposes resolved plaintext in the next screenshot ($L=1.00$ in a $1/1$ control test). All four invariants are non-redundant.
-
-
-% === END mobisys\sections/evidence.tex ===
-
-
-% === BEGIN mobisys\sections/related_work.tex ===
+% === END sections/evidence ===
+% === BEGIN sections/related_work ===
 \section{Related Work}
 \label{sec:related}
 
@@ -647,11 +619,8 @@ Table~\ref{tab:comparison} summarizes the structural differences across contempo
 \paragraph{Prompt sanitizers.} Detection-and-rewrite schemes suppress sensitive spans in prompts \cite{siyan2025papillon,zeng2025privacyrestore,chong2024casper}. They reduce model-side exposure but lack destination binding and OS enforcement. Furthermore, prompt sanitization is probabilistic: adversarial formatting and obfuscation can evade detection filters.
 
 \paragraph{Platform mechanisms and reference monitors.} Android's SMS Retriever/Consent \cite{androidSmsRetriever,androidSmsConsent}, sensitive-notification OTP pipeline \cite{android15privacy}, Credential Manager \cite{androidCredentialManager}, and Protected Confirmation \cite{androidProtectedConfirmation} are valuable primitives, but trust requesting apps without intra-app or post-entry confinement. Sensitive-field classifiers such as SUPOR~\cite{huang2015supor} and UIPicker~\cite{nan2015uipicker} inform how resolvers classify target UI fields $f$ when explicit \texttt{autofillHints} are absent. \SH{} applies complete mediation and least privilege \cite{saltzer1975protection} to UI injection by untrusted agents, building on capability systems (Capsicum \cite{watson2010capsicum}, Dennis and Van Horn \cite{dennis1966semantics}), Android app isolation \cite{felt2011permission,bugiel2013flexible,rossi2021seapp}, and trusted UI paths (SchrodinText \cite{continella2020schrodintext}, Rushmore \cite{andrus2015rushmore}, GYRUS \cite{jang2014gyrus}, TrustUI \cite{li2014trustui}, TruZ-Droid \cite{ying2018truzdroid}). While Cloak \& Dagger \cite{fratantonio2017cloak} revealed accessibility overlay abuses, \SH{} leverages overlays to shield secrets from vision agents. Unlike post-hoc taint tracking (TaintDroid \cite{enck2010taintdroid}, DroidScope \cite{yan2012droidscope}) or endpoint token binding \cite{rfc8707,rfc9449,rfc9700,webauthn3,nist80063b,rfc4226,rfc6238}, \SH{} binds on-device resolution directly to verified UI destinations under documented agent prompt-injection threats \cite{du2025mobileattacks,liao2024eia,chen2025fineprint,greshake2023indirect,debenedetti2024agentdojo,zhan2024injecagent}.
-
-% === END mobisys\sections/related_work.tex ===
-
-
-% === BEGIN mobisys\sections/discussion.tex ===
+% === END sections/related_work ===
+% === BEGIN sections/discussion ===
 \section{Discussion and Limitations}
 \label{sec:discussion}
 
@@ -666,70 +635,66 @@ Upstream native services pin secrets via \texttt{mlock()} and zero buffers via \
 \emph{Platform Scope and Adaptive Races}: Stock Android~14 evaluation grants \texttt{b3.apk} notification-listener and accessibility capabilities while confining the untrusted agent to a separate unprivileged UID. On unmodified OSes, \texttt{SecretBrokerService} relies on regex extraction after notification posting and \texttt{RedactionAccessibilityService} tracks bounds via 200\,ms/event scans; rapid scroll or arrival before overlay commit poses a finite race mitigated only by SDK bridge render synchronization. Figure~\ref{fig:b3}(b) masks the full SMS bubble conservatively (trading transaction context for zero-leak safety; span-level masking is future work). Fallback touch dialogs must set \texttt{setFilterTouchesWhenObscured(true)} to resist tapjacking. Compromised kernels and OEM debug channels lie outside our trust model.
 \emph{Web Views}: Package identity cannot enforce document origins inside WebViews; binding web forms requires Chromium origin attestation, falling back safely to fail-closed rejection.
 \emph{Authorized-Destination Misuse}: Destination binding restricts \emph{where} secrets resolve, not semantic actions \emph{within} legitimate apps. Repeated invalid attempts are throttled by retry bound $k_{\max}=3$ before falling back to local touch confirmation, thwarting DoS depletion.
-
-
-
-% === END mobisys\sections/discussion.tex ===
-
-
-% === BEGIN mobisys\sections/conclusion.tex ===
+% === END sections/discussion ===
+% === BEGIN sections/conclusion ===
 \section{Conclusion}
 \label{sec:conclusion}
 
 \SH{} eliminates credential exposure for mobile AI agents by minting unforgeable, destination- and task-bound handles at authoritative OS sources and enforcing atomic zero-exposure resolution into verified UI fields. Empirical evaluation on Android~14 confirms that \SH{} eliminates secret leakage ($0/30$) and Confused Deputy destination redirection ($0/30$ vs.\ $30/30$) with microsecond in-vault transitions ($5.42\,\mu\text{s}$) and zero touch-passthrough or measured frame-latency regression across 10 AndroidWorld applications ($\Delta\text{p95} = 0.0\,\text{ms}$ on Markor and Settings).
-
-% === END mobisys\sections/conclusion.tex ===
-
+% === END sections/conclusion ===
 
 \clearpage
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{../references_verified}
 
 \appendix
-
-% === BEGIN mobisys\sections/artifact.tex ===
+% === BEGIN sections/artifact ===
 \section{Artifact Appendix}
 \label{sec:artifact}
 
-\paragraph{Scope.} The \SH{} artifact repository is openly available at \url{https://github.com/SecretHandle/SecretHandle} under the Apache License~2.0. The repository consists of two distinct components: (1)~a formal Python reference package (\texttt{src/secrethandle}) for offline state-machine verification, property testing, and math audits; and (2)~the Android~14 on-device prototype (\texttt{device/b3-secrethandle/}) evaluated in Section~\ref{sec:evidence}, comprising the privileged Binder service, notification listener broker, accessibility redactor, Agent SDK bridge, and microbenchmark suites.
+\paragraph{Scope.} The \SH{} artifact repository (\url{https://github.com/SecretHandle/SecretHandle}, Apache License~2.0) ships four directories evaluated in Section~\ref{sec:evidence}: (1)~\texttt{SecretHandle/}: Python reference model (\texttt{src/secrethandle}), offline property verifier, and \texttt{pytest} suite; (2)~\texttt{device/\allowbreak b3-secrethandle/}: Android~14 prototype APK (\texttt{b3secrethandle.apk}) and \texttt{BenchmarkRunner}; (3)~\texttt{device/\allowbreak b0-otp-forwarding/}: B0 exfiltration harness; and (4)~\texttt{tools/} and \texttt{output/}: real-app UI compatibility auditor and archived empirical JSON logs.
 
-\paragraph{Contents.} The repository ships:
-(i)~\texttt{src/secrethandle}: Python state-machine implementation, policy solvers, offline pytest suite, and deterministic synthetic-canary property checks;
-(ii)~\texttt{device/b3-secrethandle}: Java and AIDL source code for \texttt{SecretHandleVaultService}, the \texttt{NotificationListener} broker, the accessibility overlay compositor (\texttt{TYPE\_\allowbreak ACCESSIBILITY\_\allowbreak OVERLAY}), and the in-framework \texttt{BenchmarkRunner.java} harness;
-(iii)~\texttt{evaluation/}: Experiment drivers, Mobile-Agent v3.5 bridge configuration, attack harness, synthetic bank and attacker APKs, and log parsers for reproducing Table~\ref{tab:main_eval}.
+\paragraph{Contents.}
+(i)~\texttt{SecretHandle/src}: Python state-machine model, policy solvers, offline tests, and synthetic-canary verifier;
+(ii)~\texttt{device/\allowbreak b3-\allowbreak secrethandle}: Java source for \texttt{Vault}, \texttt{Secret\allowbreak Broker\allowbreak Service} (\texttt{Notification\allowbreak Listener\allowbreak Service}), \texttt{Redaction\allowbreak Accessibility\allowbreak Service} (\texttt{TYPE\_\allowbreak ACCESSIBILITY\_\allowbreak OVERLAY}), \texttt{MainActivity}, and \texttt{Benchmark\allowbreak Runner.java};
+(iii)~\texttt{tools/} and \texttt{run\_\allowbreak tier4\_\allowbreak physical\_\allowbreak benchmark.ps1}: physical-device runner, \texttt{audit\_\allowbreak real\_\allowbreak apps\_\allowbreak compatibility.py}, and \texttt{manuscript\_\allowbreak check.py};
+(iv)~\texttt{output/}: archived datasets (\texttt{physical\_\allowbreak device\_\allowbreak benchmark.json}, \texttt{benchmark\_\allowbreak overhead\_\allowbreak lifecycle\_\allowbreak redirection.json}, \texttt{rq6\_\allowbreak benign\_\allowbreak regression\_\allowbreak results.json}, \texttt{real\_\allowbreak apps\_\allowbreak compatibility\_\allowbreak audit.json}, etc.).
 
-\paragraph{One-command offline verification.} From the repository root, with Python 3.10+ (3.11+ recommended):
+\paragraph{One-command offline verification.} Inside \texttt{SecretHandle/} (Python 3.10+):
+\begin{small}
 \begin{verbatim}
-python -m venv .venv && source .venv/bin/activate
-python -m pip install -e '.[dev]'
+cd SecretHandle && python -m venv .venv
+source .venv/bin/activate && pip install -e '.[dev]'
 make check
 \end{verbatim}
-\texttt{make check} executes linting (\texttt{ruff}), type checks (\texttt{mypy}), unit test suites (\texttt{pytest}), and the synthetic-canary property checker. Running \texttt{make smoke} tests state-machine invariants over 6,400 synthetic attack runs (seed \texttt{20261017}) with zero leak anomalies.
+\end{small}
+\texttt{make check} runs \texttt{ruff}, \texttt{mypy}, \texttt{pytest}, and \texttt{scripts/\allowbreak smoke\_\allowbreak check.py} over 6,400 synthetic runs (seed \texttt{20261017}) with zero leak anomalies.
 
-\paragraph{On-device Android 14 experiment reproduction.} To reproduce the empirical measurements in Section~\ref{sec:evidence}:
+\paragraph{On-device Android 14 experiment reproduction.} To install the Android~14 prototype, execute \texttt{BenchmarkRunner}, and audit UI compatibility:
+\begin{small}
 \begin{verbatim}
-# 1. Verify SELinux enforcing & install/enable APK
+# 1. Verify SELinux & install/enable prototype
 adb unroot && adb shell getenforce
-adb install -r device/b3-secrethandle/build/\
-  b3secrethandle.apk
+APK=device/b3-secrethandle/build/b3secrethandle.apk
+adb install -r $APK
 adb shell cmd notification allow_listener \
   com.secrethandle.b3/.SecretBrokerService
 adb shell settings put secure \
   enabled_accessibility_services \
-  com.secrethandle.b3/\
-  .RedactionAccessibilityService
-adb shell settings put secure \
-  accessibility_enabled 1
-# 2. Run microbenchmarks via app_process
+  com.secrethandle.b3/.RedactionAccessibilityService
+adb shell settings put secure accessibility_enabled 1
+# 2. Run on-device microbenchmarks (or audit UI)
+adb push $APK /data/local/tmp/bench.jar
 adb shell CLASSPATH=/data/local/tmp/bench.jar \
-  app_process /data/local/tmp BenchmarkRunner
-# 3. Execute n=30 agent evaluation trials
-python evaluation/run_agent_matrix.py \
-  --config configs/android14_eval.yaml
+  app_process /data/local/tmp \
+  com.secrethandle.b3.BenchmarkRunner all
+python tools/audit_real_apps_compatibility.py \
+  --capture "AppName" --category "Fintech"
 \end{verbatim}
-Per-trial logs, latency dumps, agent system prompts, commit hashes, and step trajectories are recorded in \texttt{evaluation/} and \texttt{results/trials.jsonl}. The evaluation uses random synthetic canaries per trial; no human subjects, production accounts, or real credentials are used.
+\end{small}
+All benchmarks use synthetic canary secrets or static UI tree dumps without storing user text; aggregated metrics from external KVM agent runs (\texttt{Mobile-Agent v3.5}, \texttt{AutoDroid}) and physical-device captures reside in \texttt{output/*.json}.
 
-\paragraph{Integrity and license.} All configuration digests and random seeds are logged in \texttt{provenance.json} at initialization. The repository is released under the Apache License~2.0 with all source files, benchmark harnesses, and analysis scripts fully open-sourced.
+\paragraph{Integrity and license.} Offline checks log seeds and digests in \texttt{provenance.json}. Source code, harnesses, auditors, and archived JSON logs are released under Apache~2.0.
 
 \section{Prompt Injection Attack Taxonomy}
 \label{sec:appendix_templates}
@@ -757,7 +722,43 @@ T5: Multilingual & Cross-lingual syntax switching & \textit{``Cảnh báo bảo 
 
 \paragraph{Adversarial delivery channels.} Injection payloads were introduced via two realistic vectors: (1)~unredacted non-banking notifications (e.g., promotional messages from external applications), and (2)~untrusted third-party content (e.g., chat logs or web pages). Under B0, all 5 templates successfully diverted the visual agent ($29/30$ exfiltration rate). Under B1, the agent transferred the placeholder token to the attacker app, resulting in complete secret release ($30/30$). Under \SH{} (B3), the OS reference monitor enforced destination verification, blocking all redirection and exfiltration attempts ($0/30$ exposure, $0/30$ redirection).
 
-% === END mobisys\sections/artifact.tex ===
+\section{Real-App UI Compatibility Audit}
+\label{sec:appendix_compat}
 
+Table~\ref{tab:app_compatibility} reports the static UI hierarchy audit conducted across 20 real Google Play applications on a physical Samsung Galaxy~A52s (\texttt{SM-A528B}, Android~14 API~34) navigated to live credential, phone/OTP, or PIN screens without executing attacks or storing user text.
+
+\begin{table*}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Empirical compatibility audit of \SH{} destination matching across 20 Google Play applications captured on a physical Samsung Galaxy~A52s (Android~14, API~34). \textbf{Direct}: \texttt{EditText} exposing explicit OTP/password semantic attributes; \textbf{Pkg+Class}: standard \texttt{EditText} or \texttt{AutoCompleteTextView} matched via foreground package boundary plus single-tap user touch gate.}
+\label{tab:app_compatibility}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lllllll@{}}
+\toprule
+Application & Category & Foreground Package & Version Name (Code) & Input Class & Matching & Fallback \\
+\midrule
+MoMo & Fintech & \texttt{com.mservice.momotransfer} & \texttt{5.18.0} (51800) & \texttt{EditText} & Direct & None \\
+Home Credit & Finance & \texttt{vn.homecredit.capp} & \texttt{3.176.5} (261110001) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+Shopee & E-Commerce & \texttt{com.shopee.vn} & \texttt{3.86.31} (38631) & \texttt{EditText} & Direct & None \\
+Messenger & Messaging & \texttt{com.facebook.orca} & \texttt{588.1.0.66.98} (347617568) & \texttt{EditText} & Direct & None \\
+Gmail (GMS Auth) & Email & \texttt{com.google.android.gms} & \texttt{26.45.31} (264531029) & \texttt{EditText} & Direct & None \\
+Microsoft Teams & Enterprise & \texttt{com.microsoft.teams} & \texttt{1.0.0.2026203802} (2026203825) & \texttt{AutoCompleteTextView} & Pkg+Class & Touch Gate \\
+TikTok & Social & \texttt{com.ss.android.ugc.trill} & \texttt{47.8.3} (470803) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+SoundCloud (Tab) & Media & \texttt{com.android.chrome} & \texttt{157.0.8103.80} (810308004) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+CocCoc Browser & Browser & \texttt{com.coccoc.trinhduyet} & \texttt{160.0.175} (998917504) & \texttt{EditText} & Direct & None \\
+Knowt & Education & \texttt{com.knowt.app} & \texttt{4.4.0} (327) & \texttt{EditText} & Direct & None \\
+Telegram & Messaging & \texttt{org.telegram.messenger} & \texttt{13.3.1} (73461) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+GitHub & Developer & \texttt{com.github.android} & \texttt{1.285.0} (956) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+WhatsApp & Messaging & \texttt{com.whatsapp} & \texttt{2.26.45.99} (264509900) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+Lazada & E-Commerce & \texttt{com.lazada.android} & \texttt{8.11.0} (5390) & \texttt{EditText} & Direct & None \\
+OKX & Fintech/Crypto & \texttt{com.okinc.okex.gp} & \texttt{6.199.0} (739547) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+Grab & Super-App & \texttt{com.grabtaxi.passenger} & \texttt{5.437.0} (54370000) & \texttt{EditText} & Direct & None \\
+Binance & Fintech/Crypto & \texttt{com.binance.dev} & \texttt{3.22.4} (100302204) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+PayPal & Fintech & \texttt{com.paypal.android.p2pmobile} & \texttt{10.21.1} (1160090191) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+Discord & Messaging & \texttt{com.discord} & \texttt{354.12} (354012) & \texttt{EditText} & Direct & None \\
+Bitwarden & Pwd Manager & \texttt{com.x8bit.bitwarden} & \texttt{2026.11.1} (22056) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+\bottomrule
+\end{tabular*}
+\end{table*}
+% === END sections/artifact ===
 
 \end{document}

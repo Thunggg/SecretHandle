@@ -1,223 +1,699 @@
 {
-  "timestamp": "2026-10-30T00:05:54.568629",
+  "timestamp": "2026-11-23T18:40:33.100014",
   "device": {
-    "brand": "google",
-    "model": "sdk_gphone64_x86_64",
-    "android_version": "14",
-    "api_level": "34"
-  },
-  "summary": {
-    "total_apps_audited": 20,
-    "directly_compatible_count": 2,
-    "directly_compatible_pct": 10.0,
-    "custom_canvas_fallback_count": 18,
-    "custom_canvas_fallback_pct": 90.0,
-    "overall_safety_guarantee": "100.0%"
+    "model": "SM-A528B",
+    "android_release": "14",
+    "android_sdk": "34"
   },
   "audited_apps": [
     {
-      "app_name": "Google Chrome",
-      "package_name": "com.android.chrome",
-      "category": "Browser / Web",
-      "field_count": 1,
-      "status": "DIRECT_MATCH",
-      "summary_description": "Directly compatible with Match(d, x)",
+      "app_name": "MoMo",
+      "category": "Fintech",
+      "package_name": "com.mservice.momotransfer",
+      "version_name": "5.18.0",
+      "version_code": "51800",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:15:27.494714",
+      "input_field_count": 1,
+      "primary_status": "DIRECT_COMPATIBLE",
       "fields": [
         {
           "class": "android.widget.EditText",
-          "resource_id": "com.android.chrome:id/search_box_text",
-          "hints": [
-            "textInput"
-          ],
+          "resource_id": "input_bottomsheet_password",
+          "content_desc": "",
           "is_password": false,
-          "bounds": "[74,346][842,472]",
-          "tier": "DIRECT_MATCH",
-          "reason": "Standard EditText with detected semantic hint (textInput)"
+          "detected_hints": [
+            "password"
+          ],
+          "bounds": "[0,1327][109,1438]",
+          "compatibility_tier": "DIRECT_MATCH",
+          "reason": "Standard EditText with explicit OTP/password semantic signal"
         }
       ]
     },
     {
-      "app_name": "Google Messages",
-      "package_name": "com.google.android.apps.messaging",
-      "category": "SMS / Telephony OTP",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
+      "app_name": "Home Credit",
+      "category": "Finance",
+      "package_name": "vn.homecredit.capp",
+      "version_name": "3.176.5",
+      "version_code": "261110001",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:16:04.685726",
+      "input_field_count": 1,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[45,1627][1035,1773]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
     },
     {
-      "app_name": "Google Play Store",
-      "package_name": "com.android.vending",
-      "category": "Commercial / Payments",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
+      "app_name": "Shopee",
+      "category": "E-Commerce",
+      "package_name": "com.shopee.vn",
+      "version_name": "3.86.31",
+      "version_code": "38631",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:17:15.959399",
+      "input_field_count": 2,
+      "primary_status": "DIRECT_COMPATIBLE",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.shopee.vn:id/cret_edit_text",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "phone",
+            "username"
+          ],
+          "bounds": "[68,601][978,736]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.shopee.vn:id/cret_edit_text",
+          "content_desc": "",
+          "is_password": true,
+          "detected_hints": [
+            "password"
+          ],
+          "bounds": "[68,737][742,872]",
+          "compatibility_tier": "DIRECT_MATCH",
+          "reason": "Standard EditText with explicit OTP/password semantic signal"
+        }
+      ]
     },
     {
-      "app_name": "Android Settings",
-      "package_name": "com.android.settings",
-      "category": "System / Security",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
-    },
-    {
-      "app_name": "Aegis 2FA Authenticator",
-      "package_name": "com.beemdevelopment.aegis",
-      "category": "2FA Authenticator",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
+      "app_name": "Messenger",
+      "category": "Messaging",
+      "package_name": "com.facebook.orca",
+      "version_name": "588.1.0.66.98",
+      "version_code": "347617568",
+      "target_sdk": "37",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:18:10.359511",
+      "input_field_count": 2,
+      "primary_status": "DIRECT_COMPATIBLE",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "",
+          "content_desc": "Số di động hoặc email,",
+          "is_password": false,
+          "detected_hints": [
+            "username"
+          ],
+          "bounds": "[90,1064][888,1114]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "",
+          "content_desc": "Mật khẩu,",
+          "is_password": true,
+          "detected_hints": [
+            "password"
+          ],
+          "bounds": "[90,1262][888,1312]",
+          "compatibility_tier": "DIRECT_MATCH",
+          "reason": "Standard EditText with explicit OTP/password semantic signal"
+        }
+      ]
     },
     {
       "app_name": "Gmail",
-      "package_name": "com.google.android.gm",
-      "category": "Communication / Email",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
-    },
-    {
-      "app_name": "Phone / Dialer",
-      "package_name": "com.google.android.dialer",
-      "category": "Telephony / Keypad",
-      "field_count": 1,
-      "status": "DIRECT_MATCH",
-      "summary_description": "Directly compatible with Match(d, x)",
+      "category": "Email",
+      "package_name": "com.google.android.gms",
+      "version_name": "26.45.31 (190400-1020418964)",
+      "version_code": "264531029",
+      "target_sdk": "37",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:18:50.812155",
+      "input_field_count": 1,
+      "primary_status": "DIRECT_COMPATIBLE",
       "fields": [
         {
           "class": "android.widget.EditText",
-          "resource_id": "com.google.android.dialer:id/search_bar",
-          "hints": [
-            "textInput"
+          "resource_id": "com.samsung.android.biometrics.app.setting:id/lockPassword",
+          "content_desc": "",
+          "is_password": true,
+          "detected_hints": [
+            "password"
           ],
-          "is_password": false,
-          "bounds": "[31,136][1049,283]",
-          "tier": "DIRECT_MATCH",
-          "reason": "Standard EditText with detected semantic hint (textInput)"
+          "bounds": "[68,645][1012,774]",
+          "compatibility_tier": "DIRECT_MATCH",
+          "reason": "Standard EditText with explicit OTP/password semantic signal"
         }
       ]
     },
     {
-      "app_name": "Google Contacts",
-      "package_name": "com.google.android.contacts",
-      "category": "Personal Data",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
-    },
-    {
-      "app_name": "Google Maps",
-      "package_name": "com.google.android.apps.maps",
-      "category": "Navigation / Search",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
-    },
-    {
-      "app_name": "YouTube",
-      "package_name": "com.google.android.youtube",
-      "category": "Media / Account",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
-    },
-    {
-      "app_name": "DeskClock",
-      "package_name": "com.google.android.deskclock",
-      "category": "Utility / Numeric",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
-    },
-    {
-      "app_name": "Google Calendar",
-      "package_name": "com.google.android.calendar",
-      "category": "Productivity / Forms",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
-    },
-    {
-      "app_name": "QuickSearchBox",
-      "package_name": "com.google.android.googlequicksearchbox",
-      "category": "System Search / Form",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
-    },
-    {
-      "app_name": "Task Manage App",
-      "package_name": "com.example.task_manage",
-      "category": "Productivity",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
-    },
-    {
-      "app_name": "Library Catalog App",
-      "package_name": "com.example.mre1_library",
+      "app_name": "Microsoft Teams",
       "category": "Enterprise",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
+      "package_name": "com.microsoft.teams",
+      "version_name": "1416/1.0.0.2026203802",
+      "version_code": "2026203825",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:19:32.640199",
+      "input_field_count": 1,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.widget.AutoCompleteTextView",
+          "resource_id": "com.microsoft.teams:id/edit_email_refresh",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "phone",
+            "username"
+          ],
+          "bounds": "[68,630][1012,758]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
     },
     {
-      "app_name": "Mobile Login App",
-      "package_name": "com.example.mobile",
-      "category": "E-Commerce / Auth",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
+      "app_name": "TikTok",
+      "category": "Social",
+      "package_name": "com.ss.android.ugc.trill",
+      "version_name": "47.8.3",
+      "version_code": "470803",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:22:43.287179",
+      "input_field_count": 1,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "phone"
+          ],
+          "bounds": "[397,453][950,513]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
     },
     {
-      "app_name": "Practice Form App",
-      "package_name": "com.example.practice",
-      "category": "General Utility",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
+      "app_name": "SoundCloud",
+      "category": "Media",
+      "package_name": "com.android.chrome",
+      "version_name": "157.0.8103.80",
+      "version_code": "810308004",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:23:54.628035",
+      "input_field_count": 2,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.webkit.WebView",
+          "resource_id": "",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[0,88][1080,2358]",
+          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "sign_in_up_email",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "username"
+          ],
+          "bounds": "[45,976][1035,1128]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
     },
     {
-      "app_name": "Movie Catalog App",
-      "package_name": "com.example.mre2_movie",
-      "category": "Entertainment",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
+      "app_name": "CocCoc Browser",
+      "category": "Browser",
+      "package_name": "com.coccoc.trinhduyet",
+      "version_name": "160.0.175",
+      "version_code": "998917504",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:25:51.837645",
+      "input_field_count": 5,
+      "primary_status": "DIRECT_COMPATIBLE",
+      "fields": [
+        {
+          "class": "android.webkit.WebView",
+          "resource_id": "",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[0,248][1080,2223]",
+          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "email",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "username"
+          ],
+          "bounds": "[64,1160][1015,1272]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "password",
+          "content_desc": "",
+          "is_password": true,
+          "detected_hints": [
+            "password"
+          ],
+          "bounds": "[64,1385][1015,1491]",
+          "compatibility_tier": "DIRECT_MATCH",
+          "reason": "Standard EditText with explicit OTP/password semantic signal"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "login",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[64,1716][1015,1826]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.coccoc.trinhduyet:id/url_bar",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "username"
+          ],
+          "bounds": "[247,88][945,246]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
     },
     {
-      "app_name": "My App Utility",
-      "package_name": "com.example.my_app",
-      "category": "General Utility",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
+      "app_name": "Knowt",
+      "category": "Education",
+      "package_name": "com.knowt.app",
+      "version_name": "4.4.0",
+      "version_code": "327",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:27:55.744029",
+      "input_field_count": 2,
+      "primary_status": "DIRECT_COMPATIBLE",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "login_email_input",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "username"
+          ],
+          "bounds": "[66,768][1014,883]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "login_password_input",
+          "content_desc": "",
+          "is_password": true,
+          "detected_hints": [
+            "password"
+          ],
+          "bounds": "[66,991][949,1105]",
+          "compatibility_tier": "DIRECT_MATCH",
+          "reason": "Standard EditText with explicit OTP/password semantic signal"
+        }
+      ]
     },
     {
-      "app_name": "SecretHandle Target Bank",
-      "package_name": "com.secrethandle.b3",
-      "category": "Banking / Finance OTP",
-      "field_count": 0,
-      "status": "CUSTOM_CANVAS_FALLBACK",
-      "summary_description": "Custom Canvas / View (Handled via Fallback Policy)",
-      "fields": []
+      "app_name": "Telegram",
+      "category": "Messaging",
+      "package_name": "org.telegram.messenger",
+      "version_name": "13.3.1",
+      "version_code": "73461",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:30:39.030197",
+      "input_field_count": 2,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "",
+          "content_desc": "Country code",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[141,1055][296,1156]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "",
+          "content_desc": "Phone number",
+          "is_password": false,
+          "detected_hints": [
+            "phone"
+          ],
+          "bounds": "[344,1055][939,1156]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
+    },
+    {
+      "app_name": "GitHub",
+      "category": "Developer",
+      "package_name": "com.github.android",
+      "version_name": "1.285.0",
+      "version_code": "956",
+      "target_sdk": "37",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:31:31.296026",
+      "input_field_count": 1,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.github.android:id/enterprise_server_url_edit_text",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[45,1797][1035,1914]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
+    },
+    {
+      "app_name": "WhatsApp",
+      "category": "Messaging",
+      "package_name": "com.whatsapp",
+      "version_name": "2.26.45.99",
+      "version_code": "264509900",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:32:03.691968",
+      "input_field_count": 2,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.whatsapp:id/registration_cc",
+          "content_desc": "Mã quốc gia cho Việt Nam, +84",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[174,666][382,779]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.whatsapp:id/registration_phone",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "phone"
+          ],
+          "bounds": "[396,666][905,779]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
+    },
+    {
+      "app_name": "Lazada",
+      "category": "E-Commerce",
+      "package_name": "com.lazada.android",
+      "version_name": "8.11.0",
+      "version_code": "5390",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:34:06.561724",
+      "input_field_count": 3,
+      "primary_status": "DIRECT_COMPATIBLE",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.lazada.android:id/et_input_text",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "username"
+          ],
+          "bounds": "[42,689][953,818]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.lazada.android:id/et_input_text",
+          "content_desc": "",
+          "is_password": true,
+          "detected_hints": [
+            "password"
+          ],
+          "bounds": "[42,860][868,989]",
+          "compatibility_tier": "DIRECT_MATCH",
+          "reason": "Standard EditText with explicit OTP/password semantic signal"
+        },
+        {
+          "class": "android.widget.TextView",
+          "resource_id": "com.lazada.android:id/btn_email_otp_login",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "smsOTPCode",
+            "username"
+          ],
+          "bounds": "[305,1265][775,1361]",
+          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+        }
+      ]
+    },
+    {
+      "app_name": "OKX",
+      "category": "Fintech/Crypto",
+      "package_name": "com.okinc.okex.gp",
+      "version_name": "6.199.0",
+      "version_code": "739547",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:35:02.039198",
+      "input_field_count": 2,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.widget.LinearLayout",
+          "resource_id": "com.okinc.okex.gp:id/vg_country_code",
+          "content_desc": "countryCode",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[102,608][217,664]",
+          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.okinc.okex.gp:id/etPhone",
+          "content_desc": "phoneInput",
+          "is_password": false,
+          "detected_hints": [
+            "phone"
+          ],
+          "bounds": "[252,568][1012,703]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
+    },
+    {
+      "app_name": "Grab",
+      "category": "Super-App",
+      "package_name": "com.grabtaxi.passenger",
+      "version_name": "5.437.0",
+      "version_code": "54370000",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:36:22.651158",
+      "input_field_count": 1,
+      "primary_status": "DIRECT_COMPATIBLE",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "com.grabtaxi.passenger:id/verify_number_edit_number",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "password"
+          ],
+          "bounds": "[231,433][1057,554]",
+          "compatibility_tier": "DIRECT_MATCH",
+          "reason": "Standard EditText with explicit OTP/password semantic signal"
+        }
+      ]
+    },
+    {
+      "app_name": "Binance",
+      "category": "Fintech/Crypto",
+      "package_name": "com.binance.dev",
+      "version_name": "3.22.4",
+      "version_code": "100302204",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:37:48.084834",
+      "input_field_count": 3,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.webkit.WebView",
+          "resource_id": "",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[0,210][1080,2358]",
+          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+        },
+        {
+          "class": "android.webkit.WebView",
+          "resource_id": "",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[0,210][1080,2358]",
+          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "bn-formItem-pucWm4Pe",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[101,634][978,702]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
+    },
+    {
+      "app_name": "PayPal",
+      "category": "Fintech",
+      "package_name": "com.paypal.android.p2pmobile",
+      "version_name": "10.21.1",
+      "version_code": "1160090191",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:38:56.111389",
+      "input_field_count": 1,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[68,940][1012,1120]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
+    },
+    {
+      "app_name": "Discord",
+      "category": "Communication",
+      "package_name": "com.discord",
+      "version_name": "354.12 - Stable",
+      "version_code": "354012",
+      "target_sdk": "36",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:39:39.790182",
+      "input_field_count": 2,
+      "primary_status": "DIRECT_COMPATIBLE",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "login_login_input",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [],
+          "bounds": "[48,553][1034,683]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        },
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "login_password_input",
+          "content_desc": "",
+          "is_password": true,
+          "detected_hints": [
+            "password"
+          ],
+          "bounds": "[48,835][967,965]",
+          "compatibility_tier": "DIRECT_MATCH",
+          "reason": "Standard EditText with explicit OTP/password semantic signal"
+        }
+      ]
+    },
+    {
+      "app_name": "Bitwarden",
+      "category": "Password Manager",
+      "package_name": "com.x8bit.bitwarden",
+      "version_name": "2026.11.1",
+      "version_code": "22056",
+      "target_sdk": "37",
+      "ui_dump_status": "ok",
+      "audited_at": "2026-11-23T18:40:33.100023",
+      "input_field_count": 1,
+      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "fields": [
+        {
+          "class": "android.widget.EditText",
+          "resource_id": "EmailAddressEntry",
+          "content_desc": "",
+          "is_password": false,
+          "detected_hints": [
+            "username"
+          ],
+          "bounds": "[45,1257][1035,1415]",
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+        }
+      ]
     }
   ]
 }

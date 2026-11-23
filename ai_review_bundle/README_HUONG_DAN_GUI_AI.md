@@ -8,7 +8,7 @@ Thư mục này tập hợp đầy đủ các tệp chuẩn bị sẵn để b�
 
 | Tên tệp | Vai trò | Khi nào nên gửi? |
 | :--- | :--- | :--- |
-| **`SecretHandle_MobiSys2027.pdf`** | Bản PDF hoàn chỉnh mới nhất (15 trang: 12 trang nội dung chính, trang 13–14 References, trang 14–15 Appendix A & B). | **Bắt buộc gửi** trong mọi chế độ. |
+| **`SecretHandle_MobiSys2027.pdf`** | Bản PDF hoàn chỉnh mới nhất (16 trang: 12 trang nội dung chính, trang 13–14 References, trang 14–16 Appendix A, B & C). | **Bắt buộc gửi** trong mọi chế độ. |
 | **`mobisys2027_review_prompt.md`** | Prompt hướng dẫn AI đóng vai thành viên TPC kỳ cựu của ACM MobiSys 2027 chấm bài theo 13 phase. | **Bắt buộc gửi** (hoặc dán nội dung vào System/User prompt). |
 | **`manuscript_full_source.tex`** | Toàn bộ mã nguồn LaTeX đã gộp gọn vào 1 tệp duy nhất (giúp AI đọc chính xác công thức toán, số dòng thuật toán, macro, bảng biểu mà không bị lỗi OCR từ PDF). | **Nên gửi kèm** nếu muốn AI kiểm tra công thức, thuật toán, chế bản LaTeX chính xác. |
 | **`references_verified.bib`** | Cơ sở dữ liệu BibTeX các tài liệu tham khảo đã xác minh. | Tùy chọn (gửi kèm nếu muốn AI kiểm tra trích dẫn). |

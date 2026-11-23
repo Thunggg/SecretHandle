@@ -1,45 +1,49 @@
 \section{Artifact Appendix}
 \label{sec:artifact}
 
-\paragraph{Scope.} The \SH{} artifact repository is openly available at \url{https://github.com/SecretHandle/SecretHandle} under the Apache License~2.0. The repository consists of two distinct components: (1)~a formal Python reference package (\texttt{src/secrethandle}) for offline state-machine verification, property testing, and math audits; and (2)~the Android~14 on-device prototype (\texttt{device/b3-secrethandle/}) evaluated in Section~\ref{sec:evidence}, comprising the privileged Binder service, notification listener broker, accessibility redactor, Agent SDK bridge, and microbenchmark suites.
+\paragraph{Scope.} The \SH{} artifact repository (\url{https://github.com/SecretHandle/SecretHandle}, Apache License~2.0) ships four directories evaluated in Section~\ref{sec:evidence}: (1)~\texttt{SecretHandle/}: Python reference model (\texttt{src/secrethandle}), offline property verifier, and \texttt{pytest} suite; (2)~\texttt{device/\allowbreak b3-secrethandle/}: Android~14 prototype APK (\texttt{b3secrethandle.apk}) and \texttt{BenchmarkRunner}; (3)~\texttt{device/\allowbreak b0-otp-forwarding/}: B0 exfiltration harness; and (4)~\texttt{tools/} and \texttt{output/}: real-app UI compatibility auditor and archived empirical JSON logs.
 
-\paragraph{Contents.} The repository ships:
-(i)~\texttt{src/secrethandle}: Python state-machine implementation, policy solvers, offline pytest suite, and deterministic synthetic-canary property checks;
-(ii)~\texttt{device/b3-secrethandle}: Java and AIDL source code for \texttt{SecretHandleVaultService}, the \texttt{NotificationListener} broker, the accessibility overlay compositor (\texttt{TYPE\_\allowbreak ACCESSIBILITY\_\allowbreak OVERLAY}), and the in-framework \texttt{BenchmarkRunner.java} harness;
-(iii)~\texttt{evaluation/}: Experiment drivers, Mobile-Agent v3.5 bridge configuration, attack harness, synthetic bank and attacker APKs, and log parsers for reproducing Table~\ref{tab:main_eval}.
+\paragraph{Contents.}
+(i)~\texttt{SecretHandle/src}: Python state-machine model, policy solvers, offline tests, and synthetic-canary verifier;
+(ii)~\texttt{device/\allowbreak b3-\allowbreak secrethandle}: Java source for \texttt{Vault}, \texttt{Secret\allowbreak Broker\allowbreak Service} (\texttt{Notification\allowbreak Listener\allowbreak Service}), \texttt{Redaction\allowbreak Accessibility\allowbreak Service} (\texttt{TYPE\_\allowbreak ACCESSIBILITY\_\allowbreak OVERLAY}), \texttt{MainActivity}, and \texttt{Benchmark\allowbreak Runner.java};
+(iii)~\texttt{tools/} and \texttt{run\_\allowbreak tier4\_\allowbreak physical\_\allowbreak benchmark.ps1}: physical-device runner, \texttt{audit\_\allowbreak real\_\allowbreak apps\_\allowbreak compatibility.py}, and \texttt{manuscript\_\allowbreak check.py};
+(iv)~\texttt{output/}: archived datasets (\texttt{physical\_\allowbreak device\_\allowbreak benchmark.json}, \texttt{benchmark\_\allowbreak overhead\_\allowbreak lifecycle\_\allowbreak redirection.json}, \texttt{rq6\_\allowbreak benign\_\allowbreak regression\_\allowbreak results.json}, \texttt{real\_\allowbreak apps\_\allowbreak compatibility\_\allowbreak audit.json}, etc.).
 
-\paragraph{One-command offline verification.} From the repository root, with Python 3.10+ (3.11+ recommended):
+\paragraph{One-command offline verification.} Inside \texttt{SecretHandle/} (Python 3.10+):
+\begin{small}
 \begin{verbatim}
-python -m venv .venv && source .venv/bin/activate
-python -m pip install -e '.[dev]'
+cd SecretHandle && python -m venv .venv
+source .venv/bin/activate && pip install -e '.[dev]'
 make check
 \end{verbatim}
-\texttt{make check} executes linting (\texttt{ruff}), type checks (\texttt{mypy}), unit test suites (\texttt{pytest}), and the synthetic-canary property checker. Running \texttt{make smoke} tests state-machine invariants over 6,400 synthetic attack runs (seed \texttt{20261017}) with zero leak anomalies.
+\end{small}
+\texttt{make check} runs \texttt{ruff}, \texttt{mypy}, \texttt{pytest}, and \texttt{scripts/\allowbreak smoke\_\allowbreak check.py} over 6,400 synthetic runs (seed \texttt{20261017}) with zero leak anomalies.
 
-\paragraph{On-device Android 14 experiment reproduction.} To reproduce the empirical measurements in Section~\ref{sec:evidence}:
+\paragraph{On-device Android 14 experiment reproduction.} To install the Android~14 prototype, execute \texttt{BenchmarkRunner}, and audit UI compatibility:
+\begin{small}
 \begin{verbatim}
-# 1. Verify SELinux enforcing & install/enable APK
+# 1. Verify SELinux & install/enable prototype
 adb unroot && adb shell getenforce
-adb install -r device/b3-secrethandle/build/\
-  b3secrethandle.apk
+APK=device/b3-secrethandle/build/b3secrethandle.apk
+adb install -r $APK
 adb shell cmd notification allow_listener \
   com.secrethandle.b3/.SecretBrokerService
 adb shell settings put secure \
   enabled_accessibility_services \
-  com.secrethandle.b3/\
-  .RedactionAccessibilityService
-adb shell settings put secure \
-  accessibility_enabled 1
-# 2. Run microbenchmarks via app_process
+  com.secrethandle.b3/.RedactionAccessibilityService
+adb shell settings put secure accessibility_enabled 1
+# 2. Run on-device microbenchmarks (or audit UI)
+adb push $APK /data/local/tmp/bench.jar
 adb shell CLASSPATH=/data/local/tmp/bench.jar \
-  app_process /data/local/tmp BenchmarkRunner
-# 3. Execute n=30 agent evaluation trials
-python evaluation/run_agent_matrix.py \
-  --config configs/android14_eval.yaml
+  app_process /data/local/tmp \
+  com.secrethandle.b3.BenchmarkRunner all
+python tools/audit_real_apps_compatibility.py \
+  --capture "AppName" --category "Fintech"
 \end{verbatim}
-Per-trial logs, latency dumps, agent system prompts, commit hashes, and step trajectories are recorded in \texttt{evaluation/} and \texttt{results/trials.jsonl}. The evaluation uses random synthetic canaries per trial; no human subjects, production accounts, or real credentials are used.
+\end{small}
+All benchmarks use synthetic canary secrets or static UI tree dumps without storing user text; aggregated metrics from external KVM agent runs (\texttt{Mobile-Agent v3.5}, \texttt{AutoDroid}) and physical-device captures reside in \texttt{output/*.json}.
 
-\paragraph{Integrity and license.} All configuration digests and random seeds are logged in \texttt{provenance.json} at initialization. The repository is released under the Apache License~2.0 with all source files, benchmark harnesses, and analysis scripts fully open-sourced.
+\paragraph{Integrity and license.} Offline checks log seeds and digests in \texttt{provenance.json}. Source code, harnesses, auditors, and archived JSON logs are released under Apache~2.0.
 
 \section{Prompt Injection Attack Taxonomy}
 \label{sec:appendix_templates}
@@ -66,3 +70,41 @@ T5: Multilingual & Cross-lingual syntax switching & \textit{``Cảnh báo bảo 
 \end{table}
 
 \paragraph{Adversarial delivery channels.} Injection payloads were introduced via two realistic vectors: (1)~unredacted non-banking notifications (e.g., promotional messages from external applications), and (2)~untrusted third-party content (e.g., chat logs or web pages). Under B0, all 5 templates successfully diverted the visual agent ($29/30$ exfiltration rate). Under B1, the agent transferred the placeholder token to the attacker app, resulting in complete secret release ($30/30$). Under \SH{} (B3), the OS reference monitor enforced destination verification, blocking all redirection and exfiltration attempts ($0/30$ exposure, $0/30$ redirection).
+
+\section{Real-App UI Compatibility Audit}
+\label{sec:appendix_compat}
+
+Table~\ref{tab:app_compatibility} reports the static UI hierarchy audit conducted across 20 real Google Play applications on a physical Samsung Galaxy~A52s (\texttt{SM-A528B}, Android~14 API~34) navigated to live credential, phone/OTP, or PIN screens without executing attacks or storing user text.
+
+\begin{table*}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Empirical compatibility audit of \SH{} destination matching across 20 Google Play applications captured on a physical Samsung Galaxy~A52s (Android~14, API~34). \textbf{Direct}: \texttt{EditText} exposing explicit OTP/password semantic attributes; \textbf{Pkg+Class}: standard \texttt{EditText} or \texttt{AutoCompleteTextView} matched via foreground package boundary plus single-tap user touch gate.}
+\label{tab:app_compatibility}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lllllll@{}}
+\toprule
+Application & Category & Foreground Package & Version Name (Code) & Input Class & Matching & Fallback \\
+\midrule
+MoMo & Fintech & \texttt{com.mservice.momotransfer} & \texttt{5.18.0} (51800) & \texttt{EditText} & Direct & None \\
+Home Credit & Finance & \texttt{vn.homecredit.capp} & \texttt{3.176.5} (261110001) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+Shopee & E-Commerce & \texttt{com.shopee.vn} & \texttt{3.86.31} (38631) & \texttt{EditText} & Direct & None \\
+Messenger & Messaging & \texttt{com.facebook.orca} & \texttt{588.1.0.66.98} (347617568) & \texttt{EditText} & Direct & None \\
+Gmail (GMS Auth) & Email & \texttt{com.google.android.gms} & \texttt{26.45.31} (264531029) & \texttt{EditText} & Direct & None \\
+Microsoft Teams & Enterprise & \texttt{com.microsoft.teams} & \texttt{1.0.0.2026203802} (2026203825) & \texttt{AutoCompleteTextView} & Pkg+Class & Touch Gate \\
+TikTok & Social & \texttt{com.ss.android.ugc.trill} & \texttt{47.8.3} (470803) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+SoundCloud (Tab) & Media & \texttt{com.android.chrome} & \texttt{157.0.8103.80} (810308004) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+CocCoc Browser & Browser & \texttt{com.coccoc.trinhduyet} & \texttt{160.0.175} (998917504) & \texttt{EditText} & Direct & None \\
+Knowt & Education & \texttt{com.knowt.app} & \texttt{4.4.0} (327) & \texttt{EditText} & Direct & None \\
+Telegram & Messaging & \texttt{org.telegram.messenger} & \texttt{13.3.1} (73461) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+GitHub & Developer & \texttt{com.github.android} & \texttt{1.285.0} (956) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+WhatsApp & Messaging & \texttt{com.whatsapp} & \texttt{2.26.45.99} (264509900) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+Lazada & E-Commerce & \texttt{com.lazada.android} & \texttt{8.11.0} (5390) & \texttt{EditText} & Direct & None \\
+OKX & Fintech/Crypto & \texttt{com.okinc.okex.gp} & \texttt{6.199.0} (739547) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+Grab & Super-App & \texttt{com.grabtaxi.passenger} & \texttt{5.437.0} (54370000) & \texttt{EditText} & Direct & None \\
+Binance & Fintech/Crypto & \texttt{com.binance.dev} & \texttt{3.22.4} (100302204) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+PayPal & Fintech & \texttt{com.paypal.android.p2pmobile} & \texttt{10.21.1} (1160090191) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+Discord & Messaging & \texttt{com.discord} & \texttt{354.12} (354012) & \texttt{EditText} & Direct & None \\
+Bitwarden & Pwd Manager & \texttt{com.x8bit.bitwarden} & \texttt{2026.11.1} (22056) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+\bottomrule
+\end{tabular*}
+\end{table*}

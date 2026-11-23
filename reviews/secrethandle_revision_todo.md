@@ -48,9 +48,9 @@
 
 ## Nhóm 3: Xử lý lỗ hổng chí mạng về khảo sát 20 ứng dụng thực tế (~2–3 ngày)
 
-- [ ] **3.1. Chạy khảo sát tương thích UI thật trên 15–20 ứng dụng Google Play (`§7`):** *(Chưa chạy do chưa kết nối Galaxy A52s; hiện đang áp dụng phương án 3.3)*
-  - Thực thi `python tools/audit_real_apps_compatibility.py --capture ...` trên Galaxy A52s ở màn hình đăng nhập/OTP của 15–20 ứng dụng phổ biến (chỉ chụp cây UI tĩnh, không tấn công app thật).
-  - Xuất báo cáo thống kê đầy đủ tên gói, `versionName`/`versionCode`, tỷ lệ khớp trực tiếp ($X/20$), custom view cần fallback ($Y/20$), và WebView ($Z/20$) rồi đưa vào bài.
+- [x] **3.1. Chạy khảo sát tương thích UI thật trên 15–20 ứng dụng Google Play (`§7` & Appendix C):**
+  - Đã thực thi `tools/audit_real_apps_compatibility.py --capture ...` trực tiếp trên **Samsung Galaxy A52s (`SM-A528B`, Android 14 / API 34)** ở màn hình đăng nhập / SĐT / OTP / PIN thực tế của **20 ứng dụng thương mại Google Play** (chỉ đọc cây UI tĩnh và `dumpsys package`, không lưu text người dùng và không chạy tấn công lên app thật; file cũ emulator 30/10 được tách lưu riêng).
+  - Kết quả thực tế trong [`output/real_apps_compatibility_audit.json`](file:///e:/NCKH/SecretHandle/output/real_apps_compatibility_audit.json) và bảng `Table~\ref{tab:app_compatibility}` (Phụ lục C, tóm tắt trong `§7`): **9/20 (45.0%)** `DIRECT_COMPATIBLE` (`EditText` có tín hiệu ngữ nghĩa OTP/mật khẩu rõ ràng) và **11/20 (55.0%)** `STANDARD_INPUT_FALLBACK` (`10` `EditText` + `1` `AutoCompleteTextView`, đối sánh theo package+class kết hợp chạm xác nhận). Ghi nhận thêm hiện tượng thực tế: 2 app ủy quyền đăng nhập sang package khác (`Gmail -> com.google.android.gms`, `SoundCloud -> com.android.chrome` Custom Tab), và `com.VCB` kích hoạt cảnh báo RASP chặn Developer Options trước khi vào màn hình nhập liệu (đã loại khỏi 20 app UI).
 
 - [x] **3.2. Tách bạch khảo sát 20 ứng dụng với microbenchmark `Vault.revealFallback` ($47.60\,\mu\text{s}$):**
   - Ghi rõ trong `§7` rằng kết quả $30/30$ với trung vị $47.60\,\mu\text{s}$ là microbenchmark tổng hợp `BenchmarkRunner` cho bước kiểm tra trong vault (`Vault.revealFallback`), không bao gồm thời gian phản xạ chạm của con người.
@@ -83,12 +83,13 @@
 
 ## Nhóm 5: Hoàn thiện phân rã T1–T5, AndroidWorld, Metadata LLM, Ablation & Năng lượng (~1.5–2 ngày)
 
-- [ ] **5.1. Thêm bảng phân rã kết quả theo từng mẫu tấn công T1–T5 (`§7`):**
+- [x] **5.1. Thêm phân rã/kịch bản T1–T5 (`§7`):**
   - [x] Đã bổ sung ngay trong `§7` tóm tắt 2 kênh truyền tải chỉ thị tiêm nhiễm (độc lập với Phụ lục B) và làm rõ T4 DoS ($k \ge k_{\max}=3$) chuyển sang xác nhận chạm người dùng (*human intervention rather than autonomous recovery*).
-  - [ ] *(Cần trích xuất từ log EC2 gốc `results/trials.jsonl` của Mobile-Agent v3.5)* Bổ sung số đếm $(E, R, U_{\text{att}}, \text{human\_fallback\_count})$ cho từng mẫu T1–T5 ($n = 6$ mỗi mẫu) nếu bạn còn giữ log phiên chạy VLM đó.
+  - *(Đóng — không bịa số liệu)* Không trích xuất được số đếm rời từng template T1–T5 do EC2 đã xóa và không còn `results/trials.jsonl`; giữ nguyên số tổng $n=30$ đã xác minh.
 
-- [ ] **5.2. Bổ sung đầy đủ siêu dữ liệu thí nghiệm LLM (`§7`):**
-  - *(Chờ tác giả điền từ console Anthropic/OpenAI)* Ghi rõ **khoảng ngày gọi API (`API call dates`)** và **chi phí token / USD trung bình mỗi tác vụ** cho Mobile-Agent v3.5 (`claude-3-5-sonnet-20241022`) và AutoDroid (`gpt-4o-2024-08-06`).
+- [x] **5.2. Kiểm tra siêu dữ liệu thí nghiệm LLM (`§7`):**
+  - Đã cập nhật đúng kênh gọi mô hình Claude~3.5~Sonnet là **qua Amazon Bedrock** (`snapshot claude-3-5-sonnet-20241022`, $T=0.0$, top-p $1.0$, max 15 steps) thay cho *"Anthropic API"*.
+  - *(Không khả dụng)* Không có khoảng ngày gọi API và chi phí USD/token chi tiết do chạy qua API Bedrock và không còn log billing tách riêng cho từng tác vụ.
 
 - [x] **5.3. Sửa tuyên bố về 10 ứng dụng AndroidWorld (Abstract, `§1`, `§7` RQ6, `§10`):**
   - Đã áp dụng **Phương án B (trung thực với dữ liệu đã đo)**: sửa thành *"zero touch-passthrough or measured frame-latency regression across 10 AndroidWorld applications ($50/50$ events, $\Delta\text{p95}=0.0\,\text{ms}$ on Markor and Settings)"*.
@@ -109,11 +110,11 @@
   - Đã kiểm chứng metadata thật qua web và bổ sung vào `§8` + `references_verified.bib`: **Aura** (`arXiv:2602.10915`), **SUPOR** (USENIX Sec '15), **UIPicker** (USENIX Sec '15), **TrustUI** (APSys '14), **TruZ-Droid** (MobiSys '18).
   - Đã sửa `dennis1966semantics` sang `@article` (`Communications of the ACM`) và xóa sạch 14 mục thừa chưa trích dẫn.
 
-- [x] **6.2. Hoàn thiện Phụ lục A–B (`mobisys/sections/artifact.tex`):**
-  - Đã bổ sung đầy đủ lệnh ADB sau `adb install` (`adb unroot && adb shell getenforce`, `cmd notification allow_listener`, `settings put secure enabled_accessibility_services`, `accessibility_enabled 1`) và sửa đúng tên `b3secrethandle.apk`.
-  - [ ] *(Tác giả tự kiểm tra trước khi nộp)* Xác nhận kho GitHub `https://github.com/SecretHandle/SecretHandle` truy cập công khai được và đồng bộ đầy đủ file + system prompt/commit hash.
+- [x] **6.2. Hoàn thiện Phụ lục A–C (`mobisys/sections/artifact.tex`):**
+  - Đã bổ sung đầy đủ lệnh ADB sau `adb install`, sửa đúng tên `b3secrethandle.apk`, và đồng bộ toàn bộ đường dẫn trong Artifact Appendix khớp 100% với cấu trúc thực tế của repo (`SecretHandle/`, `device/b3-secrethandle/`, `device/b0-otp-forwarding/`, `tools/`, `output/*.json`), gỡ bỏ tham chiếu tới `evaluation/` và `results/trials.jsonl` (EC2 đã xóa).
+  - [ ] *(Tác giả tự kiểm tra trước khi nộp)* Xác nhận kho GitHub `https://github.com/SecretHandle/SecretHandle` truy cập công khai được khi mở mã nguồn.
 
 - [x] **6.3. Sửa chế bản LaTeX, hình ảnh và ngân sách 12 trang:**
   - Đã xóa 6 dòng ép khoảng cách float trong preamble (`mobisys/main.tex`).
   - Đã tăng chiều cao Hình 2 từ `2.6cm` lên `3.2cm`, bọc Hình 1 trong `\resizebox{\textwidth}{!}{...}`, bỏ dấu chấm dư ở tiêu đề `\paragraph{Mobile agents act through the UI}`, rút ngắn tiêu đề `Remark 5.16` thành `[In-scope misuse]`.
-  - **Kết quả biên dịch cuối:** `mobisys/main.pdf` dài **15 trang** (`612 x 792 pts (letter)`), $100\%$ font nhúng (`emb=yes`), **Mục 10 Conclusion kết thúc gọn trên Trang 12**, References bắt đầu ở Trang 13, Phụ lục A–B ở Trang 14–15, `manuscript_check.py` đạt **PASS**.
+  - **Kết quả biên dịch cuối:** `mobisys/main.pdf` dài **16 trang** (`612 x 792 pts (letter)`), $100\%$ font nhúng (`emb=yes`), **Mục 10 Conclusion kết thúc gọn trên Trang 12**, References ở Trang 13–14, Phụ lục A–C ở Trang 14–16, không còn cảnh báo `Overfull`/`Undefined`, `manuscript_check.py` đạt **PASS**.
