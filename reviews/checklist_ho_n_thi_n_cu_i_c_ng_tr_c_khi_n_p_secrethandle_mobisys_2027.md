@@ -12,7 +12,7 @@
 
 **File cần sửa:** `mobisys/sections/artifact.tex`
 
-- [x] Di chuyển tiêu đề `\section{Real-App UI Compatibility Audit}\label{sec:appendix_compat}` và đoạn giới thiệu 3 dòng ngay bên dưới lên **trước** khối `\begin{table*}[b]` (kèm `\usepackage{stfloats}` và `\renewcommand{\arraystretch}{0.92}`, ngay sau lệnh `\clearpage`).
+- [x] Đưa `\clearpage` + khối `\begin{table*}[t]` (`\renewcommand{\arraystretch}{0.84}`) và tiêu đề `\section{Real-App UI Compatibility Audit}\label{sec:appendix_compat}` + đoạn giới thiệu 3 dòng nằm chung gọn gàng trên **Trang 16** (tổng số trang PDF rút từ 17 xuống còn **16 trang** gọn đẹp, không còn trang lẻ 3 dòng).
 - *Xong khi:* Tiêu đề Phụ lục C, đoạn giới thiệu và Bảng 8 nằm chung gọn gàng trên **Trang 16** (tổng số trang PDF rút từ 17 xuống còn **16 trang** gọn đẹp, không còn trang lẻ 3 dòng).
 
 ---

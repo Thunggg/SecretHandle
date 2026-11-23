@@ -1775,7 +1775,7 @@
             "detected_hints": [],
             "bounds": "[102,608][217,664]",
             "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
-            "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+            "reason": "Custom / opaque view container (package boundary + touch confirmation)"
           },
           {
             "class": "android.widget.EditText",
