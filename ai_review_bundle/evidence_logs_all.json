@@ -1,0 +1,2552 @@
+{
+  "benchmark_autodroid_diversity": {
+    "benchmark": "AutoDroid_AccessibilityTree_Agent_Evaluation",
+    "agent_modality": "Accessibility-Tree (UI Hierarchy & AccessibilityNodeInfo traversal)",
+    "target_os": "Android 14 (API 34) on AWS EC2",
+    "evaluation_trials": 30,
+    "b0_baseline": {
+      "trials": 30,
+      "tree_canary_leaks": 30,
+      "exposure_rate": 1.0,
+      "wilson_ci": [
+        0.89,
+        1.0
+      ],
+      "mean_tree_parse_ms": 0.78
+    },
+    "b3_secrethandle": {
+      "trials": 30,
+      "tree_canary_leaks": 0,
+      "exposure_rate": 0.0,
+      "exposure_wilson_ci": [
+        0.0,
+        0.11
+      ],
+      "handles_observed_by_agent": 30,
+      "handle_perception_rate": 1.0,
+      "attack2_redirection_attempts": 30,
+      "attack2_redirection_leaks": 0,
+      "redirection_rate": 0.0,
+      "redirection_wilson_ci": [
+        0.0,
+        0.11
+      ],
+      "legitimate_utility": 30,
+      "utility_rate": 1.0,
+      "utility_wilson_ci": [
+        0.89,
+        1.0
+      ],
+      "mean_tree_parse_ms": 0.78
+    }
+  },
+  "benchmark_overhead_lifecycle_redirection": {
+    "benchmark_mode": "all",
+    "device": "Android 14 (API 34/33), AVD on AWS EC2 (Intel x86_64 KVM)",
+    "overhead": {
+      "trials": 100,
+      "mint_latency_us": {
+        "mean": 5.42,
+        "median": 5.19,
+        "min": 2.81,
+        "max": 16.79,
+        "p95": 9.23,
+        "p99": 16.79,
+        "std": 1.97
+      },
+      "resolve_latency_us": {
+        "mean": 0.18,
+        "median": 0.17,
+        "min": 0.15,
+        "max": 0.88,
+        "p95": 0.22,
+        "p99": 0.88,
+        "std": 0.08
+      },
+      "heap_alloc_bytes": 1151680,
+      "heap_total_bytes": 8388608
+    },
+    "lifecycle": {
+      "trials": 50,
+      "replay_blocked": 50,
+      "replay_accepted": 0,
+      "expiry_blocked": 50,
+      "expiry_bypassed": 0,
+      "concurrency_correct_single_use": 50,
+      "concurrency_anomalies": 0
+    },
+    "redirection": {
+      "trials": 30,
+      "b3_secrethandle": {
+        "redirection_leaks": 0,
+        "redirection_rate": 0.0,
+        "legitimate_utility": 30,
+        "utility_rate": 1.0
+      },
+      "b1_placeholder": {
+        "redirection_leaks": 30,
+        "redirection_rate": 1.0,
+        "legitimate_utility": 0,
+        "utility_rate": 0.0
+      },
+      "b2_platform_flow": {
+        "exposure_leaks": 0,
+        "exposure_rate": 0.0,
+        "redirection_leaks": 30,
+        "redirection_rate": 1.0,
+        "legitimate_utility_benign": 30,
+        "utility_rate_benign": 1.0,
+        "legitimate_utility_attack": 0,
+        "utility_rate_attack": 0.0
+      }
+    },
+    "intra_app_redirection": {
+      "trials": 30,
+      "bound_field": "smsOTPCode",
+      "adversary_field": "chatInput",
+      "redirection_leaks": 0,
+      "redirection_rate": 0.0,
+      "legitimate_utility": 30,
+      "utility_rate": 1.0
+    },
+    "end_to_end_breakdown": {
+      "trials": 100,
+      "binder_ipc_us": {
+        "mean": 0.61,
+        "median": 0.33,
+        "min": 0.27,
+        "max": 3.13,
+        "p95": 2.31,
+        "p99": 3.13,
+        "std": 0.64
+      },
+      "keystore_hmac_us": {
+        "mean": 9.32,
+        "median": 5.91,
+        "min": 4.23,
+        "max": 263.61,
+        "p95": 11.17,
+        "p99": 263.61,
+        "std": 25.64
+      },
+      "policy_check_us": {
+        "mean": 0.08,
+        "median": 0.08,
+        "min": 0.05,
+        "max": 0.25,
+        "p95": 0.16,
+        "p99": 0.25,
+        "std": 0.03
+      },
+      "text_injection_us": {
+        "mean": 0.13,
+        "median": 0.09,
+        "min": 0.07,
+        "max": 1.76,
+        "p95": 0.35,
+        "p99": 1.76,
+        "std": 0.18
+      },
+      "total_mediation_latency_ms": {
+        "mean": 0.0112,
+        "median": 0.0084,
+        "min": 0.0052,
+        "max": 0.2717,
+        "p95": 0.0127,
+        "p99": 0.2717,
+        "std": 0.0264
+      }
+    },
+    "platform_flow_breakdown": {
+      "trials": 100,
+      "autofill_dataset_latency_us": {
+        "mean": 0.79,
+        "median": 0.37,
+        "min": 0.29,
+        "max": 4.83,
+        "p95": 2.37,
+        "p99": 4.83,
+        "std": 0.92
+      },
+      "full_platform_dispatch_ms": 2.1
+    },
+    "daemon_cpu_profile": {
+      "tool": "dumpsys cpuinfo",
+      "package": "com.secrethandle.b3",
+      "idle_cpu_percent": 0.2,
+      "idle_user_percent": 0.1,
+      "idle_kernel_percent": 0.0,
+      "active_burst_cpu_percent": 1.4,
+      "mechanism": "purely event-driven via onNotificationPosted, zero polling loops or background scanners"
+    }
+  },
+  "extended_source_ui_benchmark": {
+    "timestamp": "2026-10-29T18:18:45Z",
+    "device": {
+      "brand": "samsung",
+      "model": "SM-A528B",
+      "android_version": "14",
+      "api_level": "34"
+    },
+    "benchmark_result": {
+      "benchmark_mode": "extended",
+      "segmented_otp_benchmark": {
+        "trials": 30,
+        "redirection_leaks": 0,
+        "redirection_rate": 0.0,
+        "legitimate_utility": 30,
+        "utility_rate": 1.0,
+        "multi_node_injection_latency_us": {
+          "mean": 0.93,
+          "median": 0.89,
+          "min": 0.47,
+          "max": 2.55,
+          "p95": 1.15,
+          "p99": 2.55,
+          "std": 0.32
+        }
+      },
+      "clipboard_source_benchmark": {
+        "trials": 30,
+        "sensitive_flag_intercepted": 30,
+        "redirection_leaks": 0,
+        "redirection_rate": 0.0,
+        "legitimate_utility": 30,
+        "utility_rate": 1.0,
+        "clipboard_mediation_latency_us": {
+          "mean": 6.74,
+          "median": 4.9,
+          "min": 4.74,
+          "max": 36.04,
+          "p95": 18.33,
+          "p99": 36.04,
+          "std": 5.98
+        }
+      }
+    }
+  },
+  "fallback_policy_benchmark": {
+    "timestamp": "2026-10-29T22:50:13Z",
+    "device": {
+      "brand": "google",
+      "model": "sdk_gphone64_x86_64",
+      "android_version": "14",
+      "api_level": "34",
+      "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.036.A4/12096271:user/release-keys"
+    },
+    "benchmark_result": {
+      "benchmark_mode": "fallback",
+      "fallback_policy_benchmark": {
+        "trials": 30,
+        "ui_type": "custom_canvas_numpad",
+        "bound_package": "com.legitimate.bank",
+        "adversary_package": "com.attacker.rewards",
+        "adversary_fallback_leaks": 0,
+        "adversary_fallback_rate": 0.0,
+        "legitimate_fallback_utility": 30,
+        "utility_rate": 1.0,
+        "fallback_mediation_latency_us": {
+          "mean": 69.39,
+          "median": 47.6,
+          "min": 28.6,
+          "max": 342.3,
+          "p95": 144.4,
+          "p99": 342.3,
+          "std": 60.08
+        }
+      }
+    }
+  },
+  "physical_device_battery_unplugged_15m": {
+    "device_model": "SM-A528B",
+    "android_release": "14",
+    "api_level": 34,
+    "measurement_method": "unplugged_wifi_adb_dumpsys_battery",
+    "total_duration_minutes": 15.0,
+    "baseline_idle_summary": {
+      "sample_count": 31,
+      "duration_s": 450.15,
+      "level_start_pct": 63,
+      "level_end_pct": 63,
+      "charge_start_uah": 2871000,
+      "charge_end_uah": 2871000,
+      "charge_drop_uah": 0,
+      "mean_voltage_mv": 3932.06,
+      "mean_current_ma": -249.45,
+      "min_current_ma": -485,
+      "max_current_ma": -171,
+      "mean_power_mw_instant": 980.86,
+      "coulomb_avg_discharge_ma": 0.0
+    },
+    "secrethandle_active_summary": {
+      "sample_count": 29,
+      "duration_s": 451.38,
+      "level_start_pct": 63,
+      "level_end_pct": 63,
+      "charge_start_uah": 2871000,
+      "charge_end_uah": 2866500,
+      "charge_drop_uah": 4500,
+      "mean_voltage_mv": 3915.52,
+      "mean_current_ma": -240.21,
+      "min_current_ma": -531,
+      "max_current_ma": -185,
+      "mean_power_mw_instant": 940.53,
+      "coulomb_avg_discharge_ma": 35.89
+    },
+    "baseline_idle_samples": [
+      {
+        "timestamp": "2026-11-23T20:07:12.218147",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3946,
+        "current_now_ma": -201,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 368,
+        "elapsed_s": 0.0,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:07:27.388899",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3946,
+        "current_now_ma": -201,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 368,
+        "elapsed_s": 15.11,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:07:42.555545",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3938,
+        "current_now_ma": -255,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 367,
+        "elapsed_s": 30.28,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:07:57.699872",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3938,
+        "current_now_ma": -255,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 367,
+        "elapsed_s": 45.44,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:08:12.874310",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3941,
+        "current_now_ma": -197,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 367,
+        "elapsed_s": 60.59,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:08:28.017752",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3941,
+        "current_now_ma": -197,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 367,
+        "elapsed_s": 75.76,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:08:43.184870",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3940,
+        "current_now_ma": -196,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 367,
+        "elapsed_s": 90.91,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:08:58.329620",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3940,
+        "current_now_ma": -196,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 367,
+        "elapsed_s": 106.07,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:09:13.455611",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3937,
+        "current_now_ma": -212,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 366,
+        "elapsed_s": 121.22,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:09:28.550613",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3937,
+        "current_now_ma": -212,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 366,
+        "elapsed_s": 136.34,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:09:43.688774",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3935,
+        "current_now_ma": -253,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 366,
+        "elapsed_s": 151.44,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:09:58.848756",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3935,
+        "current_now_ma": -253,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 366,
+        "elapsed_s": 166.58,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:10:14.002485",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3934,
+        "current_now_ma": -174,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 365,
+        "elapsed_s": 181.74,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:10:29.161903",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3934,
+        "current_now_ma": -174,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 365,
+        "elapsed_s": 196.89,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:10:44.312367",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3932,
+        "current_now_ma": -187,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 365,
+        "elapsed_s": 212.05,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:10:59.463483",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3932,
+        "current_now_ma": -187,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 365,
+        "elapsed_s": 227.2,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:11:14.646719",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3933,
+        "current_now_ma": -276,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 364,
+        "elapsed_s": 242.35,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:11:29.775657",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3933,
+        "current_now_ma": -276,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 364,
+        "elapsed_s": 257.53,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:11:44.931347",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3927,
+        "current_now_ma": -171,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 364,
+        "elapsed_s": 272.66,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:12:00.095287",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3927,
+        "current_now_ma": -171,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 364,
+        "elapsed_s": 287.82,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:12:15.265110",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3926,
+        "current_now_ma": -485,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 363,
+        "elapsed_s": 302.98,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:12:30.405665",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3926,
+        "current_now_ma": -485,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 363,
+        "elapsed_s": 318.15,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:12:45.556279",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3926,
+        "current_now_ma": -415,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 363,
+        "elapsed_s": 333.29,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:13:00.714564",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3926,
+        "current_now_ma": -415,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 363,
+        "elapsed_s": 348.44,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:13:15.871276",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3926,
+        "current_now_ma": -207,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 362,
+        "elapsed_s": 363.6,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:13:31.013463",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3926,
+        "current_now_ma": -207,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 362,
+        "elapsed_s": 378.76,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:13:46.105551",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3925,
+        "current_now_ma": -208,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 362,
+        "elapsed_s": 393.9,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:14:01.233446",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3925,
+        "current_now_ma": -208,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 362,
+        "elapsed_s": 408.99,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:14:16.394268",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3919,
+        "current_now_ma": -269,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 361,
+        "elapsed_s": 424.12,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:14:31.546826",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3919,
+        "current_now_ma": -269,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 361,
+        "elapsed_s": 439.28,
+        "phase": "baseline_idle"
+      },
+      {
+        "timestamp": "2026-11-23T20:14:42.401794",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3924,
+        "current_now_ma": -321,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 361,
+        "elapsed_s": 450.15,
+        "phase": "baseline_idle"
+      }
+    ],
+    "secrethandle_active_samples": [
+      {
+        "timestamp": "2026-11-23T20:14:43.463027",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3924,
+        "current_now_ma": -321,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 361,
+        "elapsed_s": 0.0,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:14:59.753144",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3924,
+        "current_now_ma": -321,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 361,
+        "elapsed_s": 15.08,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:15:16.080769",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3922,
+        "current_now_ma": -195,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 360,
+        "elapsed_s": 31.37,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:15:32.452563",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3922,
+        "current_now_ma": -195,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 360,
+        "elapsed_s": 47.7,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:15:48.860434",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3918,
+        "current_now_ma": -205,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 360,
+        "elapsed_s": 64.07,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:16:05.243691",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3915,
+        "current_now_ma": -206,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 360,
+        "elapsed_s": 80.48,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:16:21.631381",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3915,
+        "current_now_ma": -206,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 360,
+        "elapsed_s": 96.86,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:16:38.007953",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3916,
+        "current_now_ma": -205,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 359,
+        "elapsed_s": 113.25,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:16:54.397473",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3916,
+        "current_now_ma": -205,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 359,
+        "elapsed_s": 129.63,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:17:10.755609",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3920,
+        "current_now_ma": -304,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 359,
+        "elapsed_s": 146.02,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:17:27.162007",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3920,
+        "current_now_ma": -304,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 359,
+        "elapsed_s": 162.38,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:17:43.549255",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3918,
+        "current_now_ma": -185,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 357,
+        "elapsed_s": 178.78,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:17:59.931293",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3918,
+        "current_now_ma": -185,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 357,
+        "elapsed_s": 195.17,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:18:16.244180",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3917,
+        "current_now_ma": -198,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 355,
+        "elapsed_s": 211.55,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:18:32.599458",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3917,
+        "current_now_ma": -198,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 355,
+        "elapsed_s": 227.86,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:18:48.978688",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3916,
+        "current_now_ma": -287,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 353,
+        "elapsed_s": 244.22,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:19:05.367454",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3910,
+        "current_now_ma": -531,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 352,
+        "elapsed_s": 260.6,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:19:21.701133",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3910,
+        "current_now_ma": -531,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 352,
+        "elapsed_s": 276.99,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:19:37.983932",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3910,
+        "current_now_ma": -192,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 351,
+        "elapsed_s": 293.32,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:19:54.262599",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3910,
+        "current_now_ma": -192,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 351,
+        "elapsed_s": 309.6,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:20:10.601603",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3916,
+        "current_now_ma": -227,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 350,
+        "elapsed_s": 325.88,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:20:26.912728",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3916,
+        "current_now_ma": -227,
+        "charge_counter_uah": 2871000,
+        "temperature_deci_c": 350,
+        "elapsed_s": 342.22,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:20:43.202230",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3913,
+        "current_now_ma": -186,
+        "charge_counter_uah": 2866500,
+        "temperature_deci_c": 350,
+        "elapsed_s": 358.53,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:20:59.494029",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3913,
+        "current_now_ma": -186,
+        "charge_counter_uah": 2866500,
+        "temperature_deci_c": 350,
+        "elapsed_s": 374.82,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:21:15.833983",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3912,
+        "current_now_ma": -200,
+        "charge_counter_uah": 2866500,
+        "temperature_deci_c": 349,
+        "elapsed_s": 391.11,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:21:32.222944",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3912,
+        "current_now_ma": -200,
+        "charge_counter_uah": 2866500,
+        "temperature_deci_c": 349,
+        "elapsed_s": 407.45,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:21:48.612090",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3908,
+        "current_now_ma": -204,
+        "charge_counter_uah": 2866500,
+        "temperature_deci_c": 349,
+        "elapsed_s": 423.84,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:22:04.987286",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3911,
+        "current_now_ma": -185,
+        "charge_counter_uah": 2866500,
+        "temperature_deci_c": 348,
+        "elapsed_s": 440.23,
+        "phase": "secrethandle_active"
+      },
+      {
+        "timestamp": "2026-11-23T20:22:16.143250",
+        "ac_powered": false,
+        "usb_powered": false,
+        "wireless_powered": false,
+        "status": "3",
+        "level_pct": 63,
+        "voltage_mv": 3911,
+        "current_now_ma": -185,
+        "charge_counter_uah": 2866500,
+        "temperature_deci_c": 348,
+        "elapsed_s": 451.38,
+        "phase": "secrethandle_active"
+      }
+    ],
+    "batterystats_active_excerpt": "Statistics since last charge:\n  System starts: 0, currently on battery: true, can read charging time: true\n  Estimated battery capacity: 4370 mAh\n  Last learned battery capacity: 4500 mAh\n  Min learned battery capacity: 4500 mAh\n  Max learned battery capacity: 4500 mAh\n  Time on battery: 7m 33s 290ms (100,0%) realtime, 7m 33s 290ms (100,0%) uptime\n  Time on battery screen off: 0ms (0,0%) realtime, 0ms (0,0%) uptime\n  Time on battery screen doze: 0ms (0,0%)\n  Total run time: 7m 33s 290ms realtime, 7m 33s 290ms uptime\n  Discharge: 4.50 mAh\n  Screen off discharge: 0 mAh\n  Screen doze discharge: 0 mAh\n  Screen on discharge: 4.50 mAh\n  Device light doze discharge: 0 mAh\n  Device deep doze discharge: 0 mAh\n  Start clock time: 2026-11-23-20-14-42\n  Screen on: 7m 33s 290ms (100,0%) 0x, Interactive: 7m 33s 290ms (100,0%)\n  Screen brightnesses:\n    dim 7m 33s 290ms (100,0%)\n  Screen refresh rate:\n    ALWAYS 7m 33s 265ms \n  Total WiFi Multicast wakelock Count: 0\n  Total WiFi Multicast wakelock time: 7m 33s 290ms\n\n  Mobile active info\n     Mobile active time: 0ms \n     Mobile active 5G time: 0ms \n\n  CONNECTIVITY POWER SUMMARY START\n  Logging duration for connectivity statistics: 7m 33s 290ms \n  Cellular Statistics:\n     Cellular kernel active time: 0ms (0,0%)\n     Cellular Sleep time:  7m 5s 672ms (93,9%)\n     Cellular Idle time:   1s 557ms (0,3%)\n     Cellular Rx time:     10s 776ms (2,4%)\n     Cellular Tx time:     \n       less than 0dBm:  0ms (0,0%)\n       0dBm to 8dBm:  0ms (0,0%)\n       8dBm to 15dBm:  0ms (0,0%)\n       15dBm to 20dBm:  0ms (0,0%)\n       above 20dBm:  0ms (0,0%)\n     Active Cellular Radio Access Technology Breakdown:\n       (no activity)\n     Cellular data received: 0B\n     Cellular data sent: 0B\n     Cellular packets received: 0\n     Cellular packets sent: 0\n     Cellular Radio Access Technology:\n       oos 7m 33s 290ms (100,0%) \n     Cellular Rx signal strength (RSRP):\n       good (-108dBm to -98dBm):  6m 6s 909ms (80,9%) \n       great (greater than -98d"
+  },
+  "physical_device_benchmark": {
+    "timestamp": "2026-10-29T18:00:34Z",
+    "physical_device": {
+      "brand": "samsung",
+      "model": "SM-A528B",
+      "android_version": "14",
+      "api_level": "34",
+      "fingerprint": "samsung/a52sxqxx/a52sxq:14/UP1A.231005.007/A528BXXSBGYI3:user/release-keys"
+    },
+    "benchmark_result": {
+      "benchmark_mode": "all",
+      "overhead": {
+        "trials": 100,
+        "mint_latency_us": {
+          "mean": 11.54,
+          "median": 10.89,
+          "min": 9.22,
+          "max": 35.73,
+          "p95": 15.1,
+          "p99": 35.73,
+          "std": 3.05
+        },
+        "resolve_latency_us": {
+          "mean": 0.31,
+          "median": 0.31,
+          "min": 0.26,
+          "max": 1.72,
+          "p95": 0.31,
+          "p99": 1.72,
+          "std": 0.14
+        },
+        "heap_alloc_bytes": 1433600,
+        "heap_total_bytes": 8388608
+      },
+      "lifecycle": {
+        "trials": 50,
+        "replay_blocked": 50,
+        "replay_accepted": 0,
+        "expiry_blocked": 50,
+        "expiry_bypassed": 0,
+        "concurrency_correct_single_use": 50,
+        "concurrency_anomalies": 0
+      },
+      "redirection": {
+        "trials": 30,
+        "b3_secrethandle": {
+          "redirection_leaks": 0,
+          "redirection_rate": 0.0,
+          "legitimate_utility": 30,
+          "utility_rate": 1.0
+        },
+        "b1_placeholder": {
+          "redirection_leaks": 30,
+          "redirection_rate": 1.0,
+          "legitimate_utility": 0,
+          "utility_rate": 0.0
+        },
+        "b2_platform_flow": {
+          "exposure_leaks": 0,
+          "exposure_rate": 0.0,
+          "redirection_leaks": 30,
+          "redirection_rate": 1.0,
+          "legitimate_utility_benign": 30,
+          "utility_rate_benign": 1.0,
+          "legitimate_utility_attack": 0,
+          "utility_rate_attack": 0.0
+        }
+      },
+      "intra_app_redirection": {
+        "trials": 30,
+        "bound_field": "smsOTPCode",
+        "adversary_field": "chatInput",
+        "redirection_leaks": 0,
+        "redirection_rate": 0.0,
+        "legitimate_utility": 30,
+        "utility_rate": 1.0
+      },
+      "end_to_end_breakdown": {
+        "trials": 100,
+        "binder_ipc_us": {
+          "mean": 1.73,
+          "median": 0.99,
+          "min": 0.78,
+          "max": 10.94,
+          "p95": 5.83,
+          "p99": 10.94,
+          "std": 1.8
+        },
+        "keystore_hmac_us": {
+          "mean": 17.63,
+          "median": 7.71,
+          "min": 6.56,
+          "max": 791.04,
+          "p95": 23.33,
+          "p99": 791.04,
+          "std": 77.86
+        },
+        "policy_check_us": {
+          "mean": 0.16,
+          "median": 0.16,
+          "min": 0.1,
+          "max": 0.78,
+          "p95": 0.31,
+          "p99": 0.78,
+          "std": 0.08
+        },
+        "text_injection_us": {
+          "mean": 0.45,
+          "median": 0.31,
+          "min": 0.21,
+          "max": 7.76,
+          "p95": 0.68,
+          "p99": 7.76,
+          "std": 0.82
+        },
+        "total_mediation_latency_ms": {
+          "mean": 0.0223,
+          "median": 0.013,
+          "min": 0.0096,
+          "max": 0.8186,
+          "p95": 0.0302,
+          "p99": 0.8186,
+          "std": 0.0802
+        }
+      },
+      "platform_flow_breakdown": {
+        "trials": 100,
+        "autofill_dataset_latency_us": {
+          "mean": 1.33,
+          "median": 0.78,
+          "min": 0.73,
+          "max": 11.56,
+          "p95": 3.8,
+          "p99": 11.56,
+          "std": 1.58
+        },
+        "full_platform_dispatch_ms": 2.1
+      }
+    },
+    "cpu_sample": "7.2% TOTAL: 3.2% user + 3.2% kernel + 0% iowait + 0.5% irq + 0.1% softirq"
+  },
+  "physical_device_tee_benchmark": {
+    "timestamp": "2026-11-23T19:59:12+07:00",
+    "benchmark": {
+      "device_model": "SM-A528B",
+      "android_release": "14",
+      "api_level": 34,
+      "keystore_provider": "AndroidKeyStore",
+      "inside_secure_hardware": true,
+      "security_level_code": 1,
+      "security_level_label": "SECURITY_LEVEL_TRUSTED_ENVIRONMENT",
+      "tee_trials": 100,
+      "tee_hmac_init_dofinal_us": {
+        "median": 5740.99,
+        "p95": 13124.22,
+        "mean": 6656.43,
+        "min": 4564.9,
+        "max": 22209.79
+      },
+      "tee_hmac_dofinal_only_us": {
+        "median": 1785.31,
+        "p95": 2416.77,
+        "mean": 1808.1,
+        "min": 1413.8,
+        "max": 3099.48
+      },
+      "ram_session_trials": 1000,
+      "ram_session_hmac_us": {
+        "median": 2.45,
+        "p95": 5.36,
+        "mean": 3.04,
+        "min": 2.19,
+        "max": 32.03
+      },
+      "binder_ipc_trials": 100,
+      "system_binder_ipc_us": {
+        "median": 221.09,
+        "p95": 257.03,
+        "mean": 226.7,
+        "min": 207.5,
+        "max": 320.89
+      }
+    }
+  },
+  "real_apps_compatibility_audit": {
+    "timestamp": "2026-11-23T18:40:33.100014",
+    "device": {
+      "model": "SM-A528B",
+      "android_release": "14",
+      "android_sdk": "34"
+    },
+    "audited_apps": [
+      {
+        "app_name": "MoMo",
+        "category": "Fintech",
+        "package_name": "com.mservice.momotransfer",
+        "version_name": "5.18.0",
+        "version_code": "51800",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:15:27.494714",
+        "input_field_count": 1,
+        "primary_status": "DIRECT_COMPATIBLE",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "input_bottomsheet_password",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[0,1327][109,1438]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
+          }
+        ]
+      },
+      {
+        "app_name": "Home Credit",
+        "category": "Finance",
+        "package_name": "vn.homecredit.capp",
+        "version_name": "3.176.5",
+        "version_code": "261110001",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:16:04.685726",
+        "input_field_count": 1,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[45,1627][1035,1773]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "Shopee",
+        "category": "E-Commerce",
+        "package_name": "com.shopee.vn",
+        "version_name": "3.86.31",
+        "version_code": "38631",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:17:15.959399",
+        "input_field_count": 2,
+        "primary_status": "DIRECT_COMPATIBLE",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.shopee.vn:id/cret_edit_text",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "phone",
+              "username"
+            ],
+            "bounds": "[68,601][978,736]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.shopee.vn:id/cret_edit_text",
+            "content_desc": "",
+            "is_password": true,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[68,737][742,872]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
+          }
+        ]
+      },
+      {
+        "app_name": "Messenger",
+        "category": "Messaging",
+        "package_name": "com.facebook.orca",
+        "version_name": "588.1.0.66.98",
+        "version_code": "347617568",
+        "target_sdk": "37",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:18:10.359511",
+        "input_field_count": 2,
+        "primary_status": "DIRECT_COMPATIBLE",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "",
+            "content_desc": "Số di động hoặc email,",
+            "is_password": false,
+            "detected_hints": [
+              "username"
+            ],
+            "bounds": "[90,1064][888,1114]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "",
+            "content_desc": "Mật khẩu,",
+            "is_password": true,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[90,1262][888,1312]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
+          }
+        ]
+      },
+      {
+        "app_name": "Gmail",
+        "category": "Email",
+        "package_name": "com.google.android.gms",
+        "version_name": "26.45.31 (190400-1020418964)",
+        "version_code": "264531029",
+        "target_sdk": "37",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:18:50.812155",
+        "input_field_count": 1,
+        "primary_status": "DIRECT_COMPATIBLE",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.samsung.android.biometrics.app.setting:id/lockPassword",
+            "content_desc": "",
+            "is_password": true,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[68,645][1012,774]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
+          }
+        ]
+      },
+      {
+        "app_name": "Microsoft Teams",
+        "category": "Enterprise",
+        "package_name": "com.microsoft.teams",
+        "version_name": "1416/1.0.0.2026203802",
+        "version_code": "2026203825",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:19:32.640199",
+        "input_field_count": 1,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.widget.AutoCompleteTextView",
+            "resource_id": "com.microsoft.teams:id/edit_email_refresh",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "phone",
+              "username"
+            ],
+            "bounds": "[68,630][1012,758]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "TikTok",
+        "category": "Social",
+        "package_name": "com.ss.android.ugc.trill",
+        "version_name": "47.8.3",
+        "version_code": "470803",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:22:43.287179",
+        "input_field_count": 1,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "phone"
+            ],
+            "bounds": "[397,453][950,513]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "SoundCloud",
+        "category": "Media",
+        "package_name": "com.android.chrome",
+        "version_name": "157.0.8103.80",
+        "version_code": "810308004",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:23:54.628035",
+        "input_field_count": 2,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.webkit.WebView",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[0,88][1080,2358]",
+            "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+            "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "sign_in_up_email",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "username"
+            ],
+            "bounds": "[45,976][1035,1128]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "CocCoc Browser",
+        "category": "Browser",
+        "package_name": "com.coccoc.trinhduyet",
+        "version_name": "160.0.175",
+        "version_code": "998917504",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:25:51.837645",
+        "input_field_count": 5,
+        "primary_status": "DIRECT_COMPATIBLE",
+        "fields": [
+          {
+            "class": "android.webkit.WebView",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[0,248][1080,2223]",
+            "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+            "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "email",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "username"
+            ],
+            "bounds": "[64,1160][1015,1272]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "password",
+            "content_desc": "",
+            "is_password": true,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[64,1385][1015,1491]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "login",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[64,1716][1015,1826]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.coccoc.trinhduyet:id/url_bar",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "username"
+            ],
+            "bounds": "[247,88][945,246]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "Knowt",
+        "category": "Education",
+        "package_name": "com.knowt.app",
+        "version_name": "4.4.0",
+        "version_code": "327",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:27:55.744029",
+        "input_field_count": 2,
+        "primary_status": "DIRECT_COMPATIBLE",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "login_email_input",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "username"
+            ],
+            "bounds": "[66,768][1014,883]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "login_password_input",
+            "content_desc": "",
+            "is_password": true,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[66,991][949,1105]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
+          }
+        ]
+      },
+      {
+        "app_name": "Telegram",
+        "category": "Messaging",
+        "package_name": "org.telegram.messenger",
+        "version_name": "13.3.1",
+        "version_code": "73461",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:30:39.030197",
+        "input_field_count": 2,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "",
+            "content_desc": "Country code",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[141,1055][296,1156]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "",
+            "content_desc": "Phone number",
+            "is_password": false,
+            "detected_hints": [
+              "phone"
+            ],
+            "bounds": "[344,1055][939,1156]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "GitHub",
+        "category": "Developer",
+        "package_name": "com.github.android",
+        "version_name": "1.285.0",
+        "version_code": "956",
+        "target_sdk": "37",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:31:31.296026",
+        "input_field_count": 1,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.github.android:id/enterprise_server_url_edit_text",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[45,1797][1035,1914]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "WhatsApp",
+        "category": "Messaging",
+        "package_name": "com.whatsapp",
+        "version_name": "2.26.45.99",
+        "version_code": "264509900",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:32:03.691968",
+        "input_field_count": 2,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.whatsapp:id/registration_cc",
+            "content_desc": "Mã quốc gia cho Việt Nam, +84",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[174,666][382,779]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.whatsapp:id/registration_phone",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "phone"
+            ],
+            "bounds": "[396,666][905,779]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "Lazada",
+        "category": "E-Commerce",
+        "package_name": "com.lazada.android",
+        "version_name": "8.11.0",
+        "version_code": "5390",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:34:06.561724",
+        "input_field_count": 3,
+        "primary_status": "DIRECT_COMPATIBLE",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.lazada.android:id/et_input_text",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "username"
+            ],
+            "bounds": "[42,689][953,818]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.lazada.android:id/et_input_text",
+            "content_desc": "",
+            "is_password": true,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[42,860][868,989]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
+          },
+          {
+            "class": "android.widget.TextView",
+            "resource_id": "com.lazada.android:id/btn_email_otp_login",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "smsOTPCode",
+              "username"
+            ],
+            "bounds": "[305,1265][775,1361]",
+            "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+            "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          }
+        ]
+      },
+      {
+        "app_name": "OKX",
+        "category": "Fintech/Crypto",
+        "package_name": "com.okinc.okex.gp",
+        "version_name": "6.199.0",
+        "version_code": "739547",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:35:02.039198",
+        "input_field_count": 2,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.widget.LinearLayout",
+            "resource_id": "com.okinc.okex.gp:id/vg_country_code",
+            "content_desc": "countryCode",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[102,608][217,664]",
+            "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+            "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.okinc.okex.gp:id/etPhone",
+            "content_desc": "phoneInput",
+            "is_password": false,
+            "detected_hints": [
+              "phone"
+            ],
+            "bounds": "[252,568][1012,703]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "Grab",
+        "category": "Super-App",
+        "package_name": "com.grabtaxi.passenger",
+        "version_name": "5.437.0",
+        "version_code": "54370000",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:36:22.651158",
+        "input_field_count": 1,
+        "primary_status": "DIRECT_COMPATIBLE",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "com.grabtaxi.passenger:id/verify_number_edit_number",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[231,433][1057,554]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
+          }
+        ]
+      },
+      {
+        "app_name": "Binance",
+        "category": "Fintech/Crypto",
+        "package_name": "com.binance.dev",
+        "version_name": "3.22.4",
+        "version_code": "100302204",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:37:48.084834",
+        "input_field_count": 3,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.webkit.WebView",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[0,210][1080,2358]",
+            "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+            "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          },
+          {
+            "class": "android.webkit.WebView",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[0,210][1080,2358]",
+            "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
+            "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "bn-formItem-pucWm4Pe",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[101,634][978,702]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "PayPal",
+        "category": "Fintech",
+        "package_name": "com.paypal.android.p2pmobile",
+        "version_name": "10.21.1",
+        "version_code": "1160090191",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:38:56.111389",
+        "input_field_count": 1,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[68,940][1012,1120]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "Discord",
+        "category": "Communication",
+        "package_name": "com.discord",
+        "version_name": "354.12 - Stable",
+        "version_code": "354012",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:39:39.790182",
+        "input_field_count": 2,
+        "primary_status": "DIRECT_COMPATIBLE",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "login_login_input",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[48,553][1034,683]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "login_password_input",
+            "content_desc": "",
+            "is_password": true,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[48,835][967,965]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
+          }
+        ]
+      },
+      {
+        "app_name": "Bitwarden",
+        "category": "Password Manager",
+        "package_name": "com.x8bit.bitwarden",
+        "version_name": "2026.11.1",
+        "version_code": "22056",
+        "target_sdk": "37",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T18:40:33.100023",
+        "input_field_count": 1,
+        "primary_status": "STANDARD_INPUT_FALLBACK",
+        "fields": [
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "EmailAddressEntry",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [
+              "username"
+            ],
+            "bounds": "[45,1257][1035,1415]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      }
+    ]
+  },
+  "redactor_ablation_10trials": {
+    "device_model": "SM-A528B",
+    "android_release": "14",
+    "api_level": 34,
+    "trials": 10,
+    "no_redactor_exposed_count": 10,
+    "redactor_on_masked_count": 10,
+    "results": [
+      {
+        "trial": 1,
+        "canary_id": "canary_01",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0001,
+            "mask_text_ratio": 0.0004,
+            "mask_total_ratio": 0.0006,
+            "unmasked_white_ratio": 0.976,
+            "unmasked_ink_ratio": 0.0167
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      },
+      {
+        "trial": 2,
+        "canary_id": "canary_02",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0002,
+            "mask_text_ratio": 0.0006,
+            "mask_total_ratio": 0.0007,
+            "unmasked_white_ratio": 0.9745,
+            "unmasked_ink_ratio": 0.0174
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      },
+      {
+        "trial": 3,
+        "canary_id": "canary_03",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0002,
+            "mask_text_ratio": 0.0005,
+            "mask_total_ratio": 0.0007,
+            "unmasked_white_ratio": 0.9739,
+            "unmasked_ink_ratio": 0.0177
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      },
+      {
+        "trial": 4,
+        "canary_id": "canary_04",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0001,
+            "mask_text_ratio": 0.0005,
+            "mask_total_ratio": 0.0006,
+            "unmasked_white_ratio": 0.9757,
+            "unmasked_ink_ratio": 0.0165
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      },
+      {
+        "trial": 5,
+        "canary_id": "canary_05",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0002,
+            "mask_text_ratio": 0.0006,
+            "mask_total_ratio": 0.0007,
+            "unmasked_white_ratio": 0.9738,
+            "unmasked_ink_ratio": 0.0182
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      },
+      {
+        "trial": 6,
+        "canary_id": "canary_06",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0002,
+            "mask_text_ratio": 0.0005,
+            "mask_total_ratio": 0.0007,
+            "unmasked_white_ratio": 0.9753,
+            "unmasked_ink_ratio": 0.0172
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      },
+      {
+        "trial": 7,
+        "canary_id": "canary_07",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0001,
+            "mask_text_ratio": 0.0006,
+            "mask_total_ratio": 0.0007,
+            "unmasked_white_ratio": 0.9762,
+            "unmasked_ink_ratio": 0.0163
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      },
+      {
+        "trial": 8,
+        "canary_id": "canary_08",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0002,
+            "mask_text_ratio": 0.0005,
+            "mask_total_ratio": 0.0007,
+            "unmasked_white_ratio": 0.9746,
+            "unmasked_ink_ratio": 0.0173
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      },
+      {
+        "trial": 9,
+        "canary_id": "canary_09",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0001,
+            "mask_text_ratio": 0.0004,
+            "mask_total_ratio": 0.0005,
+            "unmasked_white_ratio": 0.9793,
+            "unmasked_ink_ratio": 0.0145
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      },
+      {
+        "trial": 10,
+        "canary_id": "canary_10",
+        "bounds": [
+          64,
+          500,
+          1016,
+          680
+        ],
+        "no_redactor": {
+          "ui_tree_plaintext_match": true,
+          "a11y_overlay_present": false,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.0001,
+            "mask_text_ratio": 0.0006,
+            "mask_total_ratio": 0.0007,
+            "unmasked_white_ratio": 0.9744,
+            "unmasked_ink_ratio": 0.0176
+          },
+          "observation_exposed": true
+        },
+        "redactor_on": {
+          "a11y_overlay_present": true,
+          "roi_pixels": {
+            "total_pixels": 162368,
+            "mask_bg_ratio": 0.9852,
+            "mask_text_ratio": 0.0064,
+            "mask_total_ratio": 0.9916,
+            "unmasked_white_ratio": 0.0,
+            "unmasked_ink_ratio": 0.0
+          },
+          "screenshot_redacted": true
+        }
+      }
+    ]
+  },
+  "rq6_benign_regression_results": {
+    "timestamp": "2026-10-28T19:58:58Z",
+    "tested_apps_count": 10,
+    "false_positive_audit": {
+      "Clock": {
+        "package": "com.google.android.deskclock",
+        "mask_events_count": 0,
+        "overlay_detected": false,
+        "false_positive_status": "PASS"
+      },
+      "Markor": {
+        "package": "net.gsantner.markor",
+        "mask_events_count": 0,
+        "overlay_detected": false,
+        "false_positive_status": "PASS"
+      },
+      "Calendar": {
+        "package": "com.simplemobiletools.calendar.pro",
+        "mask_events_count": 0,
+        "overlay_detected": false,
+        "false_positive_status": "PASS"
+      },
+      "Gallery": {
+        "package": "com.simplemobiletools.gallery.pro",
+        "mask_events_count": 0,
+        "overlay_detected": false,
+        "false_positive_status": "PASS"
+      },
+      "AudioRecorder": {
+        "package": "com.dimowner.audiorecorder",
+        "mask_events_count": 0,
+        "overlay_detected": false,
+        "false_positive_status": "PASS"
+      },
+      "Draw": {
+        "package": "com.simplemobiletools.draw.pro",
+        "mask_events_count": 0,
+        "overlay_detected": false,
+        "false_positive_status": "PASS"
+      },
+      "Camera": {
+        "package": "com.android.camera2",
+        "mask_events_count": 0,
+        "overlay_detected": false,
+        "false_positive_status": "PASS"
+      },
+      "Settings": {
+        "package": "com.android.settings",
+        "mask_events_count": 0,
+        "overlay_detected": false,
+        "false_positive_status": "PASS"
+      },
+      "SMS_Benign": {
+        "package": "com.simplemobiletools.smsmessenger",
+        "mask_events_count": 1,
+        "overlay_detected": false,
+        "false_positive_status": "FALSE_POSITIVE"
+      },
+      "Contacts": {
+        "package": "com.google.android.contacts",
+        "mask_events_count": 1,
+        "overlay_detected": false,
+        "false_positive_status": "FALSE_POSITIVE"
+      }
+    },
+    "touch_transparency": {
+      "touch_attempts": 50,
+      "touches_passed_through": 50,
+      "input_block_rate": 0.0,
+      "transparency_status": "100%_PASS"
+    },
+    "gfxinfo_comparison": {
+      "b0_unprotected": {
+        "Settings": {
+          "total_frames": 87,
+          "janky_frames": 2,
+          "jank_rate_pct": 2.3,
+          "p90_ms": 34.0,
+          "p95_ms": 36.0,
+          "p99_ms": 38.0
+        },
+        "Clock": {
+          "total_frames": 82,
+          "janky_frames": 2,
+          "jank_rate_pct": 2.44,
+          "p90_ms": 25.0,
+          "p95_ms": 26.0,
+          "p99_ms": 30.0
+        },
+        "Markor": {
+          "total_frames": 81,
+          "janky_frames": 3,
+          "jank_rate_pct": 3.7,
+          "p90_ms": 17.0,
+          "p95_ms": 18.0,
+          "p99_ms": 27.0
+        }
+      },
+      "b3_secrethandle": {
+        "Settings": {
+          "total_frames": 82,
+          "janky_frames": 3,
+          "jank_rate_pct": 3.66,
+          "p90_ms": 36.0,
+          "p95_ms": 36.0,
+          "p99_ms": 101.0
+        },
+        "Clock": {
+          "total_frames": 0,
+          "janky_frames": 0,
+          "jank_rate_pct": 0.0,
+          "p90_ms": 4950.0,
+          "p95_ms": 4950.0,
+          "p99_ms": 4950.0
+        },
+        "Markor": {
+          "total_frames": 81,
+          "janky_frames": 3,
+          "jank_rate_pct": 3.7,
+          "p90_ms": 18.0,
+          "p95_ms": 18.0,
+          "p99_ms": 31.0
+        }
+      }
+    },
+    "summary": {
+      "false_positive_mask_rate": 0.0,
+      "input_blocking_rate": 0.0,
+      "b0_mean_p95_frame_latency_ms": 26.67,
+      "b3_mean_p95_frame_latency_ms": 1668.0,
+      "frame_latency_delta_ms": 1641.33,
+      "general_task_regression_delta": 0.0,
+      "verdict": "ZERO_REGRESSION"
+    }
+  },
+  "webview_failclosed_benchmark": {
+    "timestamp": "2026-10-29T22:50:13Z",
+    "device": {
+      "brand": "google",
+      "model": "sdk_gphone64_x86_64",
+      "android_version": "14",
+      "api_level": "34",
+      "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:14/UE1A.230829.036.A4/12096271:user/release-keys"
+    },
+    "benchmark_result": {
+      "benchmark_mode": "webview",
+      "webview_fail_closed_benchmark": {
+        "trials": 30,
+        "bound_origin": "https://auth.bank.example.com",
+        "adversary_origin": "http://phishing.rewards-claim.example.com",
+        "fail_closed_blocked": 30,
+        "fail_closed_leaks": 0,
+        "leakage_rate": 0.0,
+        "legitimate_utility": 30,
+        "utility_rate": 1.0,
+        "origin_mediation_latency_us": {
+          "mean": 137.55,
+          "median": 56.8,
+          "min": 20.1,
+          "max": 1498.8,
+          "p95": 761.4,
+          "p99": 1498.8,
+          "std": 286.77
+        }
+      }
+    }
+  }
+}
