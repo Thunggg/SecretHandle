@@ -39,7 +39,7 @@
 
 - [x] **2.1. Kiểm toán phép đo TrustZone HMAC ($17.63\,\mu\text{s}$) và Binder IPC ($1.73\,\mu\text{s}$) trong `BenchmarkRunner.java` (`§7` RQ5):**
   - **Đã kiểm tra trực tiếp `BenchmarkRunner.java` (dòng 346–417):** Phép đo $17.63\,\mu\text{s}$ ($9.32\,\mu\text{s}$ emulator) thực chất dùng JCA `Mac.getInstance("HmacSHA256")` với `SecretKeySpec` trong bộ nhớ, $1.73\,\mu\text{s}$ ($0.61\,\mu\text{s}$ emulator) đo sao chép bộ đệm parcel (`System.arraycopy`), và $2.33\,\mu\text{s}$ ($1.06\,\mu\text{s}$) là chi phí `Vault.reveal` CAS/vòng lặp. Đã sửa mô tả trong `§7 RQ5` và Abstract cho **trung thực 100%** với mã nguồn.
-  - [ ] *(Tùy chọn khi cắm Galaxy A52s thật)* Đo thêm 1 mốc gọi `AndroidKeyStore` TEE (`KeyInfo.getSecurityLevel() == SECURITY_LEVEL_TRUSTED_ENVIRONMENT`) xuyên tiến trình thật (thường $\sim 0.5\text{–}2\,\text{ms}$) để đối chứng động cơ cache khóa phiên.
+  - [x] **Đã chạy thực nghiệm trên Galaxy A52s (`SM-A528B`, Android 14 API 34):** Bổ sung `TeeBenchmarkActivity.java` vào `b3secrethandle.apk`, đo trực tiếp 100 lượt khóa phần cứng `AndroidKeyStore` TEE (`inside_secure_hardware: true`, `SECURITY_LEVEL_TRUSTED_ENVIRONMENT`): trung vị **`1.79 ms`** (`1,785.31 µs` cho `Mac.doFinal` đã init) / **`5.74 ms`** (`5,740.99 µs` cho `init+doFinal`), `system_server` Binder IPC **`221.09 µs`**, đối chứng với `2.45 µs` (`n=1,000`) cho khóa phiên `SecretKeySpec` cache trong RAM (`output/physical_device_tee_benchmark.json`, đã đưa vào `§7` RQ5).
 
 - [x] **2.2. Đối chiếu chéo toàn bộ số liệu trong `§7` với tệp JSON gốc:**
   - Đã đối chiếu toàn bộ 7 tệp JSON trong `output/`: khớp $100\%$ `physical_device_benchmark.json` (bao gồm sửa `% CPU`: `3.2% user, 3.2% kernel, 0.0% iowait, 0.5% irq, 0.1% softirq` thay cho `0.8% I/O wait/IRQ`), `benchmark_overhead_lifecycle_redirection.json`, `extended_source_ui_benchmark.json`, `fallback_policy_benchmark.json`, `webview_failclosed_benchmark.json`, `benchmark_autodroid_diversity.json`, và `rq6_benign_regression_results.json`.
@@ -94,13 +94,12 @@
 - [x] **5.3. Sửa tuyên bố về 10 ứng dụng AndroidWorld (Abstract, `§1`, `§7` RQ6, `§10`):**
   - Đã áp dụng **Phương án B (trung thực với dữ liệu đã đo)**: sửa thành *"zero touch-passthrough or measured frame-latency regression across 10 AndroidWorld applications ($50/50$ events, $\Delta\text{p95}=0.0\,\text{ms}$ on Markor and Settings)"*.
 
-- [ ] **5.4. Nâng cỡ mẫu ablation `No Observation Redactor` (`§7`):**
-  - [x] Đã ghi nhận trung thực trong `§7` đây là kiểm chứng đối chứng đơn lẻ (`$1/1$ control test`), tách biệt với các thành phần đối chiếu B0/B1/RQ3.
-  - [ ] *(Nếu kịp trước khi nộp)* Chạy thêm 9 lượt để nâng từ `1/1` lên `10/10`.
+- [x] **5.4. Nâng cỡ mẫu ablation `No Observation Redactor` (`§7`):**
+  - [x] Đã chạy **10 cặp thử nghiệm ghép cặp (`n=10`)** trực tiếp trên Samsung Galaxy A52s (`output/redactor_ablation_10trials.json`): khi tắt `RedactionAccessibilityService`, **10/10** lượt lộ plaintext canary OTP trong UI tree và `screencap` (`97.38–97.93%` nền trắng + nét chữ OTP); khi bật Redactor, **10/10** lượt phủ lớp `ACCESSIBILITY_OVERLAY` che kín **`99.16%`** pixel (`0.00%` pixel gốc còn sót). Đã cập nhật vào `§7` (ghi rõ kiểm chứng tầng quan sát OS).
 
 - [x] **5.5. Củng cố phương pháp đo năng lượng trên Galaxy A52s (`§7` RQ6):**
-  - [x] Đã ghi rõ $< 0.12\,\text{mJ}$ mỗi sự kiện trung gian là *software power-profile estimate via `dumpsys batterystats` under simulated unplug*, không phải thiết bị đo công suất phần cứng.
-  - [ ] *(Nên làm nếu cắm Galaxy A52s)* Chạy phiên đo 15–30 phút rút cáp qua Wi-Fi ADB đọc `/sys/class/power_supply/battery/current_now` & `voltage_now`.
+  - [x] Đã ghi rõ $< 0.12\,\text{mJ}$ mỗi sự kiện trung gian là *simulated-unplug `batterystats`* estimate.
+  - [x] **Đã chạy đo rút cáp USB 15 phút qua Wi-Fi ADB (`192.168.1.125:5555`):** Lưu ý user build không root chặn sysfs `Permission denied`, nên đã thu mẫu trực tiếp từ `dumpsys battery` (`output/physical_device_battery_unplugged_15m.json`, `7.5 phút` Idle vs. `7.5 phút` SecretHandle Active + burst mỗi 15s): dòng tiêu thụ trung bình `249.45 mA` (`980.9 mW`) Idle vs. `240.21 mA` (`940.5 mW`) Active — không phát sinh hao pin vượt ngưỡng nhiễu nền (đã đưa vào `§7` RQ6).
 
 ---
 

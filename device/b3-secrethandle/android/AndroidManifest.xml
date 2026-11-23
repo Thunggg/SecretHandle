@@ -21,6 +21,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".TeeBenchmarkActivity"
+            android:exported="true" />
+
         <service
             android:name=".SecretBrokerService"
             android:exported="true"
