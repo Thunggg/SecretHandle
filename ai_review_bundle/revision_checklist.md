@@ -55,7 +55,7 @@
   - Đã bổ sung đầy đủ điều kiện đo thực tế (`screen-on ~950 mW baseline`, `4.5 mAh` coulomb quantization, `36.8 -> 34.8 C` cooling).
 
 - [x] **4.3. Tận dụng khoảng trống Trang 11–12 để thêm bảng tóm tắt 20 app:**
-  - Đã thêm bảng tóm tắt **Bảng 6 (`tab:compat_summary`)** ngay trong `§7` (3 dòng: Direct Match `7/20`, Pkg+Class `10/20`, WebView `3/20`) trong khi thân bài (`§1–§10`) vẫn kết thúc gọn trên **Trang 12**.
+  - Đã thêm bảng tóm tắt **Bảng 6 (`tab:compat_summary`)** ngay trong `§7` (3 dòng: Direct Match `6/20`, Pkg+Class `9/20`, WebView `5/20`) trong khi thân bài (`§1–§10`) vẫn kết thúc gọn trên **Trang 12**.
 
 - [ ] **4.4. Kiểm tra biên dịch, Artifact công khai & Mốc thời gian HotCRP:**
   - [x] Biên dịch sạch 4 lượt (XeLaTeX + BibTeX), `manuscript_check.py` `PASS`, `pdfinfo` (`612 x 792 pts`), đồng bộ `ai_review_bundle/`.
