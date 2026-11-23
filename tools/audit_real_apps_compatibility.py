@@ -31,6 +31,7 @@ if hasattr(sys.stdout, 'reconfigure'):
     except Exception:
         pass
 import json
+import re
 import subprocess
 import argparse
 import xml.etree.ElementTree as ET
@@ -162,6 +163,39 @@ def capture_hierarchy(adb_cmd, device_serial=None):
     return foreground_pkg, content
 
 
+def _extract_semantic_hints(res_id, desc, hint_attr, text, is_password):
+    """Nhận diện tín hiệu ngữ nghĩa theo ranh giới từ (tránh trùng chuỗi con như 'passenger' -> 'pass')."""
+    short_id = res_id.split(":id/", 1)[-1] if ":id/" in res_id else res_id
+    # Tách camelCase và ký tự phân cách để đối sánh theo token
+    raw = " ".join([short_id, desc, hint_attr, text])
+    spaced = re.sub(r"([a-z])([A-Z])", r"\1 \2", raw).lower()
+    tokens = set(re.findall(r"[a-z0-9\u00c0-\u1ef9]+", spaced))
+    hints = []
+
+    if (
+        tokens & {"otp", "verification", "verifycode", "2fa", "passcode", "smscode"}
+        or any(phrase in spaced for phrase in ("mã xác thực", "mã otp", "mã kích hoạt", "verify_code", "verify code"))
+    ):
+        hints.append("smsOTPCode")
+    if (
+        is_password
+        or tokens & {"pass", "password", "pwd", "passphrase", "lockpassword"}
+        or any(phrase in spaced for phrase in ("mật khẩu", "mat khau"))
+    ):
+        hints.append("password")
+    if (
+        tokens & {"phone", "sdt", "mobile", "msisdn", "phonenumber"}
+        or "số điện thoại" in spaced
+    ):
+        hints.append("phone")
+    if (
+        tokens & {"user", "username", "account", "email"}
+        or any(phrase in spaced for phrase in ("tài khoản", "đăng nhập"))
+    ):
+        hints.append("username")
+    return hints
+
+
 def parse_ui_hierarchy(xml_content):
     """Phân tích các node nhập liệu tĩnh trong XML (không lưu text người dùng)."""
     if not xml_content.strip():
@@ -186,7 +220,12 @@ def parse_ui_hierarchy(xml_content):
 
         lower_cls = cls.lower()
         is_edit_text = "edittext" in lower_cls or "autocompletetextview" in lower_cls
+        is_non_editable = (not is_edit_text) and ("textview" in lower_cls or "button" in lower_cls)
+        if is_non_editable:
+            continue
+
         is_webview = "webview" in lower_cls
+        short_id = (res_id.split(":id/", 1)[-1] if ":id/" in res_id else res_id).lower()
         is_custom_input = (
             is_webview
             or "flutter" in lower_cls
@@ -194,24 +233,16 @@ def parse_ui_hierarchy(xml_content):
             or "canvas" in lower_cls
             or "surfaceview" in lower_cls
             or "composeview" in lower_cls
-            or any(k in res_id.lower() for k in ("pin", "otp", "code", "digit", "numpad", "keypad"))
+            or any(k in short_id for k in ("pin", "otp", "digit", "numpad", "keypad"))
         )
 
-        # Kiểm tra gợi ý trường từ resource-id, content-desc, hint, placeholder text (không ghi text ra đĩa)
-        hints = []
-        combined = " ".join([res_id.lower(), desc.lower(), hint_attr.lower(), text.lower()])
-
-        if any(k in combined for k in ("otp", "mã xác thực", "mã otp", "verification", "verify_code", "pin", "2fa", "mã kích hoạt", "passcode")):
-            hints.append("smsOTPCode")
-        if any(k in combined for k in ("pass", "mật khẩu", "pwd")) or is_password:
-            hints.append("password")
-        if any(k in combined for k in ("phone", "số điện thoại", "sdt", "mobile", "msisdn")):
-            hints.append("phone")
-        if any(k in combined for k in ("user", "account", "email", "tài khoản", "đăng nhập")):
-            hints.append("username")
+        hints = _extract_semantic_hints(res_id, desc, hint_attr, text, is_password)
 
         if is_edit_text or (focusable and is_custom_input) or is_webview:
-            if is_edit_text and ("smsOTPCode" in hints or "password" in hints):
+            if is_webview:
+                compat_status = "WEBVIEW_FAIL_CLOSED"
+                reason = "Embedded WebView container (requires Chromium origin attestation; fails closed otherwise)"
+            elif is_edit_text and ("smsOTPCode" in hints or "password" in hints):
                 compat_status = "DIRECT_MATCH"
                 reason = "Standard EditText with explicit OTP/password semantic signal"
             elif is_edit_text:
@@ -219,7 +250,7 @@ def parse_ui_hierarchy(xml_content):
                 reason = "Standard EditText without explicit OTP/password hint (package+class fallback)"
             else:
                 compat_status = "CUSTOM_CANVAS_FALLBACK"
-                reason = "WebView / custom / opaque view container (package boundary + touch confirmation)"
+                reason = "Custom/opaque view container (package boundary + touch confirmation)"
 
             input_nodes.append({
                 "class": cls,
@@ -236,14 +267,28 @@ def parse_ui_hierarchy(xml_content):
 
 
 def _pick_representative_class(fields):
-    """Chọn class đại diện theo mức ưu tiên tương thích cao nhất."""
+    """Chọn class đại diện (ưu tiên WebView nếu input nằm trong WebView)."""
     if not fields:
         return "CustomView/Opaque"
-    for tier in ("DIRECT_MATCH", "NUMERIC_STANDARD", "CUSTOM_CANVAS_FALLBACK"):
+    for tier in ("WEBVIEW_FAIL_CLOSED", "DIRECT_MATCH", "NUMERIC_STANDARD", "CUSTOM_CANVAS_FALLBACK"):
         for node in fields:
             if node.get("compatibility_tier") == tier:
                 return node["class"].split(".")[-1]
     return fields[0]["class"].split(".")[-1]
+
+
+def classify_app_status(nodes):
+    """Phân loại tổng thể: WebView ưu tiên áp dụng Fail-Closed trước khi xét EditText bên trong."""
+    has_webview = any(n.get("compatibility_tier") == "WEBVIEW_FAIL_CLOSED" or "webview" in n.get("class", "").lower() for n in nodes)
+    has_direct = any(n.get("compatibility_tier") == "DIRECT_MATCH" for n in nodes)
+    has_numeric = any(n.get("compatibility_tier") == "NUMERIC_STANDARD" for n in nodes)
+    if has_webview:
+        return "WEBVIEW_FAIL_CLOSED"
+    if has_direct:
+        return "DIRECT_COMPATIBLE"
+    if has_numeric:
+        return "STANDARD_INPUT_FALLBACK"
+    return "CUSTOM_VIEW_FALLBACK"
 
 
 def record_audit(app_name, category, foreground_pkg, nodes, pkg_meta=None, device_info=None, xml_ok=True):
@@ -266,15 +311,7 @@ def record_audit(app_name, category, foreground_pkg, nodes, pkg_meta=None, devic
     # Xóa bản ghi cũ của app này nếu có để ghi đè
     data["audited_apps"] = [a for a in data.get("audited_apps", []) if a.get("app_name") != app_name]
 
-    has_direct = any(n["compatibility_tier"] == "DIRECT_MATCH" for n in nodes)
-    has_numeric = any(n["compatibility_tier"] == "NUMERIC_STANDARD" for n in nodes)
-
-    if has_direct:
-        overall_status = "DIRECT_COMPATIBLE"
-    elif has_numeric:
-        overall_status = "STANDARD_INPUT_FALLBACK"
-    else:
-        overall_status = "CUSTOM_VIEW_FALLBACK"
+    overall_status = classify_app_status(nodes)
 
     record = {
         "app_name": app_name,
@@ -317,15 +354,17 @@ def generate_report():
     total = len(apps)
     direct_count = sum(1 for a in apps if a["primary_status"] == "DIRECT_COMPATIBLE")
     numeric_count = sum(1 for a in apps if a["primary_status"] == "STANDARD_INPUT_FALLBACK")
+    webview_count = sum(1 for a in apps if a["primary_status"] == "WEBVIEW_FAIL_CLOSED")
     custom_count = sum(1 for a in apps if a["primary_status"] == "CUSTOM_VIEW_FALLBACK")
 
     print("\n" + "="*75)
     print(f" REAL APPS COMPATIBILITY AUDIT ({dev.get('model', 'Android')} / Android {dev.get('android_release', '?')} API {dev.get('android_sdk', '?')})")
     print("="*75)
     print(f"Tổng số ứng dụng đã khảo sát: {total}")
-    print(f" - Direct Match (EditText + OTP/Password signal):      {direct_count}/{total} ({direct_count/total*100:.1f}%)")
-    print(f" - Standard Input Fallback (Standard EditText):        {numeric_count}/{total} ({numeric_count/total*100:.1f}%)")
-    print(f" - Custom View / Opaque Fallback (Touch Confirm):      {custom_count}/{total} ({custom_count/total*100:.1f}%)")
+    print(f" - Direct Match (EditText + Password/OTP signal):      {direct_count}/{total} ({direct_count/total*100:.1f}%)")
+    print(f" - Package+Class Fallback + Touch Gate:                {numeric_count}/{total} ({numeric_count/total*100:.1f}%)")
+    print(f" - WebView Fail-Closed (No Origin Attestation):        {webview_count}/{total} ({webview_count/total*100:.1f}%)")
+    print(f" - Custom View / Opaque Fallback:                      {custom_count}/{total} ({custom_count/total*100:.1f}%)")
     print("-"*75)
 
     print(f"\n| # | App | Category | Package | Version | UI Class | Status |")
@@ -338,11 +377,11 @@ def generate_report():
     tex_path = OUTPUT_DIR / "real_apps_compatibility_table.tex"
     with open(tex_path, "w", encoding="utf-8") as f:
         f.write("% Auto-generated by tools/audit_real_apps_compatibility.py\n")
-        f.write("\\begin{table*}[t]\n\\centering\\footnotesize\n")
-        f.write("\\caption{Empirical compatibility audit of \\SH{} destination matching across real Google Play applications captured on a physical Samsung Galaxy A52s (Android 14, API 34). Direct: standard \\texttt{EditText} with explicit OTP/password semantic attributes; Standard Fallback: standard \\texttt{EditText} matched by package+class; Custom/Opaque Fallback: custom view, WebView, or protected window handled via foreground-package boundary plus single-tap confirmation.}\n")
+        f.write("\\begin{table*}[t]\n\\centering\\scriptsize\n")
+        f.write("\\caption{Empirical compatibility audit of \\SH{} destination matching across real Google Play applications captured on a physical Samsung Galaxy A52s (Android 14, API 34). Direct: standard \\texttt{EditText} with explicit password/OTP attributes; Pkg+Class: standard \\texttt{EditText}/\\texttt{AutoCompleteTextView} with Touch Gate; WebView: enclosed in \\texttt{android.webkit.WebView}, triggering Fail-Closed Rejection unless Chromium origin-attested.}\n")
         f.write("\\label{tab:app_compatibility}\n")
-        f.write("\\begin{tabular*}{\\textwidth}{@{\\extracolsep{\\fill}}llllllc@{}}\n\\toprule\n")
-        f.write("Application & Category & Package Identifier & Version & Input Class & Matching & Fallback \\\\\n\\midrule\n")
+        f.write("\\begin{tabular*}{\\textwidth}{@{\\extracolsep{\\fill}}lllllll@{}}\n\\toprule\n")
+        f.write("Application & Category & Foreground Package & Version & Input Class & Matching & Fallback / Action \\\\\n\\midrule\n")
         for a in apps:
             cls_name = _pick_representative_class(a.get("fields", [])).replace("_", "\\_")
             ver = str(a.get("version_name", "?")).split()[0][:18].replace("_", "\\_")
@@ -353,11 +392,14 @@ def generate_report():
                 matching = "Direct"
                 fallback = "None"
             elif a["primary_status"] == "STANDARD_INPUT_FALLBACK":
-                matching = "Package+Class"
-                fallback = "Touch Confirm"
+                matching = "Pkg+Class"
+                fallback = "Touch Gate"
+            elif a["primary_status"] == "WEBVIEW_FAIL_CLOSED":
+                matching = "WebView"
+                fallback = "Fail-Closed"
             else:
                 matching = "Package-only"
-                fallback = "Touch Confirm"
+                fallback = "Touch Gate"
             f.write(f"{app_tex} & {cat_tex} & \\texttt{{{pkg_tex}}} & \\texttt{{{ver}}} & \\texttt{{{cls_name}}} & {matching} & {fallback} \\\\\n")
         f.write("\\bottomrule\n\\end{tabular*}\n\\end{table*}\n")
 

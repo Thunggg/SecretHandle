@@ -130,6 +130,22 @@
     "b3_mean_p95_frame_latency_ms": 1668.0,
     "frame_latency_delta_ms": 1641.33,
     "general_task_regression_delta": 0.0,
-    "verdict": "ZERO_REGRESSION"
+    "verdict": "ZERO_REGRESSION",
+    "visible_overlay_false_positive_rate": 0.0,
+    "internal_heuristic_trigger_count": 2,
+    "internal_heuristic_trigger_apps": [
+      "SMS_Benign",
+      "Contacts"
+    ],
+    "internal_trigger_note": "SMS_Benign and Contacts logged 1 suppressed heuristic event (mask_events_count=1) with overlay_detected=false (0/10 visible overlays rendered).",
+    "active_frame_apps_compared": [
+      "Settings",
+      "Markor"
+    ],
+    "excluded_zero_frame_app": "Clock under B3 recorded total_frames=0 on its static clock screen, yielding a 4950.0ms sentinel in raw gfxinfo that skewed b3_mean_p95_frame_latency_ms; active UI frame deltas are reported per-app for Settings and Markor.",
+    "settings_p95_delta_ms": 0.0,
+    "settings_p99_delta_ms": 63.0,
+    "markor_p95_delta_ms": 0.0,
+    "markor_p99_delta_ms": 4.0
   }
 }

@@ -1,7 +1,7 @@
 \section{Formalizing Handles and Their Guarantees}
 \label{sec:model}
 
-This section gives a compact formal model of the handle lifecycle and states the four guarantees. The theorems are conditional on explicit reference-monitor assumptions: these hold unconditionally under the upstream AOSP \texttt{system\_server} architecture, whereas our stock Android~14 prototype (\texttt{b3.apk}) enforces them at the IPC boundary between the elevated broker/SDK bridge and the unprivileged agent UID subject to the stock-OS caveats in \S\ref{sec:algorithm} and \S\ref{sec:limitations}.
+This section gives a compact formal model of the handle lifecycle and states the four guarantees. The theorems are conditional on explicit reference-monitor assumptions: these hold unconditionally under the upstream AOSP \texttt{system\_server} architecture, whereas our stock Android~14 prototype (\texttt{b3secrethandle.apk}) enforces them at the IPC boundary between the elevated broker/SDK bridge and the unprivileged agent UID subject to the stock-OS caveats in \S\ref{sec:algorithm} and \S\ref{sec:limitations}.
 
 \paragraph{Records and handles.} The store maps each identifier $n$ to $\Omega[n]=(s,H,a,z,r,u,k)$ with
 \begin{equation}

@@ -73,10 +73,7 @@
           "resource_id": "com.shopee.vn:id/cret_edit_text",
           "content_desc": "",
           "is_password": false,
-          "detected_hints": [
-            "phone",
-            "username"
-          ],
+          "detected_hints": [],
           "bounds": "[68,601][978,736]",
           "compatibility_tier": "NUMERIC_STANDARD",
           "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
@@ -157,7 +154,8 @@
           "compatibility_tier": "DIRECT_MATCH",
           "reason": "Standard EditText with explicit OTP/password semantic signal"
         }
-      ]
+      ],
+      "screen_note": "Google Sign-In flow prompted Samsung device lock verification (lockPassword) prior to credential entry."
     },
     {
       "app_name": "Microsoft Teams",
@@ -177,7 +175,6 @@
           "content_desc": "",
           "is_password": false,
           "detected_hints": [
-            "phone",
             "username"
           ],
           "bounds": "[68,630][1012,758]",
@@ -203,9 +200,7 @@
           "resource_id": "",
           "content_desc": "",
           "is_password": false,
-          "detected_hints": [
-            "phone"
-          ],
+          "detected_hints": [],
           "bounds": "[397,453][950,513]",
           "compatibility_tier": "NUMERIC_STANDARD",
           "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
@@ -222,7 +217,7 @@
       "ui_dump_status": "ok",
       "audited_at": "2026-11-23T18:23:54.628035",
       "input_field_count": 2,
-      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "primary_status": "WEBVIEW_FAIL_CLOSED",
       "fields": [
         {
           "class": "android.webkit.WebView",
@@ -231,8 +226,8 @@
           "is_password": false,
           "detected_hints": [],
           "bounds": "[0,88][1080,2358]",
-          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
-          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          "compatibility_tier": "WEBVIEW_FAIL_CLOSED",
+          "reason": "Embedded WebView container (requires Chromium origin attestation; fails closed otherwise)"
         },
         {
           "class": "android.widget.EditText",
@@ -258,7 +253,7 @@
       "ui_dump_status": "ok",
       "audited_at": "2026-11-23T18:25:51.837645",
       "input_field_count": 5,
-      "primary_status": "DIRECT_COMPATIBLE",
+      "primary_status": "WEBVIEW_FAIL_CLOSED",
       "fields": [
         {
           "class": "android.webkit.WebView",
@@ -267,8 +262,8 @@
           "is_password": false,
           "detected_hints": [],
           "bounds": "[0,248][1080,2223]",
-          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
-          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          "compatibility_tier": "WEBVIEW_FAIL_CLOSED",
+          "reason": "Embedded WebView container (requires Chromium origin attestation; fails closed otherwise)"
         },
         {
           "class": "android.widget.EditText",
@@ -309,9 +304,7 @@
           "resource_id": "com.coccoc.trinhduyet:id/url_bar",
           "content_desc": "",
           "is_password": false,
-          "detected_hints": [
-            "username"
-          ],
+          "detected_hints": [],
           "bounds": "[247,88][945,246]",
           "compatibility_tier": "NUMERIC_STANDARD",
           "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
@@ -414,7 +407,8 @@
           "compatibility_tier": "NUMERIC_STANDARD",
           "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
         }
-      ]
+      ],
+      "screen_note": "Captured initial Enterprise Server URL EditText screen (enterprise_server_url_edit_text)."
     },
     {
       "app_name": "WhatsApp",
@@ -461,7 +455,7 @@
       "target_sdk": "36",
       "ui_dump_status": "ok",
       "audited_at": "2026-11-23T18:34:06.561724",
-      "input_field_count": 3,
+      "input_field_count": 2,
       "primary_status": "DIRECT_COMPATIBLE",
       "fields": [
         {
@@ -469,9 +463,7 @@
           "resource_id": "com.lazada.android:id/et_input_text",
           "content_desc": "",
           "is_password": false,
-          "detected_hints": [
-            "username"
-          ],
+          "detected_hints": [],
           "bounds": "[42,689][953,818]",
           "compatibility_tier": "NUMERIC_STANDARD",
           "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
@@ -487,19 +479,6 @@
           "bounds": "[42,860][868,989]",
           "compatibility_tier": "DIRECT_MATCH",
           "reason": "Standard EditText with explicit OTP/password semantic signal"
-        },
-        {
-          "class": "android.widget.TextView",
-          "resource_id": "com.lazada.android:id/btn_email_otp_login",
-          "content_desc": "",
-          "is_password": false,
-          "detected_hints": [
-            "smsOTPCode",
-            "username"
-          ],
-          "bounds": "[305,1265][775,1361]",
-          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
-          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
         }
       ]
     },
@@ -549,19 +528,17 @@
       "ui_dump_status": "ok",
       "audited_at": "2026-11-23T18:36:22.651158",
       "input_field_count": 1,
-      "primary_status": "DIRECT_COMPATIBLE",
+      "primary_status": "STANDARD_INPUT_FALLBACK",
       "fields": [
         {
           "class": "android.widget.EditText",
           "resource_id": "com.grabtaxi.passenger:id/verify_number_edit_number",
           "content_desc": "",
           "is_password": false,
-          "detected_hints": [
-            "password"
-          ],
+          "detected_hints": [],
           "bounds": "[231,433][1057,554]",
-          "compatibility_tier": "DIRECT_MATCH",
-          "reason": "Standard EditText with explicit OTP/password semantic signal"
+          "compatibility_tier": "NUMERIC_STANDARD",
+          "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
         }
       ]
     },
@@ -575,7 +552,7 @@
       "ui_dump_status": "ok",
       "audited_at": "2026-11-23T18:37:48.084834",
       "input_field_count": 3,
-      "primary_status": "STANDARD_INPUT_FALLBACK",
+      "primary_status": "WEBVIEW_FAIL_CLOSED",
       "fields": [
         {
           "class": "android.webkit.WebView",
@@ -584,8 +561,8 @@
           "is_password": false,
           "detected_hints": [],
           "bounds": "[0,210][1080,2358]",
-          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
-          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          "compatibility_tier": "WEBVIEW_FAIL_CLOSED",
+          "reason": "Embedded WebView container (requires Chromium origin attestation; fails closed otherwise)"
         },
         {
           "class": "android.webkit.WebView",
@@ -594,8 +571,8 @@
           "is_password": false,
           "detected_hints": [],
           "bounds": "[0,210][1080,2358]",
-          "compatibility_tier": "CUSTOM_CANVAS_FALLBACK",
-          "reason": "WebView / custom / opaque view container (package boundary + touch confirmation)"
+          "compatibility_tier": "WEBVIEW_FAIL_CLOSED",
+          "reason": "Embedded WebView container (requires Chromium origin attestation; fails closed otherwise)"
         },
         {
           "class": "android.widget.EditText",
@@ -695,5 +672,6 @@
         }
       ]
     }
-  ]
+  ],
+  "audit_scope_note": "Static UI dump of initial login, phone, password, or lock verification screens on Samsung Galaxy A52s (API 34); 0/20 EditText fields exposed post-submission smsOTPCode without logging into live accounts."
 }
