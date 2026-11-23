@@ -739,10 +739,9 @@ T5: Multilingual & Cross-lingual syntax switching & \textit{``Cảnh báo bảo 
 
 \paragraph{Adversarial delivery channels.} Payloads were injected via unredacted non-banking notifications and untrusted chat/web pages: under B0, all 5 templates diverted the visual agent ($29/30$ leaks); under B1, unbound tokens leaked ($30/30$); under \SH{} (B3), destination binding blocked every redirection ($0/30$ exposure, $0/30$ redirection).
 
-\clearpage
 \begin{table*}[t]
 \centering\scriptsize
-\renewcommand{\arraystretch}{0.84}
+\renewcommand{\arraystretch}{0.95}
 \setlength{\tabcolsep}{3.5pt}
 \caption{Empirical compatibility audit of \SH{} destination matching across 20 Google Play applications captured on a physical Samsung Galaxy~A52s (Android~14, API~34). \textbf{Direct} ($6/20$): \texttt{EditText} exposing explicit password attributes; \textbf{Pkg+Class} ($9/20$): standard \texttt{EditText}/\texttt{AutoCompleteTextView} with single-tap user touch gate; \textbf{WebView} ($5/20$): inputs enclosed in \texttt{android.webkit.WebView}, handled via Fail-Closed Rejection absent Chromium origin attestation.}
 \label{tab:app_compatibility}
