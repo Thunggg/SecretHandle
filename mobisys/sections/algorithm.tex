@@ -39,13 +39,35 @@ Algorithms~\ref{alg:mint} and~\ref{alg:resolve} give the two transitions the gua
 \State $x'\gets\mathsf{FreshTargetContext}(V)$
 \State \label{line:resolve:revalidate}\textbf{if} $x'\ne x \lor \Match(d,x')=0$ \textbf{then} \textbf{if} $u_0 > 1$ \textbf{then} $(z, u) \gets (\mathsf{live}, u + 1)$ \textbf{else} $z \gets \mathsf{consumed}$; \Return $\Reject$
 \State register redaction obligation for $(V,n,q)$ before delivery; $ok\gets\mathsf{InjectInternal}(V,s)$
-\State \label{line:resolve:finalize}\textbf{if} $ok \land u>0$ \textbf{then} $z\gets\mathsf{live}$ \textbf{else if} $\neg ok \land u_0>1$ \textbf{then} $(z,u)\gets(\mathsf{live},u+1)$ \textbf{else} $z\gets\mathsf{consumed}$; wipe $s$
+\State \label{line:resolve:finalize}\textbf{if} $ok \land u>0$ \textbf{then} $z\gets\mathsf{live}$ \textbf{else if} $\neg ok \land u_0>1$ \textbf{then} $(z,u)\gets(\mathsf{live},u+1)$ \textbf{else} $\{z\gets\mathsf{consumed};\; \text{wipe } s\}$
 \State wipe local buffers; \Return $ok$ with value-oblivious status
 \end{algorithmic}
 \end{algorithm}
 
-\paragraph{Lifecycle and mutable budget.} As formalized in Section~\ref{sec:model}, the store tracks remaining uses $u$ and retry counter $k$ as mutable record state in $\Omega[n]$ outside immutable $H$, keeping $a = F_K(\enc(H))$ invariant across multi-use lifecycles ($u_0 > 1$). Decrementing the budget at reservation prevents concurrent double-spending; if delivery is rejected or cancelled before commit (verified before target buffer mutation), the reservation is refunded for multi-use handles ($u \gets u + 1$). An uncertain injection outcome on a single-use handle conservatively commits terminal state $\mathsf{consumed}$, triggering an immediate secure memory wipe (\texttt{explicit\_bzero}) of $s$. A retry counter bound $k_{\max}=3$ on destination mismatches (Line~\ref{line:resolve:mismatch}) throttles brute-force attempts before revoking the handle.
+\paragraph{Lifecycle and mutable budget.} The store tracks mutable uses $u$ and retry counter $k$ outside immutable $H$, keeping $a = F_K(\enc(H))$ invariant across multi-use lifecycles ($u_0 > 1$). Reservation decrements $u$ atomically; only aborts occurring before any byte mutates the target buffer refund $u \gets u + 1$. Uncertain post-mutation failures commit $\mathsf{consumed}$ and wipe $s$ (Line~\ref{line:resolve:finalize}), while $k_{\max}=3$ on mismatches (Line~\ref{line:resolve:mismatch}) throttles brute-force retries.
 
-\paragraph{Integration points.} Prototype mediation uses a privileged Binder service (\texttt{SecretHandleVaultService}) with a \texttt{NotificationListener} broker and non-touchable accessibility overlay, where the Agent SDK bridge synchronizes frame captures with \texttt{SurfaceFlinger} overlay composition before image serialization. Upstream AOSP targets in-tree mediation directly in \texttt{system\_server} via \texttt{InputDispatcher} and \texttt{ViewRootImpl} (\S\ref{sec:design}).
+\subsection{Upstream AOSP Design vs.\ Stock Android 14 Prototype}
+\label{sec:aosp_vs_stock}
 
-\paragraph{Complexity.} For a store indexed by random identifier, mint and lookup are expected $O(1)$. Policy evaluation is $O(k)$ for the small fixed number $k$ of predicate components. Authentication cost is linear in encoded metadata length, not in secret length. Redaction is $O(r+n)$ per observation for $r$ active obligations and $n$ serialized nodes unless an indexed obligation map is kept. Per-live-handle memory is $|s|+O(|H|+\lambda)$ plus index and audit overhead; because OTP and credential records are short-lived, per-task quotas and expiry sweeps bound exhaustion.
+Table~\ref{tab:aosp_vs_stock} contrasts the upstream AOSP \texttt{system\_server} design (\S\ref{sec:design}) with our stock Android~14 prototype (\texttt{b3secrethandle.apk}, App.~\ref{sec:artifact}). Because API~34 predates Android~15's system OTP classifier~\cite{android15privacy} and lacks in-tree \texttt{InputDispatcher} hooks, \texttt{b3secrethandle.apk} runs as a user-installed APK granted notification-listener and accessibility rights, while the untrusted agent runs in a separate unprivileged UID mediated by the SDK bridge.
+
+\begin{table}[t]
+\centering
+\caption{Upstream AOSP architecture vs.\ evaluated stock Android~14 prototype (\texttt{b3secrethandle.apk}).}
+\label{tab:aosp_vs_stock}
+\footnotesize
+\renewcommand{\arraystretch}{1.05}
+\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Mechanism & Upstream AOSP Design & Stock Android~14 Prototype \\
+\midrule
+Source Mint & System OTP classifier, CredMgr, Wallet in \texttt{system\_server} & \texttt{Notification\allowbreak ListenerService} regex extraction + clipboard listener; CredMgr/Wallet architectural \\
+Target Context & \texttt{Window\allowbreak ManagerService} / \texttt{ViewRootImpl} & \texttt{AccessibilityNodeInfo} window/node metadata via SDK bridge \\
+Injection & Private C++ \texttt{InputDispatcher} buffer & \texttt{ACTION\_SET\_TEXT} with bridge-level \texttt{TYPE\_VIEW\_TEXT\_CHANGED} suppression \\
+Redaction & Compositor frame + system node masking & \texttt{TYPE\_\allowbreak ACCESSIBILITY\_\allowbreak OVERLAY} masks pixels; \texttt{FLAG\_SECURE} reveal UI; bridge filters agent tree \\
+Memory / Key & Native C++ \texttt{mlock()}/\allowbreak\texttt{explicit\_bzero} + KeyMint TEE & Isolated Java \texttt{Vault} process + in-memory JCA \texttt{HmacSHA256} session key \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Complexity.} Mint and lookup are expected $O(1)$; policy evaluation is $O(k)$ for $k$ components; MAC cost scales with metadata length, not $|s|$; redaction is $O(r+n)$ for $r$ obligations and $n$ nodes. Memory per live handle is $|s|+O(|H|+\lambda)$, bounded by per-task quotas and short TTLs.

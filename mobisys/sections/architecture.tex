@@ -1,5 +1,6 @@
 \begin{figure*}[t]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[x=1cm,y=1cm]
 % ---- Row 0: attacker input (top right) ----
 \node[sh/attack]   (inj)   at (13.2, 6.3) {Injected content};
@@ -42,7 +43,8 @@
   \draw[sh/control]     ( 8.2,0) -- ( 9.0,0); \node[font=\scriptsize,anchor=west] at ( 9.05,0) {verify / approval};
   \draw[sh/attackflow]  (11.8,0) -- (12.6,0); \node[font=\scriptsize,anchor=west] at (12.65,0) {adversarial influence};
 \end{scope}
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \caption{SecretHandle architecture. The raw value travels only from an authoritative source through the trusted mint/resolver path to an accepted destination. The agent receives an opaque handle and a redacted post-entry view. Line styles distinguish ordinary, protected, control, and adversarial flows.}
 \label{fig:architecture}
 \end{figure*}

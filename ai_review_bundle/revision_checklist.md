@@ -1,203 +1,119 @@
-# Danh mục Công việc Cần làm (Revision Checklist) — ACM MobiSys 2027
+# Danh sách Công việc Cần sửa cho Bản thảo *SecretHandle* (Bản hoàn chỉnh)
 
-> **Tài liệu gốc:** [`reviews/mobisys2027_review_secrethandle.md`](file:///e:/NCKH/SecretHandle/reviews/mobisys2027_review_secrethandle.md)  
-> **Bài báo:** *SecretHandle: OS-Minted, Destination- and Task-Bound Opaque Secrets for Android Mobile AI Agents*  
-> **Tác giả:** Nguyễn Tiến Thuận, Trần Phát Tài (Trường Đại học FPT, Cần Thơ, Việt Nam)  
-> **Đánh giá ban đầu:** **2.5 / 5.0 (Weak Reject / Borderline)**  
-> **Mục tiêu sửa bài:** Đạt **4.0 / 5.0 (Weak Accept / Accept)**  
-> **Mốc thời gian quan trọng (AoE — Anywhere on Earth):**
-> - **Abstract Registration:** 23:59 AoE, ngày **27/11/2026** (Cấm để TBD; chốt danh sách tác giả)
-> - **Full Paper Submission:** 23:59 AoE, ngày **04/12/2026** (**Tuyệt đối không gia hạn**)
-> - **Rebuttal Period:** 08/02/2027 – 12/02/2027 (Giới hạn tối đa 500 từ)
-> - **Conference:** MobiSys '27, 21–25/06/2027, TP. Hồ Chí Minh, Việt Nam
+> **Nguồn đối chiếu:** `mobisys2027_review_secrethandle.md` (Mode B Re-Review — đánh giá hiện tại: **2.5 / 5**, mục tiêu sau sửa: **4.0 / 5**).
+>
+> **Phạm vi:** Chỉ bao gồm các công việc sửa mã nguồn, thực nghiệm, nội dung bài báo, tài liệu tham khảo, artifact và chế bản LaTeX/PDF (đã loại bỏ toàn bộ phần hậu cần nộp bài và đăng ký abstract).
 
 ---
 
-## TỔNG QUAN TÌNH TRẠNG HIỆN TẠI (EXECUTIVE SUMMARY)
+## Nhóm 1: Sửa ngay lỗi kỹ thuật, thuật toán, số học & tự mâu thuẫn (~3 giờ)
 
-| Nhóm hạng mục | Số việc | Đã hoàn thành | Còn lại | Tiến độ | Đánh giá |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **MF-1: Số học, Tên mô hình, Thuật toán** | 6 | 6 | 0 | 100% | Đã chuẩn hóa tuyệt đối, 0 mâu thuẫn |
-| **MF-2: Đồ họa, Chế bản, Tiêu đề, Trang** | 6 | 6 | 0 | 100% | 15 trang sạch, Conclusion ở tr. 12, References tr. 13 |
-| **MF-3: Minh bạch Broker Android 14 vs AOSP** | 4 | 4 | 0 | 100% | Đã phân tách rõ tầng TCB vs SDK Bridge |
-| **MF-4: Định vị lại Baseline B2** | 3 | 3 | 0 | 100% | Đã tách SMS User Consent vs Credential Manager |
-| **MF-5: Mở rộng thực nghiệm ứng dụng thực tế** | 4 | 3 | 1 | 75% | Đã xong Web & Fallback; **Cần quét 15–20 app thật** |
-| **Should-Fix & Cân đối trang (SF)** | 5 | 5 | 0 | 100% | Đã giải thích 150ms B1, năng lượng, người dùng đọc OTP |
-| **Hậu cần Nộp bài HotCRP** | 6 | 0 | 6 | 0% | Chờ mở cổng & tới hạn 27/11 – 04/12 |
+- [x] **1.1. Sửa lỗi pseudocode Thuật toán 2 Dòng 13 (`§6`, tr. 8):**
+  - Đưa lệnh `wipe s` vào đúng phạm vi nhánh `else` ($\{z \gets \mathsf{consumed};\; \text{wipe } s\}$), tránh việc xóa nhầm bí mật $s$ của handle đa dụng khi $ok \land u > 0$ (ví dụ clipboard $u_0 = 5$).
+  - Làm rõ trong đoạn giải thích đi kèm: việc hoàn trả ngân sách ($u \leftarrow u + 1$) ở handle đa dụng chỉ xảy ra khi hủy **trước khi** ghi bất kỳ byte nào vào bộ đệm trường đích.
+  - *Xong khi:* Pseudocode Dòng 13 trong `algorithm.tex` phân nhánh tường minh và khớp hoàn toàn với phần mô tả ở `§4` và `§6`.
 
----
+- [x] **1.2. Sửa lỗi tính toán bậc độ lớn (`§7` RQ5, tr. 10):**
+  - Sửa cụm *"4 orders of magnitude faster"* thành *"over two orders of magnitude ($\sim 187\times$)"* (vì $4.18\,\text{ms} / 22.30\,\mu\text{s} = 187.4\times$).
+  - *Xong khi:* Toàn văn không còn mô tả sai tỷ lệ giữa $22.30\,\mu\text{s}$ và $4.18\,\text{ms}$.
 
-## PHẦN 1: CÁC HẠNG MỤC BẮT BUỘC SỬA (MUST-FIX — BLOCKERS)
+- [x] **1.3. Sửa tuyên bố sai về StrongBox dưới quyền root (`§9`, tr. 12):**
+  - Đổi *"preventing handle MAC forgery even under root compromise"* thành *"preventing offline key extraction even if device storage is compromised (online root compromise remains out of scope per §3)"*.
+  - *Xong khi:* Tuyên bố ở `§9` nhất quán hoàn toàn với Mô hình đe dọa ở `§3` (tr. 3) và Giả định 5.3.
 
-### MF-1: Sửa các lỗi bất nhất số học, tên mô hình và logic thuật toán (W2, W5)
-*Mục tiêu: Loại bỏ mọi nghi vấn về việc gian lận số liệu hoặc code không khớp với văn bản.*
+- [x] **1.4. Đồng bộ kịch bản Template 1 giữa `§7` (tr. 10) và Bảng 5/6 (tr. 15):**
+  - Sửa câu *"In a representative Template 1 trial, an incoming SMS prompts the agent..."* ở `§7` (*Qualitative Analysis*) thành *"a promotional notification arriving alongside the banking SMS prompts the agent..."* để khớp với vector *Cross-app promotion notification* trong Phụ lục B.
+  - *Xong khi:* Không còn mâu thuẫn về kênh truyền chỉ thị tiêm nhiễm của Template 1 giữa thân bài và phụ lục.
 
-- [x] **Chuẩn hóa tên mô hình LLM trên toàn bộ bài báo:**
-  - [x] Sửa `Claude Sonnet 4.6` thành `Claude 3.5 Sonnet` trong Abstract (trang 1).
-  - [x] Sửa trong Mục 1 (trang 2).
-  - [x] Sửa Mục 7 (trang 8) thành: `Claude 3.5 Sonnet (Anthropic API snapshot claude-3-5-sonnet-20241022)`.
-  - [x] Rà soát và đồng bộ trong Mục 9.1 & Artifact.
-- [x] **Sửa lỗi phép cộng độ trễ trung gian trên phần cứng ARM (Mục 7, RQ5, Trang 10):**
-  - [x] Bổ sung thành phần `parcel/lock (2.33 µs)`: $17.63 + 1.73 + 0.16 + 2.33 + 0.45 = 22.30\,\mu\text{s}$, khớp $100\%$ với tổng $22.3\,\mu\text{s}$.
-  - [x] Làm rõ chi tiết bộ nhớ PSS: $14.2\,\text{MB}$ native + $2.1\,\text{MB}$ Dalvik + $12.4\,\text{MB}$ shared libraries/ART runtime mappings $= 28.7\,\text{MB}$.
-- [x] **Sửa lỗi phép cộng % CPU trên phần cứng ARM (Mục 7, RQ6, Trang 10):**
-  - [x] Khớp số liệu CPU burst: $3.2\% \text{ user} + 3.2\% \text{ kernel} + 0.8\% \text{ I/O wait/IRQ} = 7.2\%$ tổng CPU.
-- [x] **Khớp số dòng và logic Thuật toán 2 (Dòng 6 vs. Dòng 7):**
-  - [x] Gộp lệnh rẽ nhánh không dùng `end if` riêng lẻ, gán nhãn `\label{line:resolve:mismatch}` tại `Match(d,x)=0` (Line 6) và `\label{line:resolve:reserve}` tại `atomically reserve` (Line 7).
-  - [x] Sửa các tham chiếu trong Mục 6 (trang 8) và Mục 7 (trang 11) thành `Line~\ref{line:resolve:mismatch}` và `Line~\ref{line:resolve:reserve}` tự động.
-  - [x] Giải thích rõ cơ chế khi $k < k_{\max}$: Khi thử sai đích 1 lần (single-shot), $k$ tăng lên $1 < k_{\max}=3$, ngân sách $u$ giữ nguyên và handle vẫn `live`.
-  - [x] Giải thích rõ cơ chế khi $k = k_{\max} = 3$ (Template 4: DoS Depletion): Khi bị thử sai lặp lại $\ge 3$ lần, handle chuyển sang `revoked` và chuyển tiếp sang cơ chế dự phòng xác nhận chạm người dùng (*local user touch confirmation fallback*).
-- [x] **Phân định rõ mã trạng thái lỗi (Bảng 2 vs. Mục 7):**
-  - [x] Nêu rõ: Các mã `ALREADY_RESOLVED`, `HANDLE_EXPIRED`, `CALLER_MISMATCH`, `DESTINATION_MISMATCH` chỉ ghi nhận trong **nhật ký kiểm toán nội bộ của OS (internal audit log)**.
-  - [x] Phản hồi trả về cho tác tử không đáng tin cậy hoàn toàn là giá trị mù theo đúng Bảng 2 (`unavailable handle` / `destination denied`), không để lộ trạng thái bên trong.
-- [x] **Sửa trích dẫn Mobile-Agent (Mục 7, Trang 8):**
-  - [x] Cập nhật trích dẫn `Mobile-Agent v3.5` thành `\cite{wang2024mobileagent,ye2025mobileagentv3}`.
+- [x] **1.5. Phân tách rõ cỡ mẫu WebView (`§7` vs. Phụ lục B):**
+  - Ghi rõ kết quả $30/30$ ($56.80\,\mu\text{s}$) là microbenchmark riêng `Vault.revealWeb`, tách biệt với $n = 6$ lượt thử tác tử end-to-end của Template 3 (*Web Phishing*) trong bộ 30 lượt thử.
+  - *Xong khi:* Người đọc phân biệt rõ $n = 30$ (microbenchmark) và $n = 6$ (end-to-end Template 3).
+
+- [x] **1.6. Sửa lỗi tràn/cắt chữ tiêu đề `Remark 5.16` (`§5`, tr. 8):**
+  - Đổi `\begin{remark}[Legitimate-but-unwanted actions]` thành `\begin{remark}[In-scope misuse]`.
+  - *Xong khi:* Biên dịch PDF không còn lỗi cắt chữ `REMARK 5.16 (LEGITIMATE-BUT-UNW`.
 
 ---
 
-### MF-2: Sửa lỗi định dạng, đồ họa và tuân thủ CFP MobiSys 2027 (W8, Phase 1)
-*Mục tiêu: Đạt chuẩn xuất bản chuyên nghiệp, không để mất điểm hình thức.*
+## Nhóm 2: Kiểm chứng phần cứng trên Galaxy A52s & Đối chiếu log gốc (~0.5–1 ngày)
 
-- [x] **Sửa tiêu đề bài báo (Trang 1):**
-  - [x] Chèn dấu ngắt dòng `\\` trước `for Android Mobile AI Agents` để tiêu đề cân đối 2 dòng, không để chữ `Agents` rơi xuống giữa 2 khối tác giả.
-  - [x] Kiểm tra ký tự `AI` không bị nhầm lẫn phông chữ thành `Al`.
-- [x] **Khắc phục lỗi mất dấu tiếng Việt ở tên tác giả:**
-  - [x] Sửa mã nguồn LaTeX tương thích hoàn toàn với XeLaTeX: `Nguyễn Tiến Thuận` và `Trần Phát Tài`.
-  - [x] Sửa tiêu đề chạy (Running Header) trên các trang chẵn thành: `\shortauthors{Nguyễn and Trần}`.
-- [x] **Sửa Bảng 1 (Threat Model, Trang 3):**
-  - [x] Sửa lỗi typo hiển thị `$1 non-disclosure` thành `\textbf{S1} non-disclosure` (đồng bộ in đậm `\textbf{S1}`, `\textbf{S2}`, `\textbf{S3}`, `\textbf{S4}`).
-- [x] **Sửa lỗi chính tả Mục 2 (Trang 2):**
-  - [x] Đoạn văn bản mở đầu hiển thị chuẩn xác: `Mobile agents act through the UI.`.
-- [x] **Làm rõ tuyên bố sử dụng LLM tại Mục 9.1 (Trang 12):**
-  - [x] Cập nhật tuyên bố chuẩn: *"Portions were edited with LLM assistance solely for language proofreading; all architectural designs, proofs, code implementations, and experimental measurements were developed and verified by the authors."*.
-- [x] **Tách trang và kiểm soát nghiêm ngặt ngân sách 12 trang:**
-  - [x] Thêm `\clearpage` trước danh mục tài liệu tham khảo trong `main.tex`.
-  - [x] **Nội dung chính (Sections 1–10 Conclusion):** Kết thúc chính xác ở cuối **Trang 12** (tuân thủ 100% quy định CFP).
-  - [x] **References:** Bắt đầu sạch sẽ ngay đầu **Trang 13**.
-  - [x] **Artifact Appendix:** Bố trí gọn gàng tại **Trang 14–15**.
-  - [x] Tổng số trang văn bản: Đúng **15 trang**, 0 trang rác, 0 lỗi `[?]`, 0 lỗi `??`.
+- [x] **2.1. Kiểm toán phép đo TrustZone HMAC ($17.63\,\mu\text{s}$) và Binder IPC ($1.73\,\mu\text{s}$) trong `BenchmarkRunner.java` (`§7` RQ5):**
+  - **Đã kiểm tra trực tiếp `BenchmarkRunner.java` (dòng 346–417):** Phép đo $17.63\,\mu\text{s}$ ($9.32\,\mu\text{s}$ emulator) thực chất dùng JCA `Mac.getInstance("HmacSHA256")` với `SecretKeySpec` trong bộ nhớ, $1.73\,\mu\text{s}$ ($0.61\,\mu\text{s}$ emulator) đo sao chép bộ đệm parcel (`System.arraycopy`), và $2.33\,\mu\text{s}$ ($1.06\,\mu\text{s}$) là chi phí `Vault.reveal` CAS/vòng lặp. Đã sửa mô tả trong `§7 RQ5` và Abstract cho **trung thực 100%** với mã nguồn.
+  - [ ] *(Tùy chọn khi cắm Galaxy A52s thật)* Đo thêm 1 mốc gọi `AndroidKeyStore` TEE (`KeyInfo.getSecurityLevel() == SECURITY_LEVEL_TRUSTED_ENVIRONMENT`) xuyên tiến trình thật (thường $\sim 0.5\text{–}2\,\text{ms}$) để đối chứng động cơ cache khóa phiên.
+
+- [x] **2.2. Đối chiếu chéo toàn bộ số liệu trong `§7` với tệp JSON gốc:**
+  - Đã đối chiếu toàn bộ 7 tệp JSON trong `output/`: khớp $100\%$ `physical_device_benchmark.json` (bao gồm sửa `% CPU`: `3.2% user, 3.2% kernel, 0.0% iowait, 0.5% irq, 0.1% softirq` thay cho `0.8% I/O wait/IRQ`), `benchmark_overhead_lifecycle_redirection.json`, `extended_source_ui_benchmark.json`, `fallback_policy_benchmark.json`, `webview_failclosed_benchmark.json`, `benchmark_autodroid_diversity.json`, và `rq6_benign_regression_results.json`.
 
 ---
 
-### MF-3: Minh bạch hóa nguyên mẫu Broker Android 14 so với thiết kế AOSP (W1, W6)
-*Mục tiêu: Đập tan nghi ngờ của Reviewer A về "sự đánh tráo khái niệm giữa nhân OS và ứng dụng user-space".*
+## Nhóm 3: Xử lý lỗ hổng chí mạng về khảo sát 20 ứng dụng thực tế (~2–3 ngày)
 
-- [x] **Phân định rõ ranh giới TCB giữa thiết kế dài hạn và nguyên mẫu thử nghiệm:**
-  - [x] Trình bày rõ: Thiết kế AOSP lý tưởng can thiệp tại `system_server`, `InputDispatcher`, `ViewRootImpl`.
-  - [x] Nguyên mẫu hiện tại chạy trên **Android 14 nguyên bản (stock OS)** thông qua `SecretHandleVaultService` (dịch vụ Binder đặc quyền) kết hợp với `NotificationListener` broker và lớp phủ `TYPE_ACCESSIBILITY_OVERLAY`.
-  - [x] Nhấn mạnh rằng quy trình chạy thực nghiệm tuân thủ `adb unroot` với `SELinux enforcing` để giữ nguyên ranh giới bảo mật.
-- [x] **Làm rõ cơ chế tiêm dữ liệu `InjectInternal(V, s)`:**
-  - [x] Trình bày cơ chế phân giải tiêm trực tiếp vào node target và che khuất quan sát trước khi khung hình kế tiếp được `SurfaceFlinger` kết xuất.
-- [x] **Làm rõ cơ chế bảo toàn ngữ cảnh giao dịch khi che OTP (Hình 2a, 2b):**
-  - [x] Làm rõ: Chỉ phần mã OTP được bóc tách và thay thế bằng handle (`SH-XXXXXX`), phần ngữ cảnh tin nhắn (số tiền, người nhận, tên dịch vụ) được giữ nguyên vẹn để người dùng/tác tử đối chiếu.
-- [x] **Giải thích cơ chế phục hồi tác vụ đạt $U_{\text{att}} = 1.00$ (30/30) trong RQ2:**
-  - [x] Khi tác tử bị prompt injection lừa chuyển hướng sang app đối kháng (`com.attacker.rewards`), OS Resolver từ chối và trả về mã lỗi trung lập `destination denied`.
-  - [x] Agent SDK Bridge nhận diện hành động thất bại và khiến bộ lập kế hoạch của tác tử nhận ra đường đi không khả dụng, quay trở lại ứng dụng ngân hàng ban đầu để hoàn thành tác vụ hợp pháp.
+- [ ] **3.1. Chạy khảo sát tương thích UI thật trên 15–20 ứng dụng Google Play (`§7`):** *(Chưa chạy do chưa kết nối Galaxy A52s; hiện đang áp dụng phương án 3.3)*
+  - Thực thi `python tools/audit_real_apps_compatibility.py --capture ...` trên Galaxy A52s ở màn hình đăng nhập/OTP của 15–20 ứng dụng phổ biến (chỉ chụp cây UI tĩnh, không tấn công app thật).
+  - Xuất báo cáo thống kê đầy đủ tên gói, `versionName`/`versionCode`, tỷ lệ khớp trực tiếp ($X/20$), custom view cần fallback ($Y/20$), và WebView ($Z/20$) rồi đưa vào bài.
+
+- [x] **3.2. Tách bạch khảo sát 20 ứng dụng với microbenchmark `Vault.revealFallback` ($47.60\,\mu\text{s}$):**
+  - Ghi rõ trong `§7` rằng kết quả $30/30$ với trung vị $47.60\,\mu\text{s}$ là microbenchmark tổng hợp `BenchmarkRunner` cho bước kiểm tra trong vault (`Vault.revealFallback`), không bao gồm thời gian phản xạ chạm của con người.
+
+- [x] **3.3. Phương án dự phòng bắt buộc (đã kích hoạt ngay để bảo vệ tính trung thực):**
+  - Đã **xóa bỏ hoàn toàn** câu *"we audited 20 applications on Android 14"* thiếu bằng chứng ở `§7` và chỉ trình bày hai microbenchmark `Vault.revealFallback` và `Vault.revealWeb` có log JSON thật hậu thuẫn. (Khi chạy xong 3.1 trên Galaxy A52s sẽ cập nhật bảng thật vào lại.)
 
 ---
 
-### MF-4: Chỉnh sửa và làm rõ Baseline B2 (W4)
-*Mục tiêu: Đảm bảo tính công bằng và chính xác kỹ thuật đối với các cơ chế gốc của Android.*
+## Nhóm 4: Đồng bộ hóa Thiết kế AOSP vs. Nguyên mẫu Stock Android 14 (~1.5 ngày)
 
-- [x] **Tách bạch rõ ràng SMS User Consent và Credential Manager:**
-  - [x] Sửa tên Baseline B2 thành: **B2 (SMS User Consent / Unbound Platform Flow)**.
-  - [x] Thừa nhận chính xác: Credential Manager và SMS Retriever gốc của Android *có* cơ chế gắn kết với gói ứng dụng qua Digital Asset Links hoặc mã băm SMS 11 ký tự.
-- [x] **Chỉ rõ các lỗ hổng thực tế của cơ chế nền tảng hiện nay:**
-  - [x] (1) Đại đa số tin nhắn OTP ngân hàng thương mại gửi qua Brandname thông thường không có mã băm 11 ký tự của SMS Retriever, buộc người dùng/tác tử phải dùng SMS User Consent (nơi app đối kháng có thể xin đọc tin nhắn tiếp theo).
-  - [x] (2) Các cơ chế hiện tại hoàn toàn thiếu ràng buộc cấp trường nhập liệu nội bộ ứng dụng (intra-app field binding, ví dụ dán OTP vào khung chat CSKH trong cùng app ngân hàng).
-  - [x] (3) Không có cơ chế che khuất quan sát sau nhập liệu (*post-entry observation redaction*), khiến mã OTP sau khi điền vẫn bị tác tử chụp màn hình đọc lại được ở bước kế tiếp.
-- [x] **Đồng bộ hóa trong Bảng 3 và các phân tích liên quan ở Mục 7.**
+- [x] **4.1. Thêm tiểu mục và bảng ánh xạ *Upstream AOSP Design vs. Stock Android 14 Prototype* (`§6.1`, Bảng 3):**
+  - Đã bổ sung `Table~\ref{tab:aosp_vs_stock}` nêu rõ cơ chế/API Android 14 thực tế của `b3secrethandle.apk`: `NotificationListenerService` + regex (trình bày thẳng thắn hạn chế detector ở Android 14), `AccessibilityNodeInfo`, `ACTION_SET_TEXT` + chặn `TYPE_VIEW_TEXT_CHANGED` ở SDK bridge, `TYPE_ACCESSIBILITY_OVERLAY` + `FLAG_SECURE` trong `MainActivity` + lọc cây trợ năng ở bridge, và tách rõ Java `Vault` process vs. C++ `mlock()`/`explicit_bzero` của thiết kế AOSP upstream.
 
----
+- [x] **4.2. Chỉnh lại phần mở đầu `§5` và ánh xạ Giả định 5.3–5.7:**
+  - Đã chỉnh đoạn mở đầu `§5` phân định rõ các giả định đạt trọn vẹn trong AOSP `system_server`, còn `b3.apk` thực thi ở ranh giới IPC giữa broker được cấp quyền và UID tác tử không đặc quyền theo các giới hạn ở `§6` và `§9`.
 
-### MF-5: Mở rộng thực nghiệm sang các ứng dụng Android thực tế (W3)
-*Mục tiêu: Chứng minh tính tổng quát và khả thi trên thực tế, không dừng lại ở 2 APK tự tạo.*
+- [x] **4.3. Xóa các câu tự mâu thuẫn về đặc quyền và vị trí chặn:**
+  - Đã sửa *"intercepts the SMS at the telephony boundary"* (`§7`) thành *"at the notification listener before agent observation"*.
+  - Đã thống nhất thuật ngữ xuyên suốt `§4`, `§6`, `§7`, `§9` và Phụ lục A: `b3secrethandle.apk` là APK cài ngoài được người dùng cấp quyền Notification Listener & Accessibility, tách biệt khỏi UID tác tử không đặc quyền.
 
-- [x] **[ĐÃ HOÀN THÀNH — DATA THẬT]: Kiểm chứng thực nghiệm Chính sách Dự phòng (Fallback Policy) trên Custom Canvas/Numpad:**
-  - [x] Thực thi $n=30$ lượt trên Android 14 runtime qua `BenchmarkRunner` & `Vault.revealFallback`.
-  - [x] Kết quả: Tiện ích hợp pháp $30/30$ thành công ($U=1.00$), chặn đứng đối kháng tiền cảnh $30/30$ ($R=0.00$), độ trễ trung vị $47.60\,\mu\text{s}$ (trung bình $69.39\,\mu\text{s}$).
-  - [x] Tệp log bằng chứng: [`output/fallback_policy_benchmark.json`](file:///e:/NCKH/SecretHandle/output/fallback_policy_benchmark.json).
-- [x] **[ĐÃ HOÀN THÀNH — DATA THẬT]: Thử nghiệm định lượng cho luồng WebView Fail-Closed:**
-  - [x] Thực thi $n=30$ lượt trên Android 14 runtime qua `BenchmarkRunner` & `Vault.revealWeb`.
-  - [x] Kết quả: Từ chối đóng an toàn (fail-closed) trước origin giả mạo $30/30$ ($R=0.00$), hoàn thành luồng hợp pháp $30/30$ ($U=1.00$), độ trễ trung vị kiểm tra origin $56.80\,\mu\text{s}$ (trung bình $137.55\,\mu\text{s}$).
-  - [x] Tệp log bằng chứng: [`output/webview_failclosed_benchmark.json`](file:///e:/NCKH/SecretHandle/output/webview_failclosed_benchmark.json).
-- [ ] **[CHƯA HOÀN THÀNH — CẦN CHẠY THẬT]: Khảo sát tương thích cây giao diện trên 15–20 ứng dụng Google Play thực tế:**
-  - [ ] **Tập ứng dụng mục tiêu (Cài trên Samsung A52s thật hoặc Pixel 7 Emulator):**
-    - *Ngân hàng / Fintech:* Vietcombank, Techcombank, MB Bank, MoMo, ZaloPay, Viettel Money.
-    - *TMĐT / Giao hàng / MXH:* Shopee, Lazada, Grab, TikTok, Messenger, Telegram, Zalo.
-    - *Xác thực / Tiện ích:* Google Authenticator, Microsoft Authenticator, Aegis 2FA, Bitwarden, Chrome.
-  - [ ] **Quy trình thực hiện:**
-    - Mở ứng dụng đến đúng màn hình đăng nhập hoặc màn hình nhập mã OTP.
-    - Chạy lệnh capture: `python tools/audit_real_apps_compatibility.py --capture "<App_Name>" --category "<Category>"`.
-    - Lệnh tự động trích xuất `adb shell uiautomator dump` và phân tích các trường `autofillHints`, `inputType`, `EditText` vs `CustomView/Canvas`.
-  - [ ] **Xuất bằng chứng và cập nhật bài báo:**
-    - Chạy `python tools/audit_real_apps_compatibility.py --report` để xuất `output/real_apps_compatibility_audit.json` và bảng LaTeX `output/real_apps_compatibility_table.tex`.
-    - Đưa bảng thống kê thực tế vào Phụ lục B (hoặc Mục 7.2) làm bằng chứng không thể bác bỏ cho Reviewer A & C.
+- [x] **4.4. Thu hẹp phạm vi tuyên bố cho trung thực trong Abstract và `§1`:**
+  - Ghi rõ nguyên mẫu Android 14 cài đặt và đánh giá **2 nguồn** (**SMS/notification OTP** và **sensitive clipboard**), còn Credential Manager/Wallet thuộc thiết kế tổng quát (`§4–§5`).
+  - Ghi rõ thử nghiệm tác tử end-to-end chạy trên KVM emulator, còn microbenchmark lõi và CPU/PSS/power profile chạy trên Samsung Galaxy A52s thật.
+
+- [x] **4.5. Thảo luận trung thực đánh đổi che bong bóng SMS (Hình 2b) và 2 kịch bản tấn công thích ứng (`§9`):**
+  - Đã bổ sung phân tích trong `§9`: đánh đổi giữa che toàn bộ bong bóng (bảo toàn zero-leak nhưng ẩn ngữ cảnh giao dịch vs. span-level redaction ở tương lai), cửa sổ đua tranh 200ms/scroll trước khi `TYPE_ACCESSIBILITY_OVERLAY` commit, và `setFilterTouchesWhenObscured(true)` chống tapjacking hộp thoại fallback.
 
 ---
 
-## PHẦN 2: CÁC HẠNG MỤC NÊN SỬA & NÂNG CẤP (SHOULD-FIX)
+## Nhóm 5: Hoàn thiện phân rã T1–T5, AndroidWorld, Metadata LLM, Ablation & Năng lượng (~1.5–2 ngày)
 
-- [x] **Giải thích độ trễ 150 ms của Baseline B1 (Bảng 3, Trang 9):**
-  - [x] Nêu rõ: Độ trễ 150 ms do phải chạy bộ phát hiện NER/regex quét cục bộ cây giao diện ở mỗi khung hình, cao hơn nhiều so với cơ chế trung gian $4.2\text{ ms}$ của SecretHandle.
-- [x] **Bổ sung số liệu đo năng lượng định lượng (Mục 7, RQ6, Trang 10):**
-  - [x] Bổ sung dữ liệu `dumpsys batterystats`: Mức tiêu thụ năng lượng đo được dưới $0.12\,\text{mJ}$ cho mỗi sự kiện trung gian trên Samsung Galaxy A52s, xác nhận không gây sụt pin nền.
-- [x] **Giải thích cơ chế khi người dùng muốn tự xem mã OTP (Reviewer C Q1):**
-  - [x] Nêu rõ giải pháp: Người dùng có thể chạm vào thông báo của SecretHandle để kích hoạt hộp thoại xác thực sinh trắc học (`BiometricPrompt`) và xem trực tiếp mã OTP trong cửa sổ bảo vệ phần cứng.
-- [x] **Làm rõ điều kiện hoàn trả ngân sách ở Thuật toán 2 (Dòng 17, Trang 8):**
-  - [x] Khẳng định ngân sách chỉ được hoàn trả $(u \leftarrow u + 1)$ khi việc hủy xảy ra trước khi bất kỳ byte nhạy cảm nào bị ghi vào bộ đệm của trường đích.
-- [x] **Công bố văn bản 5 mẫu chỉ thị tiêm nhiễm (Template 1–5):**
-  - [x] Tóm tắt nội dung 5 prompt injection template (Direct Exfiltration, Support Diversion, Web Phishing, DoS Depletion, Multilingual) vào Bảng 4 tại Phụ lục B (`mobisys/sections/artifact.tex`) để người đọc và phản biện tiện tra cứu trực tiếp.
+- [ ] **5.1. Thêm bảng phân rã kết quả theo từng mẫu tấn công T1–T5 (`§7`):**
+  - [x] Đã bổ sung ngay trong `§7` tóm tắt 2 kênh truyền tải chỉ thị tiêm nhiễm (độc lập với Phụ lục B) và làm rõ T4 DoS ($k \ge k_{\max}=3$) chuyển sang xác nhận chạm người dùng (*human intervention rather than autonomous recovery*).
+  - [ ] *(Cần trích xuất từ log EC2 gốc `results/trials.jsonl` của Mobile-Agent v3.5)* Bổ sung số đếm $(E, R, U_{\text{att}}, \text{human\_fallback\_count})$ cho từng mẫu T1–T5 ($n = 6$ mỗi mẫu) nếu bạn còn giữ log phiên chạy VLM đó.
 
----
+- [ ] **5.2. Bổ sung đầy đủ siêu dữ liệu thí nghiệm LLM (`§7`):**
+  - *(Chờ tác giả điền từ console Anthropic/OpenAI)* Ghi rõ **khoảng ngày gọi API (`API call dates`)** và **chi phí token / USD trung bình mỗi tác vụ** cho Mobile-Agent v3.5 (`claude-3-5-sonnet-20241022`) và AutoDroid (`gpt-4o-2024-08-06`).
 
-## PHẦN 3: TUÂN THỦ ĐỊNH DẠNG CFP MOBISYS 2027
+- [x] **5.3. Sửa tuyên bố về 10 ứng dụng AndroidWorld (Abstract, `§1`, `§7` RQ6, `§10`):**
+  - Đã áp dụng **Phương án B (trung thực với dữ liệu đã đo)**: sửa thành *"zero touch-passthrough or measured frame-latency regression across 10 AndroidWorld applications ($50/50$ events, $\Delta\text{p95}=0.0\,\text{ms}$ on Markor and Settings)"*.
 
-- [x] **Giới hạn số trang:** Thân bài (Sections 1–10) $\le 12$ trang; References & Appendix không giới hạn trang. Hiện tại toàn bài dài 15 trang chuẩn chỉnh.
-- [x] **Định dạng tài liệu:** Mẫu `\documentclass[sigconf,10pt]{acmart}`, khổ giấy US Letter (612 x 792 pt).
-- [x] **Chế độ phản biện Single-Blind:** Đã bao gồm đầy đủ tên tác giả, email, đơn vị Trường Đại học FPT, CCS Concepts và Keywords.
-- [x] **Kiểm tra tự động mã nguồn:** `python tools/manuscript_check.py mobisys/main.tex --scan-only` đạt **PASS** (0 placeholder).
-- [ ] **Kiểm tra phông chữ nhúng:** Chạy lệnh kiểm tra kỹ thuật PDF trước khi nộp:
-  ```bash
-  pdfinfo mobisys/main.pdf
-  pdffonts mobisys/main.pdf
-  ```
-  Đảm bảo $100\%$ phông chữ đều có thuộc tính `emb = yes`.
+- [ ] **5.4. Nâng cỡ mẫu ablation `No Observation Redactor` (`§7`):**
+  - [x] Đã ghi nhận trung thực trong `§7` đây là kiểm chứng đối chứng đơn lẻ (`$1/1$ control test`), tách biệt với các thành phần đối chiếu B0/B1/RQ3.
+  - [ ] *(Nếu kịp trước khi nộp)* Chạy thêm 9 lượt để nâng từ `1/1` lên `10/10`.
+
+- [x] **5.5. Củng cố phương pháp đo năng lượng trên Galaxy A52s (`§7` RQ6):**
+  - [x] Đã ghi rõ $< 0.12\,\text{mJ}$ mỗi sự kiện trung gian là *software power-profile estimate via `dumpsys batterystats` under simulated unplug*, không phải thiết bị đo công suất phần cứng.
+  - [ ] *(Nên làm nếu cắm Galaxy A52s)* Chạy phiên đo 15–30 phút rút cáp qua Wi-Fi ADB đọc `/sys/class/power_supply/battery/current_now` & `voltage_now`.
 
 ---
 
-## PHẦN 4: HẬU CẦN VÀ TIẾN ĐỘ NỘP BÀI (HOTCRP & DEADLINES)
+## Nhóm 6: Công trình liên quan, BibTeX, Artifact & Chế bản LaTeX/PDF (~1.5 ngày)
 
-### Mốc 1: Đăng ký Tóm tắt (Abstract Registration) — Trước 23:59 AoE ngày 27/11/2026
-- [ ] Tạo tài khoản và truy cập hệ thống: `https://mobisys27.hotcrp.com/`.
-- [ ] Điền tiêu đề chính thức: *SecretHandle: OS-Minted, Destination- and Task-Bound Opaque Secrets for Android Mobile AI Agents*.
-- [ ] Chốt danh sách tác giả cố định: Nguyễn Tiến Thuận, Trần Phát Tài (FPT University) — Không được thêm/bớt tác giả sau mốc này.
-- [ ] Dán bản Tóm tắt (Abstract) đã tinh chỉnh hoàn chỉnh (tuyệt đối không để TBD).
-- [ ] Khai báo Xung đột Lợi ích (COI) chính xác: Rà soát danh sách TPC (đặc biệt là Co-chairs: Jun Han - KAIST và Falko Dressler - TU Berlin).
+- [x] **6.1. Bổ sung công trình liên quan 2026 & kinh điển (`§8`) và dọn `references_verified.bib`:**
+  - Đã kiểm chứng metadata thật qua web và bổ sung vào `§8` + `references_verified.bib`: **Aura** (`arXiv:2602.10915`), **SUPOR** (USENIX Sec '15), **UIPicker** (USENIX Sec '15), **TrustUI** (APSys '14), **TruZ-Droid** (MobiSys '18).
+  - Đã sửa `dennis1966semantics` sang `@article` (`Communications of the ACM`) và xóa sạch 14 mục thừa chưa trích dẫn.
 
-### Mốc 2: Nộp Toàn văn (Full Paper Submission) — Trước 23:59 AoE ngày 04/12/2026
-- [ ] Đảm bảo kho mã nguồn GitHub `https://github.com/SecretHandle/SecretHandle` (hoặc kho ẩn danh nếu cần) hoạt động trơn tru.
-- [ ] Biên dịch bản PDF cuối cùng đạt đúng 12 trang nội dung chính + References + Phụ lục.
-- [ ] Chạy qua trình kiểm tra định dạng tích hợp trên giao diện nộp bài của HotCRP.
-- [ ] Tải tệp `main.pdf` lên và xác nhận hoàn tất nộp bài trước 23:59 AoE.
+- [x] **6.2. Hoàn thiện Phụ lục A–B (`mobisys/sections/artifact.tex`):**
+  - Đã bổ sung đầy đủ lệnh ADB sau `adb install` (`adb unroot && adb shell getenforce`, `cmd notification allow_listener`, `settings put secure enabled_accessibility_services`, `accessibility_enabled 1`) và sửa đúng tên `b3secrethandle.apk`.
+  - [ ] *(Tác giả tự kiểm tra trước khi nộp)* Xác nhận kho GitHub `https://github.com/SecretHandle/SecretHandle` truy cập công khai được và đồng bộ đầy đủ file + system prompt/commit hash.
 
----
-
-## BẢNG THEO DÕI TIẾN ĐỘ THEO TUẦN (WEEKLY MILESTONES)
-
-```mermaid
-flowchart TD
-    W1["Tuần 1 (30/10 - 05/11): Đã hoàn thành MF-1, MF-2, MF-4, Fallback & WebView"]
-    W2["Tuần 2 (06/11 - 12/11): Đã hoàn thành MF-3, tối ưu 12 trang, ngắt References"]
-    W3["Tuần 3 (13/11 - 19/11): Khảo sát 15-20 app Google Play thật (Item cuối của MF-5)"]
-    W4["Tuần 4 (20/11 - 27/11): Đăng ký Abstract trên HotCRP trước 23:59 AoE ngày 27/11"]
-    W5["Tuần 5 (28/11 - 04/12): Kiểm tra pdffonts, rà soát lần cuối & Nộp Full Paper"]
-
-    W1 --> W2 --> W3 --> W4 --> W5
-    style W1 fill:#d4edda,stroke:#28a745,color:#155724
-    style W2 fill:#d4edda,stroke:#28a745,color:#155724
-    style W3 fill:#fff3cd,stroke:#ffc107,color:#856404
-    style W4 fill:#cce5ff,stroke:#004085,color:#004085
-    style W5 fill:#f8d7da,stroke:#721c24,color:#721c24
-```
-
+- [x] **6.3. Sửa chế bản LaTeX, hình ảnh và ngân sách 12 trang:**
+  - Đã xóa 6 dòng ép khoảng cách float trong preamble (`mobisys/main.tex`).
+  - Đã tăng chiều cao Hình 2 từ `2.6cm` lên `3.2cm`, bọc Hình 1 trong `\resizebox{\textwidth}{!}{...}`, bỏ dấu chấm dư ở tiêu đề `\paragraph{Mobile agents act through the UI}`, rút ngắn tiêu đề `Remark 5.16` thành `[In-scope misuse]`.
+  - **Kết quả biên dịch cuối:** `mobisys/main.pdf` dài **15 trang** (`612 x 792 pts (letter)`), $100\%$ font nhúng (`emb=yes`), **Mục 10 Conclusion kết thúc gọn trên Trang 12**, References bắt đầu ở Trang 13, Phụ lục A–B ở Trang 14–15, `manuscript_check.py` đạt **PASS**.

@@ -18,10 +18,18 @@ make check
 
 \paragraph{On-device Android 14 experiment reproduction.} To reproduce the empirical measurements in Section~\ref{sec:evidence}:
 \begin{verbatim}
-# 1. Install prototype services and test APKs
-adb install device/b3-secrethandle/b3.apk
-adb install apks/legitimate_bank.apk
-adb install apks/attacker_rewards.apk
+# 1. Verify SELinux enforcing & install/enable APK
+adb unroot && adb shell getenforce
+adb install -r device/b3-secrethandle/build/\
+  b3secrethandle.apk
+adb shell cmd notification allow_listener \
+  com.secrethandle.b3/.SecretBrokerService
+adb shell settings put secure \
+  enabled_accessibility_services \
+  com.secrethandle.b3/\
+  .RedactionAccessibilityService
+adb shell settings put secure \
+  accessibility_enabled 1
 # 2. Run microbenchmarks via app_process
 adb shell CLASSPATH=/data/local/tmp/bench.jar \
   app_process /data/local/tmp BenchmarkRunner
@@ -29,7 +37,7 @@ adb shell CLASSPATH=/data/local/tmp/bench.jar \
 python evaluation/run_agent_matrix.py \
   --config configs/android14_eval.yaml
 \end{verbatim}
-Per-trial logs, latency dumps, and step trajectories are recorded in \texttt{results/trials.jsonl}. The evaluation uses random synthetic canaries per trial; no human subjects, production accounts, or real credentials are used.
+Per-trial logs, latency dumps, agent system prompts, commit hashes, and step trajectories are recorded in \texttt{evaluation/} and \texttt{results/trials.jsonl}. The evaluation uses random synthetic canaries per trial; no human subjects, production accounts, or real credentials are used.
 
 \paragraph{Integrity and license.} All configuration digests and random seeds are logged in \texttt{provenance.json} at initialization. The repository is released under the Apache License~2.0 with all source files, benchmark harnesses, and analysis scripts fully open-sourced.
 

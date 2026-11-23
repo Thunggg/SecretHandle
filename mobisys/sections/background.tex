@@ -1,7 +1,7 @@
 \section{Background and Motivation}
 \label{sec:background}
 
-\paragraph{Mobile agents act through the UI.} Agents such as AppAgent, AutoDroid, and the Mobile-Agent family drive Android through the accessibility tree, screenshots, and synthesized gestures \cite{zhang2023appagent,wen2023autodroid,wang2024mobileagent,ye2025mobileagentv3}. Everything the agent perceives is therefore an observation channel, and everything it does is an actuation channel. A secret that must be entered crosses both.
+\paragraph{Mobile agents act through the UI} Agents such as AppAgent, AutoDroid, and the Mobile-Agent family drive Android through the accessibility tree, screenshots, and synthesized gestures \cite{zhang2023appagent,wen2023autodroid,wang2024mobileagent,ye2025mobileagentv3}. Everything the agent perceives is therefore an observation channel, and everything it does is an actuation channel. A secret that must be entered crosses both.
 
 \paragraph{The motivating attack.} In the OTP-forwarding pattern, the agent encounters a message or notification containing a verification code together with an injected instruction to forward it. The agent reads the code from the rendered text and sends it to an attacker-controlled endpoint \cite{du2025mobileattacks,greshake2023indirect}. We reproduced the core mechanism on an Android emulator with an open notification-listener agent: the code was read from the notification and POSTed to an isolated endpoint (Section~\ref{sec:evidence}). This establishes that the attack surface is reachable with stock, non-malicious-looking components.
 
