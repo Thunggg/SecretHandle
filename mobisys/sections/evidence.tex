@@ -104,7 +104,7 @@ Under \textbf{B3 (\SH{})}, the notification broker mints \texttt{SH-A8F29C} boun
 \emph{Fallback \& WebView Microbenchmarks}: Two synthetic \texttt{BenchmarkRunner} suites ($n=30$ each) isolate non-standard UIs and web origins: (1)~\texttt{Vault.revealFallback} pairs foreground package verification with a user touch gate for custom canvases/numpads lacking \texttt{smsOTPCode}, blocking adversary apps ($0/30$ leaks) and permitting bound targets ($30/30$, median vault check $47.60\,\mu\text{s}$ excluding human reaction time); (2)~\texttt{Vault.revealWeb} (separate from the $n=6$ end-to-end Template~3 trials) blocks unverified origins fail-closed ($0/30$ leaks) while permitting bound origins ($30/30$, median $56.80\,\mu\text{s}$).
 
 \paragraph{Empirical Real-App UI Compatibility (Physical Device).}
-We captured static UI trees (\texttt{uiautomator dump}) and package versions (\texttt{dumpsys package}) on Galaxy~A52s (\texttt{SM-A528B}, Android~14 API~34) across initial login, phone, password, or lock-verification screens of 20 Google Play apps without submitting live accounts ($0/20$ post-login \texttt{smsOTPCode} \texttt{EditText} nodes; Table~\ref{tab:compat_summary} and Appendix~\ref{sec:appendix_compat} Table~\ref{tab:app_compatibility}): (1)~\textbf{Direct Match} ($7/20$, $35.0\%$: MoMo, Shopee, Messenger, Gmail's Samsung lock gate \texttt{lockPassword}, Knowt, Lazada, Discord) exposed \texttt{EditText} password cues; (2)~\textbf{Package+Class Fallback + Touch Gate} ($10/20$, $50.0\%$: Home Credit, Teams \texttt{AutoCompleteTextView}, TikTok, Telegram, GitHub server URL, WhatsApp, OKX, Grab phone input, PayPal, Bitwarden) matched on package+class; and (3)~\textbf{WebView Fail-Closed} ($3/20$, $15.0\%$: SoundCloud Chrome Custom Tab, CocCoc Browser, Binance) enclosed inputs in \texttt{android.webkit.WebView}, triggering fail-closed rejection absent Chromium origin attestation. Two flows delegated auth across packages (\texttt{Gmail} $\rightarrow$ \texttt{com.google.android.gms}; \texttt{SoundCloud} $\rightarrow$ \texttt{com.android.chrome}); \texttt{com.VCB} blocked Developer Options via pre-login RASP and was excluded.
+We captured static UI trees (\texttt{uiautomator dump}) and package versions (\texttt{dumpsys package}) on Galaxy~A52s (\texttt{SM-A528B}, Android~14 API~34) across initial login, phone, or password screens of 20 Google Play apps without submitting live accounts ($0/20$ post-login \texttt{smsOTPCode} \texttt{EditText} nodes; Table~\ref{tab:compat_summary} and Appendix~\ref{sec:appendix_compat} Table~\ref{tab:app_compatibility}): (1)~\textbf{Direct Match} ($6/20$, $30.0\%$: MoMo, Shopee, Messenger, Knowt, Lazada, Discord) exposed \texttt{EditText} password cues; (2)~\textbf{Package+Class Fallback + Touch Gate} ($9/20$, $45.0\%$: Home Credit, Teams \texttt{AutoCompleteTextView}, TikTok, Telegram, WhatsApp, OKX, Grab phone input, PayPal, Bitwarden) matched on package+class; and (3)~\textbf{WebView Fail-Closed} ($5/20$, $25.0\%$: SoundCloud Chrome Custom Tab, CocCoc Browser, Binance, Gmail GMS Sign-In, GitHub OAuth Custom Tab) enclosed inputs in \texttt{android.webkit.WebView}, triggering fail-closed rejection absent Chromium origin attestation. Three apps natively delegated auth across packages (\texttt{Gmail} $\rightarrow$ \texttt{com.google.android.gms}; \texttt{SoundCloud} $\rightarrow$ \texttt{com.android.chrome}; \texttt{GitHub} $\rightarrow$ \texttt{com.coccoc.trinhduyet}); \texttt{com.VCB} blocked Developer Options via pre-login RASP and was excluded.
 
 \begin{table}[h]
 \centering\scriptsize
@@ -115,9 +115,9 @@ We captured static UI trees (\texttt{uiautomator dump}) and package versions (\t
 \toprule
 Tier & Count & Share & Action / Examples \\
 \midrule
-Direct Match & 7/20 & 35.0\% & Auto-resolve (MoMo, Shopee, Lazada) \\
-Pkg+Class & 10/20 & 50.0\% & Touch gate (Telegram, Grab, PayPal) \\
-WebView & 3/20 & 15.0\% & Fail-closed (CocCoc, Binance, Tab) \\
+Direct Match & 6/20 & 30.0\% & Auto-resolve (MoMo, Shopee, Lazada) \\
+Pkg+Class & 9/20 & 45.0\% & Touch gate (Telegram, Grab, PayPal) \\
+WebView & 5/20 & 25.0\% & Fail-closed (Gmail, GitHub, Binance) \\
 \bottomrule
 \end{tabular*}
 \end{table}

@@ -1324,7 +1324,7 @@
     }
   },
   "real_apps_compatibility_audit": {
-    "timestamp": "2026-11-23T18:40:33.100014",
+    "timestamp": "2026-11-23T21:37:43.101388",
     "device": {
       "model": "SM-A528B",
       "android_release": "14",
@@ -1454,33 +1454,6 @@
             "reason": "Standard EditText with explicit OTP/password semantic signal"
           }
         ]
-      },
-      {
-        "app_name": "Gmail",
-        "category": "Email",
-        "package_name": "com.google.android.gms",
-        "version_name": "26.45.31 (190400-1020418964)",
-        "version_code": "264531029",
-        "target_sdk": "37",
-        "ui_dump_status": "ok",
-        "audited_at": "2026-11-23T18:18:50.812155",
-        "input_field_count": 1,
-        "primary_status": "DIRECT_COMPATIBLE",
-        "fields": [
-          {
-            "class": "android.widget.EditText",
-            "resource_id": "com.samsung.android.biometrics.app.setting:id/lockPassword",
-            "content_desc": "",
-            "is_password": true,
-            "detected_hints": [
-              "password"
-            ],
-            "bounds": "[68,645][1012,774]",
-            "compatibility_tier": "DIRECT_MATCH",
-            "reason": "Standard EditText with explicit OTP/password semantic signal"
-          }
-        ],
-        "screen_note": "Google Sign-In flow prompted Samsung device lock verification (lockPassword) prior to credential entry."
       },
       {
         "app_name": "Microsoft Teams",
@@ -1709,31 +1682,6 @@
             "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
           }
         ]
-      },
-      {
-        "app_name": "GitHub",
-        "category": "Developer",
-        "package_name": "com.github.android",
-        "version_name": "1.285.0",
-        "version_code": "956",
-        "target_sdk": "37",
-        "ui_dump_status": "ok",
-        "audited_at": "2026-11-23T18:31:31.296026",
-        "input_field_count": 1,
-        "primary_status": "STANDARD_INPUT_FALLBACK",
-        "fields": [
-          {
-            "class": "android.widget.EditText",
-            "resource_id": "com.github.android:id/enterprise_server_url_edit_text",
-            "content_desc": "",
-            "is_password": false,
-            "detected_hints": [],
-            "bounds": "[45,1797][1035,1914]",
-            "compatibility_tier": "NUMERIC_STANDARD",
-            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
-          }
-        ],
-        "screen_note": "Captured initial Enterprise Server URL EditText screen (enterprise_server_url_edit_text)."
       },
       {
         "app_name": "WhatsApp",
@@ -1994,6 +1942,96 @@
             "bounds": "[45,1257][1035,1415]",
             "compatibility_tier": "NUMERIC_STANDARD",
             "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "Gmail",
+        "category": "Email",
+        "package_name": "com.google.android.gms",
+        "version_name": "26.45.31 (190400-1020418964)",
+        "version_code": "264531029",
+        "target_sdk": "37",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T21:36:28.477421",
+        "input_field_count": 3,
+        "primary_status": "WEBVIEW_FAIL_CLOSED",
+        "fields": [
+          {
+            "class": "android.webkit.WebView",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[0,88][1080,2155]",
+            "compatibility_tier": "WEBVIEW_FAIL_CLOSED",
+            "reason": "Embedded WebView container (requires Chromium origin attestation; fails closed otherwise)"
+          },
+          {
+            "class": "android.webkit.WebView",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[0,88][1080,2155]",
+            "compatibility_tier": "WEBVIEW_FAIL_CLOSED",
+            "reason": "Embedded WebView container (requires Chromium origin attestation; fails closed otherwise)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "identifierId",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[67,796][1012,951]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          }
+        ]
+      },
+      {
+        "app_name": "GitHub",
+        "category": "Developer",
+        "package_name": "com.coccoc.trinhduyet",
+        "version_name": "160.0.175",
+        "version_code": "998917504",
+        "target_sdk": "36",
+        "ui_dump_status": "ok",
+        "audited_at": "2026-11-23T21:37:43.101410",
+        "input_field_count": 3,
+        "primary_status": "WEBVIEW_FAIL_CLOSED",
+        "fields": [
+          {
+            "class": "android.webkit.WebView",
+            "resource_id": "",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[0,246][1080,2358]",
+            "compatibility_tier": "WEBVIEW_FAIL_CLOSED",
+            "reason": "Embedded WebView container (requires Chromium origin attestation; fails closed otherwise)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "login_field",
+            "content_desc": "",
+            "is_password": false,
+            "detected_hints": [],
+            "bounds": "[45,994][1035,1112]",
+            "compatibility_tier": "NUMERIC_STANDARD",
+            "reason": "Standard EditText without explicit OTP/password hint (package+class fallback)"
+          },
+          {
+            "class": "android.widget.EditText",
+            "resource_id": "password",
+            "content_desc": "",
+            "is_password": true,
+            "detected_hints": [
+              "password"
+            ],
+            "bounds": "[45,1221][1035,1340]",
+            "compatibility_tier": "DIRECT_MATCH",
+            "reason": "Standard EditText with explicit OTP/password semantic signal"
           }
         ]
       }

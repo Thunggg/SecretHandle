@@ -10,17 +10,17 @@
 
 **File cần tác động:** `tools/audit_real_apps_compatibility.py`, `output/real_apps_compatibility_audit.json` (và `evidence_logs_all.json`), `§7` (tr. 10–11), Phụ lục C Bảng 8 (tr. 16).
 
-- [x] **1.1. Tách 3 ứng dụng dùng WebView sang nhóm thứ 3 (`WebView Fail-Closed`):**
-  - Đã cập nhật [`tools/audit_real_apps_compatibility.py`](file:///e:/NCKH/SecretHandle/tools/audit_real_apps_compatibility.py) và [`output/real_apps_compatibility_audit.json`](file:///e:/NCKH/SecretHandle/output/real_apps_compatibility_audit.json): xếp cả 3 ứng dụng có `android.webkit.WebView` (`SoundCloud`, `CocCoc Browser`, `Binance`) vào `WEBVIEW_FAIL_CLOSED` ($3/20 = 15.0\%$, _Fail-Closed Rejection_).
+- [x] **1.1. Tách các ứng dụng dùng WebView sang nhóm thứ 3 (`WebView Fail-Closed`):**
+  - Đã cập nhật [`tools/audit_real_apps_compatibility.py`](file:///e:/NCKH/SecretHandle/tools/audit_real_apps_compatibility.py) và [`output/real_apps_compatibility_audit.json`](file:///e:/NCKH/SecretHandle/output/real_apps_compatibility_audit.json): xếp toàn bộ 5 ứng dụng có `android.webkit.WebView` (`SoundCloud`, `CocCoc Browser`, `Binance`, `Gmail (GMS Sign-In)`, `GitHub (OAuth Custom Tab)`) vào `WEBVIEW_FAIL_CLOSED` ($5/20 = 25.0\%$, _Fail-Closed Rejection_).
 
 - [x] **1.2. Sửa lỗi gán nhãn nhầm của `Grab` (và lọc nút `TextView` của `Lazada`):**
   - Sửa lỗi khớp chuỗi con (`"passenger"` $\rightarrow$ `"pass"`) bằng ranh giới token + tách `:id/` trong `_extract_semantic_hints`, đồng thời bỏ qua các node nút bấm `TextView`/`Button` không nhập liệu (`btn_email_otp_login` ở `Lazada`). `Grab` (`verify_number_edit_number`, `is_password: false`) chuyển chuẩn xác sang `STANDARD_INPUT_FALLBACK` (`phone`, _Pkg+Class / Touch Gate_).
 
-- [x] **1.3. Chú thích minh bạch 2 ứng dụng bắt màn hình khóa / server URL trên Galaxy A52s:**
-  - `Gmail (Lock Gate)` (`com.google.android.gms`, `lockPassword`) và `GitHub (Server URL)` (`enterprise_server_url_edit_text`) đã được chú thích rõ trong `§7`, Bảng 8 (Phụ lục C) và trường `screen_note` của `real_apps_compatibility_audit.json`.
+- [x] **1.3. Chụp lại sạch 2 ứng dụng `Gmail` & `GitHub` trên Galaxy A52s:**
+  - Đã chụp lại đúng màn hình **Google Sign-In (`identifierId` trong WebView của `com.google.android.gms`)** và **GitHub Sign-In (`login_field` + `password` trong OAuth Custom Tab `com.coccoc.trinhduyet`)**, thay thế hoàn toàn bản chụp màn hình khóa Samsung / Server URL cũ.
 
 - [x] **1.4. Cập nhật thống kê 3 hạng mục và phạm vi khảo sát trong `§7` & Bảng 8:**
-  - Khớp $100\%$ giữa JSON, `§7`, Bảng 6 (`tab:compat_summary`) và Bảng 8 (`tab:app_compatibility`): **`7/20 (35.0%)` Direct Match**, **`10/20 (50.0%)` Pkg+Class + Touch Gate**, **`3/20 (15.0%)` WebView Fail-Closed** (tổng $20/20$, và ghi rõ $0/20$ trường `EditText` mang `smsOTPCode` động sau đăng nhập).
+  - Khớp $100\%$ giữa JSON, `§7`, Bảng 6 (`tab:compat_summary`) và Bảng 8 (`tab:app_compatibility`): **`6/20 (30.0%)` Direct Match**, **`9/20 (45.0%)` Pkg+Class + Touch Gate**, **`5/20 (25.0%)` WebView Fail-Closed** (tổng $20/20$, và ghi rõ $0/20$ trường `EditText` mang `smsOTPCode` động sau đăng nhập).
 
 ---
 

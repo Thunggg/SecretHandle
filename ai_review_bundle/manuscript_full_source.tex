@@ -602,7 +602,7 @@ Under \textbf{B3 (\SH{})}, the notification broker mints \texttt{SH-A8F29C} boun
 \emph{Fallback \& WebView Microbenchmarks}: Two synthetic \texttt{BenchmarkRunner} suites ($n=30$ each) isolate non-standard UIs and web origins: (1)~\texttt{Vault.revealFallback} pairs foreground package verification with a user touch gate for custom canvases/numpads lacking \texttt{smsOTPCode}, blocking adversary apps ($0/30$ leaks) and permitting bound targets ($30/30$, median vault check $47.60\,\mu\text{s}$ excluding human reaction time); (2)~\texttt{Vault.revealWeb} (separate from the $n=6$ end-to-end Template~3 trials) blocks unverified origins fail-closed ($0/30$ leaks) while permitting bound origins ($30/30$, median $56.80\,\mu\text{s}$).
 
 \paragraph{Empirical Real-App UI Compatibility (Physical Device).}
-We captured static UI trees (\texttt{uiautomator dump}) and package versions (\texttt{dumpsys package}) on Galaxy~A52s (\texttt{SM-A528B}, Android~14 API~34) across initial login, phone, password, or lock-verification screens of 20 Google Play apps without submitting live accounts ($0/20$ post-login \texttt{smsOTPCode} \texttt{EditText} nodes; Table~\ref{tab:compat_summary} and Appendix~\ref{sec:appendix_compat} Table~\ref{tab:app_compatibility}): (1)~\textbf{Direct Match} ($7/20$, $35.0\%$: MoMo, Shopee, Messenger, Gmail's Samsung lock gate \texttt{lockPassword}, Knowt, Lazada, Discord) exposed \texttt{EditText} password cues; (2)~\textbf{Package+Class Fallback + Touch Gate} ($10/20$, $50.0\%$: Home Credit, Teams \texttt{AutoCompleteTextView}, TikTok, Telegram, GitHub server URL, WhatsApp, OKX, Grab phone input, PayPal, Bitwarden) matched on package+class; and (3)~\textbf{WebView Fail-Closed} ($3/20$, $15.0\%$: SoundCloud Chrome Custom Tab, CocCoc Browser, Binance) enclosed inputs in \texttt{android.webkit.WebView}, triggering fail-closed rejection absent Chromium origin attestation. Two flows delegated auth across packages (\texttt{Gmail} $\rightarrow$ \texttt{com.google.android.gms}; \texttt{SoundCloud} $\rightarrow$ \texttt{com.android.chrome}); \texttt{com.VCB} blocked Developer Options via pre-login RASP and was excluded.
+We captured static UI trees (\texttt{uiautomator dump}) and package versions (\texttt{dumpsys package}) on Galaxy~A52s (\texttt{SM-A528B}, Android~14 API~34) across initial login, phone, or password screens of 20 Google Play apps without submitting live accounts ($0/20$ post-login \texttt{smsOTPCode} \texttt{EditText} nodes; Table~\ref{tab:compat_summary} and Appendix~\ref{sec:appendix_compat} Table~\ref{tab:app_compatibility}): (1)~\textbf{Direct Match} ($6/20$, $30.0\%$: MoMo, Shopee, Messenger, Knowt, Lazada, Discord) exposed \texttt{EditText} password cues; (2)~\textbf{Package+Class Fallback + Touch Gate} ($9/20$, $45.0\%$: Home Credit, Teams \texttt{AutoCompleteTextView}, TikTok, Telegram, WhatsApp, OKX, Grab phone input, PayPal, Bitwarden) matched on package+class; and (3)~\textbf{WebView Fail-Closed} ($5/20$, $25.0\%$: SoundCloud Chrome Custom Tab, CocCoc Browser, Binance, Gmail GMS Sign-In, GitHub OAuth Custom Tab) enclosed inputs in \texttt{android.webkit.WebView}, triggering fail-closed rejection absent Chromium origin attestation. Three apps natively delegated auth across packages (\texttt{Gmail} $\rightarrow$ \texttt{com.google.android.gms}; \texttt{SoundCloud} $\rightarrow$ \texttt{com.android.chrome}; \texttt{GitHub} $\rightarrow$ \texttt{com.coccoc.trinhduyet}); \texttt{com.VCB} blocked Developer Options via pre-login RASP and was excluded.
 
 \begin{table}[h]
 \centering\scriptsize
@@ -613,9 +613,9 @@ We captured static UI trees (\texttt{uiautomator dump}) and package versions (\t
 \toprule
 Tier & Count & Share & Action / Examples \\
 \midrule
-Direct Match & 7/20 & 35.0\% & Auto-resolve (MoMo, Shopee, Lazada) \\
-Pkg+Class & 10/20 & 50.0\% & Touch gate (Telegram, Grab, PayPal) \\
-WebView & 3/20 & 15.0\% & Fail-closed (CocCoc, Binance, Tab) \\
+Direct Match & 6/20 & 30.0\% & Auto-resolve (MoMo, Shopee, Lazada) \\
+Pkg+Class & 9/20 & 45.0\% & Touch gate (Telegram, Grab, PayPal) \\
+WebView & 5/20 & 25.0\% & Fail-closed (Gmail, GitHub, Binance) \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -743,7 +743,7 @@ T5: Multilingual & Cross-lingual syntax switching & \textit{``Cảnh báo bảo 
 \begin{table*}[t]
 \centering\scriptsize
 \setlength{\tabcolsep}{3.5pt}
-\caption{Empirical compatibility audit of \SH{} destination matching across 20 Google Play applications captured on a physical Samsung Galaxy~A52s (Android~14, API~34). \textbf{Direct} ($7/20$): \texttt{EditText} exposing explicit password/lock attributes; \textbf{Pkg+Class} ($10/20$): standard \texttt{EditText}/\texttt{AutoCompleteTextView} with single-tap user touch gate; \textbf{WebView} ($3/20$): inputs enclosed in \texttt{android.webkit.WebView}, handled via Fail-Closed Rejection absent Chromium origin attestation.}
+\caption{Empirical compatibility audit of \SH{} destination matching across 20 Google Play applications captured on a physical Samsung Galaxy~A52s (Android~14, API~34). \textbf{Direct} ($6/20$): \texttt{EditText} exposing explicit password attributes; \textbf{Pkg+Class} ($9/20$): standard \texttt{EditText}/\texttt{AutoCompleteTextView} with single-tap user touch gate; \textbf{WebView} ($5/20$): inputs enclosed in \texttt{android.webkit.WebView}, handled via Fail-Closed Rejection absent Chromium origin attestation.}
 \label{tab:app_compatibility}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lllllll@{}}
 \toprule
@@ -753,14 +753,12 @@ MoMo & Fintech & \texttt{com.mservice.momotransfer} & \texttt{5.18.0} (51800) & 
 Home Credit & Finance & \texttt{vn.homecredit.capp} & \texttt{3.176.5} (261110001) & \texttt{EditText} & Pkg+Class & Touch Gate \\
 Shopee & E-Commerce & \texttt{com.shopee.vn} & \texttt{3.86.31} (38631) & \texttt{EditText} & Direct & None \\
 Messenger & Messaging & \texttt{com.facebook.orca} & \texttt{588.1.0.66.98} (347617568) & \texttt{EditText} & Direct & None \\
-Gmail (Lock Gate)$^*$ & Email & \texttt{com.google.android.gms} & \texttt{26.45.31} (264531029) & \texttt{EditText} & Direct & None \\
 Microsoft Teams & Enterprise & \texttt{com.microsoft.teams} & \texttt{1.0.0.2026203802} (2026203825) & \texttt{AutoCompleteTextView} & Pkg+Class & Touch Gate \\
 TikTok & Social & \texttt{com.ss.android.ugc.trill} & \texttt{47.8.3} (470803) & \texttt{EditText} & Pkg+Class & Touch Gate \\
 SoundCloud (Tab) & Media & \texttt{com.android.chrome} & \texttt{157.0.8103.80} (810308004) & \texttt{WebView} & WebView & Fail-Closed \\
 CocCoc Browser & Browser & \texttt{com.coccoc.trinhduyet} & \texttt{160.0.175} (998917504) & \texttt{WebView} & WebView & Fail-Closed \\
 Knowt & Education & \texttt{com.knowt.app} & \texttt{4.4.0} (327) & \texttt{EditText} & Direct & None \\
 Telegram & Messaging & \texttt{org.telegram.messenger} & \texttt{13.3.1} (73461) & \texttt{EditText} & Pkg+Class & Touch Gate \\
-GitHub (Server URL)$^\dagger$ & Developer & \texttt{com.github.android} & \texttt{1.285.0} (956) & \texttt{EditText} & Pkg+Class & Touch Gate \\
 WhatsApp & Messaging & \texttt{com.whatsapp} & \texttt{2.26.45.99} (264509900) & \texttt{EditText} & Pkg+Class & Touch Gate \\
 Lazada & E-Commerce & \texttt{com.lazada.android} & \texttt{8.11.0} (5390) & \texttt{EditText} & Direct & None \\
 OKX & Fintech/Crypto & \texttt{com.okinc.okex.gp} & \texttt{6.199.0} (739547) & \texttt{EditText} & Pkg+Class & Touch Gate \\
@@ -769,15 +767,16 @@ Binance & Fintech/Crypto & \texttt{com.binance.dev} & \texttt{3.22.4} (100302204
 PayPal & Fintech & \texttt{com.paypal.android.p2pmobile} & \texttt{10.21.1} (1160090191) & \texttt{EditText} & Pkg+Class & Touch Gate \\
 Discord & Messaging & \texttt{com.discord} & \texttt{354.12} (354012) & \texttt{EditText} & Direct & None \\
 Bitwarden & Pwd Manager & \texttt{com.x8bit.bitwarden} & \texttt{2026.11.1} (22056) & \texttt{EditText} & Pkg+Class & Touch Gate \\
+Gmail (GMS Auth) & Email & \texttt{com.google.android.gms} & \texttt{26.45.31} (264531029) & \texttt{WebView} & WebView & Fail-Closed \\
+GitHub (OAuth Tab) & Developer & \texttt{com.coccoc.trinhduyet} & \texttt{160.0.175} (998917504) & \texttt{WebView} & WebView & Fail-Closed \\
 \bottomrule
-\multicolumn{7}{@{}p{\textwidth}@{}}{\scriptsize $^*$ Google Sign-In flow prompted Samsung's device lock screen (\texttt{lockPassword}) prior to account entry. $^\dagger$ Captured initial Enterprise Server URL field (\texttt{enterprise\_server\_url\_edit\_text}).}
 \end{tabular*}
 \end{table*}
 
 \section{Real-App UI Compatibility Audit}
 \label{sec:appendix_compat}
 
-Table~\ref{tab:app_compatibility} details the static UI hierarchy audit across 20 Google Play apps on Galaxy~A52s (\texttt{SM-A528B}, Android~14 API~34) navigated to initial login, phone, password, or lock screens without storing user text ($0/20$ post-login \texttt{smsOTPCode} \texttt{EditText} nodes).
+Table~\ref{tab:app_compatibility} details the static UI hierarchy audit across 20 Google Play apps on Galaxy~A52s (\texttt{SM-A528B}, Android~14 API~34) navigated to initial login, phone, or password screens without storing user text ($0/20$ post-login \texttt{smsOTPCode} \texttt{EditText} nodes).
 % === END sections/artifact ===
 
 \end{document}
