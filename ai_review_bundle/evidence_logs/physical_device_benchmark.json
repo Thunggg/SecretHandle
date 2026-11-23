@@ -1,0 +1,141 @@
+{
+  "timestamp": "2026-10-29T18:00:34Z",
+  "physical_device": {
+    "brand": "samsung",
+    "model": "SM-A528B",
+    "android_version": "14",
+    "api_level": "34",
+    "fingerprint": "samsung/a52sxqxx/a52sxq:14/UP1A.231005.007/A528BXXSBGYI3:user/release-keys"
+  },
+  "benchmark_result": {
+    "benchmark_mode": "all",
+    "overhead": {
+      "trials": 100,
+      "mint_latency_us": {
+        "mean": 11.54,
+        "median": 10.89,
+        "min": 9.22,
+        "max": 35.73,
+        "p95": 15.1,
+        "p99": 35.73,
+        "std": 3.05
+      },
+      "resolve_latency_us": {
+        "mean": 0.31,
+        "median": 0.31,
+        "min": 0.26,
+        "max": 1.72,
+        "p95": 0.31,
+        "p99": 1.72,
+        "std": 0.14
+      },
+      "heap_alloc_bytes": 1433600,
+      "heap_total_bytes": 8388608
+    },
+    "lifecycle": {
+      "trials": 50,
+      "replay_blocked": 50,
+      "replay_accepted": 0,
+      "expiry_blocked": 50,
+      "expiry_bypassed": 0,
+      "concurrency_correct_single_use": 50,
+      "concurrency_anomalies": 0
+    },
+    "redirection": {
+      "trials": 30,
+      "b3_secrethandle": {
+        "redirection_leaks": 0,
+        "redirection_rate": 0.0,
+        "legitimate_utility": 30,
+        "utility_rate": 1.0
+      },
+      "b1_placeholder": {
+        "redirection_leaks": 30,
+        "redirection_rate": 1.0,
+        "legitimate_utility": 0,
+        "utility_rate": 0.0
+      },
+      "b2_platform_flow": {
+        "exposure_leaks": 0,
+        "exposure_rate": 0.0,
+        "redirection_leaks": 30,
+        "redirection_rate": 1.0,
+        "legitimate_utility_benign": 30,
+        "utility_rate_benign": 1.0,
+        "legitimate_utility_attack": 0,
+        "utility_rate_attack": 0.0
+      }
+    },
+    "intra_app_redirection": {
+      "trials": 30,
+      "bound_field": "smsOTPCode",
+      "adversary_field": "chatInput",
+      "redirection_leaks": 0,
+      "redirection_rate": 0.0,
+      "legitimate_utility": 30,
+      "utility_rate": 1.0
+    },
+    "end_to_end_breakdown": {
+      "trials": 100,
+      "binder_ipc_us": {
+        "mean": 1.73,
+        "median": 0.99,
+        "min": 0.78,
+        "max": 10.94,
+        "p95": 5.83,
+        "p99": 10.94,
+        "std": 1.8
+      },
+      "keystore_hmac_us": {
+        "mean": 17.63,
+        "median": 7.71,
+        "min": 6.56,
+        "max": 791.04,
+        "p95": 23.33,
+        "p99": 791.04,
+        "std": 77.86
+      },
+      "policy_check_us": {
+        "mean": 0.16,
+        "median": 0.16,
+        "min": 0.1,
+        "max": 0.78,
+        "p95": 0.31,
+        "p99": 0.78,
+        "std": 0.08
+      },
+      "text_injection_us": {
+        "mean": 0.45,
+        "median": 0.31,
+        "min": 0.21,
+        "max": 7.76,
+        "p95": 0.68,
+        "p99": 7.76,
+        "std": 0.82
+      },
+      "total_mediation_latency_ms": {
+        "mean": 0.0223,
+        "median": 0.013,
+        "min": 0.0096,
+        "max": 0.8186,
+        "p95": 0.0302,
+        "p99": 0.8186,
+        "std": 0.0802
+      }
+    },
+    "platform_flow_breakdown": {
+      "trials": 100,
+      "autofill_dataset_latency_us": {
+        "mean": 1.33,
+        "median": 0.78,
+        "min": 0.73,
+        "max": 11.56,
+        "p95": 3.8,
+        "p99": 11.56,
+        "std": 1.58
+      },
+      "full_platform_dispatch_ms": 2.1
+    }
+  },
+  "cpu_sample": "7.2% TOTAL: 3.2% user + 3.2% kernel + 0% iowait + 0.5% irq + 0.1% softirq"
+}

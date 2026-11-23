@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-10-29T18:18:45Z",
+  "device": {
+    "brand": "samsung",
+    "model": "SM-A528B",
+    "android_version": "14",
+    "api_level": "34"
+  },
+  "benchmark_result": {
+    "benchmark_mode": "extended",
+    "segmented_otp_benchmark": {
+      "trials": 30,
+      "redirection_leaks": 0,
+      "redirection_rate": 0.0,
+      "legitimate_utility": 30,
+      "utility_rate": 1.0,
+      "multi_node_injection_latency_us": {
+        "mean": 0.93,
+        "median": 0.89,
+        "min": 0.47,
+        "max": 2.55,
+        "p95": 1.15,
+        "p99": 2.55,
+        "std": 0.32
+      }
+    },
+    "clipboard_source_benchmark": {
+      "trials": 30,
+      "sensitive_flag_intercepted": 30,
+      "redirection_leaks": 0,
+      "redirection_rate": 0.0,
+      "legitimate_utility": 30,
+      "utility_rate": 1.0,
+      "clipboard_mediation_latency_us": {
+        "mean": 6.74,
+        "median": 4.9,
+        "min": 4.74,
+        "max": 36.04,
+        "p95": 18.33,
+        "p99": 36.04,
+        "std": 5.98
+      }
+    }
+  }
+}
