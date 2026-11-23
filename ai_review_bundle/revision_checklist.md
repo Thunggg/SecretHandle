@@ -1,64 +1,58 @@
-# Danh sách Công việc Cần sửa Vòng 2 — _SecretHandle_ (ACM MobiSys 2027)
+# Checklist Hoàn thiện Cuối cùng — *SecretHandle* (ACM MobiSys 2027)
 
-> **Nguồn đối chiếu:** [`reviews/acm_mobisys_2027.md`](file:///e:/NCKH/SecretHandle/reviews/acm_mobisys_2027.md) (Mode B Re-Review ngày 23/11/2026).
+> **Nguồn đối chiếu:** `mobisys2027_review_secrethandle_v3.md` (Mode B Re-Review Vòng 3 ngày 23/11/2026).
 >
-> **Trạng thái hiện tại:** Đã hoàn tất sửa toàn bộ **RMF-1, RMF-2, RMF-3, RMF-4 (4.1–4.3)** trên mã nguồn, JSON và LaTeX (chỉ còn kiểm tra link GitHub công khai và nộp HotCRP).
+> **Trạng thái hiện tại:** **4.0 / 5 (*Weak Accept — Đạt chuẩn sẵn sàng nộp*)**. Toàn bộ lỗi **Critical** và **Major** về số liệu, log JSON và định dạng CFP 12 trang đã được xử lý triệt để $100\%$.
+>
+> **Thời gian thực hiện ước tính:** $\sim 20$ phút (chỉ còn các mục đánh bóng nhỏ và hậu cần nộp bài).
 
 ---
 
-## Nhóm 1 (RMF-1 — Major, ưu tiên số 1, ~2–3 giờ): Sửa phân loại & tính nhất quán WebView trong Khảo sát 20 Ứng dụng Thực tế
+## 1. Sửa bố cục trang 16 trống ở Phụ lục C (~2 phút)
 
-**File cần tác động:** `tools/audit_real_apps_compatibility.py`, `output/real_apps_compatibility_audit.json` (và `evidence_logs_all.json`), `§7` (tr. 10–11), Phụ lục C Bảng 8 (tr. 16).
+**File cần sửa:** `mobisys/sections/artifact.tex`
 
-- [x] **1.1. Tách các ứng dụng dùng WebView sang nhóm thứ 3 (`WebView Fail-Closed`):**
-  - Đã cập nhật [`tools/audit_real_apps_compatibility.py`](file:///e:/NCKH/SecretHandle/tools/audit_real_apps_compatibility.py) và [`output/real_apps_compatibility_audit.json`](file:///e:/NCKH/SecretHandle/output/real_apps_compatibility_audit.json): xếp toàn bộ 5 ứng dụng có `android.webkit.WebView` (`SoundCloud`, `CocCoc Browser`, `Binance`, `Gmail (GMS Sign-In)`, `GitHub (OAuth Custom Tab)`) vào `WEBVIEW_FAIL_CLOSED` ($5/20 = 25.0\%$, _Fail-Closed Rejection_).
-
-- [x] **1.2. Sửa lỗi gán nhãn nhầm của `Grab` (và lọc nút `TextView` của `Lazada`):**
-  - Sửa lỗi khớp chuỗi con (`"passenger"` $\rightarrow$ `"pass"`) bằng ranh giới token + tách `:id/` trong `_extract_semantic_hints`, đồng thời bỏ qua các node nút bấm `TextView`/`Button` không nhập liệu (`btn_email_otp_login` ở `Lazada`). `Grab` (`verify_number_edit_number`, `is_password: false`) chuyển chuẩn xác sang `STANDARD_INPUT_FALLBACK` (`phone`, _Pkg+Class / Touch Gate_).
-
-- [x] **1.3. Chụp lại sạch 2 ứng dụng `Gmail` & `GitHub` trên Galaxy A52s:**
-  - Đã chụp lại đúng màn hình **Google Sign-In (`identifierId` trong WebView của `com.google.android.gms`)** và **GitHub Sign-In (`login_field` + `password` trong OAuth Custom Tab `com.coccoc.trinhduyet`)**, thay thế hoàn toàn bản chụp màn hình khóa Samsung / Server URL cũ.
-
-- [x] **1.4. Cập nhật thống kê 3 hạng mục và phạm vi khảo sát trong `§7` & Bảng 8:**
-  - Khớp $100\%$ giữa JSON, `§7`, Bảng 6 (`tab:compat_summary`) và Bảng 8 (`tab:app_compatibility`): **`6/20 (30.0%)` Direct Match**, **`9/20 (45.0%)` Pkg+Class + Touch Gate**, **`5/20 (25.0%)` WebView Fail-Closed** (tổng $20/20$, và ghi rõ $0/20$ trường `EditText` mang `smsOTPCode` động sau đăng nhập).
+- [x] Bỏ `\clearpage` thừa trước Phụ lục C để tiêu đề `\section{Real-App UI Compatibility Audit}\label{sec:appendix_compat}` + đoạn giới thiệu 3 dòng nằm gọn ở cuối **Trang 15** và Bảng 8 nằm trọn vẹn trên **Trang 16** (tổng số trang PDF rút từ 17 xuống còn **16 trang** gọn đẹp, không còn trang lẻ 3 dòng).
+- *Xong khi:* Tiêu đề Phụ lục C, đoạn giới thiệu và Bảng 8 nằm chung gọn gàng trên **Trang 16** (tổng số trang PDF rút từ 17 xuống còn **16 trang** gọn đẹp, không còn trang lẻ 3 dòng).
 
 ---
 
-## Nhóm 2 (RMF-2 — Major, rất quan trọng cho Artifact, ~2 giờ): Đồng bộ hóa `rq6_benign_regression_results.json` với `§7 RQ6`
+## 2. Chuẩn hóa từ ngữ độ trễ khung hình ở Abstract, Intro và Conclusion (~3 phút)
 
-**File cần tác động:** `output/rq6_benign_regression_results.json` (và `evidence_logs_all.json`), `§7 RQ6`.
+**File cần sửa:** `mobisys/sections/abstract.tex`, `mobisys/sections/introduction.tex` (mục *Contribution (v)*), `mobisys/sections/conclusion.tex`
 
-- [x] **2.1. Xử lý minh bạch 2 cờ `FALSE_POSITIVE` trong `false_positive_audit` (`SMS_Benign`, `Contacts`):**
-  - Áp dụng **Cách B (trung thực tuyệt đối với log EC2 gốc):** giữ nguyên số đo gốc, bổ sung các trường tóm tắt minh bạch vào `summary` của `rq6_benign_regression_results.json` (`visible_overlay_false_positive_rate: 0.0`, `internal_heuristic_trigger_count: 2`, `internal_heuristic_trigger_apps: ["SMS_Benign", "Contacts"]`) và nêu rõ trong `§7 RQ6` (_`0/10` visible false-positive overlays; `SMS_Benign` and `Contacts` logged one suppressed heuristic check with `overlay_detected=false`_).
-
-- [x] **2.2 & 2.3. Xử lý trung thực `Clock` (0 frame) và báo cáo đầy đủ `p95`, `p99`, `jank` trong `§7 RQ6`:**
-  - Vì emulator EC2 gốc đã xóa (không tự sửa tay số liệu `Clock`), đã ghi rõ `excluded_zero_frame_app` trong `summary` của JSON và báo cáo đầy đủ cả **`p95`**, **`p99`** và **`jank`** trong `§7 RQ6` (`Markor`: `p95=18.0 ms`, `p99: 27.0 -> 31.0 ms`, `jank 3.70%`; `Settings`: `p95=36.0 ms`, `p99: 38.0 -> 101.0 ms`, `jank 2.30% -> 3.66%`; `Clock`: `0` B3 frames / sentinel `4950 ms` bị loại khỏi phép so sánh khung hình động).
+- [x] Đổi cụm *"zero touch-passthrough or measured frame-latency regression"* thành *"zero touch-passthrough or measured median/p95 frame-latency regression"* ở cả 3 vị trí (Abstract tr. 1, Intro tr. 2, Conclusion tr. 12).
+- *Xong khi:* Câu chữ ở phần mở đầu và kết luận khớp tuyệt đối $100\%$ với phần báo cáo trung thực đuôi `p99` của `Settings` ($38.0 \rightarrow 101.0\,\text{ms}$) trong `§7 RQ6`.
 
 ---
 
-## Nhóm 3 (RMF-3 — Major về Minh bạch hóa, ~45 phút): Làm rõ T4 DoS & Phạm vi Log Lưu trữ
+## 3. Làm sạch 1 chuỗi chú thích nhỏ trong JSON & checklist (~2 phút)
 
-- [x] **3.1. Chú thích minh bạch cho $U_{\text{att}} = 1.00$ trên Template 4 (`DoS Depletion`):**
-  - Đã thêm chú thích `$^\S$` ngay dưới **Bảng 4** và nêu rõ trong `§7` (_Qualitative Analysis_) rằng $U_{\text{att}} = 1.00$ ($30/30$) bao gồm xác nhận chạm người dùng (_single-tap user touch confirmation_) ở các lượt Template 4 ($n=6$) sau khi vượt $k_{\max}=3$.
+**File cần sửa:** `output/real_apps_compatibility_audit.json`, `evidence_logs_all.json`, `tools/audit_real_apps_compatibility.py` *(và `revision_checklist.md` nếu lưu trữ nội bộ)*
 
-- [x] **3.2. Phân định rõ log JSON lưu trữ vs. số liệu tổng hợp từ phiên EC2 cũ trong Phụ lục A:**
-  - Đã ghi rõ trong Phụ lục A danh mục đầy đủ các log JSON chi tiết lưu trong `output/*.json` (`evidence_logs_all.json`) và tách bạch phần số liệu tổng hợp từ phiên EC2 KVM đã đóng (`Mobile-Agent v3.5` $29/30$ / $48.6\,\text{s}$, B1 $150\,\text{ms}$, OS dispatch $4.18\,\text{ms}$, PSS $28.7\,\text{MB}$, `batterystats` $< 0.12\,\text{mJ}$).
+- [x] Trong mục `OKX` $\rightarrow$ node `vg_country_code` (`android.widget.LinearLayout`), đã đổi trường `"reason"` từ `"WebView / custom / opaque view container (package boundary + touch confirmation)"` thành `"Custom / opaque view container (package boundary + touch confirmation)"` để không gây hiểu nhầm node này là `WebView`.
+- [x] Sửa nhầm lẫn nhỏ `7/20, 10/20, 3/20` $\rightarrow$ `6/20, 9/20, 5/20` tại mục 4.3 của `ai_review_bundle/revision_checklist.md` cho đồng nhất với bài báo.
 
 ---
 
-## Nhóm 4 (RMF-4 — Minor & Hậu cần trước hạn nộp, ~1 giờ): Đồng bộ hóa Chi tiết & Kiểm tra Cuối
+## 4. Biên dịch lại & kiểm tra chất lượng PDF cuối (~5 phút)
 
-- [x] **4.1. Thống nhất tên tệp APK xuyên suốt bài báo:**
-  - Đã thay toàn bộ 3 chỗ `b3.apk` (`discussion.tex` $\times 2$, `model.tex` $\times 1$) thành `b3secrethandle.apk` (còn `0` kết quả `b3.apk`).
+- [x] Chạy biên dịch sạch 5 lượt (XeLaTeX + BibTeX) và kiểm tra `manuscript_check.py` đạt `PASS`.
+- [x] Xác nhận nhanh bằng công cụ:
+  - `pdfinfo`: kích thước US Letter ($612 \times 792\,\text{pts}$), tổng **16 trang**, nội dung chính (`§1–§10`) kết thúc gọn trên **Trang 12** ($\le 12$ trang), Appendix C + Bảng 8 nằm chung trên **Trang 16**.
+  - `pdffonts`: $100\%$ (`10/10`) font nhúng (`emb=yes, sub=yes, uni=yes`).
+- [ ] Mở PDF trong Adobe Acrobat ở mức zoom $100\%$, rà nhanh Trang 1, Trang 4 (Hình 1), Trang 9 (Hình 2), Trang 11 (Bảng 6), Trang 12 (Kết luận) và Trang 16 (Phụ lục C + Bảng 8).
 
-- [x] **4.2. Thêm mệnh đề giới hạn đo pin rút cáp 15 phút (`§7 RQ6`):**
-  - Đã bổ sung đầy đủ điều kiện đo thực tế (`screen-on ~950 mW baseline`, `4.5 mAh` coulomb quantization, `36.8 -> 34.8 C` cooling).
+---
 
-- [x] **4.3. Tận dụng khoảng trống Trang 11–12 để thêm bảng tóm tắt 20 app:**
-  - Đã thêm bảng tóm tắt **Bảng 6 (`tab:compat_summary`)** ngay trong `§7` (3 dòng: Direct Match `6/20`, Pkg+Class `9/20`, WebView `5/20`) trong khi thân bài (`§1–§10`) vẫn kết thúc gọn trên **Trang 12**.
+## 5. Kiểm tra Artifact công khai & Nộp bài trên HotCRP (~10 phút)
 
-- [ ] **4.4. Kiểm tra biên dịch, Artifact công khai & Mốc thời gian HotCRP:**
-  - [x] Biên dịch sạch 4 lượt (XeLaTeX + BibTeX), `manuscript_check.py` `PASS`, `pdfinfo` (`612 x 792 pts`), đồng bộ `ai_review_bundle/`.
-  - [ ] _(Tác giả kiểm tra trước khi nộp)_ Kiểm tra lại PDF ở zoom $100\%$, đẩy `output/*.json` và `evidence_logs_all.json` lên `https://github.com/SecretHandle/SecretHandle` công khai (incognito).
-  - [ ] **Đăng ký Abstract trên HotCRP trước `27/11/2026 23:59 AoE` (còn 4 ngày).**
-  - [ ] **Nộp bản PDF chính thức & chạy trình kiểm tra định dạng của HotCRP trước `04/12/2026 23:59 AoE` (còn 11 ngày).**
+- [ ] **GitHub Artifact:** Đẩy toàn bộ mã nguồn, `output/*.json` và `evidence_logs_all.json` bản cuối lên `https://github.com/SecretHandle/SecretHandle`, sau đó mở bằng **trình duyệt ẩn danh (*incognito*)** để xác nhận kho truy cập công khai bình thường.
+- [ ] **Mốc 1 — Đăng ký Abstract (trước `27/11/2026 23:59 AoE` — còn 4 ngày):**
+  - Truy cập `https://mobisys27.hotcrp.com/`, điền tiêu đề, bản Abstract cuối ($\ge 100$ từ), chọn Regular Full Paper track (không tick Emerging Ideas).
+  - Kiểm tra kỹ danh sách tác giả cố định (`Nguyễn Tiến Thuận`, `Trần Phát Tài`, FPT University Can Tho — không thể đổi sau khi nộp).
+  - Rà soát và khai báo đầy đủ, chính xác mọi xung đột lợi ích (**COI**) với danh sách TPC và PC Co-Chairs (Jun Han, Falko Dressler).
+- [ ] **Mốc 2 — Nộp bản PDF chính thức (trước `04/12/2026 23:59 AoE` — còn 11 ngày):**
+  - Upload bản PDF cuối, chạy trình kiểm tra định dạng tự động (*format checker*) của HotCRP và xác nhận không còn cảnh báo.
+  - Kiểm tra tính nhất quán khai báo Ethics (chỉ dùng synthetic canaries & static UI dumps, không human subjects) và khai báo LLM (khớp `§9`: proofreading only).
+  - Hoàn tất nộp sớm trước hạn ít nhất 6–12 giờ.
